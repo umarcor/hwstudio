@@ -38,6 +38,6 @@
     "nw": "^0.12.3"
   },
   "darwinDependencies": {
-    "grunt-appdmg": "^0.4.0"
+    "grunt-appdmg": "^1.0.0"
   }
 }
