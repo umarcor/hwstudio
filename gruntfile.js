@@ -94,16 +94,6 @@ module.exports = function(grunt) {
     }
   };
 
-  gruntCfg.toolchain = {
-    options: {
-      apioMin: '<%=pkg.apio.min%>',
-      apioMax: '<%=pkg.apio.max%>',
-      buildDir: 'dist/',
-      extraPackages: '<%=pkg.apio.extras%>',
-      platforms: platforms
-    }
-  };
-
   gruntCfg.nwjs = {
     options: {
       version: '0.12.3',
@@ -131,7 +121,7 @@ module.exports = function(grunt) {
       files: [{
         expand: true,
         cwd: 'dist/icestudio/linux' + bits + '/',
-        src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles)
+        src: ['icestudio', 'icudtl.dat', 'nw.pak'].concat(appFiles)
       }]
     };
   }
@@ -166,7 +156,7 @@ module.exports = function(grunt) {
       files: [{
         expand: true,
         cwd: 'dist/icestudio/linux' + tgt + '/',
-        src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
+        src: ['icestudio', 'icudtl.dat', 'nw.pak'].concat(appFiles),
         dest: '<%=pkg.name%>-<%=pkg.version%>-linux' + tgt
       }]
     };
@@ -180,7 +170,7 @@ module.exports = function(grunt) {
       files: [{
         expand: true,
         cwd: 'dist/icestudio/win' + tgt + '/',
-        src: ['icestudio.exe', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
+        src: ['icestudio.exe', 'icudtl.dat', 'nw.pak'].concat(appFiles),
         dest: '<%=pkg.name%>-<%=pkg.version%>-win' + tgt
       }]
     };
@@ -253,9 +243,6 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt, options);
 
-  // Load custom tasks
-  grunt.loadTasks('tasks');
-
   // Project configuration
   grunt.initConfig({
     pkg: pkg,
@@ -264,7 +251,6 @@ module.exports = function(grunt) {
     compress:  gruntCfg.compress,  // Compress packages usin zip
     copy:      gruntCfg.copy,      // Copy dist files
     nwjs:      gruntCfg.nwjs,      // Execute nw-build packaging
-    toolchain: gruntCfg.toolchain, // Create standalone toolchains for each platform
     watch:     gruntCfg.watch,     // Watch files for changes and runs tasks based on the changed files
     wget:      gruntCfg.wget,      // Wget: Python installer and Default collection
 
@@ -330,11 +316,6 @@ module.exports = function(grunt) {
     clean: {
       tmp: ['.tmp', 'dist/tmp'],
       dist: ['dist'],
-      toolchain: [
-        'cache/toolchain/default-python-packages',
-        'cache/toolchain/default-apio',
-        'cache/toolchain/*.zip'
-      ],
       collection: ['app/resources/collection']
       // node: ['node_modules'],
       // appnode: ['app/node_modules'],
@@ -401,7 +382,6 @@ module.exports = function(grunt) {
     'checksettings',
     'jshint',
     'clean:dist',
-    'clean:toolchain',
     'nggettext_compile',
     'useminPrepare',
     'concat',
@@ -410,8 +390,7 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin',
     'usemin',
-    'nwjs',
-    'toolchain'
+    'nwjs'
   ]
   .concat(distCommands)
   .concat([
