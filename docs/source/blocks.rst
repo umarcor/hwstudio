@@ -420,7 +420,7 @@ becomes this block:
 
     |
 
-    .. literalinclude:: ../resources/samples/block.ice
+    .. literalinclude:: ../resources/samples/blocks/block.ice
        :language: json
 
 |
