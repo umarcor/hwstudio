@@ -1,0 +1,82 @@
+name: 'push'
+
+on: [push, pull_request]
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '11.x'
+    #- run: sudo dpkg --add-architecture i386
+    - run: sudo apt-get update -qq
+
+    # TODO win
+    #- run: sudo apt-get install -y wine-stable nsis
+
+    - run: yarn
+    - run: DIST_TARGET=lin yarn dist -v
+
+    # TODO win
+    # - run: xvfb-run --auto-servernum --server-args="-screen 0, ${RESOLUTION:-1600x900}x24" yarn dist
+
+    # FIXME artifacts should be uploaded at once (not supported by GHA yet):
+    # dist/*.zip
+    # dist/*.exe
+    # dist/*.AppImage
+    - name: Prepare artifacts
+      run: |
+        mkdir dist/lin64 dist/lin32 dist/win64 dist/win32
+        mv dist/*linux64.zip dist/lin64/
+        mv dist/*linux32.zip dist/lin32/
+        #mv dist/*win64.zip dist/win64/
+        #mv dist/*win32.zip dist/win32/
+    - uses: actions/upload-artifact@master
+      with:
+        name: lin64
+        path: dist/lin64
+    - uses: actions/upload-artifact@master
+      with:
+        name: lin32
+        path: dist/lin32
+    #- uses: actions/upload-artifact@master
+    #  with:
+    #    name: win64
+    #    path: dist/win64
+    #- uses: actions/upload-artifact@master
+    #  with:
+    #    name: win32
+    #    path: dist/win32
+
+  macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '8.x'
+    - run: yarn
+    - run: yarn dist -v
+    # FIXME artifacts should be uploaded at once (not supported by GHA yet):
+    # dist/*.zip
+    # dist/*.dmg
+    - name: Prepare artifacts
+      run: |
+        mkdir dist/osx64 dist/osx32
+        mv dist/*osx64*.* dist/osx64/
+        mv dist/*osx32*.* dist/osx32/
+    - uses: actions/upload-artifact@master
+      with:
+        name: osx64
+        path: dist/osx64
+    - uses: actions/upload-artifact@master
+      with:
+        name: osx32
+        path: dist/osx32
