@@ -1,0 +1,13 @@
+name: 'doc'
+
+on: [push, pull_request]
+
+jobs:
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: build doc
+      run: |
+        cd docs
+        make html
