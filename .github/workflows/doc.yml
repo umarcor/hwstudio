@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - run: pip3 install -r docs/requirements.txt
     - name: build doc
       run: |
         cd docs
