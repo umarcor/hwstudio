@@ -1,0 +1,73 @@
+name: 'push'
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 3,6'
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  linwin:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        task: [
+          { os: ubuntu,  arg: lin, larg: linux },
+          { os: windows, arg: win, larg: win   },
+        ]
+    runs-on: ${{ matrix.task.os }}-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '11.x'
+    - run: yarn
+    - run: yarn dist -v
+      env:
+        DIST_TARGET: ${{ matrix.task.arg }}
+    # FIXME artifacts should be uploaded at once (not supported by GHA yet):
+    # dist/*.zip
+    # dist/*.AppImage
+    # dist/*.exe
+    # dist/*.dmg
+    - name: Prepare artifacts
+      shell: bash
+      run: |
+        mkdir dist/${{ matrix.task.arg }}64 dist/${{ matrix.task.arg }}32
+        mv dist/*${{ matrix.task.larg }}64.zip dist/${{ matrix.task.arg }}64/
+        mv dist/*${{ matrix.task.larg }}32.zip dist/${{ matrix.task.arg }}32/
+    - uses: actions/upload-artifact@master
+      with:
+        name: ${{ matrix.task.arg }}64
+        path: dist/${{ matrix.task.arg }}64
+    - uses: actions/upload-artifact@master
+      with:
+        name: ${{ matrix.task.arg }}32
+        path: dist/${{ matrix.task.arg }}32
+
+  mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '11.x'
+    - run: yarn
+    - run: yarn dist -v
+      env:
+        DIST_TARGET: osx
+    - name: Prepare artifacts
+      shell: bash
+      run: |
+        mkdir dist/osx64
+        mv dist/*osx64.zip dist/osx64/
+    - uses: actions/upload-artifact@master
+      with:
+        name: osx64
+        path: dist/osx64
