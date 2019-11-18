@@ -10,9 +10,9 @@
 <p align="center">
   <a title="vscode-client DevDependency Status" href="https://david-dm.org/umarcor/hwstudio?type=dev"><img src="https://img.shields.io/david/dev/umarcor/hwstudio.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
   -->
-  <a title="app Dependency Status" href="https://david-dm.org/umarcor/hwstudio?path=app"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=app&longCache=true&style=flat-square&label=app&nbsp;deps"></a><!--
+  <a title="app Dependency Status" href="https://david-dm.org/umarcor/hwstudio?path=app"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=app&longCache=true&style=flat-square&label=app%2deps"></a><!--
   -->
-  <a title="tasks Dependency Status" href="https://david-dm.org/umarcor/hwstudio?path=tasks"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=tasks&longCache=true&style=flat-square&label=tasks&nbsp;deps"></a><!--
+  <a title="tasks Dependency Status" href="https://david-dm.org/umarcor/hwstudio?path=tasks"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=tasks&longCache=true&style=flat-square&label=tasks%2deps"></a><!--
   -->
 </p>
 
