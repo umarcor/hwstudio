@@ -1,0 +1,26 @@
+name: 'dev'
+
+on:
+  push:
+    paths:
+      - 'docker.sh'
+      - '.github/workflows/dev.yml'
+  schedule:
+    - cron: '0 0 * * 3,6'
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  images:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: ./docker.sh -b dev
+    - run: ./docker.sh -b run
+    - run: ./docker.sh -p
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
