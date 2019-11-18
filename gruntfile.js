@@ -5,23 +5,25 @@ module.exports = function(grunt) {
   const WIN32 = process.platform === 'win32';
   const DARWIN = process.platform === 'darwin';
 
-  var platforms, options, distCommands;
+  var platforms, distCommands;
+  var options = { scope: ['devDependencies'] };
 
-  if (DARWIN) {
-    platforms = ['osx64'];
-    options = { scope: ['devDependencies', 'darwinDependencies'] };
-    distCommands = [ 'compress:osx64', 'appdmg'];
-  }
-  else {
-    platforms = ['linux32', 'linux64', 'win32', 'win64'];
-
-    options = { scope: ['devDependencies'] };
-    distCommands = ['compress:linux32', 'compress:linux64', 'appimage:linux32', 'appimage:linux64',
-                    'compress:win32', 'compress:win64', 'wget:python32', 'wget:python64', 'exec:nsis32', 'exec:nsis64'];
-
-
-
-
+  switch (process.env.DIST_TARGET) {
+    case 'linux64':
+      platforms = ['linux64'];
+      distCommands = ['compress:linux64'];
+      break;
+    default:
+      if (DARWIN) {
+        platforms = ['osx64'];
+        options.scope += ['darwinDependencies'];
+        distCommands = ['compress:osx64', 'appdmg'];
+      }
+      else {
+        platforms = ['linux32', 'linux64', 'win32', 'win64'];
+        distCommands = ['compress:linux32', 'compress:linux64', 'appimage:linux32', 'appimage:linux64',
+                        'compress:win32', 'compress:win64', 'wget:python32', 'wget:python64', 'exec:nsis32', 'exec:nsis64'];
+      }
   }
 
   function all(dir) {
@@ -455,4 +457,5 @@ module.exports = function(grunt) {
 };
 
 // Disable Deprecation Warnings
-var os = require('os'); os.tmpDir = os.tmpdir;
+var os = require('os');
+os.tmpDir = os.tmpdir;
