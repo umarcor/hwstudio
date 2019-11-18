@@ -115,37 +115,27 @@ module.exports = function(grunt) {
     src: ['dist/tmp/**']
   };
 
+  function appimage(bits) {
+    return {
+      options: {
+        name: 'Icestudio',
+        exec: 'icestudio',
+        arch: bits + 'bit',
+        icons: 'docs/resources/icons',
+        comment: 'Visual editor for open FPGA boards',
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux' + bits + '.AppImage'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/linux' + bits + '/',
+        src: ['**'].concat(appFiles)
+      }]
+    };
+  }
+
   gruntCfg.appimage = {
-    linux32: {
-      options: {
-        name: 'Icestudio',
-        exec: 'icestudio',
-        arch: '32bit',
-        icons: 'docs/resources/icons',
-        comment: 'Visual editor for open FPGA boards',
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux32.AppImage'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/linux32/',
-        src: ['**'].concat(appFiles)
-      }]
-    },
-    linux64: {
-      options: {
-        name: 'Icestudio',
-        exec: 'icestudio',
-        arch: '64bit',
-        icons: 'docs/resources/icons',
-        comment: 'Visual editor for open FPGA boards',
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux64.AppImage'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/linux64/',
-        src: ['**'].concat(appFiles)
-      }]
-    },
+    linux32: appimage('32'),
+    linux64: appimage('64'),
   };
 
   gruntCfg.appdmg = {
@@ -163,73 +153,55 @@ module.exports = function(grunt) {
     target: { dest: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx64.dmg' }
   };
 
+  function compressLin(tgt) {
+    return {
+      options: {
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux' + tgt + '.zip'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/linux' + tgt + '/',
+        src: ['**'].concat(appFiles),
+        dest: '<%=pkg.name%>-<%=pkg.version%>-linux' + tgt
+      }]
+    };
+  }
+
+  function compressWin(tgt) {
+    return {
+      options: {
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-win' + tgt + '.zip'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/win' + tgt + '/',
+        src: ['**'].concat(appFiles),
+        dest: '<%=pkg.name%>-<%=pkg.version%>-win' + tgt
+      }]
+    };
+  }
+
+  function compressOSX(tgt) {
+    return {
+      options: {
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx' + tgt + '.zip'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/osx' + tgt + '/',
+        src: ['icestudio.app/**'],
+        dest: '<%=pkg.name%>-<%=pkg.version%>-osx' + tgt
+      }]
+    };
+  }
+
   gruntCfg.compress = {
-    linux32: {
-      options: {
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux32.zip'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/linux32/',
-        src: ['**'].concat(appFiles),
-        dest: '<%=pkg.name%>-<%=pkg.version%>-linux32'
-      }]
-    },
-    linux64: {
-      options: {
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux64.zip'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/linux64/',
-        src: ['**'].concat(appFiles),
-        dest: '<%=pkg.name%>-<%=pkg.version%>-linux64'
-      }]
-    },
-    win32: {
-      options: {
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-win32.zip'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/win32/',
-        src: ['**'].concat(appFiles),
-        dest: '<%=pkg.name%>-<%=pkg.version%>-win32'
-      }]
-    },
-    win64: {
-      options: {
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-win64.zip'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/win64/',
-        src: ['**'].concat(appFiles),
-        dest: '<%=pkg.name%>-<%=pkg.version%>-win64'
-      }]
-    },
-    osx32: {
-      options: {
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx32.zip'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/osx32/',
-        src: ['icestudio.app/**'],
-        dest: '<%=pkg.name%>-<%=pkg.version%>-osx32'
-      }]
-    },
-    osx64: {
-      options: {
-        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx64.zip'
-      },
-      files: [{
-        expand: true,
-        cwd: 'dist/icestudio/osx64/',
-        src: ['icestudio.app/**'],
-        dest: '<%=pkg.name%>-<%=pkg.version%>-osx64'
-      }]
-    }
+    linux32: compressLin('32'),
+    linux64: compressLin('64'),
+    win32:   compressWin('32'),
+    win64:   compressWin('64'),
+    osx32:   compressOSX('32'),
+    osx64:   compressOSX('64'),
   };
 
   gruntCfg.watch = {
@@ -281,7 +253,6 @@ module.exports = function(grunt) {
 
   // Project configuration
   grunt.initConfig({
-
     pkg: pkg,
     appdmg:    gruntCfg.appdmg,    // macOS only
     appimage:  gruntCfg.appimage,  // GNU/Linux only
