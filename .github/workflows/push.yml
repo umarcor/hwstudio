@@ -15,11 +15,14 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '11.x'
-    - run: sudo dpkg --add-architecture i386
+    #- run: sudo dpkg --add-architecture i386
     - run: sudo apt-get update -qq
-    - run: sudo apt-get install -y wine-stable nsis
+    # TODO win
+    #- run: sudo apt-get install -y wine-stable nsis
     - run: yarn
-    - run: yarn dist
+    - run: DIST_TARGET=linux64 yarn dist
+    # TODO win
+    # - run: xvfb-run --auto-servernum --server-args="-screen 0, ${RESOLUTION:-1600x900}x24" yarn dist
     - uses: actions/upload-artifact@master
       with:
         name: lin and win
