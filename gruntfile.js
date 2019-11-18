@@ -2,8 +2,16 @@
 
 module.exports = function(grunt) {
 
-  const WIN32 = process.platform === 'win32';
-  const DARWIN = process.platform === 'darwin';
+  const appFiles = [
+    'index.html',
+    'package.json',
+    'fonts/**/*.*',
+    'node_modules/**/*.*',
+    'resources/**/*.*',
+    'scripts/**/*.*',
+    'styles/**/*.*',
+    'views/**/*.*'
+  ];
 
   var platforms, distCommands;
   var options = { scope: ['devDependencies'] };
@@ -14,7 +22,7 @@ module.exports = function(grunt) {
       distCommands = ['compress:linux64'];
       break;
     default:
-      if (DARWIN) {
+      if (process.platform === 'darwin') {
         platforms = ['osx32', 'osx64'];
         options.scope += ['darwinDependencies'];
         distCommands = ['compress:osx32', 'compress:osx64', 'appdmg'];
@@ -26,19 +34,188 @@ module.exports = function(grunt) {
       }
   }
 
-  function all(dir) {
-    return dir + '/**/*.*';
+  var gruntCfg = {};
+
+  gruntCfg.copy = {
+    dist: {
+      files: [
+        {
+          expand: true,
+          cwd: 'app',
+          dest: 'dist/tmp',
+          src: [
+            'index.html',
+            'package.json',
+            'resources/**',
+            'node_modules/**',
+            'views/*.html'
+          ]
+        },
+        {
+          expand: true,
+          cwd: 'app/bower_components/bootstrap/fonts',
+          dest: 'dist/tmp/fonts',
+          src: '*.*'
+        }
+      ]
+    }
+  };
+
+  gruntCfg.toolchain = {
+    options: {
+      apioMin: '<%=pkg.apio.min%>',
+      apioMax: '<%=pkg.apio.max%>',
+      buildDir: 'dist/',
+      extraPackages: '<%=pkg.apio.extras%>',
+      platforms: platforms
+    }
+  };
+
+  gruntCfg.nwjs = {
+    options: {
+      version: '0.12.3',
+      flavor: 'normal',
+      zip: false,
+      buildDir: 'dist/',
+      winIco: 'docs/resources/images/logo/icestudio-logo.ico',
+      macIcns: 'docs/resources/images/logo/icestudio-logo.icns',
+      macPlist: { 'CFBundleIconFile': 'nw.icns' },
+      platforms: platforms
+    },
+    src: ['dist/tmp/**']
+  };
+
+  function appimage(bits) {
+    return {
+      options: {
+        name: 'Icestudio',
+        exec: 'icestudio',
+        arch: bits + 'bit',
+        icons: 'docs/resources/icons',
+        comment: 'Visual editor for open FPGA boards',
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux' + bits + '.AppImage'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/linux' + bits + '/',
+        src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles)
+      }]
+    };
   }
-  var appFiles = [
-    'index.html',
-    'package.json',
-    all('fonts'),
-    all('node_modules'),
-    all('resources'),
-    all('scripts'),
-    all('styles'),
-    all('views')
-  ];
+
+  gruntCfg.appimage = {
+    linux32: appimage('32'),
+    linux64: appimage('64'),
+  };
+
+  gruntCfg.appdmg = {
+    options: {
+      basepath: '.',
+      title: 'Icestudio Installer',
+      icon: 'docs/resources/images/logo/icestudio-logo.icns',
+      background: 'docs/resources/images/installation/installer-background.png',
+      window: { size: { width: 512, height: 385, } },
+      contents: [
+        { x: 345, y: 250, type: 'link', path: '/Applications' },
+        { x: 170, y: 250, type: 'file', path: 'dist/icestudio/osx64/icestudio.app' }
+      ]
+    },
+    target: {
+      dest: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx64.dmg'
+    }
+  };
+
+  function compressLin(tgt) {
+    return {
+      options: {
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux' + tgt + '.zip'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/linux' + tgt + '/',
+        src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
+        dest: '<%=pkg.name%>-<%=pkg.version%>-linux' + tgt
+      }]
+    };
+  }
+
+  function compressWin(tgt) {
+    return {
+      options: {
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-win' + tgt + '.zip'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/win' + tgt + '/',
+        src: ['icestudio.exe', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
+        dest: '<%=pkg.name%>-<%=pkg.version%>-win' + tgt
+      }]
+    };
+  }
+
+  function compressOSX(tgt) {
+    return {
+      options: {
+        archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx' + tgt + '.zip'
+      },
+      files: [{
+        expand: true,
+        cwd: 'dist/icestudio/osx' + tgt + '/',
+        src: ['icestudio.app/**'],
+        dest: '<%=pkg.name%>-<%=pkg.version%>-osx' + tgt
+      }]
+    };
+  }
+
+  gruntCfg.compress = {
+    linux32: compressLin('32'),
+    linux64: compressLin('64'),
+    win32:   compressWin('32'),
+    win64:   compressWin('64'),
+    osx32:   compressOSX('32'),
+    osx64:   compressOSX('64'),
+  };
+
+  gruntCfg.watch = {
+    scripts: {
+      files: [
+        'app/resources/**/*.*',
+        'app/scripts/**/*.*',
+        'app/styles/**/*.*',
+        'app/views/**/*.*'
+      ],
+      tasks: [
+        'wiredep',
+        'exec:stopNW',
+        'exec:nw'
+      ],
+      options: {
+        atBegin: true,
+        interrupt: true
+      }
+    }
+  };
+
+  gruntCfg.wget = {
+    python32: {
+      options: { overwrite: false },
+      src: 'https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi',
+      dest: 'cache/python/python-2.7.13.msi'
+    },
+    python64: {
+      options: { overwrite: false },
+      src: 'https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi',
+      dest: 'cache/python/python-2.7.13.amd64.msi'
+    },
+    collection: {
+      options: { overwrite: false },
+      src: 'https://github.com/FPGAwars/collection-default/archive/v<%=pkg.collection%>.zip',
+      dest: 'cache/collection/collection-default-v<%=pkg.collection%>.zip'
+    }
+  };
+
+  const WIN32 = process.platform === 'win32';
+
   var pkg = grunt.file.readJSON('app/package.json');
 
   require('load-grunt-tasks')(grunt, options);
@@ -48,8 +225,15 @@ module.exports = function(grunt) {
 
   // Project configuration
   grunt.initConfig({
-
     pkg: pkg,
+    appdmg:    gruntCfg.appdmg,    // macOS only
+    appimage:  gruntCfg.appimage,  // GNU/Linux only
+    compress:  gruntCfg.compress,  // Compress packages usin zip
+    copy:      gruntCfg.copy,      // Copy dist files
+    nwjs:      gruntCfg.nwjs,      // Execute nw-build packaging
+    toolchain: gruntCfg.toolchain, // Create standalone toolchains for each platform
+    watch:     gruntCfg.watch,     // Watch files for changes and runs tasks based on the changed files
+    wget:      gruntCfg.wget,      // Wget: Python installer and Default collection
 
     // Automatically inject Bower components into the app
     wiredep: {
@@ -73,242 +257,20 @@ module.exports = function(grunt) {
     // additional tasks can operate on them
     useminPrepare: {
       html: 'app/index.html',
-      options: {
-        dest: 'dist/tmp'
-      }
-    },
-
-    // Copy dist files
-    copy: {
-      dist: {
-        files: [
-          {
-            expand: true,
-            cwd: 'app',
-            dest: 'dist/tmp',
-            src: [
-              'index.html',
-              'package.json',
-              'resources/**',
-              'node_modules/**',
-              'views/*.html'
-            ]
-          },
-          {
-            expand: true,
-            cwd: 'app/bower_components/bootstrap/fonts',
-            dest: 'dist/tmp/fonts',
-            src: '*.*'
-          }
-        ]
-      }
+      options: { dest: 'dist/tmp' }
     },
 
     // JSON minification plugin without concatination
     'json-minify': {
-      json: {
-        files: 'dist/tmp/resources/**/*.json'
-      },
-      ice: {
-        files: 'dist/tmp/resources/**/*.ice'
-      }
+      json: { files: 'dist/tmp/resources/**/*.json' },
+      ice: { files: 'dist/tmp/resources/**/*.ice' }
     },
 
     // Uglify configuration options:
-    uglify: {
-      options: {
-        mangle: false
-      }
-    },
+    uglify: { options: { mangle: false } },
 
     // Rewrite based on filerev and the useminPrepare configuration
-    usemin: {
-      html: ['dist/tmp/index.html']
-    },
-
-    // Execute nw-build packaging
-    nwjs: {
-      options: {
-        version: '0.12.3',
-        flavor: 'normal',
-        zip: false,
-        buildDir: 'dist/',
-        winIco: 'docs/resources/images/logo/icestudio-logo.ico',
-        macIcns: 'docs/resources/images/logo/icestudio-logo.icns',
-        macPlist: { 'CFBundleIconFile': 'nw.icns' },
-        platforms: platforms
-      },
-      src: ['dist/tmp/**']
-    },
-
-    // Create standalone toolchains for each platform
-    toolchain: {
-      options: {
-        apioMin: '<%=pkg.apio.min%>',
-        apioMax: '<%=pkg.apio.max%>',
-        buildDir: 'dist/',
-        extraPackages: '<%=pkg.apio.extras%>',
-        platforms: platforms
-      }
-    },
-
-    // ONLY MAC: generate a DMG package
-    appdmg: {
-      options: {
-        basepath: '.',
-        title: 'Icestudio Installer',
-        icon: 'docs/resources/images/logo/icestudio-logo.icns',
-        background: 'docs/resources/images/installation/installer-background.png',
-        window: {
-          size: {
-            width: 512,
-            height: 385,
-          }
-        },
-        contents: [
-          {
-            x: 345,
-            y: 250,
-            type: 'link',
-            path: '/Applications'
-          },
-          {
-            x: 170,
-            y: 250,
-            type: 'file',
-            path: 'dist/icestudio/osx64/icestudio.app'
-          }
-        ]
-      },
-      target: {
-        dest: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx64.dmg'
-      }
-    },
-
-    // ONLY LINUX: generate AppImage packages
-    appimage: {
-      linux32: {
-        options: {
-          name: 'Icestudio',
-          exec: 'icestudio',
-          arch: '32bit',
-          icons: 'docs/resources/icons',
-          comment: 'Visual editor for open FPGA boards',
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux32.AppImage'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/linux32/',
-          src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles)
-        }]
-      },
-      linux64: {
-        options: {
-          name: 'Icestudio',
-          exec: 'icestudio',
-          arch: '64bit',
-          icons: 'docs/resources/icons',
-          comment: 'Visual editor for open FPGA boards',
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux64.AppImage'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/linux64/',
-          src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles)
-        }]
-      },
-    },
-
-    // Compress packages usin zip
-    compress: {
-      linux32: {
-        options: {
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux32.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/linux32/',
-          src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
-          dest: '<%=pkg.name%>-<%=pkg.version%>-linux32'
-        }]
-      },
-      linux64: {
-        options: {
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-linux64.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/linux64/',
-          src: ['icestudio', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
-          dest: '<%=pkg.name%>-<%=pkg.version%>-linux64'
-        }]
-      },
-      win32: {
-        options: {
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-win32.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/win32/',
-          src: ['icestudio.exe', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
-          dest: '<%=pkg.name%>-<%=pkg.version%>-win32'
-        }]
-      },
-      win64: {
-        options: {
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-win64.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/win64/',
-          src: ['icestudio.exe', 'icudtl.dat', 'nw.pak', 'toolchain/*.*'].concat(appFiles),
-          dest: '<%=pkg.name%>-<%=pkg.version%>-win64'
-        }]
-      },
-      osx32: {
-        options: {
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx32.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/osx32/',
-          src: ['icestudio.app/**'],
-          dest: '<%=pkg.name%>-<%=pkg.version%>-osx32'
-        }]
-      },
-      osx64: {
-        options: {
-          archive: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx64.zip'
-        },
-        files: [{
-          expand: true,
-          cwd: 'dist/icestudio/osx64/',
-          src: ['icestudio.app/**'],
-          dest: '<%=pkg.name%>-<%=pkg.version%>-osx64'
-        }]
-      }
-    },
-
-    // Watch files for changes and runs tasks based on the changed files
-    watch: {
-      scripts: {
-        files: [
-          'app/resources/**/*.*',
-          'app/scripts/**/*.*',
-          'app/styles/**/*.*',
-          'app/views/**/*.*'
-        ],
-        tasks: [
-          'wiredep',
-          'exec:stopNW',
-          'exec:nw'
-        ],
-        options: {
-          atBegin: true,
-          interrupt: true
-        }
-      }
-    },
+    usemin: { html: ['dist/tmp/index.html'] },
 
     // Check all js files
     jshint: {
@@ -317,34 +279,7 @@ module.exports = function(grunt) {
         'tasks/*.js',
         'gruntfile.js'
       ],
-      options: {
-        jshintrc: '.jshintrc'
-      }
-    },
-
-    // Wget: Python installer and Default collection
-    wget: {
-      python32: {
-        options: {
-          overwrite: false
-        },
-        src: 'https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi',
-        dest: 'cache/python/python-2.7.13.msi'
-      },
-      python64: {
-        options: {
-          overwrite: false
-        },
-        src: 'https://www.python.org/ftp/python/2.7.13/python-2.7.13.amd64.msi',
-        dest: 'cache/python/python-2.7.13.amd64.msi'
-      },
-      collection: {
-        options: {
-          overwrite: false
-        },
-        src: 'https://github.com/FPGAwars/collection-default/archive/v<%=pkg.collection%>.zip',
-        dest: 'cache/collection/collection-default-v<%=pkg.collection%>.zip'
-      }
+      options: { jshintrc: '.jshintrc' }
     },
 
     // Unzip Default collection
