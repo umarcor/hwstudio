@@ -1,0 +1,48 @@
+name: 'push'
+
+on: [push, pull_request]
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '11.x'
+    - name: Install dependencies
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update -qq
+        apt-get install -y wine nsis
+    - run: npm install
+    - run: npm run dist
+    - uses: actions/upload-artifact@master
+      with:
+        name: lin and win
+        # FIXME should be (not supported by GHA yet):
+        # dist/*.zip
+        # dist/*.exe
+        # dist/*.AppImage
+        path: dist
+
+  macos:
+    runs-on: macos-latest
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '11.x'
+    steps:
+    - run: npm install
+    - run: npm run dist
+    - uses: actions/upload-artifact@master
+      with:
+        name: osx
+        # FIXME should be (not supported by GHA yet):
+        # dist/*.dmg
+        path: dist
