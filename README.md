@@ -1,117 +1,70 @@
-<img src="https://raw.githubusercontent.com/FPGAwars/icestudio/develop/docs/resources/images/logo/icestudio-logo-label.png" align="center">
+<p align="center">
+  <a title="'dev' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adev"><img alt="'dev' workflow status" src="https://github.com/umarcor/hwstudio/workflows/dev/badge.svg"></a><!--
+  -->
+  <a title="'push' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Apush"><img alt="'push' workflow status" src="https://github.com/umarcor/hwstudio/workflows/push/badge.svg"></a><!--
+  -->
+  <a title="'doc' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adoc"><img alt="'doc' workflow status" src="https://github.com/umarcor/hwstudio/workflows/doc/badge.svg"></a><!--
+  -->
+</p>
 
-[![Build Status](https://travis-ci.org/FPGAwars/icestudio.svg?branch=v0.5.0)](https://travis-ci.org/FPGAwars/icestudio)
-[![Version](https://img.shields.io/badge/version-v0.5.0-orange.svg)](https://github.com/FPGAwars/icestudio/releases)
-[![License](http://img.shields.io/:license-gpl-blue.svg)](http://opensource.org/licenses/GPL-2.0)
-[![Documentation Status](https://readthedocs.org/projects/icestudio/badge/?version=latest)](http://icestudio.readthedocs.io/en/latest)
+<p align="center">
+  <a title="vscode-client DevDependency Status" href="https://david-dm.org/umarcor/hwstudio/actions?type=dev"><img src="https://img.shields.io/david/dev/umarcor/hwstudio.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
+  -->
+  <a title="app Dependency Status" href="https://david-dm.org/umarcor/hwstudio/actions?path=app"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=app&longCache=true&style=flat-square&label=app%20deps"></a><!--
+  -->
+  <a title="tasks Dependency Status" href="https://david-dm.org/umarcor/hwstudio?path=tasks"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=tasks&longCache=true&style=flat-square&label=tasks%20deps"></a><!--
+  -->
+</p>
 
-Visual editor for open FPGA boards. Built on top of the [Icestorm project](http://www.clifford.at/icestorm/) using [Apio](https://github.com/FPGAwars/apio).
+# Installation
 
-    Graphic design -> Verilog, PCF -> Bistream -> FPGA
+Requirements:
 
-For more information visit our site [icestudio.io](https://icestudio.io)
+- GNU/Linux: `xclip`.
+- macOS: [Homebrew](https://brew.sh).
 
-### Supported boards
+Since this repository is a proof of concept, no regular/tagged releases are available yet. However, after each commit is pushed, CI workflows produce nightly builds for all the supported platforms. Users can pick the artifacts from any of the successful jobs in [umarcor/hwstudio/actions?query=workflow%3Apush](https://github.com/umarcor/hwstudio/actions?query=workflow%3Apush).
 
-#### HX1K
+# Development
 
-| Board name | Interface |
-|:-|:-:|
-| [IceZUM Alhambra](https://github.com/FPGAwars/icezum) | FTDI |
-| [Nandland Go board](https://www.nandland.com/goboard/introduction.html) | FTDI |
-| [iCEstick Evaluation Kit](http://www.latticesemi.com/icestick) | FTDI |
+- [Node.js](https://nodejs.org/).
 
-#### HX8K
+```sh
+yarn install
 
-| Board name | Interface |
-|:-|:-:|
-| [Alhambra II](https://github.com/FPGAwars/Alhambra-II-FPGA) | FTDI |
-| [BlackIce](https://hackaday.io/project/12930-blackice-low-cost-open-hardware-fpga-dev-board) | Serial |
-| [BlackIce II](https://github.com/mystorm-org/BlackIce-II) | Serial |
-| [icoBOARD 1.0](http://icoboard.org/about-icoboard.html) | GPIO RPi |
-| [Kéfir I iCE40-HX4K](http://fpgalibre.sourceforge.net/Kefir/) | FTDI |
-| [iCE40-HX8K Breakout Board](http://www.latticesemi.com/Products/DevelopmentBoardsAndKits/iCE40HX8KBreakoutBoard) | FTDI |
-
-#### LP8K
-
-| Board name | Interface |
-|:-|:-:|
-| [TinyFPGA B2](https://tinyfpga.com/b-series-guide.html) | Serial |
-| [TinyFPGA BX](https://tinyfpga.com/bx/guide.html) | Serial |
-
-#### UP5K
-
-| Board name | Interface |
-|:-|:-:|
-| [iCEBreaker](https://github.com/icebreaker-fpga/icebreaker) | FTDI |
-| [iCEBreaker bitsy](https://github.com/icebreaker-fpga/icebreaker) | FTDI |
-| [UPDuino v1.0](http://gnarlygrey.atspace.cc/development-platform.html#upduino) | FTDI |
-| [UPDuino v2.0](http://gnarlygrey.atspace.cc/development-platform.html#upduino_v2l) | FTDI |
-| [FPGA 101 Workshop Badge Board](https://github.com/mmicko/workshop_badge) | FTDI |
-| [iCE40 UltraPlus Breakout Board](http://www.latticesemi.com/en/Products/DevelopmentBoardsAndKits/iCE40UltraPlusBreakoutBoard) | FTDI |
-
-## Installation
-
-You can install **stable** or **nightly** Icestudio versions.
-
-Because Icestudio is in development proccess, until it rises to 1.0 version, we are recommending to install **nightly** Icestudio versions, that have the latest features.
-
-
-* **GNU/Linux**
-
-  1. Install [Python >= 3.5](https://www.python.org) and **xclip**
-  2. For **stable** version, download and execute the [AppImage](https://github.com/FPGAwars/icestudio/releases)
-  3. For **nightly** version, download it from [icestudio.io](https://icestudio.io)
-
-
-
-* **Windows**
-
-  1. For **stable** version, download and execute the [Windows installer](https://github.com/FPGAwars/icestudio/releases)
-  2. For **nightly** version, download it from [icestudio.io](https://icestudio.io)
-  
-
-* **Mac OS**
-
-  1. Install [Python >=  3.5](https://www.python.org) and [Homebrew](https://brew.sh)
-  2. For **stable** version, download and execute the [DMG package](https://github.com/FPGAwars/icestudio/releases)
-  3. For **nightly** version, download it from [icestudio.io](https://icestudio.io)
-  
-<img src="https://raw.githubusercontent.com/FPGAwars/icestudio/develop/docs/resources/images/demo/main.png" width="700" align="center">
-
-<img src="https://raw.githubusercontent.com/FPGAwars/icestudio/develop/docs/resources/images/demo/main-1.png" width="700" align="center">
-
-Check the [Documentation](http://icestudio.readthedocs.io/en/latest) for more information.
-
-## Development
-
-Install [Python >= 3.5](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/), for windows developers nodejs version should be 10.17.x
-
-
-[Atom](https://atom.io/) editor with [linter-jshint](https://atom.io/packages/linter-jshint) is recommended.
-
-If you want to add blocks or examples, please contribute to [icestudio-blocks](https://github.com/FPGAwars/icestudio-blocks), [icestudio-examples](https://github.com/FPGAwars/icestudio-examples) or [collection-default](https://github.com/FPGAwars/collection-default).
-
-### Download
-
-```bash
-git clone https://github.com/FPGAwars/icestudio.git
-cd icestudio
+yarn start
 ```
 
-### Install
+## Docker images for development
 
-```bash
-npm install
+```sh
+./docker -d
+./docker -t bash
 ```
 
-### Execute
+For live watching and reloading:
 
-```bash
-npm start
+```sh
+./docker -d -i
+...
+~# cd /src
+~# yarn start
 ```
 
-### Languages
+## Build the docs
+
+```bash
+cd docs
+pip3 install -r requirements.txt
+make html
+firefox _build/html/index.html
+```
+
+## Internationalisation
+
+Use `yarn gettext` to extract the labels from the code.
+
+## Localisation
 
 |  Language  | Translated strings                       |
 |:----------:|:----------------------------------------:|
@@ -129,84 +82,16 @@ npm start
 | Basque     | ![Progress](http://progress-bar.dev/77)  |
 | Catalan    | ![Progress](http://progress-bar.dev/72)  |
 
-**Contribute!**
+`*.po` sources for localisation are located in [`app/resources/locale`](./app/resources/locale).
 
-Add or update the [app translations](https://github.com/FPGAwars/icestudio/tree/develop/app/resources/locale) using **[Poedit](https://poedit.net/)**.
-
-*Developer note*: use `npm run gettext` to extract the labels from the code.
-
-### Documentation
+## Package for distribution
 
 ```bash
-cd docs
-make html
-firefox _build/html/index.html
-```
-
-### Package
-
-```bash
-npm run dist
+yarn dist
 ```
 
 | Target OS | Development OS | Output files |
 |:---:|:-------------:|:-----------------:|
 | GNU/Linux | GNU/Linux | (linux32,linux64).zip, (linux32,linux64).AppImage |
 | Windows | GNU/Linux | (win32,win64).zip, (win32,win64).exe |
-|  Mac OS | Mac OS | (osx32,osx64).zip, osx64.dmg  |
-
-### Apio configuration
-
-Apio backend is configured in the `app/package.json` file:
-
-- `apio.min`: minimum version (>=)
-- `apio.max`: maximum version (<)
-- `apio.extras`: list of external Python programmers (*blackiceprog*, *tinyfpgab*)
-- `apio.external`: load an external Apio package instead of the default one (e.g. */path/to/my/apio*)
-- `apio.branch`: install Apio from the repository branch instead of PyPI.
-
-An external Apio package can be also set on runtime using the `ICESTUDIO_APIO` environment variable.
-
-### Troubleshooting
-
-If you get this error `npm ERR! peerinvalid The package grunt@1.0.1 does not satisfy its siblings' peerDependencies requirements!`, try to update your **[nodejs](https://github.com/nodejs/node)** or execute:
-
-```bash
-npm update -g
-```
-
-[More information](https://github.com/angular-fullstack/generator-angular-fullstack/issues/431)
-
-## Roadmap
-
-There is a [Wishlist](https://github.com/FPGAwars/icestudio/wiki/Wishlist:-proposed-features) in the wiki with the features proposed by the Community. If you want to contribute with new features and ideas write in the [Google Group](https://groups.google.com/forum/#!forum/fpga-wars-explorando-el-lado-libre).
-
- We use the GitHub [issues](https://github.com/FPGAwars/icestudio/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) to track the work and schedule our new features and improvements.
-
-## Development Team
-
-* **Jesús Arroyo Torrens**, creator [Github page](https://github.com/Jesus89)
-* **Carlos Venegas Arrabé**,concepts and development [Github page](https://github.com/cavearr)
-* **Juan González Gómez**, concepts and testing [Github page](https://github.com/Obijuan)
-
-## Contributors
-
-|Version | Contributors |
-|:-:|:-:|
-| 0.5 | [Carlos Venegas Arrabé](https://github.com/cavearr), [Juan González (Obijuan)](https://github.com/Obijuan), [Zakary Kamal Ismail](https://github.com/ZakCodes) |
-| 0.4 | [Carlos Venegas Arrabé](https://github.com/cavearr), [Elektor.Labs](https://github.com/elektor-labs), [Piotr Esden-Tempski](https://github.com/esden), [Miodrag Milanović](https://github.com/mmicko), [raTmole](https://github.com/ratmole), [Luca Cristaldi](https://github.com/wifasoi) |
-| 0.3 | [Luke Valenty](https://github.com/tinyfpga), [Lorea-Aldabaldetreku](https://github.com/Lorea-Aldabaldetreku), [Carlos Díaz](https://github.com/C47D), [Martoni](https://github.com/Martoni), [Xoan Sampaiño](https://github.com/xoan), [Unai](https://github.com/1138-4EB), [Francisco Sayas](https://github.com/fsayas), [Pascal Cotret](https://github.com/pcotret), [Juan Jose Luna Espinosa](https://github.com/yomboprime), [Salvador E. Tropea](https://github.com/set-soft), [redbeard](https://github.com/brianredbeard), [Eladio Delgado](https://github.com/EladioDM), [Philipp van Kempen](https://github.com/PhilippvK) |
-| 0.2 | [Tomás Calvo](https://github.com/tocalvo), [Juan González (Obijuan)](https://github.com/Obijuan), [Carlos Díaz](https://github.com/C47D), [Xoan Sampaiño](https://github.com/xoan), [Salvador E. Tropea](https://github.com/set-soft), [Democrito](https://github.com/Democrito), [Martoni](https://github.com/Martoni), [Pascal Cotret](https://github.com/pcotret) |
-| 0.1 | [Miguel Sánchez de León Peque](https://github.com/Peque) |
-
-## Credits
-
-* [FPGAwars](http://fpgawars.github.io/) community has developed this project in a voluntary and altruistic way since 02/2017.
-
-  <img src="https://avatars3.githubusercontent.com/u/18257418?s=100">
-
-* [BQ](https://www.bq.com) sponsored this project from 02/2016 to 02/2017. Thanks
-
-## License
-
-Licensed under [GPL 2.0](http://opensource.org/licenses/GPL-2.0) and [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+| Mac OS | Mac OS | osx64.zip, osx64.dmg |
