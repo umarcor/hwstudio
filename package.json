@@ -23,7 +23,7 @@
     "start": "grunt serve",
     "dist": "grunt dist",
     "gettext": "grunt gettext",
-    "postinstall": "npmpd && cd app && npm install && bower install && cd ../tasks && npm install && cd .. && grunt getcollection"
+    "postinstall": "npmpd && cd app && npm install && bower install --allow-root && cd ../tasks && npm install && cd .. && grunt getcollection"
   },
   "devDependencies": {
     "bower": "^1.8.0",
