@@ -1950,7 +1950,7 @@ graceful-ncp@^3.0.0:
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
   integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
 
-grunt-angular-gettext@^2.4.5:
+grunt-angular-gettext@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/grunt-angular-gettext/-/grunt-angular-gettext-2.5.1.tgz#b8b932aa36dfb1227d8cdce86f44817fb545bc90"
   integrity sha512-dzjo7dvyhk66CNXXBf5owHgzczsDjZk/yLDVJHimBNO7eneBNV/60kVfZxmQ1+8Sv0JvFXN2FBmKVrcgdmVReA==
