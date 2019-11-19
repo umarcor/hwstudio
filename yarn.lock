@@ -2155,10 +2155,10 @@ grunt-wiredep@^3.0.1:
   dependencies:
     wiredep "^4.0.0"
 
-grunt-zip@^0.17.1:
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/grunt-zip/-/grunt-zip-0.17.1.tgz#218afa37351c46f79b9fb1d6a2fc3c84519a52d0"
-  integrity sha1-IYr6NzUcRvebn7HWovw8hFGaUtA=
+grunt-zip@^0.18.2:
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/grunt-zip/-/grunt-zip-0.18.2.tgz#eb943f58a388d51604fb3d9e88043bacc0e08691"
+  integrity sha512-9o0Fmft+7C9jBqqqQRAbon1Qaz4HHqHpNrDmrWVQy9nxC9/q8budlx+J6y9ZaCs3ioAKIJl7lfXWqoOJCMnXcQ==
   dependencies:
     grunt-retro "~0.6.0"
     jszip "~2.5.0"
