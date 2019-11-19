@@ -2052,7 +2052,7 @@ grunt-contrib-uglify@^2.0.0:
     uglify-js "~2.8.21"
     uri-path "^1.0.0"
 
-grunt-contrib-watch@^1.0.0:
+grunt-contrib-watch@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/grunt-contrib-watch/-/grunt-contrib-watch-1.1.0.tgz#c143ca5b824b288a024b856639a5345aedb78ed4"
   integrity sha512-yGweN+0DW5yM+oo58fRu/XIRrPcn3r4tQx+nL7eMRwjpvk+rQY6R8o94BPK0i2UhTg9FN21hS+m8vR8v9vXfeg==
