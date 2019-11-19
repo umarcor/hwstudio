@@ -113,7 +113,7 @@ angular.module('icestudio')
 
     function processArg(arg) {
       if (nodeFs.existsSync(arg)) {
-        // Open filepath 
+        // Open filepath
         var filepath = arg;
         project.open(filepath);
       }
@@ -129,7 +129,7 @@ angular.module('icestudio')
     }
 
     /*
-     * This function triggers when version info window will be closed 
+     * This function triggers when version info window will be closed
      *                                                                 */
     $scope.closeVersionInfoWindow = function () {
       $('#version-info-tab').addClass('hidden');
@@ -840,36 +840,16 @@ angular.module('icestudio')
     $scope.about = function () {
       var content = [
         '<div class="row">',
-        '  <div class="col-sm-4">',
-        '   <img src="resources/images/fpgawars-logo.png">',
-        '  </div>',
-        '  <div class="col-sm-7" style="margin-left: 20px;">',
-        '    <h4>Icestudio</h4>',
-        '    <p><i>Visual editor for open FPGA boards</i></p>',
+        '  <div class="col-sm-12">',
+        '    <h4>Hardware Studio (hwstudio)</h4>',
+        '    <p><i>GUI editor for hardware description designers</i></p>',
         '    <p>Version: ' + $scope.version + '</p>',
         '    <p>License: GPL-2.0</p>',
-        ' </div>',
+        '  </div>',
         '</div>',
          '<div class="row" style="margin-top:30px;">',
         '  <div class="col-sm-12">',
-
-        '    <p>Development Team:</p>',
-        '    <ul  class="credits-developers-list">',
-                    '<li><strong>Jesús Arroyo Torrens</strong>, creator&nbsp;&nbsp;&nbsp;',
-                    '<a class="action-open-url-external-browser" href="https://github.com/Jesus89"><img class="credits-rss-icon" src="resources/images/icon-github.svg"></a>&nbsp;&nbsp;',
-                    '<a class="action-open-url-external-browser" href="https://twitter.com/JesusArroyo89"><img class="credits-rss-icon" src="resources/images/icon-twitter.svg"></a>',
-                    '</li>',
-        '           <li><strong>Carlos Venegas Arrabé</strong>, concepts and development&nbsp;&nbsp;&nbsp;',
-                 '<a class="action-open-url-external-browser" href="https://github.com/cavearr"><img class="credits-rss-icon" src="resources/images/icon-github.svg"></a>&nbsp;&nbsp;',
-                    '<a class="action-open-url-external-browser" href="https://twitter.com/cavearr"><img class="credits-rss-icon" src="resources/images/icon-twitter.svg"></a>',
-                    '</li>',
-        '           <li><strong>Juan González Gómez</strong>, concepts and testing&nbsp;&nbsp;&nbsp;',
- '<a class="action-open-url-external-browser" href="https://github.com/Obijuan"><img class="credits-rss-icon" src="resources/images/icon-github.svg"></a>&nbsp;&nbsp;',
-                    '<a class="action-open-url-external-browser" href="https://twitter.com/Obijuan_cube"><img class="credits-rss-icon" src="resources/images/icon-twitter.svg"></a>',
-                    '</li>',
-            '</ul><br/>',
-        '    <p>Thanks to the rest of <a class="action-open-url-external-browser" href="https://github.com/FPGAwars/icestudio">contributors</a></p>',
-        '    <p style="margin-top:30px;text-align:right;"><span class="copyleft">&copy;</span> <a class="action-open-url-external-browser" href="http://fpgawars.github.io">FPGAwars</a> 2016-2019</p>',
+        '    <p>Thanks to all the <a class="action-open-url-external-browser" href="https://github.com/umarcor/hwstudio">contributors</a></p>',
         '  </div>',
         '</div>'].join('\n');
       alertify.alert(content);
