@@ -58,7 +58,7 @@
     "ssh-exec": "~2.0.0",
     "sudo-prompt": "~8.2.0",
     "svgo": "~0.7.2",
-    "tmp": "0.0.33"
+    "tmp": "0.1.0"
   },
   "readme": "../README.md",
   "keywords": [
