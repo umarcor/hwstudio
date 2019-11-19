@@ -53,7 +53,7 @@
     "node-lang-info": "~0.2.1",
     "openurl": "~1.1.1",
     "rmdir": "~1.2.0",
-    "rsyncwrapper": "~2.0.1",
+    "rsyncwrapper": "~3.0.1",
     "sha1": "~1.1.1",
     "ssh-exec": "~2.0.0",
     "sudo-prompt": "~8.2.0",
