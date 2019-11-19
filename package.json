@@ -25,7 +25,7 @@
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-exec": "^1.0.0",
+    "grunt-exec": "^3.0.0",
     "grunt-json-minify": "^1.1.0",
     "grunt-nw-builder": "^3.1.0",
     "grunt-replace": "^1.0.1",
