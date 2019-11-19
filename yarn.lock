@@ -3383,10 +3383,10 @@ normalize-path@^2.0.0:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
-npm-platform-dependencies@0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/npm-platform-dependencies/-/npm-platform-dependencies-0.0.12.tgz#73a52f7739a504a00d6f1a3911493c4f9b68af5e"
-  integrity sha1-c6UvdzmlBKANbxo5EUk8T5tor14=
+npm-platform-dependencies@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/npm-platform-dependencies/-/npm-platform-dependencies-0.1.0.tgz#e58a2fe2de2647dd58dd84d08985239b46cf37a9"
+  integrity sha512-dth3C89WdN4wRsb97EAQVhynVPa/3k+7DXYnbaI9msRD1hBwioqkIJklf97nOjTWi3lnWQV2yNLWoiOFfPGwOA==
   dependencies:
     cross-spawn "^4.0.0"
 

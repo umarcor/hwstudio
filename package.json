@@ -34,7 +34,7 @@
     "grunt-wiredep": "^3.0.1",
     "grunt-zip": "^0.18.2",
     "load-grunt-tasks": "^3.5.0",
-    "npm-platform-dependencies": "0.0.12",
+    "npm-platform-dependencies": "^0.1.0",
     "nw": "^0.12.3"
   },
   "darwinDependencies": {
