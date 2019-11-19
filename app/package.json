@@ -56,7 +56,7 @@
     "rsyncwrapper": "~2.0.1",
     "sha1": "~1.1.1",
     "ssh-exec": "~2.0.0",
-    "sudo-prompt": "~8.2.0",
+    "sudo-prompt": "~9.1.1",
     "svgo": "~0.7.2",
     "tmp": "0.0.33"
   },
