@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-adm-zip@0.4.7:
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.7.tgz#8606c2cbf1c426ce8c8ec00174447fd49b6eafc1"
-  integrity sha1-hgbCy/HEJs6MjsABdER/1Jtur8E=
+adm-zip@0.4.9:
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.9.tgz#1a574627d3aa4ea6b8b4948e066cbd6fed4ae2f6"
+  integrity sha512-eknaJ3Io/JasGGinVeqY5TsPlQgHbiNlHnK5zdFPRNs9XRggDykKz8zPesneOMEZJxWji7G3CfsUW0Ds9Dw0Bw==
 
 angular-gettext-tools@2.3.5:
   version "2.3.5"
