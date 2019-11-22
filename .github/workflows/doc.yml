@@ -1,0 +1,21 @@
+name: 'doc'
+
+on: [push, pull_request]
+
+jobs:
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - run: pip3 install -r docs/requirements.txt
+    - name: Build docs
+      run: |
+        cd docs
+        make html
+    - uses: actions/upload-artifact@master
+      with:
+        name: hwstudio-docs
+        path: docs/_build/html
