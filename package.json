@@ -1,0 +1,61 @@
+{
+  "name": "hwstudio",
+  "version": "0.1.0",
+  "private": false,
+  "description": "GUI editor for hardware description design",
+  "author": "umarcor",
+  "scripts": {
+    "lint": "vue-cli-service lint",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "electron:serve": "vue-cli-service electron:serve --no-sandbox",
+    "electron:build": "vue-cli-service electron:build",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
+  "dependencies": {
+    "core-js": "^3.4.2",
+    "vue": "^2.6.10",
+    "vuetify": "^2.1.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.0.0",
+    "@vue/cli-plugin-eslint": "^4.0.0",
+    "@vue/cli-service": "^4.0.0",
+    "babel-eslint": "^10.0.3",
+    "electron": "^7.1.2",
+    "eslint": "^6.7.1",
+    "eslint-plugin-vue": "^6.0.1",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-electron-builder": "^1.4.2",
+    "vue-cli-plugin-vuetify": "^2.0.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "~1.4.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "repository": "https://github.com/umarcor/hwstudio"
+}
