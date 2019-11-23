@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a title="Dependency Status" href="https://david-dm.org/umarcor/hwstudio"><img src="https://img.shields.io/david/umarcor/hwstudio.svg&longCache=true&style=flat-square&label=deps"></a><!--
+  <a title="Dependency Status" href="https://david-dm.org/umarcor/hwstudio"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?longCache=true&style=flat-square&label=deps"></a><!--
   -->
   <a title="DevDependency Status" href="https://david-dm.org/umarcor/hwstudio?type=dev"><img src="https://img.shields.io/david/dev/umarcor/hwstudio.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
   -->
