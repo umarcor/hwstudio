@@ -16,8 +16,10 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.4.2",
+    "three": "^0.113.2",
     "vue": "^2.6.10",
-    "vuetify": "^2.1.11"
+    "vuetify": "^2.1.11",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",

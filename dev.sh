@@ -2,26 +2,27 @@
 
 set -e
 
-cd $(dirname $0)
+cd $(dirname "$0")
 
 ENABLE_BUILDKIT=1
 
 build_dev() {
   docker build -t umarcor/hwstudio:dev - <<EOF
-FROM python:3.7
+FROM python:3.8
 RUN \
   curl -sL https://deb.nodesource.com/setup_12.x | bash - &&\
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &&\
   echo 'deb https://dl.yarnpkg.com/debian/ stable main' | tee /etc/apt/sources.list.d/yarn.list &&\
   apt update -qq &&\
-  apt install -y nodejs yarn
+  apt install -y nodejs yarn &&\
+  sed -i 's/TLSv1.2/TLSv1.0/g' /etc/ssl/openssl.cnf
 EOF
 #  sed -i 's/TLSv1.2/TLSv1.0/g' /etc/ssl/openssl.cnf
 }
 
 build_run() {
   docker build -t umarcor/hwstudio:run - <<EOF
-FROM python:3.7
+FROM python:3.8
 RUN apt update -qq &&\
   apt install -y \
     libasound2 \

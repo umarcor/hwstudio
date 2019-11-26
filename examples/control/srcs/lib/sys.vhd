@@ -30,7 +30,7 @@ m_p: entity work.plant
 m_i: entity work.hold
   port map ( CLK, RST, en_i, p, i );
 
-process(CLK) begin if rising_edge(CLK) then
+p_clks: process(CLK) begin if rising_edge(CLK) then
   if RST then
     cnt_c <= (others=>'0');
     cnt_p <= (others=>'0');
