@@ -1,6 +1,8 @@
 name: 'push'
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 env:
   CI: true
@@ -9,16 +11,6 @@ env:
 jobs:
 
   linux:
-#    strategy:
-#      fail-fast: false
-#      max-parallel: 3
-#      matrix:
-#        task: [
-#          { os: ubuntu,  arg: lin },
-#          { os: windows, arg: win },
-#          { os: macos,   arg: osx },
-#        ]
-#    runs-on: ${{ matrix.task.os }}-latest
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -26,25 +18,28 @@ jobs:
       with:
         node-version: '12.x'
     - run: yarn
-    - run: yarn electron:build -p never
-#      env:
-#        DIST_TARGET: ${{ matrix.task.arg }}
-    # FIXME artifacts should be uploaded at once (not supported by GHA yet):
-    # dist/*.zip
-    # dist/*.AppImage
-    # dist/*.exe
-    # dist/*.dmg
-#    - name: Prepare artifacts
-#      shell: bash
-#      run: |
-#        mkdir dist/${{ matrix.task.arg }}64 dist/${{ matrix.task.arg }}32
-#        mv dist/*${{ matrix.task.larg }}64.zip dist/${{ matrix.task.arg }}64/
-#        mv dist/*${{ matrix.task.larg }}32.zip dist/${{ matrix.task.arg }}32/
-#    - uses: actions/upload-artifact@master
-#      with:
-#        name: ${{ matrix.task.arg }}64
-#        path: dist/${{ matrix.task.arg }}64
-#    - uses: actions/upload-artifact@master
-#      with:
-#        name: ${{ matrix.task.arg }}32
-#        path: dist/${{ matrix.task.arg }}32
+    - run: yarn build
+    - name: 'publish site to gh-pages'
+      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      env:
+        GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
+      run: |
+        cd dist/
+        touch .nojekyll
+        git init
+        git add .
+        git config --local user.email "push@gha"
+        git config --local user.name "GHA"
+        git commit -a -m "update ${{ github.sha }}"
+        git remote add origin "git@github.com:${{ github.repository }}"
+        eval `ssh-agent -t 60 -s`
+        echo "$GH_DEPKEY" | ssh-add -
+        mkdir -p ~/.ssh/
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git push -u origin +HEAD:gh-pages
+        ssh-agent -k
+    - run: yarn electron:build --publish never
+    - uses: actions/upload-artifact@master
+      with:
+        name: 3Dhwstudio
+        path: dist_electron

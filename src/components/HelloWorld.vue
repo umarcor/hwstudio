@@ -1,3 +1,4 @@
+<!-- THIS SOURCE IS NOT USED. IT IS HERE FOR REFERENCE PURPOSES -->
 <template>
   <v-container>
     <v-layout
@@ -28,18 +29,15 @@
         mb-5
         xs12
       >
-        <h2 class="headline font-weight-bold mb-3">What's next?</h2>
-
         <v-layout justify-center>
+          <strong class="font-weight-bold mb-3">What's next?</strong>
           <a
             v-for="(next, i) in whatsNext"
             :key="i"
             :href="next.href"
             class="subheading mx-3"
             target="_blank"
-          >
-            {{ next.text }}
-          </a>
+          >{{ next.text }}</a>
         </v-layout>
       </v-flex>
 
@@ -47,18 +45,15 @@
         xs12
         mb-5
       >
-        <h2 class="headline font-weight-bold mb-3">Important Links</h2>
-
         <v-layout justify-center>
+        <strong class="font-weight-bold mb-3">Important Links</strong>
           <a
             v-for="(link, i) in importantLinks"
             :key="i"
             :href="link.href"
             class="subheading mx-3"
             target="_blank"
-          >
-            {{ link.text }}
-          </a>
+          >{{ link.text }}</a>
         </v-layout>
       </v-flex>
 
@@ -66,9 +61,8 @@
         xs12
         mb-5
       >
-        <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
-
         <v-layout justify-center>
+          <strong class="font-weight-bold mb-3">Ecosystem</strong>
           <a
             v-for="(eco, i) in ecosystem"
             :key="i"
