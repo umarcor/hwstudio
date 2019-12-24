@@ -599,7 +599,7 @@ angular.module('icestudio')
                                               PLL: {used:'-',total:'-',percentage:'-'},
                                               WB:  {used:'-',total:'-',percentage:'-'},
                                               MF:{value:0}
-                                            }; 
+                                            };
 
             }
             common.FPGAResources.nextpnr.LC = findValueNPNR(/_LC:\s{1,}(\d+)\/\s{1,}(\d+)\s{1,}(\d+)%/g, stdout, common.FPGAResources.nextpnr.LC);
@@ -608,7 +608,7 @@ angular.module('icestudio')
             common.FPGAResources.nextpnr.GB = findValueNPNR(/SB_GB:\s{1,}(\d+)\/\s{1,}(\d+)\s{1,}(\d+)%/g, stdout, common.FPGAResources.nextpnr.GB);
             common.FPGAResources.nextpnr.PLL = findValueNPNR(/_PLL:\s{1,}(\d+)\/\s{1,}(\d+)\s{1,}(\d+)%/g, stdout, common.FPGAResources.nextpnr.PLL);
             common.FPGAResources.nextpnr.WB = findValueNPNR(/_WARMBOOT:\s{1,}(\d+)\/\s{1,}(\d+)\s{1,}(\d+)%/g, stdout, common.FPGAResources.nextpnr.WB);
-            common.FPGAResources.nextpnr.MF=findMaxFreq(/Max frequency for clock '[\w\W]+': ([\d\.]+) MHz/g,stdout,common.FPGAResources.nextpnr.MF)
+            common.FPGAResources.nextpnr.MF=findMaxFreq(/Max frequency for clock '[\w\W]+': ([\d\.]+) MHz/g,stdout,common.FPGAResources.nextpnr.MF);
             utils.rootScopeSafeApply();
           }
         }
@@ -625,10 +625,10 @@ angular.module('icestudio')
     }
 
 
-    function findValue(pattern, output, previousValue) {
-      var match = pattern.exec(output);
-      return (match && match[1]) ? match[1] : previousValue;
-    }
+    //function findValue(pattern, output, previousValue) {
+    //  var match = pattern.exec(output);
+    //  return (match && match[1]) ? match[1] : previousValue;
+    //}
 
     function mapCodeModules(code) {
       var codelines = code.split('\n');
