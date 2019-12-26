@@ -80,7 +80,6 @@ module.exports = function(grunt) {
             'views/*.html',
             'node_modules/**', // FIXME|TODO: SHOULD BE BUNDLED
             //> !!! TEMPORAL
-            'bower_components/**',
             'js/**',
             'css/**'
             //<
@@ -88,7 +87,7 @@ module.exports = function(grunt) {
         },
         {
           expand: true,
-          cwd: 'app/bower_components/bootstrap/fonts',
+          cwd: 'app/node_modules/bootstrap/fonts',
           dest: 'dist/tmp/fonts',
           src: '*.*'
         }
@@ -253,7 +252,6 @@ module.exports = function(grunt) {
       collection: ['app/resources/collection']
       // node: ['node_modules'],
       // appnode: ['app/node_modules'],
-      // appbower: ['app/bower_components'],
       // cache: ['cache']
     },
 
