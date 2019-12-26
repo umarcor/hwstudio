@@ -352,34 +352,16 @@ module.exports = function(grunt) {
     // Compile PO files into JSON
     'nggettext_compile': {
       all: {
-        options: {
-          format: 'json'
-        },
+        options: { format: 'json' },
         files: [
-          {
-            expand: true,
-            cwd: 'app/resources/locale',
-            dest: 'app/resources/locale',
-            src: ['**/*.po'],
-            ext: '.json'
-          },
-          {
-            expand: true,
-            cwd: 'app/resources/collection/locale',
-            dest: 'app/resources/collection/locale',
-            src: ['**/*.po'],
-            ext: '.json'
-          }
+          { expand: true, cwd: 'app/resources/locale',            dest: 'app/resources/locale',            src: ['**/*.po'], ext: '.json' },
+          { expand: true, cwd: 'app/resources/collection/locale', dest: 'app/resources/collection/locale', src: ['**/*.po'], ext: '.json' }
         ]
       }
     }
 
   });
 
-  // Default tasks.
-  grunt.registerTask('default', function() {
-    console.log('Icestudio');
-  });
   grunt.registerTask('gettext', [
     'nggettext_extract'
   ]);
