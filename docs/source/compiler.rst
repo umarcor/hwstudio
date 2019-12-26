@@ -11,7 +11,7 @@ Compilers
 Implementation
 --------------
 
-Compiler `source code <https://github.com/FPGAwars/icestudio/blob/develop/app/scripts/services/compiler.js>`_.
+Compiler `source code <https://github.com/umarcor/hwstudio/blob/develop/app/scripts/services/compiler.js>`_.
 
 Sample
 ------

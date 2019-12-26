@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
     .service('graph', function ($rootScope,
         joint,
         boards,
@@ -283,9 +283,9 @@ angular.module('icestudio')
             function updateCellBoxes() {
                 var cells = graph.getCells();
                 selectionView.options.state = state;
-                
+
                 for (var i = 0, len = cells.length; i < len; i++) {
- 
+
                     if (!cells[i].isLink()) {
                         cells[i].attributes.state = state;
                         var elementView = paper.findViewByModel(cells[i]);
@@ -296,7 +296,7 @@ angular.module('icestudio')
 
                     }
                 }
-               
+
             }
             // Events
 
@@ -734,7 +734,7 @@ angular.module('icestudio')
             graph.trigger('state', state);
 
         };
-    
+
         function updateWiresOnObstacles() {
             var cells = graph.getCells();
 
@@ -1432,7 +1432,7 @@ angular.module('icestudio')
                         // - if conversion from one board to other is in progress,
                         //   now is based on pin names, an improvement could be
                         //   through hash tables with assigned pins previously
-                        //   selected by icestudio developers
+                        //   selected by hwstudio developers
                         var replaced = false;
                         console.log('MIGRANDO',opt);
                         for (var i in pins) {

@@ -346,7 +346,7 @@ Go to **View > Collection info**. A new window will appear with the README.md fi
 Load external collections
 -------------------------
 
-Go to **Edit > Preferences > External collection** and insert an absolute path of your system containing Icestudio collections.
+Go to **Edit > Preferences > External collection** and insert an absolute path of your system containing hwstudio collections.
 
 
 Create a collection package
@@ -468,7 +468,7 @@ Go to **Edit > Preferences > Board rules**
 Configure a remote host
 ------------------------
 
-I you want to use a RPi, eg pi@192.168.0.22, or another computer from Icestudio as a client, first configure the host:
+I you want to use a RPi, eg pi@192.168.0.22, or another computer from hwstudio as a client, first configure the host:
 
 1. **Copy your SSH public key into the server**
 
@@ -486,7 +486,7 @@ I you want to use a RPi, eg pi@192.168.0.22, or another computer from Icestudio 
     $ apio install --all
     $ apio drivers --enable  # For FTDI devices
 
-3. **Enter the host name in Icestudio, Edit > Remote hostname**
+3. **Enter the host name in hwstudio, Edit > Remote hostname**
 
    .. image:: ../resources/images/howto/remotehost.png
 

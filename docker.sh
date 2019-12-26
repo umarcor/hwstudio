@@ -70,13 +70,13 @@ case "$1" in
     ;;
   --test|-t)
     cd dist
-    VERSION="`ls icestudio-*-linux64.zip | sed 's#.*-\([0-9\.]*\)-.*#\1#g'`"
+    VERSION="`ls hwstudio-*-linux64.zip | sed 's#.*-\([0-9\.]*\)-.*#\1#g'`"
     echo "VERSION: $VERSION"
-    unzip "icestudio-$VERSION-linux64.zip"
-    chmod +x "icestudio-$VERSION-linux64/icestudio"
+    unzip "hwstudio-$VERSION-linux64.zip"
+    chmod +x "hwstudio-$VERSION-linux64/hwstudio"
 
     shift
-    exec_runx "/$(pwd)/icestudio-$VERSION-linux64" $1
+    exec_runx "/$(pwd)/hwstudio-$VERSION-linux64" $1
     ;;
   --publish|-p)
     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin

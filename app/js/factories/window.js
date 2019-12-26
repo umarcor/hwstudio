@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .factory('gui', function() {
     var gui = require('nw.gui');
     return gui;

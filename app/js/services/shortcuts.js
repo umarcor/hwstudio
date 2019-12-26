@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .filter('shortcut', function (shortcuts) {
     return function (action) {
       return shortcuts.label(action);

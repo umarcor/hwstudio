@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .service('project', function ($rootScope,
     graph,
     boards,
@@ -155,11 +155,11 @@ angular.module('icestudio')
     function checkVersion(version) {
       if (version > common.VERSION) {
         var errorAlert = alertify.error(gettextCatalog.getString('Unsupported project format {{version}}', { version: version }), 30);
-        alertify.message(gettextCatalog.getString('Click here to <b>download a newer version</b> of Icestudio'), 30)
+        alertify.message(gettextCatalog.getString('Click here to <b>download a newer version</b> of hwstudio'), 30)
           .callback = function (isClicked) {
             if (isClicked) {
               errorAlert.dismiss(false);
-              gui.Shell.openExternal('https://github.com/FPGAwars/icestudio/releases');
+              gui.Shell.openExternal('https://github.com/umarcor/hwstudio/releases');
             }
           };
         return false;
@@ -607,7 +607,7 @@ angular.module('icestudio')
         this.name = name;
         graph.resetBreadcrumbs(name);
       }
-      var title = (this.changed ? '*' : '') + this.name + ' ─ Icestudio';
+      var title = (this.changed ? '*' : '') + this.name + ' ─ hwstudio';
       utils.updateWindowTitle(title);
     };
 
