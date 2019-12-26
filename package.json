@@ -22,7 +22,7 @@
   "scripts": {
     "start": "grunt serve",
     "dist": "grunt dist",
-    "gettext": "grunt gettext",
+    "gettext": "grunt nggettext_extract",
     "postinstall": "npmpd && cd app && yarn && bower install --allow-root && cd ../tasks && yarn && cd .. && grunt getcollection"
   },
   "devDependencies": {
