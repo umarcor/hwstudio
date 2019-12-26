@@ -15,10 +15,10 @@
    id="svg4694"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="icon.svg"
-   inkscape:export-filename="/home/jesus/code/icestudio/doc/icons/icon.png"
-   inkscape:export-xdpi="62.638184"
-   inkscape:export-ydpi="62.638184">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/jesus/code/icestudio/app/resources/images/logo.png"
+   inkscape:export-xdpi="27.892656"
+   inkscape:export-ydpi="27.892656">
   <defs
      id="defs4696" />
   <sodipodi:namedview
@@ -29,7 +29,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="-10.548086"
+     inkscape:cx="-13.405229"
      inkscape:cy="146.09537"
      inkscape:document-units="px"
      inkscape:current-layer="g4314"
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>

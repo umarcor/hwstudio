@@ -1144,7 +1144,7 @@ joint.shapes.ice.ConstantView = joint.shapes.ice.ModelView.extend({
     });
     this.inputSelector.on('paste', function (event) {
       var data = event.originalEvent.clipboardData.getData('text');
-      if (data.startsWith('{"icestudio":')) {
+      if (data.startsWith('{"hwstudio":')) {
         // Prevent paste blocks
         event.preventDefault();
       }
@@ -1356,7 +1356,7 @@ joint.shapes.ice.MemoryView = joint.shapes.ice.ModelView.extend({
       self.editor.renderer.$cursorLayer.element.style.opacity = 0;
     });
     this.editor.on('paste', function (e) {
-      if (e.text.startsWith('{"icestudio":')) {
+      if (e.text.startsWith('{"hwstudio":')) {
         // Prevent paste blocks
         e.text = '';
       }
@@ -1655,7 +1655,7 @@ joint.shapes.ice.CodeView = joint.shapes.ice.ModelView.extend({
       self.editor.renderer.$cursorLayer.element.style.opacity = 0;
     });
     this.editor.on('paste', function (e) {
-      if (e.text.startsWith('{"icestudio":')) {
+      if (e.text.startsWith('{"hwstudio":')) {
         // Prevent paste blocks
         e.text = '';
       }
@@ -1809,7 +1809,7 @@ joint.shapes.ice.CodeView = joint.shapes.ice.ModelView.extend({
 
       }
       //    this.editor.resize();
-    
+
     }
 
     // Set ports width
@@ -2023,7 +2023,7 @@ joint.shapes.ice.InfoView = joint.shapes.ice.ModelView.extend({
       self.editor.renderer.$cursorLayer.element.style.opacity = 0;
     });
     this.editor.on('paste', function (e) {
-      if (e.text.startsWith('{"icestudio":')) {
+      if (e.text.startsWith('{"hwstudio":')) {
         // Prevent paste blocks
         e.text = '';
       }
@@ -2465,7 +2465,7 @@ joint.shapes.ice.WireView = joint.dia.LinkView.extend({
   },
 
   updateConnection: function (opt) {
-    
+
     opt = opt || {};
 
     // Necessary path finding
@@ -2499,7 +2499,7 @@ joint.shapes.ice.WireView = joint.dia.LinkView.extend({
       var markerBifurcations=false;
 
       for(var i=0,n=allWires.length;i<n;i++){
-     
+
         wireSource = allWires[i].get('source');
         cwireSource = currentWire.get('source');
         if ((wireSource.id === cwireSource.id) &&
@@ -2514,7 +2514,7 @@ joint.shapes.ice.WireView = joint.dia.LinkView.extend({
             markers: markerBifurcations
           });
         }
-     
+
     }
 
       var points = [];

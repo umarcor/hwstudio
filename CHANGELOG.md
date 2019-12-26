@@ -254,7 +254,7 @@ All notable changes to this project will be documented in this file.
 - Verify/Build/Upload optimization: run only if changed
 - Show FPGA resources in upload command
 - Improve code/info blocks zoom
-- Update Icestudio logo
+- Update hwstudio logo
 
 
 ## [0.3.0-rc] - 2017-03-30
@@ -304,9 +304,9 @@ All notable changes to this project will be documented in this file.
 #### Create Windows installer
 - Uninstall previous version if required
 - Install Python 2.7 if required
-- Install Icestudio app
-- Install Icestudio shortcut
-- Register .ice files: open in Icestudio with double-click
+- Install hwstudio app
+- Install hwstudio shortcut
+- Register .ice files: open in hwstudio with double-click
 - Uninstaller: remove toolchain, profile or collections
 
 #### Add Board rules
@@ -346,7 +346,7 @@ All notable changes to this project will be documented in this file.
 - Add menu Select > Boards/Collections
 - Bugfix verilog compiler: self-connected wires
 - Apply zoom to Code/Info blocks content
-- Paste on multiple Icestudio windows (copy also wires)
+- Paste on multiple hwstudio windows (copy also wires)
 - Remember old port connections after Code block edition
 - Detect project board on load
 - Save profile when an attribute is set
@@ -376,7 +376,7 @@ Thanks to **Patripi** for the feedback and suggestions!
 - File > New: launch a new window
 - File > Open: launch a new window if required
 - File > Examples: launch a new window if required
-- Add argument to the application: eg: ./icestudio /path/to/project.ice
+- Add argument to the application: eg: ./hwstudio /path/to/project.ice
 - Show project changed state
 
 ### New project format 1.1
@@ -503,7 +503,7 @@ Thanks to **AlexTC** for the feedback and suggestions!
 - Add Hex 7 Segments CA (#81 by @C47D)
 - Support [Kefir I](http://fpgalibre.sourceforge.net/Kefir/index.html) board (@set-soft)
 - Add `default_nettype none` to generated verilog files
-- Add Icestudio headers to generated files
+- Add hwstudio headers to generated files
 - Add verilog header (.vh) files inclusion
 - Add File > Export testbench
 - Add File > Export GTKWave
@@ -601,7 +601,7 @@ Thanks to **AlexTC** for the feedback and suggestions!
 - Help menu: add documentation
 - Help menu: add source code
 - Help menu: add community forum
-- Help menu: add about Icestudio
+- Help menu: add about hwstudio
 - Basic blocks:
   - code: contains a verilog editor
   - input & output: contains a FPGA I/O pin selector

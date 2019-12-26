@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .factory('fastCopy', function() {
     return require('fast-copy');
   })

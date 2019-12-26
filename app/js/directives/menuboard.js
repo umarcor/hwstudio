@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .directive('menuboard', function() {
     return {
       restrict: 'E',

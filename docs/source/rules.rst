@@ -3,7 +3,7 @@
 Board Rules
 ===========
 
-Icestudio *board rules* allow to automate tasks such as connecting all input *CLK* wires in a sequential circuit or initializing certain output ports to 1 or 0. The result is an easier and cleaner design. In Icestudio, rules can be enabled or disabled in "Edit > Preferences > Board rules".
+hwstudio *board rules* allow to automate tasks such as connecting all input *CLK* wires in a sequential circuit or initializing certain output ports to 1 or 0. The result is an easier and cleaner design. In hwstudio, rules can be enabled or disabled in "Edit > Preferences > Board rules".
 
 The board rules are implemented in the *rules.json* file in each board directory. Each rule file is attached to a specific board. For example, this could be a rules file for the *IceZUM Alhambra*:
 

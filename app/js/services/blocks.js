@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .service('blocks', function (joint,
     utils,
     common,

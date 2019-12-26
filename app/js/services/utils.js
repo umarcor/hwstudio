@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .service('utils', function ($rootScope,
     gettextCatalog,
     common,
@@ -67,7 +67,7 @@ angular.module('icestudio')
       executable += ' -V';
       try {
         const result = nodeChildProcess.execSync(executable);
-        return (result !== false && result !== null && 
+        return (result !== false && result !== null &&
           (result.toString().indexOf('3.5') >= 0 || result.toString().indexOf('3.6') >= 0 ||
            result.toString().indexOf('3.7') >= 0 || result.toString().indexOf('3.8') >= 0));
       } catch (e) {
@@ -919,19 +919,19 @@ angular.module('icestudio')
         }
         params.local = 'local';
       }
-      // To pass parameters to the new project window, we use de GET parameter "icestudio_argv"
+      // To pass parameters to the new project window, we use de GET parameter "hwstudio_argv"
       // that contains the same arguments that shell call, in this way the two calls will be
       // compatible.
       // If in the future you will add more paremeters to the new window , you should review
       // scripts/controllers/menu.js even if all parameters that arrive are automatically parse
 
 //      console.log('PARAMS',params);
-      var url = 'index.html' + ((params === false) ? '' : '?icestudio_argv=' + encodeURI(btoa(JSON.stringify(params))));
+      var url = 'index.html' + ((params === false) ? '' : '?hwstudio_argv=' + encodeURI(btoa(JSON.stringify(params))));
       // Create a new window and get it.
       // new-instance and new_instance are necesary for OS compatibility
       // to avoid crash on new window project after close parent
       // (little trick for nwjs bug).
-      //url='index.html?icestudio_argv=fsdfsfa';
+      //url='index.html?hwstudio_argv=fsdfsfa';
 
       gui.Window.open(url, {
         // new_instance: true,  //Deprecated for new nwjs versios
@@ -970,7 +970,7 @@ angular.module('icestudio')
 
       var cells = selectionToCells(selection, graph);
       var clipboard = {
-        icestudio: this.cellsToProject(cells, graph)
+        hwstudio: this.cellsToProject(cells, graph)
       };
 
       // Send the clipboard object the global clipboard as a string
@@ -1016,8 +1016,8 @@ angular.module('icestudio')
         else {
           // Parse the global clipboard
           var clipboard = JSON.parse(text);
-          if (callback && clipboard && clipboard.icestudio) {
-            callback(clipboard.icestudio);
+          if (callback && clipboard && clipboard.hwstudio) {
+            callback(clipboard.hwstudio);
           }
         }
       });

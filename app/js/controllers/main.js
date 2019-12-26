@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .controller('MainCtrl', function ($scope,
     gettextCatalog, tools, utils) {
 

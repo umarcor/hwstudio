@@ -101,7 +101,7 @@ module.exports = function(grunt) {
       flavor: 'normal',
       zip: false,
       buildDir: 'dist/',
-      winIco: 'docs/resources/images/logo/icestudio-logo.ico',
+      winIco: 'docs/resources/images/logo/logo.ico',
       macIcns: 'docs/resources/images/logo/nw.icns',
       macPlist: { 'CFBundleIconFile': 'app' },
       platforms: platforms
@@ -112,8 +112,8 @@ module.exports = function(grunt) {
   function appimage(bits) {
     return {
       options: {
-        name: 'Icestudio',
-        exec: 'icestudio',
+        name: 'hwstudio',
+        exec: 'hwstudio',
         arch: bits + 'bit',
         icons: 'docs/resources/icons',
         comment: 'Visual editor for open FPGA boards',
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
       },
       files: [{
         expand: true,
-        cwd: 'dist/icestudio/linux' + bits + '/',
+        cwd: 'dist/hwstudio/linux' + bits + '/',
         src: ['**'].concat(appFiles)
       }]
     };
@@ -135,13 +135,13 @@ module.exports = function(grunt) {
   gruntCfg.appdmg = {
     options: {
       basepath: '.',
-      title: 'Icestudio Installer',
-      icon: 'docs/resources/images/logo/icestudio-logo.icns',
+      title: 'hwstudio installer',
+      icon: 'docs/resources/images/logo/logo.icns',
       background: 'docs/resources/images/installation/installer-background.png',
       window: { size: { width: 512, height: 385 } },
       contents: [
         { x: 345, y: 250, type: 'link', path: '/Applications' },
-        { x: 170, y: 250, type: 'file', path: 'dist/icestudio/osx64/icestudio.app' }
+        { x: 170, y: 250, type: 'file', path: 'dist/hwstudio/osx64/hwstudio.app' }
       ]
     },
     target: { dest: 'dist/<%=pkg.name%>-<%=pkg.version%>-osx64.dmg' }
@@ -154,7 +154,7 @@ module.exports = function(grunt) {
       },
       files: [{
         expand: true,
-        cwd: 'dist/icestudio/linux' + tgt + '/',
+        cwd: 'dist/hwstudio/linux' + tgt + '/',
         src: ['**'].concat(appFiles),
         dest: '<%=pkg.name%>-<%=pkg.version%>-linux' + tgt
       }]
@@ -168,7 +168,7 @@ module.exports = function(grunt) {
       },
       files: [{
         expand: true,
-        cwd: 'dist/icestudio/win' + tgt + '/',
+        cwd: 'dist/hwstudio/win' + tgt + '/',
         src: ['**'].concat(appFiles),
         dest: '<%=pkg.name%>-<%=pkg.version%>-win' + tgt
       }]
@@ -182,8 +182,8 @@ module.exports = function(grunt) {
       },
       files: [{
         expand: true,
-        cwd: 'dist/icestudio/osx' + tgt + '/',
-        src: ['icestudio.app/**'],
+        cwd: 'dist/hwstudio/osx' + tgt + '/',
+        src: ['hwstudio.app/**'],
         dest: '<%=pkg.name%>-<%=pkg.version%>-osx' + tgt
       }]
     };

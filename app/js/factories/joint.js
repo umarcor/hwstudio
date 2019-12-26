@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .factory('joint', function($window) {
     return $window.joint;
   });
