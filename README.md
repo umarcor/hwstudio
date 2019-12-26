@@ -12,8 +12,6 @@
   -->
   <a title="app Dependency Status" href="https://david-dm.org/umarcor/hwstudio/actions?path=app"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=app&longCache=true&style=flat-square&label=app%20deps"></a><!--
   -->
-  <a title="tasks Dependency Status" href="https://david-dm.org/umarcor/hwstudio?path=tasks"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=tasks&longCache=true&style=flat-square&label=tasks%20deps"></a><!--
-  -->
 </p>
 
 # Installation
