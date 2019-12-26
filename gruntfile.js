@@ -362,9 +362,6 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('gettext', [
-    'nggettext_extract'
-  ]);
   grunt.registerTask('getcollection', [
     'clean:collection',
     'wget:collection',
