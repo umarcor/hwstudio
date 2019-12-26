@@ -4,12 +4,12 @@ module.exports = function(grunt) {
 
   const appFiles = [
     'index.html',
+    '*.js',
+    '*.css',
     'package.json',
     'fonts/**/*.*',
     'node_modules/**/*.*',
     'resources/**/*.*',
-    'js/**/*.*',
-    'css/**/*.*',
     'views/**/*.*'
   ];
 
