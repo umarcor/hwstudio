@@ -22,10 +22,9 @@
   "scripts": {
     "dist": "grunt dist",
     "gettext": "grunt nggettext_extract",
-    "postinstall": "npmpd && cd app && yarn && bower install --allow-root && cd .. && grunt getcollection"
+    "postinstall": "npmpd && cd app && yarn && cd .. && grunt getcollection"
   },
   "devDependencies": {
-    "bower": "^1.8.0",
     "grunt": "^1.0.4",
     "grunt-angular-gettext": "^2.5.0",
     "grunt-appimage": "^0.6.0",
