@@ -84,7 +84,7 @@ More information in the `Board rules section <./rules.html>`_.
 
 **External collections**
 
-Set the external collections path in your system. This absolute route should contain Icestudio collections (directories or symbolic links to directories) that will be loaded as external collections.
+Set the external collections path in your system. This absolute route should contain hwstudio collections (directories or symbolic links to directories) that will be loaded as external collections.
 
 **Remote hostname**
 
@@ -211,7 +211,7 @@ Toolchain
 +----------------+-----------------------------------------------------------------------------------+
 |     Remove     |                         Remove the toolchain directories                          |
 +----------------+-----------------------------------------------------------------------------------+
-| Reset default  |             Restore the default toolchain distributed within Icestudio            |
+| Reset default  |             Restore the default toolchain distributed within hwstudio             |
 +----------------+-----------------------------------------------------------------------------------+
 |  Apio version  |                           Show the current apio version                           |
 +----------------+-----------------------------------------------------------------------------------+
@@ -263,7 +263,7 @@ Collections
 
 .. hint::
 
-    When a ZIP file of collections is added to Icestudio, it is installed in `~/.icestudio/collections`.
+    When a ZIP file of collections is added to hwstudio, it is installed in `~/.hwstudio/collections`.
 
 
 Help
@@ -272,17 +272,17 @@ Help
 +-----------------+---------------------------------------------------+
 |     Action      |                    Description                    |
 +=================+===================================================+
-|  View license   |    Open the Icestudio license in a web browser    |
+|  View license   |    Open the hwstudio license in a web browser    |
 +-----------------+---------------------------------------------------+
-|     Version     |       Show the Icestudio current version          |
+|     Version     |       Show the hwstudio current version          |
 +-----------------+---------------------------------------------------+
-|  Documentation  | Open the Icestudio documentation in a web browser |
+|  Documentation  | Open the hwstudio documentation in a web browser |
 +-----------------+---------------------------------------------------+
-|   Source code   |  Open the Icestudio source code in a web browser  |
+|   Source code   |  Open the hwstudio source code in a web browser  |
 +-----------------+---------------------------------------------------+
 | Community forum |     Open the FPGAwars forum in a web browser      |
 +-----------------+---------------------------------------------------+
-| About Icestudio |         Information about the application         |
+| About hwstudio |         Information about the application         |
 +-----------------+---------------------------------------------------+
 
 
@@ -401,7 +401,7 @@ If the error comes from a Generic block it is marked in red.
 Undo/Redo
 ``````````
 
-Icestudio allows to undo/redo the following actions:
+hwstudio allows to undo/redo the following actions:
 
 * Add or remove a block.
 * Add or remove a wire.

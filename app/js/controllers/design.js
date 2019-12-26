@@ -2,7 +2,7 @@
 
 var subModuleActive = false;
 
-angular.module('icestudio')
+angular.module('hwstudio')
         .controller('DesignCtrl', function ($rootScope,
                 $scope,
                 project,

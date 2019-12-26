@@ -3,7 +3,7 @@
 Setup
 =====
 
-This is a quick start guide to setup the development environment for Icestudio.
+This is a quick start guide to setup the development environment for hwstudio.
 
 Install `Python 2.7 <https://www.python.org/downloads/>`_ and `Node.js <https://nodejs.org/>`_.
 
@@ -14,8 +14,8 @@ Download
 
 .. code::
 
-  git clone https://github.com/FPGAwars/icestudio.git
-  cd icestudio
+  git clone https://github.com/umarcor/hwstudio.git
+  cd hwstudio
 
 
 Install
@@ -37,7 +37,7 @@ Execute
 Languages
 ---------
 
-Add or update the `app translations <https://github.com/FPGAwars/icestudio/tree/develop/app/resources/locale>`_ using `Poedit <https://poedit.net/>`_.
+Add or update the `app translations <https://github.com/umarcor/hwstudio/tree/develop/app/resources/locale>`_ using `Poedit <https://poedit.net/>`_.
 
 Developer note: use ``npm run gettext`` to extract the labels from the code.
 

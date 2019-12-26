@@ -5,16 +5,16 @@ PURPLE="\033[1;35m"
 GREEN="\033[1;32m"
 
 APP_DIR=~/.local/share/applications
-APP=${APP_DIR}/icestudio.desktop
+APP=${APP_DIR}/hwstudio.desktop
 
 MIME_DIR=~/.local/share/mime
 MIME_PKG=${MIME_DIR}/packages
-MIME=${MIME_PKG}/icestudio.xml
+MIME=${MIME_PKG}/hwstudio.xml
 
 ICON_DIR=~/.local/share/icons
-ICON=${ICON_DIR}/application-x-icestudio-project.png
+ICON=${ICON_DIR}/application-x-hwstudio-project.png
 
-echo "${PURPLE}This script uninstalls Icestudio as a user application"
+echo "${PURPLE}This script uninstalls hwstudio as a user application"
 echo "------------------------------------------------------"
 
 printf "Do you want to continue? [y/N]:${NC} "
@@ -27,7 +27,7 @@ case "$RESP" in
       rm -f ${ICON}
       update-desktop-database ${APP_DIR}
 
-      echo "${GREEN}\nIcestudio.desktop uninstalled!${NC}"
+      echo "${GREEN}\nhwstudio.desktop uninstalled!${NC}"
 
 
       # Register extension .ice
@@ -35,7 +35,7 @@ case "$RESP" in
       rm -f ${MIME}
       update-mime-database ${MIME_DIR}
 
-      echo "${GREEN}Icestudio project unregistered!${NC}"
+      echo "${GREEN}hwstudio project unregistered!${NC}"
       ;;
     *)
       ;;

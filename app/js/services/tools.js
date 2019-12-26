@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .service('tools', function (project,
     compiler,
     profile,
@@ -1240,11 +1240,11 @@ angular.module('icestudio')
               var msg = '';
               if (hasNewVersion === 'stable') {
                 msg = '<div class="new-version-notifier-box"><div class="new-version-notifier-box--icon"><img src="resources/images/confetti.svg"></div>\
-                                          <div class="new-version-notifier-box--text">'+ gettextCatalog.getString('There is a new stable version available') + '<br/><a class="action-open-url-external-browser" href="https://icestudio.io" target="_blank">Click here to download it.</a></div></div>';
+                                          <div class="new-version-notifier-box--text">'+ gettextCatalog.getString('There is a new stable version available') + '</div></div>';
 
               } else {
                 msg = '<div class="new-version-notifier-box"><div class="new-version-notifier-box--icon"><img src="resources/images/confetti.svg"></div>\
-                                          <div class="new-version-notifier-box--text">'+ gettextCatalog.getString('There is a new nightly version available') + '<br/><a class="action-open-url-external-browser" href="https://icestudio.io" target="_blank">Click here to download it.</a></div></div>';
+                                          <div class="new-version-notifier-box--text">'+ gettextCatalog.getString('There is a new nightly version available') + '</div></div>';
 
               }
               alertify.notify(msg, 'notify', 30);

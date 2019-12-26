@@ -1,25 +1,9 @@
 {
-  "name": "icestudio",
+  "name": "hwstudio",
   "version": "0.5.1",
-  "nightly": "0.5.1",
-  "description": "Visual editor for open FPGA boards",
-  "contributors": [
-    {
-      "name": "Jesús Arroyo Torrens",
-      "email": "jesus.arroyo.torrens@gmail.com",
-      "url": "https://github.com/Jesus89"
-    },
-    {
-      "name": "Carlos Venegas Arrabe",
-      "url": "https://github.com/cavearr"
-    },
-    {
-      "name": "Juan González Gómez",
-      "url": "https://github.com/Obijuan"
-    }
-  ],
-  "repository": "https://github.com/FPGAwars/icestudio",
-  "updatecheck": "https://raw.githubusercontent.com/FPGAwars/icestudio/develop/app/package.json",
+  "description": "GUI editor for hardware description designs",
+  "repository": "https://github.com/umarcor/hwstudio",
+  "updatecheck": "https://raw.githubusercontent.com/umarcor/hwstudio/develop/app/package.json",
   "license": "GPL-2.0",
   "main": "index.html",
   "development": {
@@ -32,7 +16,7 @@
     "min_height": 200,
     "resizable": true,
     "position": "center",
-    "icon": "resources/images/icestudio-logo.png"
+    "icon": "resources/images/logo.png"
   },
   "apio": {
     "min": "0.5.0",
@@ -88,9 +72,15 @@
   },
   "readme": "../README.md",
   "keywords": [
-    "FPGA",
-    "open",
     "editor",
-    "hardware"
+    "hardware",
+    "HDL",
+    "VHDL",
+    "GHDL",
+    "VUnit",
+    "GtkWave",
+    "FPGA",
+    "SoC",
+    "simulation"
   ]
 }

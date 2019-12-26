@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('icestudio')
+angular.module('hwstudio')
   .service('common', function (nodePath,
     nodeTmp) {
 
@@ -54,8 +54,8 @@ angular.module('icestudio')
     this.DEFAULT_COLLECTION_DIR = nodePath.resolve(nodePath.join('resources', 'collection'));
 
     this.BASE_DIR = process.env.HOME || process.env.USERPROFILE;
-    this.LOGFILE = nodePath.join(this.BASE_DIR, 'icestudio.log');
-    this.ICESTUDIO_DIR = safeDir(nodePath.join(this.BASE_DIR, '.icestudio'), this);
+    this.LOGFILE = nodePath.join(this.BASE_DIR, 'hwstudio.log');
+    this.ICESTUDIO_DIR = safeDir(nodePath.join(this.BASE_DIR, '.hwstudio'), this);
     this.INTERNAL_COLLECTIONS_DIR = nodePath.join(this.ICESTUDIO_DIR, 'collections');
     this.APIO_HOME_DIR = nodePath.join(this.ICESTUDIO_DIR, 'apio');
     this.PROFILE_PATH = nodePath.join(this.ICESTUDIO_DIR, 'profile.json');
@@ -87,7 +87,7 @@ angular.module('icestudio')
     this.APIO_CMD = (this.WIN32 ? 'set' : 'export') + ' APIO_HOME_DIR=' + this.APIO_HOME_DIR + (this.WIN32 ? '& ' : '; ') + '"' + this.ENV_APIO + '"';
 
     this.BUILD_DIR_OBJ = new nodeTmp.dirSync({
-      prefix: 'icestudio-',
+      prefix: 'hwstudio-',
       unsafeCleanup: true
     });
     this.BUILD_DIR = this.BUILD_DIR_OBJ.name;
@@ -108,8 +108,8 @@ angular.module('icestudio')
             return nodePath.format({
               root: _dirFormat.root,
               dir: _dirFormat.root,
-              base: '.icestudio',
-              name: '.icestudio',
+              base: '.hwstudio',
+              name: '.hwstudio',
             });
           }
         }

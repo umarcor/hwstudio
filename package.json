@@ -1,23 +1,8 @@
 {
-  "name": "icestudio",
+  "name": "hwstudio",
   "version": "0.5.1",
-  "description": "Visual editor for open FPGA boards",
-  "contributors": [
-    {
-      "name": "Jesús Arroyo Torrens",
-      "email": "jesus.arroyo.torrens@gmail.com",
-      "url": "https://github.com/Jesus89"
-    },
-    {
-      "name": "Carlos Venegas Arrabe",
-      "url": "https://github.com/cavearr"
-    },
-    {
-      "name": "Juan González Gómez",
-      "url": "https://github.com/Obijuan"
-    }
-  ],
-  "repository": "https://github.com/FPGAwars/icestudio",
+  "description": "GUI editor for hardware description designs",
+  "repository": "https://github.com/umarcor/hwstudio",
   "license": "GPL-2.0",
   "scripts": {
     "dist": "grunt dist",
