@@ -8,8 +8,8 @@ module.exports = function(grunt) {
     'fonts/**/*.*',
     'node_modules/**/*.*',
     'resources/**/*.*',
-    'scripts/**/*.*',
-    'styles/**/*.*',
+    'js/**/*.*',
+    'css/**/*.*',
     'views/**/*.*'
   ];
 
@@ -208,8 +208,8 @@ module.exports = function(grunt) {
     scripts: {
       files: [
         'app/resources/**/*.*',
-        'app/scripts/**/*.*',
-        'app/styles/**/*.*',
+        'app/js/**/*.*',
+        'app/css/**/*.*',
         'app/views/**/*.*'
       ],
       tasks: [
@@ -303,7 +303,7 @@ module.exports = function(grunt) {
     // Check all js files
     jshint: {
       all: [
-        'app/scripts/**/*.js',
+        'app/js/**/*.js',
         'tasks/*.js',
         'gruntfile.js'
       ],
@@ -343,7 +343,7 @@ module.exports = function(grunt) {
         files: {
           'app/resources/locale/template.pot': [
             'app/views/*.html',
-            'app/scripts/**/*.js'
+            'app/js/**/*.js'
           ]
         }
       },
