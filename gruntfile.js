@@ -4,11 +4,11 @@ module.exports = function(grunt) {
 
   const appFiles = [
     'index.html',
-    '*.js',
-    '*.css',
     'package.json',
     'fonts/**/*.*',
     'node_modules/**/*.*',
+    'js/**/*.*',
+    'css/**/*.*',
     'resources/**/*.*',
     'views/**/*.*'
   ];
@@ -77,8 +77,13 @@ module.exports = function(grunt) {
             'index.html',
             'package.json',
             'resources/**',
-            'node_modules/**',
-            'views/*.html'
+            'views/*.html',
+            'node_modules/**', // FIXME|TODO: SHOULD BE BUNDLED
+            //> !!! TEMPORAL
+            'bower_components/**',
+            'js/**',
+            'css/**'
+            //<
           ]
         },
         {
@@ -204,44 +209,6 @@ module.exports = function(grunt) {
     osx64:   compressOSX('64'),
   };
 
-  gruntCfg.watch = {
-    scripts: {
-      files: [
-        'app/resources/**/*.*',
-        'app/js/**/*.*',
-        'app/css/**/*.*',
-        'app/views/**/*.*'
-      ],
-      tasks: [
-        'wiredep',
-        'exec:stopNW',
-        'exec:nw'
-      ],
-      options: {
-        atBegin: true,
-        interrupt: true
-      }
-    }
-  };
-
-  gruntCfg.wget = {
-    python32: {
-      options: { overwrite: false },
-      src: 'https://www.python.org/ftp/python/3.7.4/python-3.7.4.exe',
-      dest: 'cache/python/python-3.7.4.exe'
-    },
-    python64: {
-      options: { overwrite: false },
-      src: 'https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe',
-      dest: 'cache/python/python-3.7.4-amd64.exe'
-    },
-    collection: {
-      options: { overwrite: false },
-      src: 'https://github.com/FPGAwars/collection-default/archive/v<%=pkg.collection%>.zip',
-      dest: 'cache/collection/collection-default-v<%=pkg.collection%>.zip'
-    }
-  };
-
   const WIN32 = process.platform === 'win32';
 
   var pkg = grunt.file.readJSON('app/package.json');
@@ -260,54 +227,24 @@ module.exports = function(grunt) {
     copy:      gruntCfg.copy,      // Copy dist files
     nwjs:      gruntCfg.nwjs,      // Execute nw-build packaging
     toolchain: gruntCfg.toolchain, // Create standalone toolchains for each platform
-    watch:     gruntCfg.watch,     // Watch files for changes and runs tasks based on the changed files
-    wget:      gruntCfg.wget,      // Wget: Python installer and Default collection
 
-    // Automatically inject Bower components into the app
-    wiredep: {
-      task: {
-        directory: 'app/bower_components',
-        bowerJson: grunt.file.readJSON('app/bower.json'),
-        src: ['index.html']
+    // Get default collection
+    wget: {
+      python32: {
+        options: { overwrite: false },
+        src: 'https://www.python.org/ftp/python/3.7.4/python-3.7.4.exe',
+        dest: 'cache/python/python-3.7.4.exe'
+      },
+      python64: {
+        options: { overwrite: false },
+        src: 'https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe',
+        dest: 'cache/python/python-3.7.4-amd64.exe'
+      },
+      collection: {
+        options: { overwrite: false },
+        src: 'https://github.com/FPGAwars/collection-default/archive/v<%=pkg.collection%>.zip',
+        dest: 'cache/collection/collection-default-v<%=pkg.collection%>.zip'
       }
-    },
-
-    // Execute nw application
-    exec: {
-      nw: 'nw app' + (WIN32 ? '' : ' 2>/dev/null'),
-      stopNW: (WIN32 ? 'taskkill /F /IM nw.exe >NUL 2>&1' : 'killall nw 2>/dev/null || killall nwjs 2>/dev/null') + ' || (exit 0)',
-      nsis32: 'makensis -DARCH=win32 -DPYTHON="python-3.7.4.exe" -DVERSION=<%=pkg.version%> -V3 scripts/windows_installer.nsi',
-      nsis64: 'makensis -DARCH=win64 -DPYTHON="python-3.7.4-amd64.exe" -DVERSION=<%=pkg.version%> -V3 scripts/windows_installer.nsi'
-    },
-
-    // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
-    // additional tasks can operate on them
-    useminPrepare: {
-      html: 'app/index.html',
-      options: { dest: 'dist/tmp' }
-    },
-
-    // JSON minification plugin without concatination
-    'json-minify': {
-      json: { files: 'dist/tmp/resources/**/*.json' },
-      ice: { files: 'dist/tmp/resources/**/*.ice' }
-    },
-
-    // Uglify configuration options:
-    uglify: { options: { mangle: false } },
-
-    // Rewrite based on filerev and the useminPrepare configuration
-    usemin: { html: ['dist/tmp/index.html'] },
-
-    // Check all js files
-    jshint: {
-      all: [
-        'app/js/**/*.js',
-        'tasks/*.js',
-        'gruntfile.js'
-      ],
-      options: { jshintrc: '.jshintrc' }
     },
 
     // Unzip Default collection
@@ -319,6 +256,20 @@ module.exports = function(grunt) {
         src: 'cache/collection/collection-default-v<%=pkg.collection%>.zip',
         dest: 'app/resources/'
       }
+    },
+
+    // Execute nw application
+    exec: {
+      nw: 'nw app' + (WIN32 ? '' : ' 2>/dev/null'),
+      stopNW: (WIN32 ? 'taskkill /F /IM nw.exe >NUL 2>&1' : 'killall nw 2>/dev/null || killall nwjs 2>/dev/null') + ' || (exit 0)',
+      nsis32: 'makensis -DARCH=win32 -DPYTHON="python-3.7.4.exe" -DVERSION=<%=pkg.version%> -V3 scripts/windows_installer.nsi',
+      nsis64: 'makensis -DARCH=win64 -DPYTHON="python-3.7.4-amd64.exe" -DVERSION=<%=pkg.version%> -V3 scripts/windows_installer.nsi'
+    },
+
+    // Check all js files
+    jshint: {
+      all: ['gruntfile.js', 'app/js/**/*.js'],
+      options: { jshintrc: '.jshintrc' }
     },
 
     // Empty folders to start fresh
@@ -339,14 +290,7 @@ module.exports = function(grunt) {
 
     // Generate POT file
     'nggettext_extract': {
-      pot: {
-        files: {
-          'app/resources/locale/template.pot': [
-            'app/views/*.html',
-            'app/js/**/*.js'
-          ]
-        }
-      },
+      pot: { files: { 'app/resources/locale/template.pot': ['app/js/**/*.js', 'app/views/*.html'] } },
     },
 
     // Compile PO files into JSON
@@ -367,23 +311,13 @@ module.exports = function(grunt) {
     'wget:collection',
     'unzip'
   ]);
-  grunt.registerTask('serve', [
-    'nggettext_compile',
-    'watch:scripts'
-  ]);
   grunt.registerTask('dist', [
     'checksettings',
     'jshint',
     'clean:dist',
-    'clean:toolchain',
+    //'clean:toolchain',
     'nggettext_compile',
-    'useminPrepare',
-    'concat',
     'copy:dist',
-    'json-minify',
-    'uglify',
-    'cssmin',
-    'usemin',
     'nwjs',
     //'toolchain'
   ]
