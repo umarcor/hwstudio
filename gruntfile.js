@@ -23,7 +23,7 @@ module.exports = function(grunt) {
   }
   function targetWin(bits) {
     platforms.push('win' + bits);
-    distCommands.push('compress:win' + bits, 'wget:python' + bits, 'exec:nsis' + bits);
+    distCommands.push('compress:win' + bits);
   }
   function targetOSX() {
     platforms.push('osx64');
@@ -93,16 +93,6 @@ module.exports = function(grunt) {
           src: '*.*'
         }
       ]
-    }
-  };
-
-  gruntCfg.toolchain = {
-    options: {
-      apioMin: '<%=pkg.apio.min%>',
-      apioMax: '<%=pkg.apio.max%>',
-      buildDir: 'dist/',
-      extraPackages: '<%=pkg.apio.extras%>',
-      platforms: platforms
     }
   };
 
@@ -215,9 +205,6 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt, options);
 
-  // Load custom tasks
-  grunt.loadTasks('tasks');
-
   // Project configuration
   grunt.initConfig({
     pkg: pkg,
@@ -226,20 +213,9 @@ module.exports = function(grunt) {
     compress:  gruntCfg.compress,  // Compress packages usin zip
     copy:      gruntCfg.copy,      // Copy dist files
     nwjs:      gruntCfg.nwjs,      // Execute nw-build packaging
-    toolchain: gruntCfg.toolchain, // Create standalone toolchains for each platform
 
     // Get default collection
     wget: {
-      python32: {
-        options: { overwrite: false },
-        src: 'https://www.python.org/ftp/python/3.7.4/python-3.7.4.exe',
-        dest: 'cache/python/python-3.7.4.exe'
-      },
-      python64: {
-        options: { overwrite: false },
-        src: 'https://www.python.org/ftp/python/3.7.4/python-3.7.4-amd64.exe',
-        dest: 'cache/python/python-3.7.4-amd64.exe'
-      },
       collection: {
         options: { overwrite: false },
         src: 'https://github.com/FPGAwars/collection-default/archive/v<%=pkg.collection%>.zip',
@@ -261,9 +237,7 @@ module.exports = function(grunt) {
     // Execute nw application
     exec: {
       nw: 'nw app' + (WIN32 ? '' : ' 2>/dev/null'),
-      stopNW: (WIN32 ? 'taskkill /F /IM nw.exe >NUL 2>&1' : 'killall nw 2>/dev/null || killall nwjs 2>/dev/null') + ' || (exit 0)',
-      nsis32: 'makensis -DARCH=win32 -DPYTHON="python-3.7.4.exe" -DVERSION=<%=pkg.version%> -V3 scripts/windows_installer.nsi',
-      nsis64: 'makensis -DARCH=win64 -DPYTHON="python-3.7.4-amd64.exe" -DVERSION=<%=pkg.version%> -V3 scripts/windows_installer.nsi'
+      stopNW: (WIN32 ? 'taskkill /F /IM nw.exe >NUL 2>&1' : 'killall nw 2>/dev/null || killall nwjs 2>/dev/null') + ' || (exit 0)'
     },
 
     // Check all js files
@@ -276,11 +250,6 @@ module.exports = function(grunt) {
     clean: {
       tmp: ['.tmp', 'dist/tmp'],
       dist: ['dist'],
-      toolchain: [
-        'cache/toolchain/default-python-packages',
-        'cache/toolchain/default-apio',
-        'cache/toolchain/*.zip'
-      ],
       collection: ['app/resources/collection']
       // node: ['node_modules'],
       // appnode: ['app/node_modules'],
@@ -312,24 +281,16 @@ module.exports = function(grunt) {
     'unzip'
   ]);
   grunt.registerTask('dist', [
-    'checksettings',
     'jshint',
     'clean:dist',
-    //'clean:toolchain',
     'nggettext_compile',
     'copy:dist',
     'nwjs',
-    //'toolchain'
   ]
   .concat(distCommands)
   .concat([
     'clean:tmp'
   ]));
-  grunt.registerTask('checksettings', function() {
-    if (pkg.apio.external !== '' || pkg.apio.branch !== '') {
-      grunt.fail.fatal('Apio settings are in debug mode');
-    }
-  });
 };
 
 // Disable Deprecation Warnings

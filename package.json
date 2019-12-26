@@ -22,7 +22,7 @@
   "scripts": {
     "dist": "grunt dist",
     "gettext": "grunt nggettext_extract",
-    "postinstall": "npmpd && cd app && yarn && bower install --allow-root && cd ../tasks && yarn && cd .. && grunt getcollection"
+    "postinstall": "npmpd && cd app && yarn && bower install --allow-root && cd .. && grunt getcollection"
   },
   "devDependencies": {
     "bower": "^1.8.0",
