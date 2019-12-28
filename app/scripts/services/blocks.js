@@ -578,8 +578,9 @@ angular.module('icestudio')
         }
         // Validate values
         var i, inPortInfo, inPortInfos = [];
-       
-        let nib=0, nob=0;
+
+        var nib=0;
+        var nob=0;
         for (i in inPorts) {
           if (inPorts[i]) {
             inPortInfo = utils.parsePortLabel(inPorts[i], common.PATTERN_PORT_LABEL);
@@ -596,7 +597,7 @@ angular.module('icestudio')
             nib++;
           }
         }
-        
+
         var o, outPortInfo, outPortInfos = [];
         for (o in outPorts) {
           if (outPorts[o]) {
@@ -618,7 +619,7 @@ angular.module('icestudio')
                evt.cancel = true;
               resultAlert = alertify.warning(gettextCatalog.getString('Code block needs at least one input or one output'));
               return;
- 
+
 
         }
 
