@@ -19,3 +19,15 @@ jobs:
       with:
         name: hwstudio-docs
         path: docs/_build/html
+    - name: 'publish site to gh-pages'
+      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      run: |
+        cd docs/_build/html
+        touch .nojekyll
+        git init
+        git add .
+        git config --local user.email "push@gha"
+        git config --local user.name "GHA"
+        git commit -a -m "update ${{ github.sha }}"
+        git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY"
+        git push -u origin +HEAD:gh-pages
