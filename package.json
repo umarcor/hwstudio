@@ -25,7 +25,7 @@
     "grunt-zip": "^0.18.2",
     "load-grunt-tasks": "^5.1.0",
     "npm-platform-dependencies": "^0.1.0",
-    "nw": "0.35.5-sdk"
+    "nw": "0.43.4"
   },
   "darwinDependencies": {
     "grunt-appdmg": "^1.0.0"
