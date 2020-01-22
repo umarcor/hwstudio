@@ -785,7 +785,7 @@ angular.module('icestudio')
       return code;
     }
     function lpfCompiler(project, opt) {
-      var i, j, block, pin, value, code = '';
+      var i, block, pin, value, code = '';
       var blocks = project.design.graph.blocks;
       opt = opt || {};
 
