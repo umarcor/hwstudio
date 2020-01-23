@@ -12,8 +12,7 @@ angular.module('hwstudio')
       'externalCollections': '',
       'language': '',
       'remoteHostname': '',
-      'showFPGAResources': false,
-      'displayVersionInfoWindow': 'yes'
+      'showFPGAResources': false
     };
 
     if (common.DARWIN) {
@@ -31,9 +30,7 @@ angular.module('hwstudio')
             'language': data.language || '',
             'externalCollections': data.externalCollections || '',
             'remoteHostname': data.remoteHostname || '',
-            'showFPGAResources': data.showFPGAResources || false,
-            'displayVersionInfoWindow': data.displayVersionInfoWindow || 'yes'
-
+            'showFPGAResources': data.showFPGAResources || false
           };
           if (common.DARWIN) {
             self.data['macosFTDIDrivers'] = data.macosFTDIDrivers || false;
