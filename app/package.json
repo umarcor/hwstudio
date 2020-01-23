@@ -65,7 +65,7 @@
     "bootstrap": "~3.3.7",
     "jointjs": "~1.1.0",
     "jquery-resize": "https://github.com/cowboy/jquery-resize#v1.1",
-    "lodash": "~3.10.1",
+    "lodash": "~4.17.13",
     "underscore": "~1.9.1",
     "select2": "~4.0.5",
     "svg-pan-zoom": "~3.4.1"
