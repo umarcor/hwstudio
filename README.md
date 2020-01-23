@@ -1,13 +1,19 @@
 <p align="center">
-  <a title="'dev' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adev"><img alt="'dev' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/dev?longCache=true&style=flat-square&label=dev"></a><!--
+  <a title="'dev' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adev"><img alt="'dev' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/dev?longCache=true&style=flat-square&label=dev&logo=github"></a><!--
   -->
-  <a title="'push' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Apush"><img alt="'push' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/push?longCache=true&style=flat-square&label=push"></a><!--
+  <a title="'push' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Apush"><img alt="'push' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/push?longCache=true&style=flat-square&label=push&logo=github"></a><!--
   -->
-  <a title="'doc' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adoc"><img alt="'doc' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/doc?longCache=true&style=flat-square&label=doc"></a><!--
+  <a title="'doc' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adoc"><img alt="'doc' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/doc?longCache=true&style=flat-square&label=doc&logo=github"></a>
+</p>
+
+<p align="center">
+  <img width="550px" src="./app/resources/images/banner.png"/>
+</p>
+
+<p align="center">
+  <a title="vscode-client DevDependency Status" href="https://david-dm.org/umarcor/hwstudio/develop?type=dev"><img src="https://img.shields.io/david/dev/umarcor/hwstudio.svg?longCache=true&style=flat-square&label=devdeps&logo=npm"></a><!--
   -->
-  <a title="vscode-client DevDependency Status" href="https://david-dm.org/umarcor/hwstudio/develop?type=dev"><img src="https://img.shields.io/david/dev/umarcor/hwstudio.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
-  -->
-  <a title="app Dependency Status" href="https://david-dm.org/umarcor/hwstudio/develop?path=app"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=app&longCache=true&style=flat-square&label=app%20deps"></a><!--
+  <a title="app Dependency Status" href="https://david-dm.org/umarcor/hwstudio/develop?path=app"><img src="https://img.shields.io/david/umarcor/hwstudio.svg?path=app&longCache=true&style=flat-square&label=app%20deps&logo=npm"></a><!--
   -->
 </p>
 
