@@ -866,23 +866,26 @@ angular.module('hwstudio')
     };
 
     $scope.about = function () {
-      var content = [
+      alertify.alert([
         '<div class="row">',
         '  <div class="col-sm-12">',
-        '    <h4>Hardware Studio (hwstudio)</h4>',
+        '    <h4>Hardware Studio (<a class="action-open-url-external-browser" href="https://github.com/umarcor/hwstudio">hwstudio</a>)</h4>',
         '    <p><i>GUI editor for hardware description designers</i></p>',
-        '    <p>Version: ' + $scope.version + '</p>',
-        '    <p>License: GPL-2.0</p>',
         '  </div>',
         '</div>',
-         '<div class="row" style="margin-top:30px;">',
+        '<div class="row" style="margin-top:15px;">',
         '  <div class="col-sm-12">',
-        '    <p>Thanks to all the <a class="action-open-url-external-browser" href="https://github.com/umarcor/hwstudio">contributors</a></p>',
+        '    <p>Version: ' + $scope.version + '</p>',
+        '    <p>License: <a class="action-open-url-external-browser" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GPL-2.0</a></p>',
+        '    <p>Documentation: <a class="action-open-url-external-browser" href="http://umarcor.github.io/hwstudio">umarcor.github.io/hwstudio</a></p>',
         '  </div>',
-        '</div>'].join('\n');
-      alertify.alert(content);
+        '</div>',
+         '<div class="row" style="margin-top:15px;">',
+        '  <div class="col-sm-12">',
+        '    <p>Thanks to all the <a class="action-open-url-external-browser" href="https://github.com/umarcor/hwstudio/graphs/contributors">contributors</a>!</p>',
+        '  </div>',
+        '</div>'].join('\n'));
     };
-
 
     // Events
 
