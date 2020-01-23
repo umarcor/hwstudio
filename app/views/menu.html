@@ -140,6 +140,81 @@
                       <span ng-show="profile.data.remoteHostname" class="glyphicon glyphicon-ok-circle"></span>
                     </a>
                   </li>
+                  <li class="divider" ng-if="common.showToolchain()"></li>
+                  <li class="dropdown-submenu" uib-dropdown ng-if="common.showToolchain()">
+                    <a href uib-dropdown-toggle>{{ 'Toolchain' | translate }}</a>
+                    <ul uib-dropdown-menu>
+                      <li ng-class="toolchain.disabled ? 'disabled' : ''">
+                        <a href ng-hide="toolchain.installed" ng-click="tools.installToolchain()">
+                          {{ 'Install' | translate }}
+                        </a>
+                        <a href ng-show="toolchain.installed" ng-click="tools.updateToolchain()">
+                          {{ 'Update' | translate }}
+                        </a>
+                      </li>
+                      <li ng-class="(toolchain.disabled || !toolchain.installed) ? 'disabled' : ''">
+                        <a href ng-click="(toolchain.disabled || !toolchain.installed) ? '' : tools.removeToolchain()">
+                          {{ 'Remove' | translate }}
+                        </a>
+                      </li>
+                      <li ng-class="(toolchain.disabled || !toolchain.installed) ? 'disabled' : ''">
+                        <a href ng-click="(toolchain.disabled || !toolchain.installed) ? '' : tools.resetToolchain()">
+                          {{ 'Reset default' | translate }}
+                        </a>
+                      </li>
+                      <li class="divider" ng-show="toolchain.apio"></li>
+                      <li class="disabled" ng-show="toolchain.apio">
+                        <a href>{{ 'Apio ' + toolchain.apio }}</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu" uib-dropdown ng-if="common.showDrivers()">
+                    <a href uib-dropdown-toggle>{{ 'Drivers' | translate }}</a>
+                    <ul uib-dropdown-menu>
+                      <li>
+                        <a href ng-click="tools.enableDrivers()">
+                          {{ 'Enable' | translate }}
+                        </a>
+                      </li>
+                      <li>
+                        <a href ng-click="tools.disableDrivers()">
+                          {{ 'Disable' | translate }}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="dropdown-submenu" uib-dropdown>
+                    <a href uib-dropdown-toggle>{{ 'Collections' | translate }}</a>
+                    <ul uib-dropdown-menu>
+                      <li>
+                        <a href ng-click="addCollections()">
+                          {{ 'Add' | translate }}
+                        </a>
+                      </li>
+                      <li>
+                        <a href ng-click="reloadCollections()">
+                          {{ 'Reload' | translate }}
+                        </a>
+                      </li>
+                      <li class="dropdown-submenu" uib-dropdown>
+                        <a href uib-dropdown-toggle>{{ 'Remove' | translate }}</a>
+                        <ul uib-dropdown-menu
+                            ng-show="common.internalCollections.length > 0">
+                          <li ng-repeat="collection in common.internalCollections">
+                            <a href ng-click="removeCollection(collection)" ng-if="collection.name != ''">
+                              {{ collection.name | translate }}
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href ng-click="removeAllCollections()">
+                          {{ 'Remove all' | translate }}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -249,82 +324,6 @@
               <li>
                 <a href ng-click="uploadCode()">{{ 'Upload' | translate }}<span class="shortcut">{{ 'uploadCode' | shortcut }}</span></a>
               </li>
-              <li class="divider" ng-if="common.showToolchain()"></li>
-              <li class="dropdown-submenu" uib-dropdown ng-if="common.showToolchain()">
-                <a href uib-dropdown-toggle>{{ 'Toolchain' | translate }}</a>
-                <ul uib-dropdown-menu>
-                  <li ng-class="toolchain.disabled ? 'disabled' : ''">
-                    <a href ng-hide="toolchain.installed" ng-click="tools.installToolchain()">
-                      {{ 'Install' | translate }}
-                    </a>
-                    <a href ng-show="toolchain.installed" ng-click="tools.updateToolchain()">
-                      {{ 'Update' | translate }}
-                    </a>
-                  </li>
-                  <li ng-class="(toolchain.disabled || !toolchain.installed) ? 'disabled' : ''">
-                    <a href ng-click="(toolchain.disabled || !toolchain.installed) ? '' : tools.removeToolchain()">
-                      {{ 'Remove' | translate }}
-                    </a>
-                  </li>
-                  <li ng-class="(toolchain.disabled || !toolchain.installed) ? 'disabled' : ''">
-                    <a href ng-click="(toolchain.disabled || !toolchain.installed) ? '' : tools.resetToolchain()">
-                      {{ 'Reset default' | translate }}
-                    </a>
-                  </li>
-                  <li class="divider" ng-show="toolchain.apio"></li>
-                  <li class="disabled" ng-show="toolchain.apio">
-                    <a href>{{ 'Apio ' + toolchain.apio }}</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="dropdown-submenu" uib-dropdown ng-if="common.showDrivers()">
-                <a href uib-dropdown-toggle>{{ 'Drivers' | translate }}</a>
-                <ul uib-dropdown-menu>
-                  <li>
-                    <a href ng-click="tools.enableDrivers()">
-                      {{ 'Enable' | translate }}
-                    </a>
-                  </li>
-                  <li>
-                    <a href ng-click="tools.disableDrivers()">
-                      {{ 'Disable' | translate }}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-              <li class="dropdown-submenu" uib-dropdown>
-                <a href uib-dropdown-toggle>{{ 'Collections' | translate }}</a>
-                <ul uib-dropdown-menu>
-                  <li>
-                    <a href ng-click="addCollections()">
-                      {{ 'Add' | translate }}
-                    </a>
-                  </li>
-                  <li>
-                    <a href ng-click="reloadCollections()">
-                      {{ 'Reload' | translate }}
-                    </a>
-                  </li>
-                  <li class="dropdown-submenu" uib-dropdown>
-                    <a href uib-dropdown-toggle>{{ 'Remove' | translate }}</a>
-                    <ul uib-dropdown-menu
-                        ng-show="common.internalCollections.length > 0">
-                      <li ng-repeat="collection in common.internalCollections">
-                        <a href ng-click="removeCollection(collection)" ng-if="collection.name != ''">
-                          {{ collection.name | translate }}
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href ng-click="removeAllCollections()">
-                      {{ 'Remove all' | translate }}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
             </ul>
           </li>
 
