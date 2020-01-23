@@ -69,14 +69,11 @@ angular.module('hwstudio')
       // https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/unescape
       // unescape is deprecated javascript function, should use decodeURI instead
 
-
-      var queryStr='';
-      if(window.location.search.indexOf('?hwstudio_argv=')===0){
-        queryStr='?hwstudio_argv='+atob(decodeURI(window.location.search.replace('?hwstudio_argv=','')))+'&';
-      }else{
-
-        queryStr = decodeURI(window.location.search) + '&';
-      }
+      var queryStr = (window.location.search.indexOf('?hwstudio_argv=')===0) ?
+        '?hwstudio_argv='+atob(decodeURI(window.location.search.replace('?hwstudio_argv=','')))+'&'
+      :
+        decodeURI(window.location.search) + '&'
+      ;
       var regex = new RegExp('.*?[&\\?]hwstudio_argv=(.*?)&.*');
       var val = queryStr.replace(regex, '$1');
 
@@ -89,7 +86,6 @@ angular.module('hwstudio')
         var prop;
       if (params !== false) {
         params = JSON.parse(decodeURI(params));
-
         for ( prop in params) {
           gui.App.argv.push(params[prop]);
         }
@@ -100,12 +96,10 @@ angular.module('hwstudio')
         argv=[];
     }
 
-
       if(params !==false){
          for (prop in params) {
           argv.push(params[prop]);
         }
-
       }
       var local = false;
       for (var i in argv) {
@@ -114,22 +108,15 @@ angular.module('hwstudio')
         local = arg === 'local' || local;
       }
 
-
       console.log('ARGV',argv);
       var editable = !project.path.startsWith(common.DEFAULT_COLLECTION_DIR) &&
         !project.path.startsWith(common.INTERNAL_COLLECTIONS_DIR) &&
         project.path.startsWith(common.selectedCollection.path);
 
       if (editable || !local ) {
-
         updateWorkingdir(project.path);
-      }
-      else {
+      } else {
         project.path = '';
-      }
-      var versionW = $scope.profile.get('displayVersionInfoWindow');
-      if (versionW === 'yes') {
-        $scope.openVersionInfoWindow();
       }
 
     }, 500);
@@ -150,27 +137,6 @@ angular.module('hwstudio')
         win.moveTo(offset.x, offset.y);
       }
     }
-
-    /*
-     * This function triggers when version info window will be closed
-     *                                                                 */
-    $scope.closeVersionInfoWindow = function () {
-      $('#version-info-tab').addClass('hidden');
-      var nodisplay = $('input[name="version-info-tab--no-display"]').is(':checked');
-      if (nodisplay) {
-        profile.set('displayVersionInfoWindow', 'no');
-      } else {
-        profile.set('displayVersionInfoWindow', 'yes');
-      }
-    };
-
-    $scope.openVersionInfoWindow = function () {
-      $('#version-info-tab').removeClass('hidden');
-      var versionW = $scope.profile.get('displayVersionInfoWindow');
-      if (versionW === 'no') {
-        $('input[name="version-info-tab--no-display"]').prop('checked', true);
-      }
-    };
 
     //-- File
 
