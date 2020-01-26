@@ -858,7 +858,7 @@ angular.module('icestudio')
 
     //-- Help
 
-    $scope.openUrl = function (url,$event) {
+    $scope.openUrl = function (url) {
      // $event.preventDefault();
 
       utils.openUrlExternalBrowser(url);
