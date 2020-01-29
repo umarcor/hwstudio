@@ -279,7 +279,7 @@ module.exports = function(grunt) {
     'unzip'
   ]);
   grunt.registerTask('dist', [
-    'jshint',
+    //'jshint',
     'clean:dist',
     'nggettext_compile',
     'copy:dist',

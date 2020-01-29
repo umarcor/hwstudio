@@ -5,6 +5,7 @@
   "repository": "https://github.com/umarcor/hwstudio",
   "license": "GPL-2.0",
   "scripts": {
+    "lint": "grunt jshint",
     "dist": "grunt dist",
     "gettext": "grunt nggettext_extract",
     "postinstall": "npmpd && cd app && yarn && cd .. && grunt getcollection"

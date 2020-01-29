@@ -65,7 +65,7 @@ case "$1" in
     if [ "x$1" = "x-i" ]; then
       exec_runx "/$(pwd)" bash
     else
-      docker run --rm -v /$(pwd)://src -w //src -e DIST_TARGET=lin64 umarcor/hwstudio:dev bash -c "yarn && yarn grunt dist -v"
+      docker run --rm -v /$(pwd)://src -w //src -e DIST_TARGET=lin64 umarcor/hwstudio:dev bash -c "yarn && yarn dist -v"
     fi
     ;;
   --test|-t)
