@@ -64,7 +64,7 @@
     "async": "~1.5.2",
     "backbone": "~1.4.0",
     "bootstrap": "~3.3.7",
-    "jointjs": "~1.1.0",
+    "jointjs": "~3.1.1",
     "jquery-resize": "https://github.com/cowboy/jquery-resize#v1.1",
     "lodash": "~3.10.1",
     "underscore": "~1.9.1",
