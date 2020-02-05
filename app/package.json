@@ -69,7 +69,7 @@
     "lodash": "~3.10.1",
     "underscore": "~1.9.1",
     "select2": "~4.0.5",
-    "svg-pan-zoom": "~3.4.1"
+    "svg-pan-zoom": "~3.6.1"
   },
   "readme": "../README.md",
   "keywords": [

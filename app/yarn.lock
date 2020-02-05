@@ -961,10 +961,10 @@ supports-color@^2.0.0:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
   integrity sha1-U10EXOa2Nj+kARcIRimZXp3zJMc=
 
-svg-pan-zoom@~3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/svg-pan-zoom/-/svg-pan-zoom-3.4.1.tgz#0d19e82e0f9660dbd94275589475753cb33b23ff"
-  integrity sha1-DRnoLg+WYNvZQnVYlHV1PLM7I/8=
+svg-pan-zoom@~3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/svg-pan-zoom/-/svg-pan-zoom-3.6.1.tgz#f880a1bb32d18e9c625d7715350bebc269b450cf"
+  integrity sha512-JaKkGHHfGvRrcMPdJWkssLBeWqM+Isg/a09H7kgNNajT1cX5AztDTNs+C8UzpCxjCTRrG34WbquwaovZbmSk9g==
 
 svgo@~0.7.2:
   version "0.7.2"
