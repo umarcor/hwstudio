@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img width="550px" src="./public/img/banner.png"/>
+  <a title="Online demo" href="https://umarcor.github.io/hwstudio"><img width="550px" src="./public/img/banner.png"/></a>
 </p>
 
 <p align="center">
