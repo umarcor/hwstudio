@@ -19,6 +19,10 @@ jobs:
         node-version: '12.x'
     - run: yarn
     - run: yarn build
+    - uses: actions/upload-artifact@master
+      with:
+        name: hwstudio
+        path: dist
     - name: 'publish site to gh-pages'
       if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
       env:
@@ -41,5 +45,5 @@ jobs:
     - run: yarn electron:build --publish never
     - uses: actions/upload-artifact@master
       with:
-        name: 3Dhwstudio
+        name: hwstudio_desktop
         path: dist_electron
