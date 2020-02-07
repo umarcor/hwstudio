@@ -32,7 +32,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
-    "vue-cli-plugin-electron-builder": "^1.4.4",
+    "vue-cli-plugin-electron-builder": "^1.4.5",
     "vue-cli-plugin-vuetify": "^2.0.4",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "~1.4.3"
