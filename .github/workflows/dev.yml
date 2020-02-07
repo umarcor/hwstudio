@@ -3,7 +3,7 @@ name: 'dev'
 on:
   push:
     paths:
-      - 'docker.sh'
+      - 'dev.sh'
       - '.github/workflows/dev.yml'
   schedule:
     - cron: '0 0 * * 3,6'
