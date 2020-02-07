@@ -70,7 +70,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn alt="Toggle stats" title="Toggle stats" icon v-on:click.native="toggleStats" :color="sw_stats?'blue':''">
+      <v-btn alt="Toggle stats" title="Toggle stats" icon v-on:click.native="sw_stats=!sw_stats" :color="sw_stats?'blue':''">
         <v-icon>mdi-chart-histogram</v-icon>
       </v-btn>
 
@@ -101,15 +101,18 @@
               <v-list-item-title>Layer {{n}}</v-list-item-title>
             </v-list-item-content>
 
-            <!-- FIXME:
-              Currently, this is not reponsive;
-              the class and the icon should be updated on toggle
+            <!--  TODO:
+              https://vuejs.org/v2/guide/list.html#Caveats
+
+              There might be a more idiomatic way to do this;
+              ideally, 'layers' should be passed as a prop to Scene;
+              alternatively, this might be handled by vuex, as it is expected to be a core feature
             -->
             <v-list-item-action>
               <v-btn
                 :class="v ? 'primary--text' : ''"
                 icon
-                @click="toggleLayer(n)"
+                @click="$set(layers, n, !v); $refs.scene.layerToggle(n)"
               >
                 <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
               </v-btn>
@@ -168,21 +171,5 @@ export default {
   created () {
     this.$vuetify.theme.dark = true
   },
-  methods: {
-    toggleStats () {
-      // TODO: there might be a more idiomatic way to do this,
-      // such as using a prop or describing the body of this function in the attribute above
-      this.sw_stats=!this.sw_stats;
-    },
-    toggleLayer (n) {
-      /* TODO:
-         There might be a more idiomatic way to do this;
-         ideally, 'layers' should be passed as a prop to Scene;
-         alternatively, this might be handled by vuex, as it is expected to be a core feature
-      */
-      this.layers[n] = !this.layers[n];
-      this.$refs.scene.layerToggle(n);
-    }
-  }
 };
 </script>
