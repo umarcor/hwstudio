@@ -16,6 +16,7 @@
 <!-- IDEAS:
   - Use TypeScript instead of JavaScript before going too far?
   - Wavedrom JS viewer
+  - 'Reports' viewer
 -->
 
   <!-- QUESTION: what is this id="inspire" used for? Is it required? -->
@@ -103,11 +104,25 @@
           <v-btn
             icon
             v-on="on"
+            @click="$router.push('/')"
           >
             <v-icon>mdi-view-dashboard</v-icon>
           </v-btn>
         </template>
         <span>Dashboard</span>
+      </v-tooltip>
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            v-on="on"
+            @click="$router.push('/scene')"
+          >
+            <v-icon>mdi-cube-outline</v-icon>
+          </v-btn>
+        </template>
+        <span>3D editor</span>
       </v-tooltip>
 
       <v-btn
@@ -186,11 +201,8 @@
       </v-menu>
     </v-app-bar>
 
-    <!-- TODO:
-      Use router to handle different sections: 'Scene', 'Home', 'Docs', 'Reports', etc.
-    -->
     <v-content>
-      <Scene ref="scene"/>
+      <router-view ref="scene"/>
     </v-content>
 
     <v-footer app>
@@ -221,13 +233,9 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-import Scene from '@/components/Scene';
-
 export default {
   name: 'App',
-  components: {
-    Scene
-  },
+  components: {},
   data: () => ({
     drawer: false,
     // TODO: use localStorage to remember user preference with regard to having the drawer expanded/collapsed

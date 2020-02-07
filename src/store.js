@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
-//import HelloWorld from '@/components/HelloWorld';
 
 Vue.use(Vuex);
 
