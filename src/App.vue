@@ -193,6 +193,10 @@
       <v-btn icon color="red" small>
         <v-icon>mdi-heart</v-icon>
       </v-btn>
+      <v-btn icon small @click="$vuetify.theme.dark=!$vuetify.theme.dark">
+        <v-icon>mdi-lightbulb{{$vuetify.theme.dark?'':'-on-outline'}}</v-icon>
+        <!--this.$vuetify.theme.dark = this.dark-->
+      </v-btn>
       <!--<span>&copy; 2020</span>-->
     </v-footer>
     <input ref="finput" v-show="false" type="file" multiple v-on:change="uploadFile">
