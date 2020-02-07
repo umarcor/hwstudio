@@ -41,7 +41,9 @@
           <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
           <v-list-item-content><v-list-item-title>New design</v-list-item-title></v-list-item-content>
         </v-list-item>
-        <v-list-item link title="Load... | Import...">
+        <v-list-item link title="Load... | Import..."
+          @click="uploadTrigger"
+        >
           <v-list-item-action><v-icon>mdi-upload</v-icon></v-list-item-action>
           <v-list-item-content><v-list-item-title>Load... | Import...</v-list-item-title></v-list-item-content>
         </v-list-item>
@@ -193,6 +195,7 @@
       </v-btn>
       <!--<span>&copy; 2020</span>-->
     </v-footer>
+    <input ref="finput" v-show="false" type="file" multiple v-on:change="uploadFile">
   </v-app>
 </template>
 
@@ -212,18 +215,35 @@ export default {
   data: () => ({
     alive: false,
     drawer: false,
-    /* TODO:
-      Use localStorage to remember user preference with regard to having the drawer expanded/collapsed
-    */
+    // TODO: use localStorage to remember user preference with regard to having the drawer expanded/collapsed
     drawerMini: true,
     sw_stats: false,
     layers: [true, true, true],
+    // TODO: use vuex store instead
+    mainStore: [],
   }),
   created () {
     this.$vuetify.theme.dark = true;
     this.rest_alive();
   },
   methods: {
+    uploadTrigger() {
+      this.$refs["finput"].click();
+    },
+    uploadFile (e) {
+      e.target.files.forEach(file => {
+        console.log(file);
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          console.log(e);
+          this.mainStore.push({
+            file: file,
+            content: e.target.result
+          });
+        }.bind(this);
+        reader.readAsText(file);
+      });
+    },
     rest_alive () {
       this.$http.get('/api/alive')
       .then((r) => {
@@ -235,7 +255,7 @@ export default {
         }
       })
       .catch((err) => {
-        console.log('Backend API alive check ERROR:', err)
+        console.log('Backend API alive check ERROR:', err.status, err.statusText)
         this.alive=false;
       });
     },
@@ -252,7 +272,7 @@ export default {
       })
       .catch((err) => {
         // TODO: open a modal to show this error to the user
-        console.log('Generate bitstream ERROR:', err)
+        console.log('Generate bitstream ERROR:', err.status, err.statusText)
       });
     }
   }
