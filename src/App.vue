@@ -1,7 +1,7 @@
 <template>
 <!-- TODO:
   - Use localStorage (https://vuejs.org/v2/cookbook/client-side-storage.html) to optionally save
-    the state of the app beteween different sessions
+    the state of the app beteween different sessions (dbhi)
   - Use vuex to handle app-level state, actions and mutations
 -->
 <!-- NEXT:
@@ -25,21 +25,54 @@
     -->
     <v-navigation-drawer
       v-model="drawer"
+      :mini-variant="drawerMini"
       app
       clipped
     >
-      <!-- PROPOSAL:
-        Add buttons/items/commands to 'Load', 'Import', 'Save', 'Export', etc. here;
-        place a <v-divider></v-divider> between those and the Settings
-      -->
       <v-list dense>
-        <v-list-item link v-for="(value, key) in drawerItems" :key="key">
-          <v-list-item-action>
-            <v-icon>{{value.icon}}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{key}}</v-list-item-title>
-          </v-list-item-content>
+        <v-list-item link title="Dashboard">
+          <v-list-item-action><v-icon>mdi-view-dashboard</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Dashboard</v-list-item-title></v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item link title="New design">
+          <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>New design</v-list-item-title></v-list-item-content>
+        </v-list-item>
+        <v-list-item link title="Load... | Import...">
+          <v-list-item-action><v-icon>mdi-upload</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Load... | Import...</v-list-item-title></v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item link title="Save">
+          <v-list-item-action><v-icon>mdi-content-save</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Save</v-list-item-title></v-list-item-content>
+        </v-list-item>
+        <v-list-item link title="Save As...">
+          <v-list-item-action><v-icon>mdi-content-save-all</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Save As...</v-list-item-title></v-list-item-content>
+        </v-list-item>
+        <v-list-item link title="Download... | Export...">
+          <v-list-item-action><v-icon>mdi-download</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Download... | Export...</v-list-item-title></v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item link title="Settings">
+          <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Settings</v-list-item-title></v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item link :title="drawerMini?'Expand':'Collapse'" @click="drawerMini=!drawerMini">
+          <v-list-item-action><v-icon>mdi-arrow-{{drawerMini?'expand-right':'collapse-left'}}</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>{{drawerMini?'Expand':'Collapse'}}</v-list-item-title></v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -70,7 +103,13 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn alt="Toggle stats" title="Toggle stats" icon v-on:click.native="sw_stats=!sw_stats" :color="sw_stats?'blue':''">
+      <v-btn
+        alt="Toggle stats"
+        title="Toggle stats"
+        icon
+        @click="sw_stats=!sw_stats"
+        :color="sw_stats?'blue':''"
+      >
         <v-icon>mdi-chart-histogram</v-icon>
       </v-btn>
 
@@ -148,15 +187,6 @@
 <script>
 import Scene from '@/components/Scene';
 
-const drawerItems = {
-  "Dashboard": {
-    icon: "mdi-view-dashboard"
-  },
-  "Settings": {
-    icon: "mdi-settings"
-  }
-}
-
 export default {
   name: 'App',
   components: {
@@ -164,12 +194,15 @@ export default {
   },
   data: () => ({
     drawer: false,
-    drawerItems: drawerItems,
+    /* TODO:
+      Use localStorage to remember user preference with regard to having the drawer expanded/collapsed
+    */
+    drawerMini: true,
     sw_stats: false,
     layers: [true, true, true],
   }),
   created () {
     this.$vuetify.theme.dark = true
-  },
+  }
 };
 </script>
