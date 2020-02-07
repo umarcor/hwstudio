@@ -63,6 +63,16 @@
 
         <v-divider></v-divider>
 
+        <v-list-item link title="Generate bitstream"
+          @click="rest_genbit"
+          v-if="alive"
+        >
+          <v-list-item-action><v-icon>mdi-cube-outline</v-icon></v-list-item-action>
+          <v-list-item-content><v-list-item-title>Generate bitstream</v-list-item-title></v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
         <v-list-item link title="Settings">
           <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
           <v-list-item-content><v-list-item-title>Settings</v-list-item-title></v-list-item-content>
@@ -70,7 +80,9 @@
 
         <v-divider></v-divider>
 
-        <v-list-item link :title="drawerMini?'Expand':'Collapse'" @click="drawerMini=!drawerMini">
+        <v-list-item link :title="drawerMini?'Expand':'Collapse'"
+          @click="drawerMini=!drawerMini"
+        >
           <v-list-item-action><v-icon>mdi-arrow-{{drawerMini?'expand-right':'collapse-left'}}</v-icon></v-list-item-action>
           <v-list-item-content><v-list-item-title>{{drawerMini?'Expand':'Collapse'}}</v-list-item-title></v-list-item-content>
         </v-list-item>
@@ -185,6 +197,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
+
 import Scene from '@/components/Scene';
 
 export default {
@@ -193,6 +210,7 @@ export default {
     Scene
   },
   data: () => ({
+    alive: false,
     drawer: false,
     /* TODO:
       Use localStorage to remember user preference with regard to having the drawer expanded/collapsed
@@ -202,7 +220,41 @@ export default {
     layers: [true, true, true],
   }),
   created () {
-    this.$vuetify.theme.dark = true
+    this.$vuetify.theme.dark = true;
+    this.rest_alive();
+  },
+  methods: {
+    rest_alive () {
+      this.$http.get('/api/alive')
+      .then((r) => {
+        if (r.status === 200) {
+          console.log('Backend API is alive:', r.body)
+        } else {
+          console.log('Backend API alive request failed. Returned status of ' + r.status);
+          this.alive=false;
+        }
+      })
+      .catch((err) => {
+        console.log('Backend API alive check ERROR:', err)
+        this.alive=false;
+      });
+    },
+    rest_genbit () {
+      // TODO: send (POST) binary (encoded) stream; a tarball; instead of JSON content
+      this.$http.get('/api/genbit')
+      .then((r) => {
+        if (r.status === 200) {
+          console.log('Generate bitstream SUCCESS:', r.body)
+        } else {
+          // TODO: open a modal to show this error to the user
+          console.log('Generate bitstream request failed. Returned status of ' + r.status);
+        }
+      })
+      .catch((err) => {
+        // TODO: open a modal to show this error to the user
+        console.log('Generate bitstream ERROR:', err)
+      });
+    }
   }
 };
 </script>

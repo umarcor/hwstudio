@@ -35,12 +35,28 @@ class HardwareStudioServer(object):
         def serve_css(path):
             return app.send_static_file("css/" + path)
 
+        def alive():
+            """
+            Check if the backend API is alive
+            """
+            return "ALIVE!"
+
+        def genbit():
+            """
+            [PLACEHOLDER] Generate a bitstream from a HWD tarball
+            """
+            # TODO: receive binary (encoded) stream; a tarball; instead of JSON content
+            print(request.json)
+            return jsonify({"exitcode": 0})
+
         self.add_url_rules([
             ["/favicon.ico", "favicon", favicon],
             ["/", "index", index],
             ["/js/<path>", "js", serve_js],
             ["/img/<path>", "img", serve_img],
             ["/css/<path>", "css", serve_css],
+            ["/api/alive", "alive", alive, ["GET", "POST"]],
+            ["/api/genbit", "genbit", genbit, ["GET", "POST"]],
         ])
 
     def add_url_rules(self, lst):

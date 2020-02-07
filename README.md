@@ -22,7 +22,7 @@
 
 Since this repository is a proof of concept, no regular/tagged releases are available yet. However, after each commit is pushed, CI workflows produce *nightly* builds:
 
-- The frontend is deployed to [umarcor.github.io/hwstudio](https://umarcor.github.io/hwstudio). Hence, GUI editor features are ready-to-use without any additional dependency!
+- The frontend is deployed to [umarcor.github.io/hwstudio](https://umarcor.github.io/hwstudio). Hence, GUI editor features are ready-to-use without any additional dependency! Note that features related to integration with tools on the host are disabled by default, since GitHub Pages is limited to serving files.
 
 - Users can pick the artifacts from any of the successful jobs in ['push' workflow](https://github.com/umarcor/hwstudio/actions?query=workflow%3Apush):
   - `hwstudio`: frontend along with a [Python](https://www.python.org/) backend.
