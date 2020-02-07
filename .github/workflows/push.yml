@@ -19,6 +19,7 @@ jobs:
         node-version: '12.x'
     - run: yarn
     - run: yarn build
+    - run: cp -vr hwstudio dist
     - uses: actions/upload-artifact@master
       with:
         name: hwstudio
