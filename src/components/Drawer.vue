@@ -3,6 +3,7 @@
 <v-navigation-drawer
   v-model="$store.state.drawer"
   :mini-variant="drawerMini"
+  :disable-route-watcher="true"
   app
   clipped
 >
