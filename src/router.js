@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/components/Home";
+import About from "@/components/About";
 import Scene from "@/components/Scene";
 import NotFound from "@/components/NotFound";
 
@@ -20,6 +21,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: About
     },
     {
       path: "/scene",
