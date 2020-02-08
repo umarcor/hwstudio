@@ -24,6 +24,12 @@ jobs:
       with:
         name: hwstudio
         path: dist
+    - name: build for GHP
+      run: |
+        rm -rf dist
+        yarn build
+      env:
+        BASE_URL: '/hwstudio/'
     - name: 'publish site to gh-pages'
       if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
       env:
@@ -43,6 +49,8 @@ jobs:
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         git push -u origin +HEAD:gh-pages
         ssh-agent -k
+        cd ..
+        rm -rf dist
     - run: yarn electron:build --publish never
     - uses: actions/upload-artifact@master
       with:
