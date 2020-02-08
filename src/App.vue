@@ -2,7 +2,7 @@
 <!-- TODO:
   - Use localStorage (https://vuejs.org/v2/cookbook/client-side-storage.html) to optionally save
     the state of the app beteween different sessions (dbhi)
-  - Use vuex to handle app-level state, actions and mutations
+  - Understand vuex's app-level 'state', 'actions' and 'mutations'. Are those names conventions or fixed?
 -->
 <!-- NEXT:
   - Integrate a static site generator for section 'Docs'. Should it be external (Hugo)?
@@ -10,8 +10,8 @@
   - Integrate a JSON/YAML/TOML viewer (both, as an interactive tree and as plain text), to allow
     modification of the model/design that is being shown in 3D.
     hint: vue-codemirror and vue-json-tree-view (anna)
-  - Communicate with an optional backend (node, go, python...) to export, simulate, synthesise, etc.
-    hint: vue-resource
+  - Extend Python backend endpoints to export, simulate, synthesise, etc.
+    -  Optionally, implement the backend in a different language: JS (node, electron), go...
 -->
 <!-- IDEAS:
   - Use TypeScript instead of JavaScript before going too far?
@@ -60,7 +60,7 @@
 
         <v-list-item link title="Generate bitstream"
           @click="rest_genbit"
-          v-if="alive"
+          v-if="$store.state.alive"
         >
           <v-list-item-action><v-icon>mdi-cube-outline</v-icon></v-list-item-action>
           <v-list-item-content><v-list-item-title>Generate bitstream</v-list-item-title></v-list-item-content>
@@ -110,6 +110,13 @@
         <span>Dashboard</span>
       </v-tooltip>
 
+      <v-btn
+        v-for="(v, n) in $store.state.designs"
+        :key="n"
+      >
+        {{v.file.name}}
+      </v-btn>
+
       <!-- TODO:
         Show title of the currently open document/section. If reading the docs, show breadcrumbs
       -->
@@ -125,8 +132,8 @@
         alt="Toggle stats"
         title="Toggle stats"
         icon
-        @click="sw_stats=!sw_stats"
-        :color="sw_stats?'blue':''"
+        @click="$store.state.scene.stats=!$store.state.scene.stats"
+        :color="$store.state.scene.stats?'blue':''"
       >
         <v-icon>mdi-chart-histogram</v-icon>
       </v-btn>
@@ -145,7 +152,7 @@
 
         <v-list>
           <v-list-item
-            v-for="(v, n) in layers"
+            v-for="(v, n) in $store.state.scene.layers"
             :key="n"
           >
             <!--
@@ -162,14 +169,14 @@
               https://vuejs.org/v2/guide/list.html#Caveats
 
               There might be a more idiomatic way to do this;
-              ideally, 'layers' should be passed as a prop to Scene;
-              alternatively, this might be handled by vuex, as it is expected to be a core feature
+              ideally, Scene should watch for changes in '$store.state.scene.layers' and toggle internal
+              fields accordingly.
             -->
             <v-list-item-action>
               <v-btn
                 :class="v ? 'primary--text' : ''"
                 icon
-                @click="$set(layers, n, !v); $refs.scene.layerToggle(n)"
+                @click="$set($store.state.scene.layers, n, !v); $refs.scene.layerToggle(n)"
               >
                 <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
               </v-btn>
@@ -183,7 +190,7 @@
       Use router to handle different sections: 'Scene', 'Home', 'Docs', 'Reports', etc.
     -->
     <v-content>
-      <Scene ref="scene" :sw_stats="sw_stats"/>
+      <Scene ref="scene"/>
     </v-content>
 
     <v-footer app>
@@ -222,14 +229,9 @@ export default {
     Scene
   },
   data: () => ({
-    alive: false,
     drawer: false,
     // TODO: use localStorage to remember user preference with regard to having the drawer expanded/collapsed
     drawerMini: true,
-    sw_stats: false,
-    layers: [true, true, true],
-    // TODO: use vuex store instead
-    mainStore: [],
   }),
   created () {
     this.$vuetify.theme.dark = true;
@@ -245,7 +247,7 @@ export default {
         var reader = new FileReader();
         reader.onload = function(e) {
           console.log(e);
-          this.mainStore.push({
+          this.$store.state.designs.push({
             file: file,
             content: e.target.result
           });
@@ -260,12 +262,12 @@ export default {
           console.log('Backend API is alive:', r.body)
         } else {
           console.log('Backend API alive request failed. Returned status of ' + r.status);
-          this.alive=false;
+          this.$store.state.alive=false;
         }
       })
       .catch((err) => {
         console.log('Backend API alive check ERROR:', err.status, err.statusText)
-        this.alive=false;
+        this.$store.state.alive=false;
       });
     },
     rest_genbit () {

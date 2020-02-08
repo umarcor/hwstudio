@@ -11,7 +11,7 @@
     Ideally, Stats would be attached to "scene"; hence this level of indentation would
     be removed, and the "ref" attribute would be applied to the parent 'v-layout'
   -->
-  <div ref="stats" v-show="sw_stats"></div>
+  <div ref="stats" v-show="$store.state.scene.stats"></div>
 </v-layout>
 </template>
 
@@ -38,9 +38,6 @@ import Stats from 'three/examples/jsm/libs/stats.module';
 
 export default {
   name: 'Scene',
-  props: {
-    sw_stats: Boolean,
-  },
   data: () => ({
     // Layer 0 is for lights and other ambient objects; hence actual object are placed in layers 1 and higher
     layerNum: 3, // TODO: get the number of layers from the parent
@@ -157,7 +154,7 @@ export default {
         this.objects[i].rotation.y += 0.025;
       }
       this.renderer.render(this.scene, this.camera);
-      if ( this.sw_stats ) {
+      if ( this.$store.state.scene.stats ) {
         this.stats.update();
       }
     };
