@@ -37,6 +37,9 @@
 
       <v-divider vertical></v-divider>
 
+      <!-- DASHBOARD -->
+
+      <!-- TODO: hide when the user is in '/' (check router path) -->
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -50,7 +53,17 @@
         <span>Dashboard</span>
       </v-tooltip>
 
-      <v-tooltip bottom>
+      <!-- TODO:
+        - If/when reading the docs, show breadcrumbs.
+        - Optionally show backend actions here, instead of in the drawer. Provide a settings switch for users to choose.
+      -->
+
+      <!-- 3D Scene (left) -->
+
+      <!-- TODO: hide when the user is in '/scene/*' (check router path) -->
+      <v-tooltip bottom
+        v-if="designNum==1"
+      >
         <template v-slot:activator="{ on }">
           <v-btn
             icon
@@ -63,23 +76,40 @@
         <span>3D editor</span>
       </v-tooltip>
 
-      <v-btn
-        v-for="(v, n) in $store.state.designs"
-        :key="n"
+      <v-menu
+        v-if="designNum>1"
+        :close-on-content-click="true"
+        :offset-y="true"
+        right
+        bottom
       >
-        {{v.file.name}}
-      </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-badge
+              overlap
+              :content="designNum"
+            >
+              <v-icon>mdi-cube-outline</v-icon>
+            </v-badge>
+          </v-btn>
+        </template>
 
-      <!-- TODO:
-        Show title of the currently open document/section. If reading the docs, show breadcrumbs
-      -->
-
-      <!-- TODO:
-        Add buttons/tabs/dropdowns to select the one of the opened projects.
-        Show optional actions too (such as calling backend features, if available)
-      -->
+        <v-list>
+          <v-list-item link
+            v-for="(v, n) in $store.state.designs"
+            :key="n"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{v.file.name}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
       <v-spacer></v-spacer>
+
+      <!-- 3D Scene (right) -->
+      <!-- TODO: hide all these buttons/menus when the user is NOT in '/scene/*' (check router path) -->
 
       <v-btn
         alt="Toggle stats"
@@ -181,6 +211,11 @@ export default {
   created () {
     this.$vuetify.theme.dark = true;
     this.rest_alive();
+  },
+  computed: {
+    designNum () {
+      return this.$store.state.designs.length
+    }
   },
   methods: {
     rest_alive () {
