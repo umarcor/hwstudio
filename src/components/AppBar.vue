@@ -1,6 +1,7 @@
 <template>
 <v-app-bar
   app
+  short
 >
   <!-- TODO:
     Add the (fancy) logo; can the hamburguer icon be replaced?
