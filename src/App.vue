@@ -30,13 +30,6 @@
       clipped
     >
       <v-list dense>
-        <v-list-item link title="Dashboard">
-          <v-list-item-action><v-icon>mdi-view-dashboard</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Dashboard</v-list-item-title></v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
         <v-list-item link title="New design">
           <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
           <v-list-item-content><v-list-item-title>New design</v-list-item-title></v-list-item-content>
@@ -102,10 +95,21 @@
         Add the (fancy) logo; can the hamburguer icon be replaced?
       -->
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <!-- TODO:
-        Move to the footer (right), taking care not to enlarge the height of it
-      -->
-      <v-toolbar-title>Hardware Studio</v-toolbar-title>
+
+      <v-divider vertical></v-divider>
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            v-on="on"
+          >
+            <v-icon>mdi-view-dashboard</v-icon>
+          </v-btn>
+        </template>
+        <span>Dashboard</span>
+      </v-tooltip>
+
       <!-- TODO:
         Show title of the currently open document/section. If reading the docs, show breadcrumbs
       -->
@@ -186,6 +190,7 @@
       <!-- TODO:
         Add stats and status icons on the left of the footer (a la VSC)
       -->
+      Hardware Studio
       <v-spacer></v-spacer>
       <!-- TODO:
         Add a modal to show an 'About' content, with License, link to repo, etc.
