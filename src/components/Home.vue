@@ -3,9 +3,30 @@
   class="fill-height"
   fluid
 >
+<!-- TODO:
+  Maybe this template can be enhanced using 'v-layout' as suggested in
+  https://vuetifyjs.com/en/introduction/frequently-asked-questions#how-to-center-vertically
+  instead of using 'mt-auto' and 'mb-auto'.
+  The same modification might be applied to 'About'.
+-->
   <v-row
-    align="center"
     justify="center"
+    class="mt-auto flex-column"
+  >
+    <v-row justify="center">
+    <h1 class="display-3 font-weight-bold mb-5">
+      Hardware Studio
+    </h1>
+    </v-row>
+    <v-row justify="center">
+    <h2 class="title mb-5">
+      GUI editor for hardware description design
+    </h2>
+    </v-row>
+  </v-row>
+  <v-row
+    justify="center"
+    class="mb-auto"
   >
     <v-col class="shrink">
       <v-tooltip right>

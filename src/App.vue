@@ -191,7 +191,9 @@
       <!-- TODO:
         Add stats and status icons on the left of the footer (a la VSC)
       -->
-      Hardware Studio
+      <template v-if="!atHome && !atAbout">
+        Hardware Studio
+      </template>
       <v-spacer></v-spacer>
       <v-btn icon color="red" small
         @click="$router.push('/about')"
@@ -232,6 +234,9 @@ export default {
     },
     atHome () {
       return this.$store.state.route.name === 'home'
+    },
+    atAbout () {
+      return this.$store.state.route.name === 'about'
     },
     atScene () {
       return this.$store.state.route.name === 'scene'
