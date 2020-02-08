@@ -35,26 +35,7 @@
       <router-view ref="scene"/>
     </v-content>
 
-    <v-footer app>
-      <!-- TODO:
-        Add design stats and status icons on the left of the footer (a la VSC)
-      -->
-      <template v-if="!$store.getters.isAt('home') && !$store.getters.isAt('about')">
-        Hardware Studio
-      </template>
-      <v-spacer></v-spacer>
-      <v-btn icon color="red" small
-        @click="$router.push('/about')"
-      >
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-      <v-btn icon small
-        @click="$vuetify.theme.dark=!$vuetify.theme.dark"
-      >
-        <v-icon>mdi-lightbulb{{$vuetify.theme.dark?'':'-on-outline'}}</v-icon>
-      </v-btn>
-      <!--<span>&copy; 2020</span>-->
-    </v-footer>
+    <Foot/>
   </v-app>
 </template>
 
@@ -66,12 +47,14 @@ Vue.use(VueResource);
 
 import Drawer from '@/components/Drawer';
 import AppBar from '@/components/AppBar';
+import Foot from '@/components/Foot';
 
 export default {
   name: 'App',
   components: {
     Drawer,
-    AppBar
+    AppBar,
+    Foot
   },
   created () {
     this.$vuetify.theme.dark = true;
