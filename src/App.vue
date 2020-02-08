@@ -39,8 +39,9 @@
 
       <!-- DASHBOARD -->
 
-      <!-- TODO: hide when the user is in '/' (check router path) -->
-      <v-tooltip bottom>
+      <v-tooltip bottom
+        v-if="!atHome"
+      >
         <template v-slot:activator="{ on }">
           <v-btn
             icon
@@ -76,6 +77,10 @@
         <span>3D editor</span>
       </v-tooltip>
 
+      <!-- FIXME:
+        This button/menu jumps to the right when changing to a different section.
+        Instead, the location (on the left of the spacer) shoul be preserved.
+      -->
       <v-menu
         v-if="designNum>1"
         :close-on-content-click="true"
@@ -93,7 +98,6 @@
             </v-badge>
           </v-btn>
         </template>
-
         <v-list>
           <v-list-item link
             v-for="(v, n) in $store.state.designs"
@@ -109,64 +113,74 @@
       <v-spacer></v-spacer>
 
       <!-- 3D Scene (right) -->
-      <!-- TODO: hide all these buttons/menus when the user is NOT in '/scene/*' (check router path) -->
 
-      <v-btn
-        alt="Toggle stats"
-        title="Toggle stats"
-        icon
-        @click="$store.state.scene.stats=!$store.state.scene.stats"
-        :color="$store.state.scene.stats?'blue':''"
-      >
-        <v-icon>mdi-chart-histogram</v-icon>
-      </v-btn>
+      <template v-if="atScene">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              v-on="on"
+              @click="$store.state.scene.stats=!$store.state.scene.stats"
+              :color="$store.state.scene.stats?'blue':''"
+            >
+              <v-icon>mdi-chart-histogram</v-icon>
+            </v-btn>
+          </template>
+          <span>Toggle render stats</span>
+        </v-tooltip>
 
-      <v-menu
-        :close-on-content-click="false"
-        :offset-y="true"
-        left
-        bottom
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-layers-triple</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="(v, n) in $store.state.scene.layers"
-            :key="n"
-          >
-            <!--
-            <v-list-item-avatar>
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-            </v-list-item-avatar>
-            -->
-
-            <v-list-item-content>
-              <v-list-item-title>Layer {{n}}</v-list-item-title>
-            </v-list-item-content>
-
-            <!--  TODO:
-              https://vuejs.org/v2/guide/list.html#Caveats
-
-              There might be a more idiomatic way to do this;
-              ideally, Scene should watch for changes in '$store.state.scene.layers' and toggle internal
-              fields accordingly.
-            -->
-            <v-list-item-action>
-              <v-btn
-                :class="v ? 'primary--text' : ''"
-                icon
-                @click="$set($store.state.scene.layers, n, !v); $refs.scene.layerToggle(n)"
+        <v-menu
+          :close-on-content-click="false"
+          :offset-y="true"
+          left
+          bottom
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on">
+              <v-badge
+                overlap
+                :content="$store.state.scene.layers.length"
               >
-                <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+                <v-icon>mdi-layers-triple</v-icon>
+              </v-badge>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+              v-for="(v, n) in $store.state.scene.layers"
+              :key="n"
+            >
+              <!--
+              <v-list-item-avatar>
+                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+              </v-list-item-avatar>
+              -->
+
+              <v-list-item-content>
+                <v-list-item-title>Layer {{n}}</v-list-item-title>
+              </v-list-item-content>
+
+              <!--  TODO:
+                https://vuejs.org/v2/guide/list.html#Caveats
+
+                There might be a more idiomatic way to do this;
+                ideally, Scene should watch for changes in '$store.state.scene.layers' and toggle internal
+                fields accordingly.
+              -->
+              <v-list-item-action>
+                <v-btn
+                  :class="v ? 'primary--text' : ''"
+                  icon
+                  @click="$set($store.state.scene.layers, n, !v); $refs.scene.layerToggle(n)"
+                >
+                  <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
     </v-app-bar>
 
     <v-content>
@@ -215,6 +229,12 @@ export default {
   computed: {
     designNum () {
       return this.$store.state.designs.length
+    },
+    atHome () {
+      return this.$store.state.route.name === 'home'
+    },
+    atScene () {
+      return this.$store.state.route.name === 'scene'
     }
   },
   methods: {
