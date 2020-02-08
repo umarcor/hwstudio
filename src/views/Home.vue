@@ -49,6 +49,20 @@
         <span>Open demo scene</span>
       </v-tooltip>
     </v-col>
+
+    <v-col class="shrink">
+      <v-tooltip right v-for="design in $store.state.designs" :key="design.file.name">
+        <template v-slot:activator="{ on }">
+          <span
+            v-on="on"
+          >
+            {{design.file.name}}
+          </span>
+        </template>
+        <span>size: {{design.file.size}}</span><br/>
+        <span>lastmodified: {{design.file.lastModified}}</span>
+      </v-tooltip>
+    </v-col>
   </v-row>
 </v-container>
 </template>
