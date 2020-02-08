@@ -61,7 +61,8 @@ export default {
       this.$http.get('/api/alive')
       .then((r) => {
         if (r.status === 200) {
-          console.log('Backend API is alive:', r.body)
+          console.log('Backend API is alive:', r.body);
+          this.$store.state.alive=true;
         } else {
           console.log('Backend API alive request failed. Returned status of ' + r.status);
           this.$store.state.alive=false;

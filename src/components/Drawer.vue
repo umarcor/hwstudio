@@ -127,9 +127,9 @@
       <template v-slot:activator="{ on }">
         <v-list-item link
           v-on="on"
-          @click="drawerMini=!drawerMini"
+          @click="rest_genbit"
         >
-          <v-list-item-action><v-icon>mdi-cube-outline</v-icon></v-list-item-action>
+          <v-list-item-action><v-icon>mdi-package</v-icon></v-list-item-action>
           <v-list-item-content></v-list-item-content>
         </v-list-item>
       </template>
@@ -140,11 +140,11 @@
       v-if="!drawerMini && $store.state.alive"
       @click="rest_genbit"
     >
-      <v-list-item-action><v-icon>mdi-cube-outline</v-icon></v-list-item-action>
+      <v-list-item-action><v-icon>mdi-package</v-icon></v-list-item-action>
       <v-list-item-content><v-list-item-title>Generate bitstream</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
+    <v-divider v-if="$store.state.alive"></v-divider>
 
     <!-- SETTINGS -->
 
