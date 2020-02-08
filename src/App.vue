@@ -21,69 +21,7 @@
 
   <!-- QUESTION: what is this id="inspire" used for? Is it required? -->
   <v-app id="inspire">
-    <!-- TODO:
-      This drawer should be moved to a separate component (components/Drawer.vue)
-    -->
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="drawerMini"
-      app
-      clipped
-    >
-      <v-list dense>
-        <v-list-item link title="New design">
-          <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>New design</v-list-item-title></v-list-item-content>
-        </v-list-item>
-        <v-list-item link title="Load... | Import..."
-          @click="uploadTrigger"
-        >
-          <v-list-item-action><v-icon>mdi-upload</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Load... | Import...</v-list-item-title></v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item link title="Save">
-          <v-list-item-action><v-icon>mdi-content-save</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Save</v-list-item-title></v-list-item-content>
-        </v-list-item>
-        <v-list-item link title="Save As...">
-          <v-list-item-action><v-icon>mdi-content-save-all</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Save As...</v-list-item-title></v-list-item-content>
-        </v-list-item>
-        <v-list-item link title="Download... | Export...">
-          <v-list-item-action><v-icon>mdi-download</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Download... | Export...</v-list-item-title></v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item link title="Generate bitstream"
-          @click="rest_genbit"
-          v-if="$store.state.alive"
-        >
-          <v-list-item-action><v-icon>mdi-cube-outline</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Generate bitstream</v-list-item-title></v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item link title="Settings">
-          <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>Settings</v-list-item-title></v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item link :title="drawerMini?'Expand':'Collapse'"
-          @click="drawerMini=!drawerMini"
-        >
-          <v-list-item-action><v-icon>mdi-arrow-{{drawerMini?'expand-right':'collapse-left'}}</v-icon></v-list-item-action>
-          <v-list-item-content><v-list-item-title>{{drawerMini?'Expand':'Collapse'}}</v-list-item-title></v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <Drawer :drawer="drawer"/>
 
     <!-- TODO:
       This bar should be moved to a separate component (components/AppBar.vue)
@@ -221,7 +159,6 @@
       </v-btn>
       <!--<span>&copy; 2020</span>-->
     </v-footer>
-    <input ref="finput" v-show="false" type="file" multiple v-on:change="uploadFile">
   </v-app>
 </template>
 
@@ -231,36 +168,21 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
+import Drawer from '@/components/Drawer';
+
 export default {
   name: 'App',
-  components: {},
+  components: {
+    Drawer
+  },
   data: () => ({
     drawer: false,
-    // TODO: use localStorage to remember user preference with regard to having the drawer expanded/collapsed
-    drawerMini: true,
   }),
   created () {
     this.$vuetify.theme.dark = true;
     this.rest_alive();
   },
   methods: {
-    uploadTrigger() {
-      this.$refs["finput"].click();
-    },
-    uploadFile (e) {
-      e.target.files.forEach(file => {
-        console.log(file);
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          console.log(e);
-          this.$store.state.designs.push({
-            file: file,
-            content: e.target.result
-          });
-        }.bind(this);
-        reader.readAsText(file);
-      });
-    },
     rest_alive () {
       this.$http.get('/api/alive')
       .then((r) => {
@@ -276,22 +198,6 @@ export default {
         this.$store.state.alive=false;
       });
     },
-    rest_genbit () {
-      // TODO: send (POST) binary (encoded) stream; a tarball; instead of JSON content
-      this.$http.get('/api/genbit')
-      .then((r) => {
-        if (r.status === 200) {
-          console.log('Generate bitstream SUCCESS:', r.body)
-        } else {
-          // TODO: open a modal to show this error to the user
-          console.log('Generate bitstream request failed. Returned status of ' + r.status);
-        }
-      })
-      .catch((err) => {
-        // TODO: open a modal to show this error to the user
-        console.log('Generate bitstream ERROR:', err.status, err.statusText)
-      });
-    }
   }
 };
 </script>
