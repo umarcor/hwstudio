@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/components/Home";
 import Scene from "@/components/Scene";
+import NotFound from "@/components/NotFound";
 
 Vue.use(Router);
 
@@ -25,5 +26,10 @@ export default new Router({
       name: "scene",
       component: Scene
     },
+    {
+      path: "*",
+      name: "notfound",
+      component: NotFound
+    }
   ]
 });
