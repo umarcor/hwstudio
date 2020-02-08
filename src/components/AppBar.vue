@@ -1,14 +1,17 @@
 <template>
 <v-app-bar
   app
-  clipped-left
 >
   <!-- TODO:
     Add the (fancy) logo; can the hamburguer icon be replaced?
   -->
-  <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer" />
+  <template v-if="!$store.state.drawer">
+  <v-app-bar-nav-icon
+    @click.stop="$store.state.drawer = !$store.state.drawer"
+  />
 
   <v-divider vertical></v-divider>
+  </template>
 
   <!-- DASHBOARD -->
 

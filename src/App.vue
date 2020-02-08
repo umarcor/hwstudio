@@ -19,22 +19,18 @@
   - 'Reports' viewer
 -->
 
+  <!--  TODO:
+    https://vuejs.org/v2/guide/list.html#Caveats
+
+    There might be a more idiomatic way to execute/trigger a method in Scene; ideally, Scene should
+    watch for changes in '$store.state.scene.layers' and toggle internal fields accordingly.
+  -->
+
   <!-- QUESTION: what is this id="inspire" used for? Is it required? -->
   <v-app id="inspire">
     <Drawer/>
-
-    <!--  TODO:
-      https://vuejs.org/v2/guide/list.html#Caveats
-
-      There might be a more idiomatic way to do this; ideally, Scene should watch for changes in
-      '$store.state.scene.layers' and toggle internal fields accordingly.
-    -->
     <AppBar @layerToggle="(n) => {$refs.scene.layerToggle(n)}"/>
-
-    <v-content>
-      <router-view ref="scene"/>
-    </v-content>
-
+    <router-view ref="scene"/>
     <Foot/>
   </v-app>
 </template>

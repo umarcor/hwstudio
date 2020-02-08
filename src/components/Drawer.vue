@@ -5,7 +5,6 @@
   :mini-variant="drawerMini"
   :disable-route-watcher="true"
   app
-  clipped
   overlay-color="primary"
 >
   <v-list dense>
@@ -13,6 +12,33 @@
     <!-- TODO:
       It feels that there is too much duplication. This should be refactored.
     -->
+
+    <!-- CLOSE -->
+
+    <v-tooltip right
+      v-if="drawerMini"
+    >
+      <template v-slot:activator="{ on }">
+        <v-list-item link
+          v-on="on"
+          @click="$store.state.drawer = !$store.state.drawer"
+        >
+          <v-list-item-action><v-icon>mdi-close</v-icon></v-list-item-action>
+          <v-list-item-content></v-list-item-content>
+        </v-list-item>
+      </template>
+      <span>Close menu</span>
+    </v-tooltip>
+
+    <v-list-item link
+      v-if="!drawerMini"
+      @click="$store.state.drawer = !$store.state.drawer"
+    >
+      <v-list-item-action><v-icon>mdi-close</v-icon></v-list-item-action>
+      <v-list-item-content><v-list-item-title>Close menu</v-list-item-title></v-list-item-content>
+    </v-list-item>
+
+    <v-divider></v-divider>
 
     <!-- NEW DESIGN -->
 
