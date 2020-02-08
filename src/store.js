@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     alive: false,
+    drawer: false,
     designs: [],
     scene: {
       stats: false,
@@ -14,4 +15,12 @@ export default new Vuex.Store({
   },
   mutations: {},
   actions: {},
+  getters: {
+    isAt: (state) => (name) => {
+      return state.route.name === name
+    },
+    designNum: (state) => {
+      return state.designs.length
+    }
+  }
 });

@@ -21,167 +21,15 @@
 
   <!-- QUESTION: what is this id="inspire" used for? Is it required? -->
   <v-app id="inspire">
-    <Drawer :drawer="drawer"/>
+    <Drawer/>
 
-    <!-- TODO:
-      This bar should be moved to a separate component (components/AppBar.vue)
+    <!--  TODO:
+      https://vuejs.org/v2/guide/list.html#Caveats
+
+      There might be a more idiomatic way to do this; ideally, Scene should watch for changes in
+      '$store.state.scene.layers' and toggle internal fields accordingly.
     -->
-    <v-app-bar
-      app
-      clipped-left
-    >
-      <!-- TODO:
-        Add the (fancy) logo; can the hamburguer icon be replaced?
-      -->
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-
-      <v-divider vertical></v-divider>
-
-      <!-- DASHBOARD -->
-
-      <v-tooltip bottom
-        v-if="!atHome"
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            v-on="on"
-            @click="$router.push('/')"
-          >
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-btn>
-        </template>
-        <span>Dashboard</span>
-      </v-tooltip>
-
-      <!-- TODO:
-        - If/when reading the docs, show breadcrumbs.
-        - Optionally show backend actions here, instead of in the drawer. Provide a settings switch for users to choose.
-      -->
-
-      <!-- 3D Scene (left) -->
-
-      <!-- TODO: hide when the user is in '/scene/*' (check router path) -->
-      <v-tooltip bottom
-        v-if="designNum==1"
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            v-on="on"
-            @click="$router.push('/scene')"
-          >
-            <v-icon>mdi-cube-outline</v-icon>
-          </v-btn>
-        </template>
-        <span>3D editor</span>
-      </v-tooltip>
-
-      <!-- FIXME:
-        This button/menu jumps to the right when changing to a different section.
-        Instead, the location (on the left of the spacer) shoul be preserved.
-      -->
-      <v-menu
-        v-if="designNum>1"
-        :close-on-content-click="true"
-        :offset-y="true"
-        right
-        bottom
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-badge
-              overlap
-              :content="designNum"
-            >
-              <v-icon>mdi-cube-outline</v-icon>
-            </v-badge>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item link
-            v-for="(v, n) in $store.state.designs"
-            :key="n"
-          >
-            <v-list-item-content>
-              <v-list-item-title>{{v.file.name}}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-
-      <v-spacer></v-spacer>
-
-      <!-- 3D Scene (right) -->
-
-      <template v-if="atScene">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              icon
-              v-on="on"
-              @click="$store.state.scene.stats=!$store.state.scene.stats"
-              :color="$store.state.scene.stats?'blue':''"
-            >
-              <v-icon>mdi-chart-histogram</v-icon>
-            </v-btn>
-          </template>
-          <span>Toggle render stats</span>
-        </v-tooltip>
-
-        <v-menu
-          :close-on-content-click="false"
-          :offset-y="true"
-          left
-          bottom
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-badge
-                overlap
-                :content="$store.state.scene.layers.length"
-              >
-                <v-icon>mdi-layers-triple</v-icon>
-              </v-badge>
-            </v-btn>
-          </template>
-
-          <v-list>
-            <v-list-item
-              v-for="(v, n) in $store.state.scene.layers"
-              :key="n"
-            >
-              <!--
-              <v-list-item-avatar>
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-              </v-list-item-avatar>
-              -->
-
-              <v-list-item-content>
-                <v-list-item-title>Layer {{n}}</v-list-item-title>
-              </v-list-item-content>
-
-              <!--  TODO:
-                https://vuejs.org/v2/guide/list.html#Caveats
-
-                There might be a more idiomatic way to do this;
-                ideally, Scene should watch for changes in '$store.state.scene.layers' and toggle internal
-                fields accordingly.
-              -->
-              <v-list-item-action>
-                <v-btn
-                  :class="v ? 'primary--text' : ''"
-                  icon
-                  @click="$set($store.state.scene.layers, n, !v); $refs.scene.layerToggle(n)"
-                >
-                  <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </template>
-    </v-app-bar>
+    <AppBar @layerToggle="(n) => {$refs.scene.layerToggle(n)}"/>
 
     <v-content>
       <router-view ref="scene"/>
@@ -189,9 +37,9 @@
 
     <v-footer app>
       <!-- TODO:
-        Add stats and status icons on the left of the footer (a la VSC)
+        Add design stats and status icons on the left of the footer (a la VSC)
       -->
-      <template v-if="!atHome && !atAbout">
+      <template v-if="!$store.getters.isAt('home') && !$store.getters.isAt('about')">
         Hardware Studio
       </template>
       <v-spacer></v-spacer>
@@ -200,7 +48,9 @@
       >
         <v-icon>mdi-heart</v-icon>
       </v-btn>
-      <v-btn icon small @click="$vuetify.theme.dark=!$vuetify.theme.dark">
+      <v-btn icon small
+        @click="$vuetify.theme.dark=!$vuetify.theme.dark"
+      >
         <v-icon>mdi-lightbulb{{$vuetify.theme.dark?'':'-on-outline'}}</v-icon>
       </v-btn>
       <!--<span>&copy; 2020</span>-->
@@ -215,32 +65,17 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
 import Drawer from '@/components/Drawer';
+import AppBar from '@/components/AppBar';
 
 export default {
   name: 'App',
   components: {
-    Drawer
+    Drawer,
+    AppBar
   },
-  data: () => ({
-    drawer: false,
-  }),
   created () {
     this.$vuetify.theme.dark = true;
     this.rest_alive();
-  },
-  computed: {
-    designNum () {
-      return this.$store.state.designs.length
-    },
-    atHome () {
-      return this.$store.state.route.name === 'home'
-    },
-    atAbout () {
-      return this.$store.state.route.name === 'about'
-    },
-    atScene () {
-      return this.$store.state.route.name === 'scene'
-    }
   },
   methods: {
     rest_alive () {

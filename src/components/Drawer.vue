@@ -1,14 +1,14 @@
 
 <template>
 <v-navigation-drawer
-  v-model="drawer"
+  v-model="$store.state.drawer"
   :mini-variant="drawerMini"
   app
   clipped
 >
   <v-list dense>
 
-    <!-- FIXME:
+    <!-- TODO:
       It feels that there is too much duplication. This should be refactored.
     -->
 
