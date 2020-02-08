@@ -6,6 +6,7 @@
   :disable-route-watcher="true"
   app
   clipped
+  overlay-color="primary"
 >
   <v-list dense>
 
@@ -155,6 +156,13 @@
 
   </v-list>
   <input ref="finput" v-show="false" type="file" multiple v-on:change="uploadFile">
+
+  <template v-slot:append v-if="!drawerMini">
+    <v-alert type="warning" prominent class="ml-2 mr-2 caption text-center" dense outlined>
+      This tool is a proof of concept; expect breaking changes!
+    </v-alert>
+  </template>
+
 </v-navigation-drawer>
 </template>
 
