@@ -1,24 +1,4 @@
 <template>
-<!-- TODO:
-  - Use localStorage (https://vuejs.org/v2/cookbook/client-side-storage.html) to optionally save
-    the state of the app beteween different sessions (dbhi)
-  - Understand vuex's app-level 'state', 'actions' and 'mutations'. Are those names conventions or fixed?
--->
-<!-- NEXT:
-  - Integrate a static site generator for section 'Docs'. Should it be external (Hugo)?
-    Is there any ready-to-use JS/VueJS lib?
-  - Integrate a JSON/YAML/TOML viewer (both, as an interactive tree and as plain text), to allow
-    modification of the model/design that is being shown in 3D.
-    hint: vue-codemirror and vue-json-tree-view (anna)
-  - Extend Python backend endpoints to export, simulate, synthesise, etc.
-    -  Optionally, implement the backend in a different language: JS (node, electron), go...
--->
-<!-- IDEAS:
-  - Use TypeScript instead of JavaScript before going too far?
-  - Wavedrom JS viewer
-  - 'Reports' viewer
--->
-
   <!--  TODO:
     https://vuejs.org/v2/guide/list.html#Caveats
 

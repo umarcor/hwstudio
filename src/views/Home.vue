@@ -3,12 +3,6 @@
   class="fill-height"
   fluid
 >
-<!-- TODO:
-  Maybe this template can be enhanced using 'v-layout' as suggested in
-  https://vuetifyjs.com/en/introduction/frequently-asked-questions#how-to-center-vertically
-  instead of using 'mt-auto' and 'mb-auto'.
-  The same modification might be applied to 'About'.
--->
   <v-row
     justify="center"
     class="mt-auto flex-column"
