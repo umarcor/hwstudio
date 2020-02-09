@@ -25,6 +25,19 @@
   - [vue chat](https://chat.vuejs.org)
   - [vuetify chat](https://community.vuetifyjs.com)
 
+### Vue and Three.js
+
+- https://github.com/sascha245/vue-threejs-composer
+- https://github.com/fritx/vue-threejs
+- https://github.com/vue-gl/vue-gl
+
+### Vue and TypeScript
+
+- https://vuejs.org/v2/guide/typescript.html
+- https://github.com/microsoft/TypeScript-Vue-Starter
+- https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
+- https://github.com/vuetifyjs/vue-cli-plugins/issues/112#issuecomment-562935079
+
 ## Three.js
 
 - [three](https://threejs.org/)
