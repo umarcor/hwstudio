@@ -33,13 +33,6 @@ class Tool():
         hws.run(host=addr, port=port)
 
 
-class WithBuildAttributes(Attribute):
-  def __call__(self, func):
-    self._AppendAttribute(func, SwitchArgumentAttribute("--dry-run", dest="dry_run", help="Print build commands but do not execute them."))
-    # ... add more if needed
-    return func
-
-
 class CLI(Tool, ArgParseMixin):
     def __init__(self):
         import argparse
