@@ -8,7 +8,7 @@
   </template>
   <v-spacer></v-spacer>
   <v-btn icon color="red" small
-    @click="$router.push('/about')"
+    to="/about"
   >
     <v-icon>mdi-heart</v-icon>
   </v-btn>

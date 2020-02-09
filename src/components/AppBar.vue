@@ -23,7 +23,8 @@
       <v-btn
         icon
         v-on="on"
-        @click="$router.push('/')"
+        to="/"
+        exact
       >
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
@@ -45,7 +46,7 @@
       <v-btn
         icon
         v-on="on"
-        @click="$router.push('/scene')"
+        to="/scene"
       >
         <v-icon>mdi-cube-outline</v-icon>
       </v-btn>

@@ -48,7 +48,7 @@
           <v-btn
             icon
             large
-            @click="$router.push('/scene')"
+            to="/scene"
             v-on="on"
           >
             <v-icon large>mdi-cube-outline</v-icon>

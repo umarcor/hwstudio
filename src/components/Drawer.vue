@@ -42,17 +42,13 @@
 
     <!-- NEW DESIGN -->
 
-      <!-- FIXME
-        This item should clean the scene before calling '$router.push'
-      -->
-
     <v-tooltip right
       v-if="drawerMini"
     >
       <template v-slot:activator="{ on }">
         <v-list-item link
           v-on="on"
-          @click="$router.push('/scene')"
+          @click="newDesign"
         >
           <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
           <v-list-item-content></v-list-item-content>
@@ -63,7 +59,7 @@
 
     <v-list-item link
       v-if="!drawerMini"
-      @click="$router.push('/scene')"
+      @click="newDesign"
     >
       <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
       <v-list-item-content><v-list-item-title>New design</v-list-item-title></v-list-item-content>
@@ -220,6 +216,18 @@ export default {
         }.bind(this);
         reader.readAsText(file);
       });
+    },
+    newDesign () {
+      /* FIXME:
+         This item should clean the scene before calling '$router.push'.
+         The comments are an example about how to call an action in the store,
+         and wait for it to finish before pushing to the router
+      */
+      //this.$store.dispatch('submitLoginDetails', userDetails).then(() => {
+        //if(!this.$store.getters.error){
+          this.$router.push('/scene')
+        //}
+      //})
     },
     // FIXME: this method should not be located here, but in the vuex store instead
     rest_genbit () {
