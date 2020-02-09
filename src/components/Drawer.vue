@@ -7,7 +7,7 @@
   app
   overlay-color="primary"
 >
-  <v-list dense>
+  <v-list dense class="pt-0 pb-0">
 
     <!-- TODO:
       It feels that there is too much duplication. This should be refactored.
