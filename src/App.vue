@@ -10,7 +10,9 @@
   <v-app id="inspire">
     <Drawer/>
     <AppBar @layerToggle="(n) => {$refs.scene.layerToggle(n)}"/>
-    <router-view ref="scene"/>
+    <v-content>
+      <router-view ref="scene"/>
+    </v-content>
     <Foot/>
   </v-app>
 </template>
