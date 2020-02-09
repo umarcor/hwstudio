@@ -1,8 +1,5 @@
 <template>
-<v-container
-  class="fill-height"
-  fluid
->
+<v-container fill-height fluid>
   <v-row class="mt-auto">
     <v-img
       :src="$vuetify.theme.dark?require('../../public/img/logo_light.svg'):require('../../public/img/logo.svg')"

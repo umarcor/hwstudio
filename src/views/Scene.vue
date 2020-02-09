@@ -1,11 +1,6 @@
 <template>
-<v-layout
-  class="fill-height"
->
-  <v-layout
-    class="fill-height"
-    ref="scene"
-  />
+<v-layout fill-height>
+  <v-layout fill-height ref="scene"/>
   <!-- FIXME:
     This is a workaround because Stats are positioned absolutely on the top-left
     Ideally, Stats would be attached to "scene"; hence this level of indentation would
