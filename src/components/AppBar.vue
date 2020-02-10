@@ -11,7 +11,7 @@
     @click.stop="$store.state.drawer = !$store.state.drawer"
   />
 
-  <v-divider vertical></v-divider>
+  <v-divider vertical/>
   </template>
 
   <!-- DASHBOARD -->

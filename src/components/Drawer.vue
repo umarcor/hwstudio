@@ -38,7 +38,7 @@
       <v-list-item-content><v-list-item-title>Close menu</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
+    <v-divider/>
 
     <!-- NEW DESIGN -->
 
@@ -90,7 +90,7 @@
       <v-list-item-content><v-list-item-title>Load... | Import...</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
+    <v-divider/>
 
     <!-- SAVE -->
 
@@ -113,7 +113,7 @@
       <v-list-item-content><v-list-item-title>Download... | Export...</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
+    <v-divider/>
 
     <!-- GENERATE BITSTREAM -->
 
@@ -140,7 +140,7 @@
       <v-list-item-content><v-list-item-title>Generate bitstream</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider v-if="$store.state.alive"></v-divider>
+    <v-divider v-if="$store.state.alive" />
 
     <!-- SETTINGS -->
 
@@ -149,7 +149,7 @@
       <v-list-item-content><v-list-item-title>Settings</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
+    <v-divider/>
 
     <!-- EXPAND | COLLAPSE -->
 
