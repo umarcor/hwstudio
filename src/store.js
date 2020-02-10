@@ -15,6 +15,7 @@ export default new Vuex.Store({
     alive: false,
     drawer: false,
     designs: [],
+    active: null,
     scene: {
       stats: false,
       layers: [true, true, true],
@@ -30,7 +31,11 @@ export default new Vuex.Store({
 
     designNum: (state) => {
       return state.designs.length
-    }
+    },
+
+    design: (state) => (id) => {
+      return state.designs[id]
+    },
 
   },
 
@@ -59,6 +64,7 @@ export default new Vuex.Store({
 
     addDesign (state, design) {
       state.designs.push(design);
+      state.active=state.designs.length-1;
     }
 
   },

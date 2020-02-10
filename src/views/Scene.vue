@@ -44,6 +44,9 @@ export default {
     controls: null,
   }),
   computed: {
+    ...mapState([
+      'active'
+    ]),
     ...mapState({
       layers: state => state.scene.layers,
     })
@@ -54,7 +57,7 @@ export default {
     const el = this.$refs.scene;
 
     this.camera = new THREE.PerspectiveCamera(70, el.clientWidth / el.clientHeight,1, 10000);
-    this.camera.position.set( 0, 0, 900 );
+    this.camera.position.set( 0, 2, 5 );
     // Layer 0 is for lights and other ambient objects; hence actual objects are placed in layers 1 and higher
     for ( i = 0; i <= this.layers.length; i ++ ) {
       this.camera.layers.enable( i );
@@ -103,16 +106,16 @@ export default {
 
     var geometry = new THREE.BoxBufferGeometry( 40, 40, 40 );
 
-    for ( i = 0; i < 50; i ++ ) {
+    for ( i = 0; i < 3; i ++ ) {
       var object = new THREE.Mesh(
         geometry,
         new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } )
       );
 
       object.position.set(
-        Math.random() * 1000 - 500,
-        Math.random() * 600 - 300,
-        Math.random() * 800 - 400
+        Math.random() * 10 - 5,
+        Math.random() * 5 - 2.5,
+        Math.random() * 4 - 2
       );
 
       object.rotation.set(
@@ -122,9 +125,9 @@ export default {
       );
 
       object.scale.set(
-        Math.random() * 2 + 1,
-        Math.random() * 2 + 1,
-        Math.random() * 2 + 1
+        Math.random() * .049 + .001,
+        Math.random() * .049 + .001,
+        Math.random() * .049 + .001
       );
 
       object.castShadow = true;
@@ -150,7 +153,7 @@ export default {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      for ( var i = 0; i < 5; i ++ ) {
+      for ( var i = 0; i < 3; i ++ ) {
         this.objects[i].rotation.x += 0.025;
         this.objects[i].rotation.y += 0.025;
       }
@@ -166,6 +169,10 @@ export default {
     window.addEventListener( 'resize', this.onWindowResize, false );
   },
   methods: {
+    loadJSON (jobj) {
+      var loader = new THREE.ObjectLoader();
+      this.scene.add(loader.parse(jobj));
+    },
     layerAll (bool) {
       if (bool) {
         this.camera.layers.enableAll();
@@ -177,9 +184,10 @@ export default {
       const el = this.$refs.scene;
       if ( el != undefined ) {
       const w = el.clientWidth;
-      // FIXME
-      // with el.clientWidth, the Scene grows vertically non-stop
-      // however, window.innerHeight seems to be larger than required
+      /* FIXME:
+         With el.clientWidth, the Scene grows vertically non-stop
+         however, window.innerHeight seems to be larger than required
+      */
       //const h = el.clientWidth;
       const h = window.innerHeight;
 
@@ -190,14 +198,17 @@ export default {
     }
   },
   watch: {
+    active: function(v, o) {
+      console.log('active', v, o);
+      this.loadJSON(JSON.parse(this.$store.getters.design(v).content));
+    },
     layers: function (v) {
-      /* FIXME
-        https://vuejs.org/v2/guide/computed.html#Watchers
+      /*
+        https://vuejs.org/v2/api/#vm-watch
+        Note: when mutating (rather than replacing) an Object or an Array, the old value will be the same as new value...
 
-        The watcher should return the old and the new values of '$store.state.scene.layers';
-        but it seems that the two returned objects have the same content. It should be possible
-        to toggle the desired layer only ('this.camera.layers.toggle(num+1)'), instead of looping
-        through all of them.
+        There might be some other mechanism to toggle the desired layer only ('this.camera.layers.toggle(num+1)'),
+        instead of looping through all of them. Meanwhile, this works.
       */
       v.forEach((b, i) => {
         this.camera.layers[b?'enable':'disable'](i+1);

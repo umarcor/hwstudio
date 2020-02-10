@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a title="Site" href="https://umarcor.github.io/hwstudio"><img src="https://img.shields.io/website.svg?label=umarcor.github.io%2Fhwstudio&longCache=true&style=flat-square&url=http%3A%2F%2Fumarcor.github.io%2Fhwstudio%2Findex.html"></a><!--
+  <a title="Site (frontend only)" href="https://umarcor.github.io/hwstudio"><img src="https://img.shields.io/website.svg?label=umarcor.github.io%2Fhwstudio&longCache=true&style=flat-square&url=http%3A%2F%2Fumarcor.github.io%2Fhwstudio%2Findex.html"></a><!--
   -->
   <a title="'dev' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adev"><img alt="'dev' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/dev?longCache=true&style=flat-square&label=dev&logo=github"></a><!--
   -->
