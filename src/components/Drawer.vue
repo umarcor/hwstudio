@@ -21,7 +21,7 @@
       <template v-slot:activator="{ on }">
         <v-list-item link
           v-on="on"
-          @click="$store.state.drawer = !$store.state.drawer"
+          @click="toggleDrawer"
         >
           <v-list-item-action><v-icon>mdi-close</v-icon></v-list-item-action>
           <v-list-item-content></v-list-item-content>
@@ -32,7 +32,7 @@
 
     <v-list-item link
       v-if="!drawerMini"
-      @click="$store.state.drawer = !$store.state.drawer"
+      @click="toggleDrawer"
     >
       <v-list-item-action><v-icon>mdi-close</v-icon></v-list-item-action>
       <v-list-item-content><v-list-item-title>Close menu</v-list-item-title></v-list-item-content>
@@ -118,12 +118,12 @@
     <!-- GENERATE BITSTREAM -->
 
     <v-tooltip right
-      v-if="drawerMini && $store.state.alive"
+      v-if="drawerMini && alive"
     >
       <template v-slot:activator="{ on }">
         <v-list-item link
           v-on="on"
-          @click="rest_genbit"
+          @click="generateBitstream"
         >
           <v-list-item-action><v-icon>mdi-package</v-icon></v-list-item-action>
           <v-list-item-content></v-list-item-content>
@@ -133,14 +133,14 @@
     </v-tooltip>
 
     <v-list-item link
-      v-if="!drawerMini && $store.state.alive"
-      @click="rest_genbit"
+      v-if="!drawerMini && alive"
+      @click="generateBitstream"
     >
       <v-list-item-action><v-icon>mdi-package</v-icon></v-list-item-action>
       <v-list-item-content><v-list-item-title>Generate bitstream</v-list-item-title></v-list-item-content>
     </v-list-item>
 
-    <v-divider v-if="$store.state.alive" />
+    <v-divider v-if="alive" />
 
     <!-- SETTINGS -->
 
@@ -189,16 +189,23 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex';
+
 export default {
   name: 'Drawer',
-  props: {
-    drawer: Boolean
-  },
   data: () => ({
     // TODO: use localStorage to remember user preference with regard to having the drawer expanded/collapsed
     drawerMini: true,
   }),
+  computed: {
+    ...mapState([
+      'alive'
+    ]),
+  },
   methods: {
+    ...mapMutations([
+      'toggleDrawer'
+    ]),
     uploadTrigger() {
       this.$refs["finput"].click();
     },
@@ -209,7 +216,7 @@ export default {
         reader.onload = function(e) {
           console.log(e);
           // TODO: check that the file is of a supported format, and extract the content if required
-          this.$store.state.designs.push({
+          this.$store.commit('addDesign', {
             file: file,
             content: e.target.result
           });
@@ -229,23 +236,9 @@ export default {
         //}
       //})
     },
-    // FIXME: this method should not be located here, but in the vuex store instead
-    rest_genbit () {
-      // TODO: send (POST) binary (encoded) stream; a tarball; instead of JSON content
-      this.$http.get('/api/genbit')
-      .then((r) => {
-        if (r.status === 200) {
-          console.log('Generate bitstream SUCCESS:', r.body)
-        } else {
-          // TODO: open a modal to show this error to the user
-          console.log('Generate bitstream request failed. Returned status of ' + r.status);
-        }
-      })
-      .catch((err) => {
-        // TODO: open a modal to show this error to the user
-        console.log('Generate bitstream ERROR:', err.status, err.statusText)
-      });
-    }
+    ...mapActions([
+      'generateBitstream'
+    ]),
   }
 };
 </script>

@@ -1,7 +1,6 @@
 # To Do
 
 - Use localStorage (https://vuejs.org/v2/cookbook/client-side-storage.html) to optionally save the state of the app beteween different sessions. (dbhi)
-- Use vuex's state, actions and mutations idiomatically. Work in progress in branch `vuex-strict`.
 - Define the HWD format: a zip/tarball including VHDL sources, a configuration file and a 'layout'/'three' file.
 - Extend Python backend endpoints to export, simulate, synthesise, etc. HWD files.
   -  Optionally, implement the backend in a different language: JS (node, electron), go...

@@ -31,11 +31,11 @@ import Stats from 'three/examples/jsm/libs/stats.module';
 //import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 //import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
 
+import { mapState } from 'vuex';
+
 export default {
   name: 'Scene',
   data: () => ({
-    // Layer 0 is for lights and other ambient objects; hence actual object are placed in layers 1 and higher
-    layerNum: 3, // TODO: get the number of layers from the parent
     camera: null,
     renderer: new THREE.WebGLRenderer( { antialias: true } ),
     scene: new THREE.Scene(),
@@ -43,6 +43,11 @@ export default {
     stats: new Stats(),
     controls: null,
   }),
+  computed: {
+    ...mapState({
+      layers: state => state.scene.layers,
+    })
+  },
   mounted() {
     var i;
 
@@ -50,7 +55,8 @@ export default {
 
     this.camera = new THREE.PerspectiveCamera(70, el.clientWidth / el.clientHeight,1, 10000);
     this.camera.position.set( 0, 0, 900 );
-    for ( i = 0; i <= this.layerNum; i ++ ) {
+    // Layer 0 is for lights and other ambient objects; hence actual objects are placed in layers 1 and higher
+    for ( i = 0; i <= this.layers.length; i ++ ) {
       this.camera.layers.enable( i );
     }
     // NOTE: 0 is enabled by default
@@ -123,7 +129,7 @@ export default {
 
       object.castShadow = true;
       object.receiveShadow = true;
-      object.layers.set((i % this.layerNum)+1);
+      object.layers.set((i % this.layers.length)+1);
 
       this.scene.add( object );
       this.objects.push( object );
@@ -160,9 +166,6 @@ export default {
     window.addEventListener( 'resize', this.onWindowResize, false );
   },
   methods: {
-    layerToggle (num) {
-        this.camera.layers.toggle(num+1);
-    },
     layerAll (bool) {
       if (bool) {
         this.camera.layers.enableAll();
@@ -184,7 +187,22 @@ export default {
       this.camera.updateProjectionMatrix();
       this.renderer.setSize( w, h );
       }
-  }
+    }
+  },
+  watch: {
+    layers: function (v) {
+      /* FIXME
+        https://vuejs.org/v2/guide/computed.html#Watchers
+
+        The watcher should return the old and the new values of '$store.state.scene.layers';
+        but it seems that the two returned objects have the same content. It should be possible
+        to toggle the desired layer only ('this.camera.layers.toggle(num+1)'), instead of looping
+        through all of them.
+      */
+      v.forEach((b, i) => {
+        this.camera.layers[b?'enable':'disable'](i+1);
+      });
+    }
   }
 
 }

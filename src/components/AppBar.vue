@@ -6,26 +6,16 @@
   <!-- TODO:
     Add the (fancy) logo; can the hamburguer icon be replaced?
   -->
-  <template v-if="!$store.state.drawer">
-  <v-app-bar-nav-icon
-    @click.stop="$store.state.drawer = !$store.state.drawer"
-  />
-
+  <template v-if="!drawer">
+  <v-app-bar-nav-icon @click.stop="toggleDrawer" />
   <v-divider vertical/>
   </template>
 
   <!-- DASHBOARD -->
 
-  <v-tooltip bottom
-    v-if="!$store.getters.isAt('home')"
-  >
+  <v-tooltip bottom v-if="!isAt('home')">
     <template v-slot:activator="{ on }">
-      <v-btn
-        icon
-        v-on="on"
-        to="/"
-        exact
-      >
+      <v-btn icon v-on="on" to="/" exact>
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
     </template>
@@ -39,15 +29,9 @@
 
   <!-- 3D Scene (left) -->
 
-  <v-tooltip bottom
-    v-if="$store.getters.designNum==1 && !$store.getters.isAt('scene')"
-  >
+  <v-tooltip bottom v-if="designs.length==1 && !isAt('scene')">
     <template v-slot:activator="{ on }">
-      <v-btn
-        icon
-        v-on="on"
-        to="/scene"
-      >
+      <v-btn icon v-on="on" to="/scene">
         <v-icon>mdi-cube-outline</v-icon>
       </v-btn>
     </template>
@@ -59,7 +43,7 @@
     Instead, the location (on the left of the spacer) shoul be preserved.
   -->
   <v-menu
-    v-if="$store.getters.designNum>1"
+    v-if="designs.length>1"
     :close-on-content-click="true"
     :offset-y="true"
     right
@@ -67,19 +51,13 @@
   >
     <template v-slot:activator="{ on }">
       <v-btn icon v-on="on">
-        <v-badge
-          overlap
-          :content="$store.getters.designNum"
-        >
+        <v-badge overlap :content="designs.length">
           <v-icon>mdi-cube-outline</v-icon>
         </v-badge>
       </v-btn>
     </template>
     <v-list>
-      <v-list-item link
-        v-for="(v, n) in $store.state.designs"
-        :key="n"
-      >
+      <v-list-item link v-for="(v, n) in designs" :key="n">
         <v-list-item-content>
           <v-list-item-title>{{v.file.name}}</v-list-item-title>
         </v-list-item-content>
@@ -91,14 +69,14 @@
 
   <!-- 3D Scene (right) -->
 
-  <template v-if="$store.getters.isAt('scene')">
+  <template v-if="isAt('scene')">
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn
           icon
           v-on="on"
-          @click="$store.state.scene.stats=!$store.state.scene.stats"
-          :color="$store.state.scene.stats?'blue':''"
+          @click="toggleStats"
+          :color="stats?'blue':''"
         >
           <v-icon>mdi-chart-histogram</v-icon>
         </v-btn>
@@ -114,34 +92,26 @@
     >
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
-          <v-badge
-            overlap
-            :content="$store.state.scene.layers.length"
-          >
+          <v-badge overlap :content="layers.length">
             <v-icon>mdi-layers-triple</v-icon>
           </v-badge>
         </v-btn>
       </template>
 
       <v-list>
-        <v-list-item
-          v-for="(v, n) in $store.state.scene.layers"
-          :key="n"
-        >
+        <v-list-item v-for="(v, n) in layers" :key="n">
           <!--
           <v-list-item-avatar>
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
           </v-list-item-avatar>
           -->
-
           <v-list-item-content>
             <v-list-item-title>Layer {{n}}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-btn
+            <v-btn icon
               :class="v ? 'primary--text' : ''"
-              icon
-              @click="$set($store.state.scene.layers, n, !v); $emit('layerToggle', n)"
+              @click="toggleLayer(n)"
             >
               <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
             </v-btn>
@@ -154,7 +124,29 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex';
+
 export default {
   name: 'AppBar',
+  computed: {
+    ...mapState([
+      'drawer',
+      'designs',
+    ]),
+    ...mapState({
+      stats: 'scene.stats',
+      layers: state => state.scene.layers,
+    }),
+    ...mapGetters([
+      'isAt'
+    ])
+  },
+  methods: {
+    ...mapMutations([
+      'toggleDrawer',
+      'toggleStats',
+      'toggleLayer'
+    ]),
+  }
 };
 </script>
