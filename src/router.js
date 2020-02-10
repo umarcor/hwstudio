@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "@/views/Home";
 import About from "@/views/About";
 import Scene from "@/views/Scene";
+import Grid from "@/views/Grid";
 import NotFound from "@/views/NotFound";
 
 Vue.use(Router);
@@ -31,6 +32,11 @@ export default new Router({
       path: "/scene",
       name: "scene",
       component: Scene
+    },
+    {
+      path: "/grid",
+      name: "grid",
+      component: Grid
     },
     {
       path: "*",
