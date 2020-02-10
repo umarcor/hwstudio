@@ -109,11 +109,21 @@
             <v-list-item-title>Layer {{n}}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-btn icon
+            <v-btn icon small
               :class="v ? 'primary--text' : ''"
               @click="toggleLayer(n)"
             >
               <v-icon>mdi-eye{{ (v==false)?'-off':''}}</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Add new layer</v-list-item-title>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-btn icon small @click="addLayer()">
+              <v-icon>mdi-plus</v-icon>
             </v-btn>
           </v-list-item-action>
         </v-list-item>
@@ -145,7 +155,8 @@ export default {
     ...mapMutations([
       'toggleDrawer',
       'toggleStats',
-      'toggleLayer'
+      'toggleLayer',
+      'addLayer',
     ]),
   }
 };

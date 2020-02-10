@@ -23,35 +23,49 @@ export default new Vuex.Store({
 
   // https://vuex.vuejs.org/guide/getters.html
   getters: {
+
     isAt: (state) => (name) => {
       return state.route.name === name
     },
+
     designNum: (state) => {
       return state.designs.length
     }
+
   },
 
   // https://vuex.vuejs.org/guide/mutations.html
   mutations: {
+
+    setAlive (state, b) {
+      state.alive = b;
+    },
+
     toggleDrawer (state) {
       state.drawer = !state.drawer;
     },
+
     toggleStats (state) {
       state.scene.stats = !state.scene.stats;
     },
+
     toggleLayer (state, n) {
       Vue.set(state.scene.layers, n, !state.scene.layers[n]);
     },
+
+    addLayer (state) {
+      state.scene.layers.push(true);
+    },
+
     addDesign (state, design) {
       state.designs.push(design);
-    },
-    setAlive (state, b) {
-      state.alive = b;
     }
+
   },
 
   // https://vuex.vuejs.org/guide/actions.html
   actions: {
+
     checkAlive ({commit}) {
       Vue.http.get('/api/alive')
       .then((r) => {
@@ -68,6 +82,7 @@ export default new Vuex.Store({
         commit('setAlive', false);
       });
     },
+
     generateBitstream () {
       // TODO: send (POST) binary (encoded) stream; a tarball; instead of JSON content
       Vue.http.get('/api/genbit')
@@ -84,6 +99,7 @@ export default new Vuex.Store({
         console.log('Generate bitstream ERROR:', err.status, err.statusText)
       });
     }
+
   }
 
 });
