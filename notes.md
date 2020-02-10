@@ -92,6 +92,8 @@ These options are specially interesting when working fullscreen (F11), as users 
 
 - [three](https://threejs.org/)
 - ! [documentation](https://threejs.org/docs/)
+- !!! [editor](https://threejs.org/editor/)
+- [editor sources](https://github.com/mrdoob/three.js/tree/master/editor)
 
 ## JointJS
 
