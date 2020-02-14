@@ -27,7 +27,7 @@
           <v-list-item-content></v-list-item-content>
         </v-list-item>
       </template>
-      <span>Close menu</span>
+      <span>{{$t("closeMenu")}}</span>
     </v-tooltip>
 
     <v-list-item link
@@ -35,7 +35,7 @@
       @click="toggleDrawer"
     >
       <v-list-item-action><v-icon>mdi-close</v-icon></v-list-item-action>
-      <v-list-item-content><v-list-item-title>Close menu</v-list-item-title></v-list-item-content>
+      <v-list-item-content><v-list-item-title>{{$t("closeMenu")}}</v-list-item-title></v-list-item-content>
     </v-list-item>
 
     <v-divider/>
@@ -54,7 +54,7 @@
           <v-list-item-content></v-list-item-content>
         </v-list-item>
       </template>
-      <span>New design</span>
+      <span>{{$t("newDesign")}}</span>
     </v-tooltip>
 
     <v-list-item link
@@ -62,7 +62,7 @@
       @click="newDesign"
     >
       <v-list-item-action><v-icon>mdi-file-outline</v-icon></v-list-item-action>
-      <v-list-item-content><v-list-item-title>New design</v-list-item-title></v-list-item-content>
+      <v-list-item-content><v-list-item-title>{{$t("newDesign")}}</v-list-item-title></v-list-item-content>
     </v-list-item>
 
     <!-- LOAD | IMPORT -->
@@ -79,7 +79,7 @@
           <v-list-item-content></v-list-item-content>
         </v-list-item>
       </template>
-      <span>Load... | Import...</span>
+      <span>{{$t("loadImport")}}</span>
     </v-tooltip>
 
     <v-list-item link
@@ -87,7 +87,7 @@
       @click="uploadTrigger"
     >
       <v-list-item-action><v-icon>mdi-upload</v-icon></v-list-item-action>
-      <v-list-item-content><v-list-item-title>Load... | Import...</v-list-item-title></v-list-item-content>
+      <v-list-item-content><v-list-item-title>{{$t("loadImport")}}</v-list-item-title></v-list-item-content>
     </v-list-item>
 
     <v-divider/>

@@ -67,6 +67,13 @@
 
   <v-spacer></v-spacer>
 
+  <!-- Language selector -->
+  <v-select
+    :items="Object.keys($i18n.messages)"
+    label="Language"
+    v-model="$i18n.locale"
+  ></v-select>
+
   <!-- 3D Scene (right) -->
 
   <template v-if="isAt('scene')">
@@ -106,7 +113,7 @@
           </v-list-item-avatar>
           -->
           <v-list-item-content>
-            <v-list-item-title>Layer {{n}}</v-list-item-title>
+            <v-list-item-title>{{$t("layer", {n: n})}}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
             <v-btn icon small
@@ -119,7 +126,7 @@
         </v-list-item>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>Add new layer</v-list-item-title>
+            <v-list-item-title>{{$t("addLayer")}}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
             <v-btn icon small @click="addLayer()">

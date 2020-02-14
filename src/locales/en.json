@@ -1,0 +1,8 @@
+{
+  "description": "GUI editor for hardware description design",
+  "closeMenu": "Close menu",
+  "newDesign": "New design",
+  "loadImport": "Load... | Import...",
+  "layer": "Layer {n}",
+  "addLayer": "Add new layer"
+}

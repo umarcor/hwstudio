@@ -1,0 +1,8 @@
+{
+  "description": "Editor gráfico para diseños de descripción hardware",
+  "closeMenu": "Cerrar menú",
+  "newDesign": "Nuevo diseño",
+  "loadImport": "Cargar... | Importar...",
+  "layer": "Capa {n}",
+  "addLayer": "Añadir nueva capa"
+}

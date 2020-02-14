@@ -11,7 +11,7 @@
     </v-col>
     <v-col>
     <h2 class="title mb-5" align="center">
-      GUI editor for hardware description design
+      {{ $t("description") }}
     </h2>
     </v-col>
   </v-row>
