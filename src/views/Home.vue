@@ -1,23 +1,24 @@
 <template>
 <v-container fill-height fluid>
   <v-row
-    justify="center"
     class="mt-auto flex-column"
+    no-gutters
   >
-    <v-row justify="center">
-    <h1 class="display-3 font-weight-bold mb-5">
+    <v-col>
+    <h1 class="display-3 font-weight-bold mb-5" align="center">
       Hardware Studio
     </h1>
-    </v-row>
-    <v-row justify="center">
-    <h2 class="title mb-5">
+    </v-col>
+    <v-col>
+    <h2 class="title mb-5" align="center">
       GUI editor for hardware description design
     </h2>
-    </v-row>
+    </v-col>
   </v-row>
   <v-row
     justify="center"
     class="mb-auto"
+    no-gutters
   >
     <v-col class="shrink">
       <v-tooltip right>

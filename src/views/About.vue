@@ -1,6 +1,6 @@
 <template>
 <v-container fill-height fluid>
-  <v-row class="mt-auto">
+  <v-row class="mt-auto" no-gutters>
     <v-img
       :src="$vuetify.theme.dark?require('../../public/img/logo_light.svg'):require('../../public/img/logo.svg')"
       contain
@@ -10,8 +10,9 @@
   <v-row
     class="mb-auto"
     justify="center"
+    no-gutters
   >
-    <h1 class="display-3 font-weight-bold mt-10">
+    <h1 class="display-3 font-weight-bold mt-10" align="center">
       Hardware Studio
     </h1>
   </v-row>
