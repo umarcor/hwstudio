@@ -10,7 +10,7 @@ env:
 
 jobs:
 
-  linux:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -51,8 +51,33 @@ jobs:
         ssh-agent -k
         cd ..
         rm -rf dist
+
+  lin:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: yarn
     - run: yarn electron:build --publish never
     - uses: actions/upload-artifact@master
       with:
-        name: hwstudio_desktop
-        path: dist_electron
+        name: hwstudio_desktop_lin
+        path: dist_electron/linux-unpacked
+
+  win:
+    needs: [test]
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: yarn
+    - run: yarn electron:build --publish never
+    - uses: actions/upload-artifact@master
+      with:
+        name: hwstudio_desktop_win
+        path: dist_electron/win-unpacked
