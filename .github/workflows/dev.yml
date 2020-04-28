@@ -17,7 +17,7 @@ jobs:
   images:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: ./dev.sh -b dev
     - run: ./dev.sh -b run
     - run: ./dev.sh -p

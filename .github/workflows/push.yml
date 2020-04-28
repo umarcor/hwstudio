@@ -3,6 +3,8 @@ name: 'push'
 on:
   push:
   pull_request:
+  schedule:
+    - cron: '0 0 * * 5'
 
 env:
   CI: true
@@ -13,14 +15,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
     - run: yarn
     - run: yarn build
     - run: cp -vr hwstudio dist
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
         name: hwstudio
         path: dist
@@ -56,28 +58,28 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
     - run: yarn
     - run: yarn electron:build --publish never
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
-        name: hwstudio_desktop_lin
+        name: hwstudio_lin
         path: dist_electron/linux-unpacked
 
   win:
     needs: [test]
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
     - run: yarn
     - run: yarn electron:build --publish never
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v2
       with:
-        name: hwstudio_desktop_win
+        name: hwstudio_win
         path: dist_electron/win-unpacked
