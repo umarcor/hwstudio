@@ -3513,10 +3513,10 @@ electron-to-chromium@^1.3.413:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.427.tgz#ea43d02908a8c71f47ebb46e09de5a3cf8236f04"
   integrity sha512-/rG5G7Opcw68/Yrb4qYkz07h3bESVRJjUl4X/FrKLXzoUJleKm6D7K7rTTz8V5LUWnd+BbTOyxJX2XprRqHD8A==
 
-electron@^8.2.5:
-  version "8.2.5"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-8.2.5.tgz#ae3cb23d5517b2189fd35298e487198d65d1a291"
-  integrity sha512-LxSCUwmlfJtRwthd3ofpYaZ+1C2hQSW8Ep1DD9K3VbnDItO+kb3t1z35daJgAab78j54aOwo9gMxJtvU0Ftj6w==
+electron@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-8.3.0.tgz#c2b565a4c10d6d287d20164bcd5a478468b940a9"
+  integrity sha512-XRjiIJICZCgUr2vKSUI2PTkfP0gPFqCtqJUaTJSfCTuE3nTrxBKOUNeRMuCzEqspKkpFQU3SB3MdbMSHmZARlQ==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
@@ -9501,10 +9501,10 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@^8.17.5:
-  version "8.17.5"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.17.5.tgz#e34ceda4273a83be94c392358a227d66b76acb12"
-  integrity sha512-gijXwvyTH3aeJhuq8EoQ9SDDlm1mgJexNccSK1ctalxsa6C7ifbWiH7V/YGfm9WJ7udYoD8ezfZdazxxvKvKYw==
+vue-i18n@^8.17.6:
+  version "8.17.6"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.17.6.tgz#eb894dc1db7f69f505a8df5fed37f8d10aa10980"
+  integrity sha512-SsKL5D9Ii3zJPsFhUSllY754XuZvP8uCouUm+Mbylu95h3OwenV09uzIIEjkT7EtWyDQuWSMWObrNaD4ukBGZw==
 
 vue-loader@^15.9.1:
   version "15.9.2"
@@ -9555,20 +9555,20 @@ vuetify-loader@~1.4.3:
   dependencies:
     loader-utils "^1.2.0"
 
-vuetify@^2.2.27:
-  version "2.2.27"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.27.tgz#a28cb6773b7c55cd8e9cedcac06133b886c8eee4"
-  integrity sha512-vcCrcoUEdveXgM9BVq5ZWTiWlJZo/J7ZQCpvOD8+VtkrBNbCeTsJAygoGB+6rRDy3TBQqxdCvi42IDNwJVqiJg==
+vuetify@^2.2.28:
+  version "2.2.28"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.28.tgz#9cea948758e96c349f107a0f853e4226a96cdf4d"
+  integrity sha512-zKnPYaXcNTOpnQHK6Ys+WETzrSsplhwGmC8EudcosWA19kU1c+CAqg4SuPk8nDz/KUVPc2nI9AIRN6UQYUcHtA==
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/vuex-router-sync/-/vuex-router-sync-5.0.0.tgz#1a225c17a1dd9e2f74af0a1b2c62072e9492b305"
   integrity sha512-Mry2sO4kiAG64714X1CFpTA/shUH1DmkZ26DFDtwoM/yyx6OtMrc+MxrU+7vvbNLO9LSpgwkiJ8W+rlmRtsM+w==
 
-vuex@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.3.0.tgz#665b4630ea1347317139fcc5cb495aab3ec5e513"
-  integrity sha512-1MfcBt+YFd20DPwKe0ThhYm1UEXZya4gVKUvCy7AtS11YAOUR+9a6u4fsv1Rr6ePZCDNxW/M1zuIaswp6nNv8Q==
+vuex@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
+  integrity sha512-ajtqwEW/QhnrBZQsZxCLHThZZaa+Db45c92Asf46ZDXu6uHXgbfVuBaJ4gzD2r4UX0oMJHstFwd2r2HM4l8umg==
 
 watchpack@^1.6.1:
   version "1.6.1"
