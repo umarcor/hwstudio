@@ -3513,10 +3513,10 @@ electron-to-chromium@^1.3.413:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.427.tgz#ea43d02908a8c71f47ebb46e09de5a3cf8236f04"
   integrity sha512-/rG5G7Opcw68/Yrb4qYkz07h3bESVRJjUl4X/FrKLXzoUJleKm6D7K7rTTz8V5LUWnd+BbTOyxJX2XprRqHD8A==
 
-electron@^8.3.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-8.3.0.tgz#c2b565a4c10d6d287d20164bcd5a478468b940a9"
-  integrity sha512-XRjiIJICZCgUr2vKSUI2PTkfP0gPFqCtqJUaTJSfCTuE3nTrxBKOUNeRMuCzEqspKkpFQU3SB3MdbMSHmZARlQ==
+electron@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-9.0.0.tgz#335cd426a8a542ad8d4c96c0c40a8668ab5527b8"
+  integrity sha512-JsaSQNPh+XDYkLj8APtVKTtvpb86KIG57W5OOss4TNrn8L3isC9LsCITwfnVmGIXHhvX6oY/weCtN5hAAytjVg==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
@@ -9501,10 +9501,10 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@^8.17.6:
-  version "8.17.6"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.17.6.tgz#eb894dc1db7f69f505a8df5fed37f8d10aa10980"
-  integrity sha512-SsKL5D9Ii3zJPsFhUSllY754XuZvP8uCouUm+Mbylu95h3OwenV09uzIIEjkT7EtWyDQuWSMWObrNaD4ukBGZw==
+vue-i18n@^8.17.7:
+  version "8.17.7"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.17.7.tgz#d87e653e815a07f86e2c2dfe35261e6ea105c38a"
+  integrity sha512-7IQJ+72IIIxfR6Mt+X6EDmMP1i5oETFpc0FttnWKA9cgacf1DAlyho1aTItekG+AkbNs6nz4q3sYrXaPdC0irA==
 
 vue-loader@^15.9.1:
   version "15.9.2"
@@ -9517,10 +9517,10 @@ vue-loader@^15.9.1:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-router@^3.1.6:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.6.tgz#45f5a3a3843e31702c061dd829393554e4328f89"
-  integrity sha512-GYhn2ynaZlysZMkFE5oCHRUTqE8BWs/a9YbKpNLi0i7xD6KG1EzDqpHQmv1F5gXjr8kL5iIVS8EOtRaVUEXTqA==
+vue-router@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.2.0.tgz#da35195ffe37fdf0bec9f5f8f72781d2a7718815"
+  integrity sha512-khkrcUIzMcI1rDcNtqkvLwfRFzB97GmJEsPAQdj7t/VvpGhmXLOkUfhc+Ah8CvpSXGXwuWuQO+x8Sy/xDhXZIA==
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
@@ -9555,10 +9555,10 @@ vuetify-loader@~1.4.3:
   dependencies:
     loader-utils "^1.2.0"
 
-vuetify@^2.2.28:
-  version "2.2.28"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.28.tgz#9cea948758e96c349f107a0f853e4226a96cdf4d"
-  integrity sha512-zKnPYaXcNTOpnQHK6Ys+WETzrSsplhwGmC8EudcosWA19kU1c+CAqg4SuPk8nDz/KUVPc2nI9AIRN6UQYUcHtA==
+vuetify@^2.2.29:
+  version "2.2.29"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.29.tgz#77fd26d8d143251445bed69d3fa0e5d418f25fd0"
+  integrity sha512-UI1i8kEdV+s7tNQe2yJJMPlvxGTE8cZfUAXEGV2yO4owHmeybn6p5YzFpJqimoKkfX6ok+zV29+6yIKfkyUDAA==
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"
