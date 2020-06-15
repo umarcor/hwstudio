@@ -19,18 +19,18 @@
     "core-js": "^3.6.5",
     "three": "^0.117.1",
     "vue": "^2.6.11",
-    "vue-i18n": "^8.18.1",
-    "vue-router": "^3.3.2",
-    "vuetify": "^2.2.30",
+    "vue-i18n": "^8.18.2",
+    "vue-router": "^3.3.4",
+    "vuetify": "^2.3.0",
     "vuex": "^3.4.0",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.1",
-    "@vue/cli-plugin-eslint": "^4.4.1",
-    "@vue/cli-service": "^4.4.1",
+    "@vue/cli-plugin-babel": "^4.4.4",
+    "@vue/cli-plugin-eslint": "^4.4.4",
+    "@vue/cli-service": "^4.4.4",
     "babel-eslint": "^10.1.0",
-    "electron": "^9.0.0",
+    "electron": "^9.0.4",
     "eslint": "^7.2.0",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.7",
@@ -38,7 +38,7 @@
     "vue-cli-plugin-electron-builder": "^1.4.6",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "~1.4.4"
+    "vuetify-loader": "~1.5.0"
   },
   "eslintConfig": {
     "root": true,
