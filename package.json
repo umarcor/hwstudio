@@ -33,7 +33,7 @@
     "electron": "^9.0.4",
     "eslint": "^7.3.0",
     "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.26.7",
+    "sass": "^1.26.9",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-electron-builder": "^1.4.6",
     "vue-cli-plugin-vuetify": "^2.0.5",
