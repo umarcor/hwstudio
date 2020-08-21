@@ -1,0 +1,33 @@
+=== Roadmap
+
+* [ ] Define the format/classes for, at least:
+** [ ] `Data`
+** [ ] `Repository`
+** [ ] `Project`
+** [ ] `Entity`
+** [ ] `Architecture`
+* · Extract entities and architectures by parsing HDL sources:
+** [ ] VHDL
+*** Using GHDL's Python interface: https://github.com/ghdl/ghdl/pull/1449[ghdl/ghdl#1449]
+** [ ] Verilog
+*** Verilator?
+* [ ] Define the content of the (internal) _utils_ repository: gates, combinatorial, sequential...
+* [ ] Show the tree structure of the current design in tab _Design_ from window _Repositories_.
+* [ ] Define/update the content of _Block details_ in windows _Repositories_, depending on the selected unit (in the tree or in the diagram).
+* [ ] Redefine the routing of the connections (currently, splines/bezier curves).
+** https://github.com/godotengine/godot-proposals/issues/1401[godotengine/godot-proposals#1401]
+* · Generate HDL sources from _ArchGraph_:
+** [ ] VHDL
+** [ ] Verilog
+* · Generate _ArchGraph_ from:
+** [ ] VHDL
+** [ ] Verilog
+** [ ] ICE
+* · Synch _Entities_ and HDL sources:
+** [ ] VHDL
+** [ ] Verilog
+* · 2.5D
+** [ ] Minimap
+** [ ] Layers/groups
+* · Co-simulation
+* · Waveforms

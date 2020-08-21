@@ -1,0 +1,138 @@
+name: 'build'
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 5'
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+
+  html5:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - uses: ./.github/actions/godot
+      with:
+        platform: HTML5
+        path: ./dist/html5/index.html
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: html5
+        path: dist/html5/*
+
+    - name: Publish site to gh-pages
+      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      run: GITHUB_SHA="${{ github.sha }}" ./.github/publish.sh
+
+
+  lin:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - uses: ./.github/actions/godot
+      with:
+        platform: Linux/X11
+        path: ./dist/lin/hwstudio.x86_64
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: lin
+        path: |
+          dist/lin/hwstudio.x86_64
+          dist/lin/hwstudio.pck
+
+
+  win:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - uses: ./.github/actions/godot
+      with:
+        platform: Windows Desktop
+        path: ./dist/win/hwstudio.exe
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: win
+        path: |
+          dist/win/hwstudio.exe
+          dist/win/hwstudio.pck
+
+
+  mac:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - uses: ./.github/actions/godot
+      with:
+        platform: Mac OSX
+        path: ./dist/mac/hwstudio.zip
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: mac
+        path: |
+          dist/mac/hwstudio.zip
+
+
+  nightly:
+    needs: [html5, win, lin, mac]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt install tree
+
+      - uses: actions/download-artifact@v2
+
+      - name: Generate assets from artifacts
+        run: |
+          echo '· Generate about.txt and copy it to all the platform asset/artifact subdirs'
+          GIT_SHA="$(echo "${{ github.sha }}" | cut -c1-8)"
+          echo "Hardware Studio g${GIT_SHA} github.com/umarcor/hwstudio" > about.txt
+          cp about.txt html5/
+          cp about.txt lin/
+          cp about.txt win/
+          cp about.txt mac/
+
+          echo '· Create dir to place assets at'
+          mkdir assets
+
+          echo '· Package asset for HTML5'
+          tar czf assets/hwstudio_html5.tgz html5
+
+          echo '· Package asset for Linux'
+          tar czf assets/hwstudio_lin.tgz lin
+
+          echo '· Package asset for Windows'
+          zip -r assets/hwstudio_win.zip win
+
+          echo '· Package asset for MacOS'
+          cd mac
+          unzip hwstudio.zip
+          rm -rf hwstudio.zip
+          cd ..
+          zip -r assets/hwstudio_mac.zip mac
+
+          echo '· Print directory tree'
+          tree ./
+
+      - uses: eine/tip@master
+        with:
+          token: ${{ github.token }}
+          tag: 'nightly'
+          rm: true
+          files: assets/*

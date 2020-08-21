@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://graph/GBlock.gd" type="Script" id=1]
+
+[node name="GBlock" type="GraphNode"]
+margin_right = 192.0
+margin_bottom = 128.0
+custom_constants/port_offset = 2
+custom_constants/separation = 5
+show_close = true
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color( 1, 1, 1, 1 )
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Data" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 176.0
+margin_bottom = 74.0
+
+[node name="Entity" type="Label" parent="Data"]
+margin_right = 160.0
+margin_bottom = 14.0
+text = "entity"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Architecture" type="Label" parent="Data"]
+margin_top = 18.0
+margin_right = 160.0
+margin_bottom = 32.0
+text = "architecture"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HasGenerics" type="Label" parent="Data"]
+margin_top = 36.0
+margin_right = 160.0
+margin_bottom = 50.0
+text = "generics?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_left = 16.0
+margin_top = 79.0
+margin_right = 176.0
+margin_bottom = 83.0

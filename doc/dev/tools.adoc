@@ -1,0 +1,48 @@
+=== Tools
+
+NOTE: For previous iterations based on https://vuejs.org/[Vue.js], https://vuetifyjs.com[Vuetify], and
+https://www.jointjs.com/[JointJS] or https://threejs.org/[Three.js], see other https://github.com/umarcor/hwstudio/branches[branches].
+
+The current iteration of this project is based on https://godotengine.org/[Godot] (https://github.com/godotengine/godot[github.com/godotengine/godot]),
+a "_multi-platform 2D and 3D game engine_" . Despite Godot being presented as a game engine, it is a powerful framework that
+provides common tools for writing fancy and interactive interfaces. It has built-in support for exporting to multiple platforms:
+Linux, Windows, Mac OS, Android, iOS, HTML5 and consoles. Moreover, it is free, open source, community driven and lightweight.
+
+A very interesting feature of Godot is that a very complete set of pre-built _control nodes_ is provided. "Node" is the term
+used in Godot for reusable objects/items, and "control" is the category with nodes for User Interfaces (UI). The category
+includes not only labels, buttons, checkboxes, etc. but also container/layout components that set anchors, margins and sizes
+automatically. As a matter of fact, Godot Editor (the development environment/application) is written/designed using the engine
+itself; so are most of plugins/assets available in the (https://godotengine.org/asset-library/asset[Asset Library]). How cool
+is that!
+
+As a result, designing interfaces with Godot feels gratefully similar to using CSS frameworks such as Bootstrap, Bulma, Tachyons,
+etc. Yet, Godot provides two significant advantages. On the one hand, Godot exports to HTML5 by converting the game/tool to
+WebAssembly and exports to other platforms are native statically compiled executable binaries. Hence, desktop releases are
+significantly more lightweight than putting a website into Electron or NW.js. On the other hand, for providing so-called single
+page applications (SPA), CSS frameworks need to be complemented with a JavaScript/TypeScript framework, such as Vue.js, React
+or AngularJS. In the context of a diagraming tool, those general purpose JS frameworks fall short. There are more specialized
+libraries (JointJS, Three.js...), but none of them provides powerful enough pre-built UI features. Coordinating a backend, a
+framework for UI and a different framework for diagramming is certainly a difficult task. The most complete JS framework in
+this regard is https://jgraph.github.io/mxgraph/[JGraph/mxgraph], which is a self-contained solution including frontend libraries
+and backend. Unfortunately, mxgraph was a commercial project for a decade, before being open sourced a few years ago.
+Subsequently, there are some constraints that feel dated. For instance, backends (and documentation) are only available in .NET
+and Java. However, the main drawback is that lots of features are related to allowing users to customize the look and feel of
+their diagrams through graphical interfaces, and to allowing developers to build complex custom interactive diagrams. That's
+a whole set of features that we don't need, and thus add excessive complexity. In the context of this project, we need a tool
+good enough for drawing structural diagrams with square boxes and a single predefined style/theme. However, it needs to provide
+easy bindings to languages such as Python or C.
+
+If you are new to Godot, read the https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html[docs.godotengine.org: Step by step]
+guide. There, you will learn that multiple languages can be used. Apart from C/C++ or C#, Godot offers its own programming
+languages: VisualScript and GDScript. Furthermore, with GDNative, high-performance code can be written using compiled languages
+like C, C++, Rust, or Python (using the Cython compiler). In this project, https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/index.html[GDScript]
+is used only (for now), which is similar to Python with optional static typing. Nonetheless, VisualScript is very relevant
+too. It is a node-based (graphical) programming language. Users/designers/developers can drag and drop nodes and set
+connections to compose a dataflow diagram. Since Godot Editor is built with the engine, this means that there are built-in
+classes for handling those diagrams. Hence, it is possible to design custom tools by reusing those. For example,
+https://github.com/littleMouseGames/whiskers[littleMouseGames/whiskers].
+
+Overall, the only drawback of Godot is that windows and dialogs are fully managed by the engine. In consequence, when opening
+or saving some file, the explorer is not the native one from the host. Moreover, the tool and the modal windows are constrained
+in a single main window; i.e. floating dialogs cannot be moved to other monitors. Nonetheless, for this same reason, the
+experience is more consistent accross platforms, which might be desirable.

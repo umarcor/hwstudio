@@ -1,0 +1,46 @@
+= Hardware Studio
+Unai Martinez-Corral <unai.martinezcorral[at]ehu[dot]eus>
+:toc: left
+:toclevels: 4
+:repotree: https://github.com/umarcor/hwstudio/tree/main/
+:toc-title: Hardware Studio
+:icons: font
+:docinfo: shared
+
+== Installation
+
+This repository is early work in progress and no regular/tagged releases are available yet. However, after each commit is
+pushed, CI workflows produce artifacts. Latest artifacts are published as assets of pre-release _nightly_:
+https://github.com/umarcor/hwstudio/releases/tag/nightly[github.com/umarcor/hwstudio/releases/tag/nightly]. Just downloading
+the tarball/zipfile for your platform and extracting it should work. Otherwise, https://github.com/umarcor/hwstudio/issues/new[let us know]!
+
+The HTML5 version of the app is available at https://umarcor.github.io/hwstudio/[umarcor.github.io/hwstudio]. Note that
+running the HTML5 version locally requires a web server. For testing purposes, a shell script is included in the tarball
+(link:{repotree}dist/html5/serve.sh[`serve.sh`]), which will start a Docker container.
+
+== Usage
+
+Since *Hardware Studio* is mainly a diagraming tool, the usage should be intuitive and self-learning should be easy. If you
+don't understand how some feature works, or if nothing happens when you do some action, chances are that it is not ready yet.
+Feel free to https://github.com/umarcor/hwstudio/issues/new[open an issue] for discussing it!
+
+=== Boards
+
+* http://www.latticesemi.com/icestick[iCEstick Evaluation Kit]
+* https://tomu.im/fomu.html[Fomu] (https://github.com/im-tomu/fomu-hardware[im-tomu/fomu-hardware])
+
+== Development
+
+include::dev/tools.adoc[]
+
+include::dev/goals.adoc[]
+
+include::dev/structure.adoc[]
+
+include::dev/types.adoc[]
+
+include::dev/i18n.adoc[]
+
+include::dev/ci.adoc[]
+
+include::dev/roadmap.adoc[]

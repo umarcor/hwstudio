@@ -1,0 +1,7 @@
+=== Internationalisation and localisation
+
+Godot supports translating games/tols by importing CSV files, or using https://www.gnu.org/software/gettext/[gettext]'s
+`*.po` format. See https://docs.godotengine.org/en/stable/tutorials/i18n/index.html[docs.godotengine.org: Internationalization].
+
+IMPORTANT: Hardware Studio is in a very early design state and no internationalisation was done yet. Should you be interested
+in helping, https://github.com/umarcor/hwstudio/issues/new/choose[let us know]!

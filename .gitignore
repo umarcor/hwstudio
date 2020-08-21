@@ -1,0 +1,8 @@
+.import/
+!dist/.gdignore
+!dist/html5/serve.sh
+!dist/linux/.gitkeep
+!dist/win/.gitkeep
+!dist/mac/.gitkeep
+dist/
+doc/index.html

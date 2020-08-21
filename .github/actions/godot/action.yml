@@ -1,0 +1,12 @@
+name: 'Godot Export'
+description: "Export Godot projects for HTML5, Linux, Windows or macOS!"
+inputs:
+  platform:
+    description: 'Name of the preset to be exported'
+    required: true
+  path:
+    description: 'Target location for the artifacts'
+    required: true
+runs:
+  using: 'docker'
+  image: 'gexport.dockerfile'

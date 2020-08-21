@@ -1,0 +1,31 @@
+name: 'dev'
+
+on:
+  push:
+    paths:
+      - '.github/workflows/dev.yml'
+      - '.github/actions/godot/godot.dockerfile'
+  schedule:
+    - cron: '0 0 * * 4'
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  docker:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build image
+      run: docker build -t hwstudio/godot:export - < .github/actions/godot/godot.dockerfile
+
+    - name: Publish image
+      run: |
+        echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+        docker images
+        docker push hwstudio/godot:export
+        docker logout

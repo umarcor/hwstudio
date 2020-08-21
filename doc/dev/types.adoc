@@ -1,0 +1,91 @@
+=== Types
+
+==== Data
+
+* repositories
+* devices
+
+==== Repository
+
+* library
+  * entities: []
+  * architectures: []
+
+==== Project
+
+* instance
+* implementations: []
+
+==== Entity
+
+* name
+* context
+* generics
+* ports
+
+==== Generic
+
+* name
+* type
+
+==== Port
+
+* name
+* direction
+* type
+
+==== Architecture
+
+* name
+* entity
+* type
+** ArchScript
+** ArchGraph
+** ArchVHDL
+** ArchICE
+** ...
+
+===== ArchScript
+
+Logic defined in _GDScript_. Mostly used for defining built-in basic blocks.
+
+===== ArchGraph (GraphEdit)
+
+* children:
+** GBlock (entity instances)
+** GLabel
+** GSlice
+* types
+
+A dataflow diagram designed using Godot's _GraphEdit_ and _GraphNode_.
+
+===== ArchVHDL
+
+* entity_file
+* entity_name
+* arch_file
+* arch_name
+
+VHDL sources.
+
+===== ArchVerilog
+
+_TBW_
+
+===== ArchICE
+
+_TBW_
+
+==== Graph Nodes
+
+Graphical scene/class hierarchy:
+
+* GraphNode
+** GNode
+*** GBlock
+**** name
+**** entity
+**** architecture
+**** generic_map
+*** GLabel
+*** GSlice

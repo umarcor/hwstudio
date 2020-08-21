@@ -1,0 +1,25 @@
+name: 'doc'
+
+on:
+  pull_request:
+  push:
+    paths:
+      - '.github/workflows/doc.yml'
+      - 'doc/*'
+  schedule:
+    - cron: '0 0 * * 4'
+
+jobs:
+
+  asciidoc:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Build site
+      run: docker run -v $(pwd)/doc:/documents/ asciidoctor/docker-asciidoctor asciidoctor index.adoc
+
+    - name: Publish site to gh-pages (doc)
+      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      run: GITHUB_SHA="${{ github.sha }}" ./.github/publish.sh doc

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://graph/GNode.gd" type="Script" id=1]
+
+[node name="GNode" type="GraphNode"]
+margin_right = 192.0
+margin_bottom = 128.0
+rect_clip_content = true
+hint_tooltip = "Entity name"
+show_close = true
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,29 @@
+=== Continuous Integration (CI)
+
+https://github.com/features/actions[GitHub Actions] is used for automatically building Hardware Studio and for publishing
+artifacts/assets. See CI runs at https://github.com/umarcor/hwstudio/actions[github.com/umarcor/hwstudio/actions]. Two main
+workflows are defined in link:{repotree}.github/workflows[`.github/workflows`]:
+
+* link:{repotree}.github/workflows/build.yml[`.github/workflows/build.yml`]: a custom GitHub Action (see below) is used for
+exporting the tool to four different platforms, one in a different job. In each job, the corresponding artifact is uploaded.
+The artifact of job HTML5 is pushed to branch `gh-pages` too (see link:{repotree}.github/publish.sh[`.github/publish.sh`]),
+which is served at https://umarcor.github.io/hwstudio/[umarcor.github.io/hwstudio]. Then, all the artifacts are gathered and
+the assets of pre-release https://github.com/umarcor/hwstudio/releases/tag/nightly[nightly] are updated.
+
+* link:{repotree}.github/workflows/doc.yml[`.github/workflows/doc.yml`]: Docker image https://hub.docker.com/r/asciidoctor/docker-asciidoctor[asciidoctor/docker-asciidoctor]
+is used for building the link:{repotree}.github/doc[doc] (written in AsciiDoc). Then, link:{repotree}.github/publish.sh[`.github/publish.sh`]
+is used for updating subdir `doc` of branch `gh-pages`. The content is served at https://umarcor.github.io/hwstudio/doc[umarcor.github.io/hwstudio/doc].
+
+TIP: Since the output of asciidoctor is a single HTML file, no artifact is uploaded.
+
+==== Action `.github/actions/godot`
+
+Currently, there are neither official Docker images nor GitHub Actions for Godot (see https://github.com/godotengine/godot-proposals/issues/1411[godotengine/godot-proposals#1411]
+and https://github.com/godotengine/godot-proposals/issues/1413[godotengine/godot-proposals#1413]). Hence, Hardware Studio
+uses it's own:
+
+* link:{repotree}.github/workflows/dev.yml[`.github/workflows/dev.yml`]: Docker image `hwstudio/godot:export` is generated
+from link:{repotree}.github/actions/godot/godot.dockerfile[`godot.dockerfile`] and then pushed to https://hub.docker.com/r/hwstudio/godot[hub.docker.com/r/hwstudio/godot].
+
+* link:{repotree}.github/workflows/dev.yml[`.github/workflows/.github/actions/godot`]: a Docker Action based on image
+`hwstudio/godot:export` (see link:{repotree}.github/actions/godot/gexport.dockerfile[gexport.dockerfile]).

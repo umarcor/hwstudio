@@ -1,0 +1,10 @@
+{
+  "name": "UP5K",
+  "resources": {
+    "ffs": 5280,
+    "luts": 5280,
+    "pios": 3,
+    "plbs": 5,
+    "brams": 120
+  }
+}

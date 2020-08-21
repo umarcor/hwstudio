@@ -1,0 +1,89 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Architecture",
+"language": "GDScript",
+"path": "res://data/Architecture.gd"
+}, {
+"base": "Reference",
+"class": "Data",
+"language": "GDScript",
+"path": "res://data/Data.gd"
+}, {
+"base": "Reference",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://data/Entity.gd"
+}, {
+"base": "GNode",
+"class": "GBlock",
+"language": "GDScript",
+"path": "res://graph/GBlock.gd"
+}, {
+"base": "GNode",
+"class": "GLabel",
+"language": "GDScript",
+"path": "res://graph/GLabel.gd"
+}, {
+"base": "GraphNode",
+"class": "GNode",
+"language": "GDScript",
+"path": "res://graph/GNode.gd"
+}, {
+"base": "GNode",
+"class": "GSlice",
+"language": "GDScript",
+"path": "res://graph/GSlice.gd"
+}, {
+"base": "Reference",
+"class": "Project",
+"language": "GDScript",
+"path": "res://data/Project.gd"
+}, {
+"base": "Reference",
+"class": "Repository",
+"language": "GDScript",
+"path": "res://data/Repository.gd"
+} ]
+_global_script_class_icons={
+"Architecture": "",
+"Data": "",
+"Entity": "",
+"GBlock": "",
+"GLabel": "",
+"GNode": "",
+"GSlice": "",
+"Project": "",
+"Repository": ""
+}
+
+[application]
+
+config/name="Hardware Studio"
+run/main_scene="res://Main.tscn"
+boot_splash/image="res://img/banner.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.298039, 0.298039, 0.298039, 1 )
+config/icon="res://img/icon.png"
+
+[display]
+
+window/size/width=1366
+window/size/height=768
+window/energy_saving/keep_screen_on=false
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"
