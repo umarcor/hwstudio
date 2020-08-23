@@ -31,28 +31,33 @@ jobs:
         rm -rf dist
         yarn build
       env:
-        BASE_URL: '/hwstudio/'
+        BASE_URL: '/hwstudio/vue-three'
     - name: 'publish site to gh-pages'
       if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
       env:
         GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
       run: |
-        cd dist/
-        touch .nojekyll
+        mkdir pages
+        cd pages
         git init
-        git add .
+        cp ../.git/config ./.git/config
         git config --local user.email "push@gha"
         git config --local user.name "GHA"
-        git commit -a -m "update ${{ github.sha }}"
-        git remote add origin "git@github.com:${{ github.repository }}"
-        eval `ssh-agent -t 60 -s`
-        echo "$GH_DEPKEY" | ssh-add -
-        mkdir -p ~/.ssh/
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        git push -u origin +HEAD:gh-pages
-        ssh-agent -k
+        git fetch
+        git checkout -b gh-pages origin/gh-pages
+        if [ ! -f .nojekyll ]; then
+          touch .nojekyll
+        fi
+        if [ -d vue-three ]; then
+          git rm -rf vue-three
+        fi
+        git commit -am "clean vue-three ${{ github.sha }}"
+        mv ../dist vue-three
+        git add vue-three/*
+        git commit -am "update vue-three ${{ github.sha }}"
+        git push -u origin +gh-pages
         cd ..
-        rm -rf dist
+        rm -rf pages
 
   lin:
     needs: [test]
