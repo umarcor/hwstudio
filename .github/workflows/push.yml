@@ -33,7 +33,7 @@ jobs:
       env:
         BASE_URL: '/hwstudio/vue-three'
     - name: 'publish site to gh-pages'
-      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      if: github.ref == 'refs/heads/vue/threejs/main' && github.event_name != 'pull_request'
       env:
         GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
       run: |

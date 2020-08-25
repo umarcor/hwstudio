@@ -15,6 +15,7 @@ env:
 jobs:
 
   images:
+    if: github.ref == 'refs/heads/vue/threejs/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
