@@ -4,10 +4,10 @@ set -e
 
 cd $(dirname "$0")
 
-ENABLE_BUILDKIT=1
+DOCKER_BUILDKIT=1
 
 build_dev() {
-  docker build -t umarcor/hwstudio:dev - <<EOF
+  docker build -t hwstudio/vuethreejs:dev - <<EOF
 FROM python:3.8
 RUN \
   curl -sL https://deb.nodesource.com/setup_12.x | bash - &&\
@@ -21,7 +21,7 @@ EOF
 }
 
 build_run() {
-  docker build -t umarcor/hwstudio:run - <<EOF
+  docker build -t hwstudio/vuethreejs:run - <<EOF
 FROM python:3.8
 RUN apt update -qq &&\
   apt install -y \
@@ -47,7 +47,7 @@ EOF
 #libpangocairo-1.0-0 \
 
 exec_runx() {
-  /t/runx/runx --no-auth -- /t/x11docker/x11docker -i --hostdisplay --gpu --user=root -- -v "$1"://src -- umarcor/hwstudio:run $2
+  /t/runx/runx --no-auth -- /t/x11docker/x11docker -i --hostdisplay --gpu --user=root -- -v "$1"://src -- hwstudio/vuethreejs:run $2
 }
 
 case "$1" in
@@ -66,7 +66,7 @@ case "$1" in
     if [ "x$1" = "x-i" ]; then
       exec_runx "/$(pwd)" bash
     else
-      docker run --rm -v /$(pwd)://src -w //src -e DIST_TARGET=lin64 umarcor/hwstudio:dev bash -c "yarn && yarn grunt dist -v"
+      docker run --rm -v /$(pwd)://src -w //src -e DIST_TARGET=lin64 hwstudio/vuethreejs:dev bash -c "yarn && yarn grunt dist -v"
     fi
     ;;
 #  --test|-t)
@@ -79,10 +79,10 @@ case "$1" in
 #    shift
 #    exec_runx "/$(pwd)/icestudio-$VERSION-linux64" $1
 #    ;;
-#  --publish|-p)
-#    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-#    docker images
-#    docker push umarcor/hwstudio
-#    docker logout
-#    ;;
+  --publish|-p)
+    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+    docker images
+    docker push hwstudio/vuethreejs
+    docker logout
+    ;;
 esac

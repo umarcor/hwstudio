@@ -74,13 +74,13 @@ yarn electron:build
 
 ## Docker images
 
-Use a `umarcor/hwstudio:dev` container to package as an electron application:
+Use a `hwstudio/vuethreejs:dev` container to package as an electron application:
 
 ```sh
 ./dev.sh -d
 ```
 
-Start a `umarcor/hwstudio:run` container with runx and x11docker, to test the packaged application:
+Start a `hwstudio/vuethreejs:run` container with runx and x11docker, to test the packaged application:
 
 ```sh
 ./dev.sh -d -i
