@@ -497,6 +497,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_internationalisation_and_localisation">Internationalisation and localisation</a></li>
+<li><a href="#_continuous_integration_ci">Continuous Integration (CI)</a>
+<ul class="sectlevel3">
+<li><a href="#_action_githubactionsgodot">Action <code>.github/actions/godot</code></a></li>
+</ul>
+</li>
 <li><a href="#_roadmap">Roadmap</a></li>
 </ul>
 </li>
@@ -1148,8 +1153,61 @@ in helping, <a href="https://github.com/umarcor/hwstudio/issues/new/choose">let 
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_continuous_integration_ci">Continuous Integration (CI)</h3>
 <div class="paragraph">
-<p>Unresolved directive in index.adoc - include::dev/ci.adoc[]</p>
+<p><a href="https://github.com/features/actions">GitHub Actions</a> is used for automatically building Hardware Studio and for publishing
+artifacts/assets. See CI runs at <a href="https://github.com/umarcor/hwstudio/actions">github.com/umarcor/hwstudio/actions</a>. Two main
+workflows are defined in <a href="https://github.com/umarcor/hwstudio/tree/main/.github/workflows"><code>.github/workflows</code></a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/umarcor/hwstudio/tree/main/.github/workflows/build.yml"><code>.github/workflows/build.yml</code></a>: a custom GitHub Action (see below) is used for
+exporting the tool to four different platforms, one in a different job. In each job, the corresponding artifact is uploaded.
+The artifact of job HTML5 is pushed to branch <code>gh-pages</code> too (see <a href="https://github.com/umarcor/hwstudio/tree/main/.github/publish.sh"><code>.github/publish.sh</code></a>),
+which is served at <a href="https://umarcor.github.io/hwstudio/">umarcor.github.io/hwstudio</a>. Then, all the artifacts are gathered and
+the assets of pre-release <a href="https://github.com/umarcor/hwstudio/releases/tag/nightly">nightly</a> are updated.</p>
+</li>
+<li>
+<p><a href="https://github.com/umarcor/hwstudio/tree/main/.github/workflows/doc.yml"><code>.github/workflows/doc.yml</code></a>: Docker image <a href="https://hub.docker.com/r/asciidoctor/docker-asciidoctor">asciidoctor/docker-asciidoctor</a>
+is used for building the <a href="https://github.com/umarcor/hwstudio/tree/main/.github/doc">doc</a> (written in AsciiDoc). Then, <a href="https://github.com/umarcor/hwstudio/tree/main/.github/publish.sh"><code>.github/publish.sh</code></a>
+is used for updating subdir <code>doc</code> of branch <code>gh-pages</code>. The content is served at <a href="https://umarcor.github.io/hwstudio/doc">umarcor.github.io/hwstudio/doc</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Since the output of asciidoctor is a single HTML file, no artifact is uploaded.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_action_githubactionsgodot">Action <code>.github/actions/godot</code></h4>
+<div class="paragraph">
+<p>Currently, there are neither official Docker images nor GitHub Actions for Godot (see <a href="https://github.com/godotengine/godot-proposals/issues/1411">godotengine/godot-proposals#1411</a>
+and <a href="https://github.com/godotengine/godot-proposals/issues/1413">godotengine/godot-proposals#1413</a>). Hence, Hardware Studio
+uses it&#8217;s own:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/umarcor/hwstudio/tree/main/.github/workflows/dev.yml"><code>.github/workflows/dev.yml</code></a>: Docker image <code>hwstudio/godot:export</code> is generated
+from <a href="https://github.com/umarcor/hwstudio/tree/main/.github/actions/godot/godot.dockerfile"><code>godot.dockerfile</code></a> and then pushed to <a href="https://hub.docker.com/r/hwstudio/godot">hub.docker.com/r/hwstudio/godot</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/umarcor/hwstudio/tree/main/.github/workflows/dev.yml"><code>.github/workflows/.github/actions/godot</code></a>: a Docker Action based on image
+<code>hwstudio/godot:export</code> (see <a href="https://github.com/umarcor/hwstudio/tree/main/.github/actions/godot/gexport.dockerfile">gexport.dockerfile</a>).</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1299,7 +1357,7 @@ in helping, <a href="https://github.com/umarcor/hwstudio/issues/new/choose">let 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-27 16:15:15 UTC
+Last updated 2020-08-27 16:24:40 UTC
 </div>
 </div>
 </body>
