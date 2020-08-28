@@ -27,13 +27,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Entity" parent="Graph" instance=ExtResource( 3 )]
+[node name="Block" parent="Graph" instance=ExtResource( 3 )]
 margin_left = 150.0
 margin_top = 200.0
 margin_right = 300.0
 margin_bottom = 313.0
 mouse_filter = 1
-title = "Entity name"
+title = "Block name"
 offset = Vector2( 150, 200 )
 slot/2/left_enabled = false
 slot/2/left_type = 0
@@ -48,25 +48,25 @@ slot/3/right_enabled = true
 slot/3/right_type = 0
 slot/3/right_color = Color( 1, 1, 1, 1 )
 
-[node name="GridContainer" type="GridContainer" parent="Graph/Entity"]
+[node name="GridContainer" type="GridContainer" parent="Graph/Block"]
 margin_left = 16.0
 margin_top = 88.0
 margin_right = 134.0
 margin_bottom = 88.0
 
-[node name="Port" parent="Graph/Entity" instance=ExtResource( 5 )]
+[node name="Port" parent="Graph/Block" instance=ExtResource( 5 )]
 margin_left = 16.0
 margin_top = 93.0
 margin_right = 134.0
 margin_bottom = 107.0
 
-[node name="Entity2" parent="Graph" instance=ExtResource( 3 )]
+[node name="Block2" parent="Graph" instance=ExtResource( 3 )]
 margin_left = 750.0
 margin_top = 500.0
 margin_right = 900.0
 margin_bottom = 608.0
 mouse_filter = 1
-title = "Entity2 name"
+title = "Block name"
 offset = Vector2( 750, 500 )
 slot/2/left_enabled = true
 slot/2/left_type = 0
@@ -75,7 +75,7 @@ slot/2/right_enabled = true
 slot/2/right_type = 0
 slot/2/right_color = Color( 1, 1, 1, 1 )
 
-[node name="Port" parent="Graph/Entity2" instance=ExtResource( 5 )]
+[node name="Port" parent="Graph/Block2" instance=ExtResource( 5 )]
 margin_left = 16.0
 margin_top = 88.0
 margin_right = 134.0
@@ -410,5 +410,5 @@ text = "Thanks to all the contributors!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="dragged" from="Graph/Entity" to="Graph" method="_on_Entity_dragged"]
-[connection signal="resize_request" from="Graph/Entity" to="Graph" method="_on_Entity_resize_request"]
+[connection signal="dragged" from="Graph/Block" to="Graph" method="_on_Entity_dragged"]
+[connection signal="resize_request" from="Graph/Block" to="Graph" method="_on_Entity_resize_request"]
