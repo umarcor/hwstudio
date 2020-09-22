@@ -44,3 +44,5 @@ include::dev/i18n.adoc[]
 include::dev/ci.adoc[]
 
 include::dev/roadmap.adoc[]
+
+include::dev/refs.adoc[]
