@@ -48,8 +48,9 @@ The complexity is increased if the layout needs to be automatic. Nevertheless, s
 counterproductive. Hence, a more constrained 2.5D approach might be preferred.
 
 Depending on implementation details, off the self Godot classes might not work. That is, the connection and port type
-management logic that is provided in `GraphEdit` and `GraphNode` might need to be reimplemented. Nevertheless, this is far
-below other features in the priority list.
+management logic that is provided in `GraphEdit` and `GraphNode` might need to be reimplemented. On the other hand,
+https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d[2.5D Demo Project with GDScript] exists.
+Nevertheless, this is far below other features in the priority list.
 
 Moreover, 2.5D or 3D visualizations are a good fit for virtual reality (VR) devices. The usability of VR for real-time
 navigation of (V)HDL designs is to be tested. We are not convinced about it, because text editing is expected to be an
