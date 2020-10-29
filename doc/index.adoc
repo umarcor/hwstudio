@@ -26,8 +26,9 @@ Feel free to https://github.com/umarcor/hwstudio/issues/new[open an issue] for d
 
 === Boards
 
-* http://www.latticesemi.com/icestick[iCEstick Evaluation Kit]
-* https://tomu.im/fomu.html[Fomu] (https://github.com/im-tomu/fomu-hardware[im-tomu/fomu-hardware])
+* https://github.com/hdl/constraints[hdl/constraints]
+** http://www.latticesemi.com/icestick[iCEstick Evaluation Kit]
+** https://tomu.im/fomu.html[Fomu] (https://github.com/im-tomu/fomu-hardware[im-tomu/fomu-hardware])
 
 == Development
 
