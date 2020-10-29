@@ -3,7 +3,7 @@
 The layout and routing of schematic/dataflow diagrams that minimize crossings is a non-trivial optimization/algorithmic
 problem (https://github.com/godotengine/godot-proposals/issues/1401[godotengine/godot-proposals#1401]). However, that is
 neither the most complex nor the most important feature to implement. This project can get along with a _just good enough_
-connection routing solution. Layout and routing has been thoroughly studied and is known to work weel enough. Instead, this
+connection routing solution. Layout and routing has been thoroughly studied and is known to work well enough. Instead, this
 project is focused on some more _interesting_ ideas. In this context, "interesting" means "not attempted before" (thus,
 undocumented) or "no public/open implementation available, although the feature is known in some vendor/commercial product".
 
@@ -34,7 +34,7 @@ sources from diagrams in Hardware Studio. This is supported by many tools alread
 usability.
 
 In this regard, it is unfortunate that neither a standard style guide nor open source automatic code formatter exists for
-GHDL. As a result, keeping style consistency between handwritten and generated sources is not possible yet. Nevertheless,
+VHDL. As a result, keeping style consistency between handwritten and generated sources is not possible yet. Nevertheless,
 see https://github.com/jeremiah-c-leary/vhdl-style-guide[VHDL Style Guide (VSG)].
 
 ==== 2.5D|3D visualization
@@ -47,7 +47,7 @@ The main blocker to achieve a true 3D visualization allowing users to locate blo
 The complexity is increased if the layout needs to be automatic. Nevertheless, so much freedom in the visualization might be
 counterproductive. Hence, a more constrained 2.5D approach might be preferred.
 
-Depending on implementation details, off the self Godot classes might not work. That is, the connection and port type
+Depending on implementation details, off-the-shelf Godot classes might not work. That is, the connection and port type
 management logic that is provided in `GraphEdit` and `GraphNode` might need to be reimplemented. On the other hand,
 https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d[2.5D Demo Project with GDScript] exists.
 Nevertheless, this is far below other features in the priority list.
@@ -121,9 +121,6 @@ working with VHDL and VUnit: https://github.com/TerosTechnology/vscode-terosHDL[
 
 For waveform visualization, either http://gtkwave.sourceforge.net/[GtkWave] (https://github.com/gtkwave/gtkwave[github.com/gtkwave/gtkwave])
 or https://wavedrom.com/[Wavedrom] (https://github.com/wavedrom/wavedrom[github.com/wavedrom/wavedrom]) might be used.
-Nonetheless, it would be interesting to "replay" waveforms in the dataflow diagram (e.g., by colouring connections), to
-allow "animated simulations". Related reference: https://github.com/umarcor/pulseview/tree/ghdl/ghdl[Reading waveforms from HDL simulators with PulseView].
+Nonetheless, *replaying* waveforms in Hardware Studio's frontend dataflow diagram (e.g., by colouring connections) would be interesting for
+allowing *animated simulations*. Related reference: https://github.com/umarcor/pulseview/tree/ghdl/ghdl[Reading waveforms from HDL simulators with PulseView].
 See also https://github.com/dbhi/fpconv[Data type exploration and visualization in arithmetic algorithms/circuits].
-
-http://flowgorithm.org/[Flowgorithm] is an interesting reference regarding the automatic generation of code in different
-languages, using a flowchart diagram as the programming language.

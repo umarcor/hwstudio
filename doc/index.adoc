@@ -46,4 +46,21 @@ include::dev/ci.adoc[]
 
 include::dev/roadmap.adoc[]
 
-include::dev/refs.adoc[]
+== References
+
+* https://www.gnuradio.org/[GNURadio] is a development toolkit for software-defined radio and signal-processing. It provides
+a GUI tool for creating flow graph designs, used to work on simulation. See https://en.wikipedia.org/wiki/File:GNU_Radio_Companion_(3.8.1.0)_Screenshot.png[Wikipedia: GNU Radio Companion (From GNU Radio 3.8.1.0) with a simulation Flow Graph].
+Feature-wise, the GUI provided by GNURadio is very similar to Godot's VisualScript (implemented through `GraphEdit` and
+`GraphNode`). The main reason for picking Godot is the simplicity for building packages for multiple platforms. GNURadio is
+based on C++ and Qt; hence, the build process is more complex. However, examples about co-simulating GNURadio and Verilator
+models have been reported (see https://github.com/gnuradio/gr-verilog[gnuradio/gr-verilog]). Therefore, there are multiple
+opportunities for collaboration.
+
+* https://github.com/hneemann/Digital[hneemann/Digital] is a fork of http://www.cburch.com/logisim/[Logisim], which support
+GHDL and Icarus Verilog. There is an interesting discussion about the multiple existing forks of Logisim: https://github.com/hneemann/Digital#motivation[hneemann/Digital: Motivation].
+
+* http://flowgorithm.org/[Flowgorithm] allows automatic generation of code in different languages, using a flowchart diagram
+as the programming language.
+
+* https://www.systemvision.com[SystemVision Cloud] by Siemens.
+
