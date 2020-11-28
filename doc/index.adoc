@@ -7,6 +7,10 @@ Unai Martinez-Corral <unai.martinezcorral[at]ehu[dot]eus>
 :icons: font
 :docinfo: shared
 
+[.text-center]
+https://github.com/umarcor/hwstudio[image:https://img.shields.io/badge/umarcor-hwstudio-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='umarcor/hwstudio GitHub repository']]
+https://github.com/umarcor/hwstudio/releases[image:https://img.shields.io/github/v/release/umarcor/hwstudio?include_prereleases&longCache=true&style=flat-square&label=Releases&logo=github&color=informational[title='GitHub releases (latest by date including pre-releases)']]
+
 == Installation
 
 This repository is early work in progress and no regular/tagged releases are available yet. However, after each commit is
