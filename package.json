@@ -16,13 +16,13 @@
   "main": "background.js",
   "dependencies": {
     "axios": "^0.21.0",
-    "core-js": "^3.7.0",
-    "three": "^0.122.0",
+    "core-js": "^3.8.0",
+    "three": "^0.123.0",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.2",
     "vue-router": "^3.4.9",
-    "vuetify": "^2.3.18",
-    "vuex": "^3.5.1",
+    "vuetify": "^2.3.19",
+    "vuex": "^3.6.0",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@vue/cli-plugin-eslint": "^4.5.9",
     "@vue/cli-service": "^4.5.9",
     "babel-eslint": "^10.1.0",
-    "electron": "^11.0.2",
+    "electron": "^11.0.3",
     "eslint": "^7.14.0",
     "eslint-plugin-vue": "^7.1.0",
     "sass": "^1.29.0",
