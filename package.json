@@ -16,7 +16,7 @@
   "main": "background.js",
   "dependencies": {
     "axios": "^0.21.0",
-    "core-js": "^3.8.0",
+    "core-js": "^3.8.1",
     "three": "^0.123.0",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.2",
@@ -31,7 +31,7 @@
     "@vue/cli-service": "^4.5.9",
     "babel-eslint": "^10.1.0",
     "electron": "^11.0.3",
-    "eslint": "^7.14.0",
+    "eslint": "^7.15.0",
     "eslint-plugin-vue": "^7.1.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
