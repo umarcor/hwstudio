@@ -32,7 +32,7 @@
     "babel-eslint": "^10.1.0",
     "electron": "^11.1.0",
     "eslint": "^7.16.0",
-    "eslint-plugin-vue": "^7.3.0",
+    "eslint-plugin-vue": "^7.4.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
     "vue-cli-plugin-electron-builder": "^1.4.6",
