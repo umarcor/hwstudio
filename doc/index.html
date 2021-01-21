@@ -657,16 +657,22 @@ undocumented) or "no public/open implementation available, although the feature 
 Hardware Studio.</p>
 </div>
 <div class="paragraph">
-<p>The main blocker to achieve this is that no open source and documented parser for VHDL 2008 exists. See detailed discussions
+<p>There is an abstract language model project written in Python: <a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a>. The motivation
+is abstracting parser engines and allowing building tools on top of a standardised API. Unfortunately, there is still no open
+source, complete and documented parser for VHDL 2008 which interacts with it. See detailed discussions
 in <a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/312">jeremiah-c-leary/vhdl-style-guide#312</a> and
-<a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328">jeremiah-c-leary/vhdl-style-guide#328</a>. Yet, there are two
-distinct required features with different complexity:</p>
+<a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328">jeremiah-c-leary/vhdl-style-guide#328</a>. As of January 2021,
+<a href="https://github.com/ghdl/ghdl/tree/master/pyGHDL">pyGHDL</a> is the best candidate, since a prototype exists and GHDL is the most
+used open source simulator and synthesiser for VHDL; however, the implementation of <code>pyGHDL.dom</code> is not complete.</p>
+</div>
+<div class="paragraph">
+<p>Yet, there are two distinct required features with different complexity:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Parsing the entities to get the list and types of generics and ports. This might be possible with either
-<a href="https://github.com/kraigher/rust_hdl">rust_hdl</a> or <a href="https://github.com/ghdl/ghdl">GHDL</a> already. It would allow to identify
+<a href="https://github.com/ghdl/ghdl">GHDL</a> or <a href="https://github.com/kraigher/rust_hdl">rust_hdl</a> already. It would allow to identify
 entities as blocks to be instantiaded in diagrams.</p>
 </li>
 <li>
@@ -700,8 +706,9 @@ better understood and debugged by using the third dimension.</p>
 </div>
 <div class="paragraph">
 <p>The main blocker to achieve a true 3D visualization allowing users to locate blocks at arbitrary locations is the routing.
-The complexity is increased if the layout needs to be automatic. Nevertheless, so much freedom in the visualization might be
-counterproductive. Hence, a more constrained 2.5D approach might be preferred.</p>
+The complexity is increased if the layout needs to be automatic. That is, in fact, a very challenging task from an algorithmic
+point of view (<a href="https://github.com/SymbiFlow/ideas/issues/41">SymbiFlow/ideas#/issues/#41</a>). Nevertheless, so much freedom in
+the visualization might be counterproductive. Hence, a semi-constrained 2.5D approach might be preferred.</p>
 </div>
 <div class="paragraph">
 <p>Depending on implementation details, off-the-shelf Godot classes might not work. That is, the connection and port type
@@ -826,16 +833,27 @@ Moreover, <a href="https://github.com/TerosTechnology">TerosTechnology</a> provi
 working with VHDL and VUnit: <a href="https://github.com/TerosTechnology/vscode-terosHDL">vscode-terosHDL</a>.</p>
 </div>
 <div class="paragraph">
-<p>For waveform visualization, either <a href="http://gtkwave.sourceforge.net/">GtkWave</a> (<a href="https://github.com/gtkwave/gtkwave">github.com/gtkwave/gtkwave</a>)
-or <a href="https://wavedrom.com/">Wavedrom</a> (<a href="https://github.com/wavedrom/wavedrom">github.com/wavedrom/wavedrom</a>) might be used.
-Nonetheless, <strong>replaying</strong> waveforms in Hardware Studio&#8217;s frontend dataflow diagram (e.g., by colouring connections) would be interesting for
-allowing <strong>animated simulations</strong>. Related reference: <a href="https://github.com/umarcor/pulseview/tree/ghdl/ghdl">Reading waveforms from HDL simulators with PulseView</a>.
-See also <a href="https://github.com/dbhi/fpconv">Data type exploration and visualization in arithmetic algorithms/circuits</a>.</p>
+<p>For waveform visualization, either <a href="http://gtkwave.sourceforge.net/">GtkWave</a> (<a href="https://github.com/gtkwave/gtkwave">github.com/gtkwave/gtkwave</a>),
+<a href="https://wavedrom.com/">Wavedrom</a> (<a href="https://github.com/wavedrom/wavedrom">github.com/wavedrom/wavedrom</a>) or <a href="https://github.com/Nic30/d3-wave">d3-wave</a> might be used. Nonetheless, <strong>replaying</strong> waveforms in Hardware Studio&#8217;s frontend dataflow diagram (e.g., by colouring connections)
+would be interesting for allowing <strong>animated simulations</strong>. Related reference: <a href="https://github.com/umarcor/pulseview/tree/ghdl/ghdl">Reading waveforms from HDL simulators with PulseView</a>.
+See also <a href="https://github.com/dbhi/fpconv">Data type exploration and visualization in arithmetic algorithms/circuits</a> and <a href="https://github.com/dbhi/vboard">Virtual development board for HDL design</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_structure">Structure</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is work in progress and is to be designed in terms of <a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The workflow and internal structure of Hardware Studio are based on <em>Entities</em>, <em>Architectures</em> and <em>Blocks</em>:</p>
 </div>
@@ -1383,6 +1401,9 @@ models have been reported (see <a href="https://github.com/gnuradio/gr-verilog">
 opportunities for collaboration.</p>
 </li>
 <li>
+<p><a href="https://github.com/Nic30">@Nic30</a> has prototyped an interesting ecosystem on HDL tools based on ANTLR parsers. On of the tools is <a href="https://github.com/Nic30/d3-hwschematic">d3-hwschematic</a>, a JavaScript based solution using <a href="https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html">ELK JSON</a> as the input format. There are references to other multiple projects in <a href="https://github.com/Nic30/d3-hwschematic#similar-opensource-projects">Nic30/d3-hwschematic: Similar opensource projects</a>.</p>
+</li>
+<li>
 <p><a href="https://github.com/hneemann/Digital">hneemann/Digital</a> is a fork of <a href="http://www.cburch.com/logisim/">Logisim</a>, which support
 GHDL and Icarus Verilog. There is an interesting discussion about the multiple existing forks of Logisim: <a href="https://github.com/hneemann/Digital#motivation">hneemann/Digital: Motivation</a>.</p>
 </li>
@@ -1406,7 +1427,7 @@ as the programming language.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-01-21 01:19:09 UTC
+Last updated 2021-01-21 08:47:00 UTC
 </div>
 </div>
 </body>
