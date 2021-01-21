@@ -13,13 +13,18 @@ The workflow needs to be (V)HDL centric. That is, hardware designers working wit
 https://github.com/VUnit/vunit[VUnit] for managing regression tests should NOT need to modify their sources in order to use
 Hardware Studio.
 
-The main blocker to achieve this is that no open source and documented parser for VHDL 2008 exists. See detailed discussions
+There is an abstract language model project written in Python: https://github.com/vhdl/pyVHDLModel[pyVHDLModel]. The motivation
+is abstracting parser engines and allowing building tools on top of a standardised API. Unfortunately, there is still no open
+source, complete and documented parser for VHDL 2008 which interacts with it. See detailed discussions
 in https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/312[jeremiah-c-leary/vhdl-style-guide#312] and
-https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328[jeremiah-c-leary/vhdl-style-guide#328]. Yet, there are two
-distinct required features with different complexity:
+https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328[jeremiah-c-leary/vhdl-style-guide#328]. As of January 2021,
+https://github.com/ghdl/ghdl/tree/master/pyGHDL[pyGHDL] is the best candidate, since a prototype exists and GHDL is the most
+used open source simulator and synthesiser for VHDL; however, the implementation of `pyGHDL.dom` is not complete.
+
+Yet, there are two distinct required features with different complexity:
 
 * Parsing the entities to get the list and types of generics and ports. This might be possible with either
-https://github.com/kraigher/rust_hdl[rust_hdl] or https://github.com/ghdl/ghdl[GHDL] already. It would allow to identify
+https://github.com/ghdl/ghdl[GHDL] or https://github.com/kraigher/rust_hdl[rust_hdl] already. It would allow to identify
 entities as blocks to be instantiaded in diagrams.
 
 * Getting an schematic/RTL diagram from an architecture. This is more complex, as it requires not only parsing, but also
@@ -44,8 +49,9 @@ go beyond collapsible/expandable 2D diagrams. Our belief is that the multiple ab
 better understood and debugged by using the third dimension.
 
 The main blocker to achieve a true 3D visualization allowing users to locate blocks at arbitrary locations is the routing.
-The complexity is increased if the layout needs to be automatic. Nevertheless, so much freedom in the visualization might be
-counterproductive. Hence, a more constrained 2.5D approach might be preferred.
+The complexity is increased if the layout needs to be automatic. That is, in fact, a very challenging task from an algorithmic
+point of view (https://github.com/SymbiFlow/ideas/issues/41[SymbiFlow/ideas#/issues/#41]). Nevertheless, so much freedom in
+the visualization might be counterproductive. Hence, a semi-constrained 2.5D approach might be preferred.
 
 Depending on implementation details, off-the-shelf Godot classes might not work. That is, the connection and port type
 management logic that is provided in `GraphEdit` and `GraphNode` might need to be reimplemented. On the other hand,
@@ -119,8 +125,7 @@ good solutions. GHDL provides a https://github.com/ghdl/ghdl-language-server[lan
 Moreover, https://github.com/TerosTechnology[TerosTechnology] provides a VSCode extension with multiple advanced features for
 working with VHDL and VUnit: https://github.com/TerosTechnology/vscode-terosHDL[vscode-terosHDL].
 
-For waveform visualization, either http://gtkwave.sourceforge.net/[GtkWave] (https://github.com/gtkwave/gtkwave[github.com/gtkwave/gtkwave])
-or https://wavedrom.com/[Wavedrom] (https://github.com/wavedrom/wavedrom[github.com/wavedrom/wavedrom]) might be used.
-Nonetheless, *replaying* waveforms in Hardware Studio's frontend dataflow diagram (e.g., by colouring connections) would be interesting for
-allowing *animated simulations*. Related reference: https://github.com/umarcor/pulseview/tree/ghdl/ghdl[Reading waveforms from HDL simulators with PulseView].
-See also https://github.com/dbhi/fpconv[Data type exploration and visualization in arithmetic algorithms/circuits].
+For waveform visualization, either http://gtkwave.sourceforge.net/[GtkWave] (https://github.com/gtkwave/gtkwave[github.com/gtkwave/gtkwave]),
+https://wavedrom.com/[Wavedrom] (https://github.com/wavedrom/wavedrom[github.com/wavedrom/wavedrom]) or https://github.com/Nic30/d3-wave[d3-wave] might be used. Nonetheless, *replaying* waveforms in Hardware Studio's frontend dataflow diagram (e.g., by colouring connections)
+would be interesting for allowing *animated simulations*. Related reference: https://github.com/umarcor/pulseview/tree/ghdl/ghdl[Reading waveforms from HDL simulators with PulseView].
+See also https://github.com/dbhi/fpconv[Data type exploration and visualization in arithmetic algorithms/circuits] and https://github.com/dbhi/vboard[Virtual development board for HDL design].

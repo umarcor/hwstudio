@@ -6,3 +6,4 @@
 !dist/mac/.gitkeep
 dist/
 doc/index.html
+node_modules

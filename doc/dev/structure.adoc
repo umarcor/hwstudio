@@ -1,5 +1,7 @@
 === Structure
 
+IMPORTANT: This is work in progress and is to be designed in terms of https://github.com/vhdl/pyVHDLModel[pyVHDLModel].
+
 The workflow and internal structure of Hardware Studio are based on _Entities_, _Architectures_ and _Blocks_:
 
 * _Entities_ are black boxes with name, ports, generics/constants and a context. It defines the external interface of a
