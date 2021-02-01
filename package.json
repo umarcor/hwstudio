@@ -17,12 +17,12 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.8.3",
-    "three": "^0.124.0",
+    "three": "^0.125.2",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.4",
-    "vue-router": "^3.4.9",
+    "vue-router": "^3.5.1",
     "vuetify": "^2.4.3",
-    "vuex": "^3.6.0",
+    "vuex": "^3.6.2",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
@@ -31,12 +31,12 @@
     "@vue/cli-service": "^4.5.11",
     "babel-eslint": "^10.1.0",
     "electron": "^11.2.1",
-    "eslint": "^7.18.0",
+    "eslint": "^7.19.0",
     "eslint-plugin-vue": "^7.5.0",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.0",
     "vue-cli-plugin-electron-builder": "^1.4.6",
-    "vue-cli-plugin-vuetify": "^2.0.9",
+    "vue-cli-plugin-vuetify": "^2.1.0",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "~1.6.0"
   },
