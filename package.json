@@ -38,7 +38,7 @@
     "vue-cli-plugin-electron-builder": "^1.4.6",
     "vue-cli-plugin-vuetify": "^2.1.0",
     "vue-template-compiler": "^2.6.12",
-    "vuetify-loader": "^1.7.1"
+    "vuetify-loader": "^1.7.2"
   },
   "eslintConfig": {
     "root": true,
