@@ -56,6 +56,10 @@ include::dev/roadmap.adoc[]
 
 == References
 
+* https://github.com/ghdl/ghdl/issues/111[ghdl/ghdl#111], https://github.com/ghdl/ghdl/issues/1519[ghdl/ghdl#1519], https://github.com/eine/hwd-ide/wiki[eine/hwd-ide: wiki], https://hackfin.gitlab.io/xhdl/[hackfin.gitlab.io/xhdl].
+
+* https://github.com/SymbiFlow/ideas/issues/41[SymbiFlow/ideas#41], https://github.com/SymbiFlow/sphinxcontrib-hdl-diagrams[SymbiFlow/sphinxcontrib-hdl-diagrams].
+
 * https://www.gnuradio.org/[GNURadio] is a development toolkit for software-defined radio and signal-processing. It provides
 a GUI tool for creating flow graph designs, used to work on simulation. See https://en.wikipedia.org/wiki/File:GNU_Radio_Companion_(3.8.1.0)_Screenshot.png[Wikipedia: GNU Radio Companion (From GNU Radio 3.8.1.0) with a simulation Flow Graph].
 Feature-wise, the GUI provided by GNURadio is very similar to Godot's VisualScript (implemented through `GraphEdit` and
