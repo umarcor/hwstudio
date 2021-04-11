@@ -68,7 +68,7 @@ based on C++ and Qt; hence, the build process is more complex. However, examples
 models have been reported (see https://github.com/gnuradio/gr-verilog[gnuradio/gr-verilog]). Therefore, there are multiple
 opportunities for collaboration.
 
-* https://github.com/Nic30[@Nic30] has prototyped an interesting ecosystem on HDL tools based on ANTLR parsers. On of the tools is https://github.com/Nic30/d3-hwschematic[d3-hwschematic], a JavaScript based solution using https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html[ELK JSON] as the input format. There are references to other multiple projects in https://github.com/Nic30/d3-hwschematic#similar-opensource-projects[Nic30/d3-hwschematic: Similar opensource projects].
+* https://github.com/Nic30[@Nic30] has prototyped an interesting ecosystem on HDL tools based on ANTLR parsers. On of the tools is https://github.com/Nic30/d3-hwschematic[d3-hwschematic], a JavaScript based solution using https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html[ELK JSON] as the input format. There are references to other multiple projects in https://github.com/Nic30/d3-hwschematic#similar-opensource-projects[Nic30/d3-hwschematic: Similar opensource projects], such as https://github.com/davidthings/hdelk[hdelk].
 
 * https://github.com/hneemann/Digital[hneemann/Digital] is a fork of http://www.cburch.com/logisim/[Logisim], which support
 GHDL and Icarus Verilog. There is an interesting discussion about the multiple existing forks of Logisim: https://github.com/hneemann/Digital#motivation[hneemann/Digital: Motivation].
