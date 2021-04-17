@@ -73,6 +73,8 @@ opportunities for collaboration.
 * https://github.com/hneemann/Digital[hneemann/Digital] is a fork of http://www.cburch.com/logisim/[Logisim], which support
 GHDL and Icarus Verilog. There is an interesting discussion about the multiple existing forks of Logisim: https://github.com/hneemann/Digital#motivation[hneemann/Digital: Motivation].
 
+* https://github.com/emsec/hal[emsec/hal]: The Hardware Analyzer.
+
 * https://github.com/jamesbowman/cuflow[jamesbowman/cuflow]: experimental procedural PCB layout program.
 
 * http://flowgorithm.org/[Flowgorithm] allows automatic generation of code in different languages, using a flowchart diagram
