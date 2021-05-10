@@ -16,7 +16,7 @@
   "main": "background.js",
   "dependencies": {
     "axios": "^0.21.1",
-    "core-js": "^3.11.1",
+    "core-js": "^3.12.1",
     "three": "^0.128.0",
     "vue": "^2.6.12",
     "vue-i18n": "^8.24.4",
