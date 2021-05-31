@@ -6,9 +6,9 @@
 
   <AppBar/>
 
-  <v-content>
+  <v-main>
     <router-view/>
-  </v-content>
+  </v-main>
 
   <Foot/>
 
