@@ -1,6 +1,20 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://graph/GBlock.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends GNode
+
+
+class_name GBlock
+
+
+var entity: String
+var architecture: String
+var generic_map: Array
+
+
+func _ready():
+	print('GBlock is ready!')
+"
 
 [node name="GBlock" type="GraphNode"]
 margin_right = 192.0
@@ -21,7 +35,7 @@ slot/1/left_color = Color( 1, 1, 1, 1 )
 slot/1/right_enabled = false
 slot/1/right_type = 0
 slot/1/right_color = Color( 1, 1, 1, 1 )
-script = ExtResource( 1 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -12,51 +12,45 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Architecture",
 "language": "GDScript",
-"path": "res://data/Architecture.gd"
-}, {
-"base": "Reference",
-"class": "Data",
-"language": "GDScript",
-"path": "res://data/Data.gd"
+"path": "res://data/Data_Architecture.gd"
 }, {
 "base": "Reference",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://data/Entity.gd"
+"path": "res://data/Data_Entity.gd"
 }, {
 "base": "GNode",
 "class": "GBlock",
 "language": "GDScript",
-"path": "res://graph/GBlock.gd"
+"path": "res://mode/graph/GBlock.gd"
 }, {
 "base": "GNode",
 "class": "GLabel",
 "language": "GDScript",
-"path": "res://graph/GLabel.gd"
+"path": "res://mode/graph/GLabel.gd"
 }, {
 "base": "GraphNode",
 "class": "GNode",
 "language": "GDScript",
-"path": "res://graph/GNode.gd"
+"path": "res://mode/graph/GNode.gd"
 }, {
 "base": "GNode",
 "class": "GSlice",
 "language": "GDScript",
-"path": "res://graph/GSlice.gd"
+"path": "res://mode/graph/GSlice.gd"
 }, {
 "base": "Reference",
 "class": "Project",
 "language": "GDScript",
-"path": "res://data/Project.gd"
+"path": "res://data/Data_Project.gd"
 }, {
 "base": "Reference",
 "class": "Repository",
 "language": "GDScript",
-"path": "res://data/Repository.gd"
+"path": "res://data/Data_Repository.gd"
 } ]
 _global_script_class_icons={
 "Architecture": "",
-"Data": "",
 "Entity": "",
 "GBlock": "",
 "GLabel": "",
@@ -70,10 +64,14 @@ _global_script_class_icons={
 
 config/name="Hardware Studio"
 run/main_scene="res://Main.tscn"
-boot_splash/image="res://img/banner.png"
+boot_splash/image="res://img/banner_blur.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.298039, 0.298039, 0.298039, 1 )
 config/icon="res://img/icon.png"
+
+[autoload]
+
+Data="*res://data/Data.gd"
 
 [display]
 
@@ -81,9 +79,56 @@ window/size/width=1366
 window/size/height=768
 window/energy_saving/keep_screen_on=false
 
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_switch_view={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_add_instance={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777349,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_context_menu={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
 environment/default_environment="res://default_env.tres"

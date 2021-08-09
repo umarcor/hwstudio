@@ -1,4 +1,5 @@
-.import/
+__pycache__/
+*.import
 !dist/.gdignore
 !dist/html5/serve.sh
 !dist/linux/.gitkeep

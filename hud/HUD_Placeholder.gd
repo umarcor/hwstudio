@@ -1,9 +1,7 @@
-extends AcceptDialog
+extends Tabs
 
+var tabs;
 
-var tree 
-
-var tabs
 
 func _ready():
 	#$VSplitContainer/Details.visible = false

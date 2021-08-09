@@ -1,4 +1,4 @@
-extends AcceptDialog
+extends Tabs
 
 
 var pmenu

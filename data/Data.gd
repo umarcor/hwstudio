@@ -1,8 +1,54 @@
-class_name Data
+extends Node
 
 
 var devices = {}
 var libraries = {}
+
+
+const gates = {
+	"not": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [0, 0, 1]
+	},
+	"and": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [0, 1, 0]
+	},
+	"or": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [1, 0, 0]
+	},
+	"xor": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [1, 1, 0]
+	},
+	"nand": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [0, 1, 1]
+	},
+	"nor": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [1, 0, 1]
+	},
+	"xnor": {
+		"inputs": 1,
+		"outputs": 1,
+		"color": [1, 1, 1]
+	},
+}
+
+
+func _checkError(err, msg):
+	if err != OK:
+		print("Failure ", msg, "! ", err);
+		return true;
+	return false;
 
 
 func _init():
@@ -19,29 +65,18 @@ func _read_JSON(file):
 	fptr.open(file, File.READ)
 	var content = JSON.parse(fptr.get_as_text())
 	fptr.close()
-	if content.error != OK:
-		print('_read_JSON: something went wrong; ', content.error)
+	if _checkError(content.error, '_read_JSON: something went wrong; '):
 		return
 	return content.result
 
 
 func _load_Parts():
-	var path = 'res://data/parts/'
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin()
-
-	var file = dir.get_next()
-	while file != '':
-		if file.ends_with('.json'):
-			var id = file.trim_suffix('.json')
-			devices[id] = _read_JSON(path + file)
-			devices[id].boards = {}
-		file = dir.get_next()
+	devices["hx1k"] = { "name": "HX1K", "boards": {} };
+	devices["up5k"] = { "name": "UP5K", "boards": {}  };
 
 
 func _load_Boards():
-	var path = 'res://data/devices/'
+	var path = 'res://data/boards/'
 	var dir = Directory.new()
 	dir.open(path)
 	dir.list_dir_begin()
