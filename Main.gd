@@ -1,6 +1,7 @@
 extends Node
 
 
+var modeGroups = []
 var currentMode: int = -1
 
 
@@ -10,39 +11,46 @@ func _ready():
 		"connecting $HUD/ContextMenu context_pressed"
 	);
 	Utils._checkError(
-		$HUD.connect("mode_pressed", self, "_switchMode"),
+		$HUD.connect("mode_pressed", self, "_switch_mode"),
 		"connecting $HUD mode_change"
 	);
 	Utils._checkError(
 		$Graph.connect('raise_request', self, "_on_raise_request"),
 		"connecting $Graph raise_request"
 	);
-	_switchMode($HUD.Mode.SPATIAL);
+
+	modeGroups = {
+		"graph": [$Graph],
+		"tilemap": [$TileMap],
+		"spatial": [$Spatial, $Spatial/Window]
+	};
+	for group in modeGroups:
+		for item in modeGroups[group]:
+			item.add_to_group(group);
+
+	_switch_mode($HUD.Mode.SPATIAL);
 
 
 # FIXME: There should be a better solution to achieve this.
 # We tried using a TabContainer. Unfortunately, the Spatial (3D) node seems to be always hidden behind the tab container.
-func _switchMode(idx):
-	if idx != null:
-		if currentMode == idx:
-			return
-		else:
-			currentMode = idx
-	else:
-		currentMode = currentMode+1 if currentMode < 2 else 0;
+func _switch_mode(idx : int):
+	if currentMode == idx:
+		return
+	currentMode = posmod(idx, modeGroups.size());
 
-	for item in [$Graph, $TileMap, $Spatial, $Spatial/Window]:
-		item.hide()
+	for group in modeGroups:
+		get_tree().call_group(group, "hide")
 
-	var hud = $HUD
+	var mode = $HUD.Mode;
+	var group = '';
 	match currentMode:
-		hud.Mode.GRAPH:
-			$Graph.show()
-		hud.Mode.TILEMAP:
-			$TileMap.show()
-		hud.Mode.SPATIAL:
-			$Spatial.show()
-			$Spatial/Window.show()
+		mode.GRAPH:
+			group = "graph";
+		mode.TILEMAP:
+			group = "tilemap";
+		mode.SPATIAL:
+			group = "spatial";
+	get_tree().call_group(group, "show");
 
 
 func _on_ContextMenu_pressed(idx : int):
@@ -64,8 +72,10 @@ func _on_raise_request(name, type):
 
 
 func _input(_ev: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_switch_view"):
-		_switchMode(null)
+	if Input.is_action_just_pressed("ui_switch_prev"):
+		_switch_mode(currentMode-1);
+	elif Input.is_action_just_pressed("ui_switch_next"):
+		_switch_mode(currentMode+1);
 	#if ev.is_action_pressed("click"):
 	#if ev is InputEventMouseButton:
 		#print(
