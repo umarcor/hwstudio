@@ -4,15 +4,19 @@ extends Node
 var currentMode: int = -1
 
 
-func _checkError(err, msg):
-	if err != OK:
-		print("Failure ", msg, "! ", err)
-
-
 func _ready():
-	_checkError($HUD.connect("context_pressed", self, "_on_ContextMenu_pressed"), "connecting $HUD/ContextMenu context_pressed")
-	_checkError($HUD.connect("mode_pressed", self, "_switchMode"), "connecting $HUD mode_change");
-	_checkError($Graph.connect('raise_request', self, "_on_raise_request"), "connecting $Graph raise_request")
+	Utils._checkError(
+		$HUD.connect("context_pressed", self, "_on_ContextMenu_pressed"),
+		"connecting $HUD/ContextMenu context_pressed"
+	);
+	Utils._checkError(
+		$HUD.connect("mode_pressed", self, "_switchMode"),
+		"connecting $HUD mode_change"
+	);
+	Utils._checkError(
+		$Graph.connect('raise_request', self, "_on_raise_request"),
+		"connecting $Graph raise_request"
+	);
 	_switchMode($HUD.Mode.SPATIAL);
 
 
@@ -41,7 +45,7 @@ func _switchMode(idx):
 			$Spatial/Window.show()
 
 
-func _on_ContextMenu_pressed(idx):
+func _on_ContextMenu_pressed(idx : int):
 	var hud = $HUD
 	match idx:
 		hud.Context.ADD:

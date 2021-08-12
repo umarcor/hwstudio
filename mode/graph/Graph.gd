@@ -7,27 +7,22 @@ signal raise_request(name, type)
 const GBlock = preload("res://mode/graph/GBlock.tscn");
 
 
-func _checkError(err, msg):
-	if err != OK:
-		print("Failure ", msg, "! ", err);
-
-
 func _ready():
 	#get_node("Entity").connect("resize_request", self, "_on_Entity_resize_request")
 
-	_checkError(
+	Utils._checkError(
 		connect('connection_request', self, '_on_connection_request'),
 		"connecting Graph connection_request"
 	);
-	_checkError(
+	Utils._checkError(
 		connect('connection_from_empty', self, '_on_connection_from_empty'),
 		"connecting Graph connection_from_empty"
 	);
-	_checkError(
+	Utils._checkError(
 		connect('connection_to_empty', self, '_on_connection_to_empty'),
 		"connecting Graph connection_to_empty"
 	);
-	_checkError(
+	Utils._checkError(
 		connect('disconnection_request', self, '_on_disconnection_request'),
 		"connecting Graph disconnection_request"
 	);
@@ -42,7 +37,7 @@ func _on_Entity_resize_request(new_minsize):
 
 
 func _on_connection_request(from, from_slot, to, to_slot):
-	_checkError(
+	Utils._checkError(
 		connect_node(from, from_slot, to, to_slot),
 		"connecting nodes {0} [{1}] -> {2} [{3}]".format([from, from_slot, to, to_slot])
 	);
@@ -57,10 +52,8 @@ func _on_connection_to_empty(from, from_slot, release_position):
 
 
 func _on_disconnection_request(from, from_slot, to, to_slot):
-	_checkError(
-		disconnect_node(from, from_slot, to, to_slot),
-		"disconnecting nodes {0} [{1}] -> {2} [{3}]".format([from, from_slot, to, to_slot])
-	);
+	print("Disconnecting nodes {0} [{1}] -> {2} [{3}]".format([from, from_slot, to, to_slot]));
+	disconnect_node(from, from_slot, to, to_slot);
 
 
 func _add_Block(

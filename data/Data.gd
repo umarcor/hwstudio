@@ -44,13 +44,6 @@ const gates = {
 }
 
 
-func _checkError(err, msg):
-	if err != OK:
-		print("Failure ", msg, "! ", err);
-		return true;
-	return false;
-
-
 func _init():
 	_load_Parts()
 	_load_Boards()
@@ -65,7 +58,8 @@ func _read_JSON(file):
 	fptr.open(file, File.READ)
 	var content = JSON.parse(fptr.get_as_text())
 	fptr.close()
-	if _checkError(content.error, '_read_JSON: something went wrong; '):
+	if content.error != OK:
+		print("Failure _read_JSON: something went wrong; ! {0}".format([content.error]));
 		return
 	return content.result
 

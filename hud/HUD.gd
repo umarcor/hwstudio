@@ -30,11 +30,6 @@ var prefBackend : Node;
 var aboutLinks : Node;
 
 
-func _checkError(err, msg):
-	if err != OK:
-		print("Failure ", msg, " ", err)
-		
-
 func _ready():
 	
 	prefBackend = $Menu/TabContainer/Preferences/Scroll/Sections/Backend;
@@ -46,7 +41,10 @@ func _ready():
 	modeMenu.add_item('Spatial', Mode.SPATIAL);
 	contextMenu.add_child(modeMenu);
 
-	_checkError(modeMenu.connect("id_pressed", self, "_on_ModeMenu_pressed"), "connecting modeMenu id_pressed");
+	Utils._checkError(
+		modeMenu.connect("id_pressed", self, "_on_ModeMenu_pressed"),
+		"connecting modeMenu id_pressed"
+	);
 
 	contextMenu.set_name("ContextMenu");
 	add_child(contextMenu);
@@ -66,21 +64,48 @@ func _ready():
 	contextMenu.add_separator();
 	contextMenu.add_item('Quit', Context.QUIT);
 
-	_checkError(contextMenu.connect("id_pressed", self, "_on_ContextMenu_pressed"), "connecting contextMenu id_pressed");
+	Utils._checkError(
+		contextMenu.connect("id_pressed", self, "_on_ContextMenu_pressed"),
+		"connecting contextMenu id_pressed"
+	);
 
-	_checkError($FileDialog.connect('confirmed', self, "_on_confirmed"), "connecting $FileDialog confirmed");
-	_checkError($FileDialog.connect('dir_selected', self, "_on_dir_selected"), "connecting $FileDialog dir_selected");
-	_checkError($FileDialog.connect('file_selected', self, "_on_file_selected"), "connecting $FileDialog file_selected");
-	_checkError($FileDialog.connect('files_selected', self, "_on_files_selected"), "connecting $FileDialog files_selected");
+	Utils._checkError($FileDialog.connect(
+		'confirmed', self, "_on_confirmed"),
+		"connecting $FileDialog confirmed"
+	);
+	Utils._checkError(
+		$FileDialog.connect('dir_selected', self, "_on_dir_selected"),
+		"connecting $FileDialog dir_selected"
+	);
+	Utils._checkError(
+		$FileDialog.connect('file_selected', self, "_on_file_selected"),
+		"connecting $FileDialog file_selected"
+	);
+	Utils._checkError(
+		$FileDialog.connect('files_selected', self, "_on_files_selected"),
+		"connecting $FileDialog files_selected"
+	);
 
-	_checkError(aboutLinks.get_node("RepoLink").connect("pressed", self, "_on_RepoLink_pressed"), "connecting $About...RepoLink pressed")
-	_checkError(aboutLinks.get_node("DocLink").connect("pressed", self, "_on_DocLink_pressed"), "connecting $About...DocLink pressed")
+	Utils._checkError(
+		aboutLinks.get_node("RepoLink").connect("pressed", self, "_on_RepoLink_pressed"),
+		"connecting $About...RepoLink pressed"
+	);
+	Utils._checkError(
+		aboutLinks.get_node("DocLink").connect("pressed", self, "_on_DocLink_pressed"),
+		"connecting $About...DocLink pressed"
+	);
 
 	$Menu.hide();
 	$Menu/TabContainer/Boards.update_devices(Data.devices);
 
-	_checkError(prefBackend.get_node("Address/Test").connect("pressed", self, "_on_Backend_Test_pressed"), "connecting $Menu...Backend...Test pressed");
-	_checkError($HTTPRequest.connect("request_completed", self, "_on_HTTPRequest_completed"), "connecting $HTTPRequest request_completed");
+	Utils._checkError(
+		prefBackend.get_node("Address/Test").connect("pressed", self, "_on_Backend_Test_pressed"),
+		"connecting $Menu...Backend...Test pressed"
+	);
+	Utils._checkError(
+		$HTTPRequest.connect("request_completed", self, "_on_HTTPRequest_completed"),
+		"connecting $HTTPRequest request_completed"
+	);
 
 	$About.hide();
 
@@ -100,11 +125,11 @@ func _on_HTTPRequest_completed(result, response_code, headers, body):
 	#print(json.result)
 
 
-func _on_ModeMenu_pressed(idx):
+func _on_ModeMenu_pressed(idx : int):
 	emit_signal('mode_pressed', idx)
 
 
-func _on_ContextMenu_pressed(idx):
+func _on_ContextMenu_pressed(idx : int):
 	match idx:
 		Context.MENU:
 			$Menu.show();
@@ -138,10 +163,16 @@ func _on_files_selected(files):
 
 
 func _on_DocLink_pressed():
-	_checkError(OS.shell_open("https://umarcor.github.io/hwstudio/doc"), "opening URL umarcor.github.io/hwstudio/doc")
+	Utils._checkError(
+		OS.shell_open("https://umarcor.github.io/hwstudio/doc"),
+		"opening URL umarcor.github.io/hwstudio/doc"
+	);
 
 func _on_RepoLink_pressed():
-	_checkError(OS.shell_open("https://github.com/umarcor/hwstudio"), "opening URL github.com/umarcor/hwstudio")
+	Utils._checkError(
+		OS.shell_open("https://github.com/umarcor/hwstudio"),
+		"opening URL github.com/umarcor/hwstudio"
+	);
 
 
 func _unhandled_input(_ev: InputEvent) -> void:

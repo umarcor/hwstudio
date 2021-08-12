@@ -71,6 +71,7 @@ config/icon="res://img/icon.png"
 
 [autoload]
 
+Utils="*res://Utils.gd"
 Data="*res://data/Data.gd"
 
 [display]
