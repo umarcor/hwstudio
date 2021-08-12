@@ -103,7 +103,7 @@ func _ready():
 		"connecting $Menu...Backend...Test pressed"
 	);
 	Utils._checkError(
-		$HTTPRequest.connect("request_completed", self, "_on_HTTPRequest_completed"),
+		Utils.APIRequest.connect("request_completed", self, "_on_HTTPRequest_completed"),
 		"connecting $HTTPRequest request_completed"
 	);
 
@@ -111,9 +111,12 @@ func _ready():
 
 
 func _on_Backend_Test_pressed():
-	var addr = prefBackend.get_node("Address/LineEdit").text;
-	print('We are testing the connection to the backend [{0}]...'.format([addr]));
-	$HTTPRequest.request("http://{0}/things".format([addr]));
+	var call = "http://{0}/things".format([prefBackend.get_node("Address/LineEdit").text])
+	print('We are testing the connection to the backend [{0}]...'.format([call]));
+	Utils._checkError(
+		Utils.APIRequest.request(call),
+		"requesting {0}".format([call])
+	);
 
 
 func _on_HTTPRequest_completed(result, response_code, headers, body):
@@ -135,21 +138,21 @@ func _on_ContextMenu_pressed(idx : int):
 			_switch_pause($Menu, true);
 
 		Context.OPEN:
-			$FileDialog.show()
+			$FileDialog.show();
 
 		Context.DOCS:
-			_on_DocLink_pressed()
+			_on_DocLink_pressed();
 
 		Context.ABOUT:
 			_switch_pause($About, true);
 
 		Context.ADD:
 			# Handled in Main
-			emit_signal('context_pressed', idx)
+			emit_signal('context_pressed', idx);
 			return
 
 		_:
-			print('HUD/contextMenu: unhandled button pressed ' + str(idx))
+			print('HUD/contextMenu: unhandled button pressed ' + str(idx));
 
 
 func _on_dir_selected(dir):
