@@ -132,17 +132,17 @@ func _on_ModeMenu_pressed(idx : int):
 func _on_ContextMenu_pressed(idx : int):
 	match idx:
 		Context.MENU:
-			$Menu.show();
+			_switch_pause($Menu, true);
 
 		Context.OPEN:
 			$FileDialog.show()
 
 		Context.DOCS:
 			_on_DocLink_pressed()
-			
+
 		Context.ABOUT:
-			$About.show()
-			
+			_switch_pause($About, true);
+
 		Context.ADD:
 			# Handled in Main
 			emit_signal('context_pressed', idx)
@@ -175,14 +175,26 @@ func _on_RepoLink_pressed():
 	);
 
 
+func _switch_pause(
+	node: Node,
+	val : bool
+):
+	if val:
+		get_tree().paused = true;
+		node.show();
+	else:
+		node.hide();
+		get_tree().paused = false;
+
+
 func _unhandled_input(_ev: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_context_menu"):
 		contextMenu.rect_position = contextMenu.get_global_mouse_position();
 		contextMenu.popup();
 	elif Input.is_action_just_pressed("ui_cancel"):
 		if $About.visible:
-			$About.hide();
-			#get_node('/root').set_input_as_handled();
-		elif not contextMenu.visible:
-			$Menu.visible = false #not $Menu.visible
-			#get_node('/root').set_input_as_handled();
+			_switch_pause($About, false);
+			get_node('/root').set_input_as_handled();
+		elif $Menu.visible and not contextMenu.visible:
+			_switch_pause($Menu, false);
+			get_node('/root').set_input_as_handled();

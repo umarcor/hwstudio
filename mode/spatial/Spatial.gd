@@ -60,7 +60,7 @@ func _placeInstance():
 	$Blocks.add_child(mesh);
 
 
-func _unhandled_input(_ev: InputEvent) -> void:
+func _unhandled_key_input(_evk: InputEventKey) -> void:
 	if addingInstance:
 		if Input.is_action_pressed("ui_cancel"):
 			addingInstance = false;
