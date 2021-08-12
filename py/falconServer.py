@@ -12,8 +12,14 @@ class ThingsResource:
         resp.text = ('\nTwo things awe me most, the starry sky above me and the moral law within me.\n\n'
                      '    ~ Immanuel Kant\n\n')
 
+# A CORS policy is required for <umarcor.github.io/hwstudio> to work with a backend served at <127.0.0.1>.
+# - https://github.com/godotengine/godot/pull/40542
+# - https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+# - https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSMissingAllowOrigin
+# Enable a simple CORS policy for all responses.
+# - https://falcon.readthedocs.io/en/3.0.1/api/cors.html
+app = falcon.App(cors_enable=True)
 
-app = falcon.App()
 app.add_route('/things', ThingsResource())
 
 if __name__ == '__main__':
