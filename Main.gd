@@ -1,7 +1,7 @@
 extends Node
 
 
-var view: int = -1
+var currentMode: int = -1
 
 
 func _checkError(err, msg):
@@ -13,30 +13,30 @@ func _ready():
 	_checkError($HUD.connect("context_pressed", self, "_on_ContextMenu_pressed"), "connecting $HUD/ContextMenu context_pressed")
 	_checkError($HUD.connect("mode_pressed", self, "_switchMode"), "connecting $HUD mode_change");
 	_checkError($Graph.connect('raise_request', self, "_on_raise_request"), "connecting $Graph raise_request")
-	_switchMode($HUD._File_Mode_Spatial);
+	_switchMode($HUD.Mode.SPATIAL);
 
 
 # FIXME: There should be a better solution to achieve this.
 # We tried using a TabContainer. Unfortunately, the Spatial (3D) node seems to be always hidden behind the tab container.
 func _switchMode(idx):
 	if idx != null:
-		if view == idx:
+		if currentMode == idx:
 			return
 		else:
-			view = idx
+			currentMode = idx
 	else:
-		view = view+1 if view < 2 else 0;
+		currentMode = currentMode+1 if currentMode < 2 else 0;
 
 	for item in [$Graph, $TileMap, $Spatial, $Spatial/Window]:
 		item.hide()
 
 	var hud = $HUD
-	match view:
-		hud._File_Mode_Graph:
+	match currentMode:
+		hud.Mode.GRAPH:
 			$Graph.show()
-		hud._File_Mode_TileMap:
+		hud.Mode.TILEMAP:
 			$TileMap.show()
-		hud._File_Mode_Spatial:
+		hud.Mode.SPATIAL:
 			$Spatial.show()
 			$Spatial/Window.show()
 
@@ -44,9 +44,9 @@ func _switchMode(idx):
 func _on_ContextMenu_pressed(idx):
 	var hud = $HUD
 	match idx:
-		hud._File_Add:
+		hud.Context.ADD:
 			$Graph._add_Block()
-		hud._File_Save:
+		hud.Context.SAVE:
 			for child in $Graph.get_children():
 				if child is GNode:
 					print('Entity: ', child.get_class(), ' ', child.title if 'title' in child else '')
@@ -80,24 +80,3 @@ func _unhandled_input(ev: InputEvent) -> void:
 	if ev is InputEventKey and (ev.scancode == KEY_CONTROL or ev.scancode == KEY_TAB):
 		return
 	#print("_unhandled_input: ", ev)
-
-	# THIS IS A TEST TO READ AN `.ice` FILE
-#	var iceFile = File.new()
-#	iceFile.open('/hwstudio/godot/examples/ice/test.ice', File.READ)
-#	var iceContent = parse_json(iceFile.get_as_text())
-#	iceFile.close()
-#	var iceBlocks = iceContent.design.graph.blocks
-#	print(iceBlocks)
-#	var design = {
-#		'blocks': []
-#	}
-#	for block in iceBlocks:
-#		design.blocks.append({
-#			'name': block.id,
-#			'entity': block.type,
-#			'arch': '',
-#			'const': {},
-#			'pos':  Vector2(block.position.x, block.position.y),
-#			'size': Vector2(block.size.width, block.size.height) if 'size' in block else null
-#		})
-#	print(design)

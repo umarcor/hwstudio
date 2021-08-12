@@ -100,3 +100,25 @@ func print_device_list():
 		print('- ', device)
 		for board in devices[device].boards:
 			print('  - ', board)
+
+
+# THIS IS A TEST TO READ AN `.ice` FILE
+#	var iceFile = File.new()
+#	iceFile.open('/hwstudio/godot/examples/ice/test.ice', File.READ)
+#	var iceContent = parse_json(iceFile.get_as_text())
+#	iceFile.close()
+#	var iceBlocks = iceContent.design.graph.blocks
+#	print(iceBlocks)
+#	var design = {
+#		'blocks': []
+#	}
+#	for block in iceBlocks:
+#		design.blocks.append({
+#			'name': block.id,
+#			'entity': block.type,
+#			'arch': '',
+#			'const': {},
+#			'pos':  Vector2(block.position.x, block.position.y),
+#			'size': Vector2(block.size.width, block.size.height) if 'size' in block else null
+#		})
+#	print(design)

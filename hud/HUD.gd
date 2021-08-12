@@ -4,22 +4,25 @@ extends Node
 signal context_pressed(idx)
 signal mode_pressed(idx)
 
+enum Context {
+	MENU,
+	MODE,
+	NEW,
+	OPEN,
+	ADD,
+	SAVE,
+	SAVEAS,
+	EXPORT,
+	DOCS,
+	ABOUT,
+	QUIT
+}
 
-const _File_Menu = 0
-const _File_Mode = 1
-const _File_New = 2
-const _File_Open = 3
-const _File_Add = 4
-const _File_Save = 5
-const _File_SaveAs = 6
-const _File_Export = 7
-const _File_Docs = 8
-const _File_About = 9
-const _File_Quit = 10
-
-const _File_Mode_Graph = 0
-const _File_Mode_TileMap = 1
-const _File_Mode_Spatial = 2
+enum Mode {
+	GRAPH,
+	TILEMAP,
+	SPATIAL
+}
 
 var contextMenu = PopupMenu.new();
 var modeMenu = PopupMenu.new();
@@ -38,30 +41,30 @@ func _ready():
 	aboutLinks = $About/PanelContainer/CenterContainer/VBoxContainer/CenterContent/VBoxContent/HBoxData/VBoxValues;
 	
 	modeMenu.set_name("modeMenu");
-	modeMenu.add_item('Graph', _File_Mode_Graph);
-	modeMenu.add_item('TileMap', _File_Mode_TileMap);
-	modeMenu.add_item('Spatial', _File_Mode_Spatial);
+	modeMenu.add_item('Graph', Mode.GRAPH);
+	modeMenu.add_item('TileMap', Mode.TILEMAP);
+	modeMenu.add_item('Spatial', Mode.SPATIAL);
 	contextMenu.add_child(modeMenu);
 
 	_checkError(modeMenu.connect("id_pressed", self, "_on_ModeMenu_pressed"), "connecting modeMenu id_pressed");
 
 	contextMenu.set_name("ContextMenu");
 	add_child(contextMenu);
-	contextMenu.add_item('Menu...', _File_Menu);
-	contextMenu.add_submenu_item('Mode', "modeMenu", _File_Mode);
+	contextMenu.add_item('Menu...', Context.MENU);
+	contextMenu.add_submenu_item('Mode', "modeMenu", Context.MODE);
 	contextMenu.add_separator();
-	contextMenu.add_item('New', _File_New);
-	contextMenu.add_item('Open...', _File_Open);
-	contextMenu.add_item('Add', _File_Add);
+	contextMenu.add_item('New', Context.NEW);
+	contextMenu.add_item('Open...', Context.OPEN);
+	contextMenu.add_item('Add', Context.ADD);
 	contextMenu.add_separator();
-	contextMenu.add_item('Save', _File_Save);
-	contextMenu.add_item('Save as...', _File_SaveAs);
-	contextMenu.add_item('Export', _File_Export);
+	contextMenu.add_item('Save', Context.SAVE);
+	contextMenu.add_item('Save as...', Context.SAVEAS);
+	contextMenu.add_item('Export', Context.EXPORT);
 	contextMenu.add_separator();
-	contextMenu.add_item('Docs', _File_Docs);
-	contextMenu.add_item('About', _File_About);
+	contextMenu.add_item('Docs', Context.DOCS);
+	contextMenu.add_item('About', Context.ABOUT);
 	contextMenu.add_separator();
-	contextMenu.add_item('Quit', _File_Quit);
+	contextMenu.add_item('Quit', Context.QUIT);
 
 	_checkError(contextMenu.connect("id_pressed", self, "_on_ContextMenu_pressed"), "connecting contextMenu id_pressed");
 
@@ -103,19 +106,19 @@ func _on_ModeMenu_pressed(idx):
 
 func _on_ContextMenu_pressed(idx):
 	match idx:
-		_File_Menu:
+		Context.MENU:
 			$Menu.show();
 
-		_File_Open:
+		Context.OPEN:
 			$FileDialog.show()
 
-		_File_Docs:
+		Context.DOCS:
 			_on_DocLink_pressed()
 			
-		_File_About:
+		Context.ABOUT:
 			$About.show()
 			
-		_File_Add, _File_Docs:
+		Context.ADD:
 			# Handled in Main
 			emit_signal('context_pressed', idx)
 			return
