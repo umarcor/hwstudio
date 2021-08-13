@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://mode/graph/GSlice.gd"
 }, {
-"base": "Reference",
+"base": "Object",
 "class": "Project",
 "language": "GDScript",
 "path": "res://data/Data_Project.gd"

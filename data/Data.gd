@@ -1,45 +1,54 @@
 extends Node
 
 
+const Project = preload('res://data/Data_Project.gd')
+
 var devices = {}
 var libraries = {}
+var projects = []
 
+const backends = [
+	'OSVB',
+	'SymbiFlow',
+	'Edalize',
+	'Apio'
+]
 
 const gates = {
-	"not": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [0, 0, 1]
+	'not': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [0, 0, 1]
 	},
-	"and": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [0, 1, 0]
+	'and': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [0, 1, 0]
 	},
-	"or": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [1, 0, 0]
+	'or': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [1, 0, 0]
 	},
-	"xor": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [1, 1, 0]
+	'xor': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [1, 1, 0]
 	},
-	"nand": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [0, 1, 1]
+	'nand': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [0, 1, 1]
 	},
-	"nor": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [1, 0, 1]
+	'nor': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [1, 0, 1]
 	},
-	"xnor": {
-		"inputs": 1,
-		"outputs": 1,
-		"color": [1, 1, 1]
+	'xnor': {
+		'inputs': 1,
+		'outputs': 1,
+		'color': [1, 1, 1]
 	},
 }
 
@@ -51,6 +60,11 @@ func _init():
 		'entities': {},
 		'architectures': {}
 	}
+	projects.append(Project.new('Example project', [
+		Project.Source.new('/t/neorv32', Project.source_types.GLOB),
+		Project.Source.new('/t/vunit/vunit', Project.source_types.GLOB),
+		Project.Source.new('/t/vunit/osvb/AXI4Stream', Project.source_types.PYCAPI)
+	]));
 
 
 func _read_JSON(file):
@@ -59,14 +73,14 @@ func _read_JSON(file):
 	var content = JSON.parse(fptr.get_as_text())
 	fptr.close()
 	if content.error != OK:
-		print("Failure _read_JSON: something went wrong; ! {0}".format([content.error]));
+		print('Failure _read_JSON: something went wrong; ! {0}'.format([content.error]));
 		return
 	return content.result
 
 
 func _load_Parts():
-	devices["hx1k"] = { "name": "HX1K", "boards": {} };
-	devices["up5k"] = { "name": "UP5K", "boards": {}  };
+	devices['hx1k'] = { 'name': 'HX1K', 'boards': {} };
+	devices['up5k'] = { 'name': 'UP5K', 'boards': {}  };
 
 
 func _load_Boards():
@@ -77,15 +91,15 @@ func _load_Boards():
 
 	var file = dir.get_next()
 	while file != '':
-		if file.ends_with(".json"):
-			var content = _read_JSON(path + file)
-			var id = file.trim_suffix('.json')
-			var part = content.part
-			content.erase(part)
+		if file.ends_with('.json'):
+			var content = _read_JSON('{0}{1}'.format([path, file]));
+			var id = file.trim_suffix('.json');
+			var part = content.part;
+			content.erase(part);
 			if id in devices[part].boards:
-				print('Overwritting info of board ', content.name)
-			devices[part].boards[id] = content
-		file = dir.get_next()
+				print('Overwritting info of board ', content.name);
+			devices[part].boards[id] = content;
+		file = dir.get_next();
 
 
 func print_device_list():

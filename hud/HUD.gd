@@ -26,30 +26,26 @@ enum Mode {
 
 var contextMenu = PopupMenu.new();
 var modeMenu = PopupMenu.new();
-var prefBackend : Node;
-var aboutLinks : Node;
+onready var prefBackend : Node = $Menu/TabContainer/Preferences/Scroll/Sections/Backend;
+onready var aboutLinks : Node = $About/PanelContainer/CenterContainer/VBoxContainer/CenterContent/VBoxContent/HBoxData/VBoxValues;
 
 
 func _ready():
-	
-	prefBackend = $Menu/TabContainer/Preferences/Scroll/Sections/Backend;
-	aboutLinks = $About/PanelContainer/CenterContainer/VBoxContainer/CenterContent/VBoxContent/HBoxData/VBoxValues;
-	
-	modeMenu.set_name("modeMenu");
+	modeMenu.set_name('modeMenu');
 	modeMenu.add_item('Graph', Mode.GRAPH);
 	modeMenu.add_item('TileMap', Mode.TILEMAP);
 	modeMenu.add_item('Spatial', Mode.SPATIAL);
 	contextMenu.add_child(modeMenu);
 
-	Utils._checkError(
-		modeMenu.connect("id_pressed", self, "_on_ModeMenu_pressed"),
-		"connecting modeMenu id_pressed"
+	Utils.checkError(
+		modeMenu.connect('id_pressed', self, '_on_ModeMenu_pressed'),
+		'connecting modeMenu id_pressed'
 	);
 
-	contextMenu.set_name("ContextMenu");
+	contextMenu.set_name('ContextMenu');
 	add_child(contextMenu);
 	contextMenu.add_item('Menu...', Context.MENU);
-	contextMenu.add_submenu_item('Mode', "modeMenu", Context.MODE);
+	contextMenu.add_submenu_item('Mode', 'modeMenu', Context.MODE);
 	contextMenu.add_separator();
 	contextMenu.add_item('New', Context.NEW);
 	contextMenu.add_item('Open...', Context.OPEN);
@@ -64,58 +60,58 @@ func _ready():
 	contextMenu.add_separator();
 	contextMenu.add_item('Quit', Context.QUIT);
 
-	Utils._checkError(
-		contextMenu.connect("id_pressed", self, "_on_ContextMenu_pressed"),
-		"connecting contextMenu id_pressed"
+	Utils.checkError(
+		contextMenu.connect('id_pressed', self, '_on_ContextMenu_pressed'),
+		'connecting contextMenu id_pressed'
 	);
 
-	Utils._checkError($FileDialog.connect(
-		'confirmed', self, "_on_confirmed"),
-		"connecting $FileDialog confirmed"
+	Utils.checkError($FileDialog.connect(
+		'confirmed', self, '_on_confirmed'),
+		'connecting $FileDialog confirmed'
 	);
-	Utils._checkError(
-		$FileDialog.connect('dir_selected', self, "_on_dir_selected"),
-		"connecting $FileDialog dir_selected"
+	Utils.checkError(
+		$FileDialog.connect('dir_selected', self, '_on_dir_selected'),
+		'connecting $FileDialog dir_selected'
 	);
-	Utils._checkError(
-		$FileDialog.connect('file_selected', self, "_on_file_selected"),
-		"connecting $FileDialog file_selected"
+	Utils.checkError(
+		$FileDialog.connect('file_selected', self, '_on_file_selected'),
+		'connecting $FileDialog file_selected'
 	);
-	Utils._checkError(
-		$FileDialog.connect('files_selected', self, "_on_files_selected"),
-		"connecting $FileDialog files_selected"
+	Utils.checkError(
+		$FileDialog.connect('files_selected', self, '_on_files_selected'),
+		'connecting $FileDialog files_selected'
 	);
 
-	Utils._checkError(
-		aboutLinks.get_node("RepoLink").connect("pressed", self, "_on_RepoLink_pressed"),
-		"connecting $About...RepoLink pressed"
+	Utils.checkError(
+		aboutLinks.get_node('RepoLink').connect('pressed', self, '_on_RepoLink_pressed'),
+		'connecting $About...RepoLink pressed'
 	);
-	Utils._checkError(
-		aboutLinks.get_node("DocLink").connect("pressed", self, "_on_DocLink_pressed"),
-		"connecting $About...DocLink pressed"
+	Utils.checkError(
+		aboutLinks.get_node('DocLink').connect('pressed', self, '_on_DocLink_pressed'),
+		'connecting $About...DocLink pressed'
 	);
 
 	$Menu.hide();
 	$Menu/TabContainer/Boards.update_devices(Data.devices);
 
-	Utils._checkError(
-		prefBackend.get_node("Address/Test").connect("pressed", self, "_on_Backend_Test_pressed"),
-		"connecting $Menu...Backend...Test pressed"
+	Utils.checkError(
+		prefBackend.get_node('Address/Test').connect('pressed', self, '_on_Backend_Test_pressed'),
+		'connecting $Menu...Backend...Test pressed'
 	);
-	Utils._checkError(
-		Utils.APIRequest.connect("request_completed", self, "_on_HTTPRequest_completed"),
-		"connecting $HTTPRequest request_completed"
+	Utils.checkError(
+		Utils.APIRequest.connect('request_completed', self, '_on_HTTPRequest_completed'),
+		'connecting $HTTPRequest request_completed'
 	);
 
 	$About.hide();
 
 
 func _on_Backend_Test_pressed():
-	var call = "http://{0}/things".format([prefBackend.get_node("Address/LineEdit").text])
+	var call = 'http://{0}/things'.format([prefBackend.get_node('Address/LineEdit').text])
 	print('We are testing the connection to the backend [{0}]...'.format([call]));
-	Utils._checkError(
+	Utils.checkError(
 		Utils.APIRequest.request(call),
-		"requesting {0}".format([call])
+		'requesting {0}'.format([call])
 	);
 
 
@@ -152,7 +148,7 @@ func _on_ContextMenu_pressed(idx : int):
 			return
 
 		_:
-			print('HUD/contextMenu: unhandled button pressed ' + str(idx));
+			print('HUD/contextMenu: unhandled button pressed {0}'.format([idx]));
 
 
 func _on_dir_selected(dir):
@@ -166,15 +162,15 @@ func _on_files_selected(files):
 
 
 func _on_DocLink_pressed():
-	Utils._checkError(
-		OS.shell_open("https://umarcor.github.io/hwstudio/doc"),
-		"opening URL umarcor.github.io/hwstudio/doc"
+	Utils.checkError(
+		OS.shell_open('https://umarcor.github.io/hwstudio/doc'),
+		'opening URL umarcor.github.io/hwstudio/doc'
 	);
 
 func _on_RepoLink_pressed():
-	Utils._checkError(
-		OS.shell_open("https://github.com/umarcor/hwstudio"),
-		"opening URL github.com/umarcor/hwstudio"
+	Utils.checkError(
+		OS.shell_open('https://github.com/umarcor/hwstudio'),
+		'opening URL github.com/umarcor/hwstudio'
 	);
 
 
@@ -191,10 +187,10 @@ func _switch_pause(
 
 
 func _unhandled_input(_ev: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_context_menu"):
+	if Input.is_action_just_pressed('ui_context_menu'):
 		contextMenu.rect_position = contextMenu.get_global_mouse_position();
 		contextMenu.popup();
-	elif Input.is_action_just_pressed("ui_cancel"):
+	elif Input.is_action_just_pressed('ui_cancel'):
 		if $About.visible:
 			_switch_pause($About, false);
 			get_node('/root').set_input_as_handled();

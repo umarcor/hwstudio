@@ -5,7 +5,7 @@ class_name GNode
 
 
 func _ready():
-	Utils._checkError(
+	Utils.checkError(
 		connect('resize_request', self, '_on_resize_request'),
 		"connecting GNode resize_request"
 	);

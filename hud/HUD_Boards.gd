@@ -1,20 +1,16 @@
 extends Tabs
 
 
-var pmenu
-var bmenu
-
-var devices
-var selected_part
-var selected_board
+onready var pmenu = $VBoxContainer/HBoxContainer/SelectPart;
+onready var bmenu = $VBoxContainer/HBoxContainer/SelectBoard;
+var devices;
+var selected_part;
+var selected_board;
 
 
 func _ready():
-	pmenu = $VBoxContainer/HBoxContainer/SelectPart
-	bmenu = $VBoxContainer/HBoxContainer/SelectBoard
-
-	pmenu.get_popup().connect("id_pressed", self, "_on_SelectPart_pressed")
-	bmenu.get_popup().connect("id_pressed", self, "_on_SelectBoard_pressed")
+	pmenu.get_popup().connect('id_pressed', self, '_on_SelectPart_pressed')
+	bmenu.get_popup().connect('id_pressed', self, '_on_SelectBoard_pressed')
 
 
 func update_devices(data):

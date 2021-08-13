@@ -1,13 +1,12 @@
 extends Tabs
 
-var tabs;
+
+onready var tabs : TabContainer = $VSplitContainer/TabContainer;
 
 
 func _ready():
 	#$VSplitContainer/Details.visible = false
-		
-	tabs = $VSplitContainer/TabContainer
-		
+
 	var utils = {
 		'Constant': null,
 		'Label': null,
@@ -40,13 +39,13 @@ func _ready():
 	_add_tab('Utils', utils)
 
 	tabs.current_tab = 1
-	
-	
+
+
 func _add_buttons_to_treeitem(item):
-	item.add_button(0, preload("res://img/btn/plus-thick.svg"), 0, false, "Add instance")
-	item.add_button(0, preload("res://img/btn/eye.svg"), 1, false, "View in editor")
-	item.add_button(0, preload("res://img/btn/pencil.svg"), 2, false, "Edit")
-	item.add_button(0, preload("res://img/btn/content-copy.svg"), 3, false, "Create a copy")
+	item.add_button(0, Utils.icons.plus, 0, false, 'Add instance')
+	item.add_button(0, Utils.icons.eye, 1, false, 'View in editor')
+	item.add_button(0, Utils.icons.pencil, 2, false, 'Edit')
+	item.add_button(0, Utils.icons.copy, 3, false, 'Create a copy')
 	
 	
 func _add_children_recursively(tree, entry, children):
@@ -78,4 +77,3 @@ func _add_tab(name, items):
 
 func _tree_button_pressed(item, column, id):
 	print('Tree button pressed ', item.get_text(0), ' column ', column, ' id ', id)
-	

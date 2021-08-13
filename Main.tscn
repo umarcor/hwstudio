@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://mode/graph/Graph.tscn" type="PackedScene" id=2]
 [ext_resource path="res://mode/spatial/Spatial.tscn" type="PackedScene" id=3]
 [ext_resource path="res://mode/tilemap/TileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://img/banner_blur.png" type="Texture" id=5]
+[ext_resource path="res://hud/HUD_Repositories.gd" type="Script" id=6]
 [ext_resource path="res://hud/HUD.gd" type="Script" id=7]
+[ext_resource path="res://hud/HUD_Preferences.gd" type="Script" id=8]
 [ext_resource path="res://hud/HUD_Details.gd" type="Script" id=9]
 [ext_resource path="res://hud/HUD_Boards.gd" type="Script" id=10]
 [ext_resource path="res://hud/HUD_Placeholder.gd" type="Script" id=11]
@@ -63,6 +65,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 6 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HUD/Menu/TabContainer/Repositories"]
 anchor_right = 1.0
@@ -79,11 +82,15 @@ margin_bottom = 722.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Files" type="Tree" parent="HUD/Menu/TabContainer/Repositories/HSplitContainer/VSplitContainer"]
+[node name="Projects" type="Tree" parent="HUD/Menu/TabContainer/Repositories/HSplitContainer/VSplitContainer"]
 margin_right = 668.0
 margin_bottom = 355.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/item_margin = 14
+custom_constants/draw_guides = 1
+custom_constants/draw_relationship_lines = 1
+hide_root = true
 
 [node name="Libraries" type="Tree" parent="HUD/Menu/TabContainer/Repositories/HSplitContainer/VSplitContainer"]
 margin_top = 367.0
@@ -91,6 +98,10 @@ margin_right = 668.0
 margin_bottom = 722.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/item_margin = 14
+custom_constants/draw_guides = 1
+custom_constants/draw_relationship_lines = 1
+hide_root = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HUD/Menu/TabContainer/Repositories/HSplitContainer"]
 margin_left = 680.0
@@ -231,6 +242,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 8 )
 
 [node name="Scroll" type="ScrollContainer" parent="HUD/Menu/TabContainer/Preferences"]
 anchor_right = 1.0
@@ -266,10 +278,10 @@ margin_bottom = 14.0
 text = "Backend"
 
 [node name="Type" type="HBoxContainer" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend"]
-margin_left = 5.0
 margin_top = 18.0
 margin_right = 1338.0
 margin_bottom = 42.0
+custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend/Type"]
 margin_top = 5.0
@@ -280,22 +292,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="OptionButton" type="OptionButton" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend/Type"]
+margin_left = 38.0
+margin_right = 67.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LineEdit" type="LineEdit" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend/Type"]
-margin_left = 32.0
-margin_right = 1333.0
+margin_left = 77.0
+margin_right = 1338.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "OSVB"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Address" type="HBoxContainer" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend"]
-margin_left = 5.0
 margin_top = 46.0
 margin_right = 1338.0
 margin_bottom = 70.0
+custom_constants/separation = 10
 
 [node name="Label" type="Label" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend/Address"]
 margin_top = 5.0
@@ -307,8 +326,8 @@ __meta__ = {
 }
 
 [node name="LineEdit" type="LineEdit" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend/Address"]
-margin_left = 92.0
-margin_right = 1290.0
+margin_left = 98.0
+margin_right = 1289.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -318,8 +337,8 @@ __meta__ = {
 }
 
 [node name="Test" type="Button" parent="HUD/Menu/TabContainer/Preferences/Scroll/Sections/Backend/Address"]
-margin_left = 1294.0
-margin_right = 1333.0
+margin_left = 1299.0
+margin_right = 1338.0
 margin_bottom = 24.0
 text = "Test"
 
