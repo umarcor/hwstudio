@@ -5,7 +5,7 @@ Unai Martinez-Corral <unai.martinezcorral[at]ehu[dot]eus>
 :repotree: https://github.com/umarcor/hwstudio/tree/main/
 :toc-title: Hardware Studio
 :icons: font
-:docinfo: shared
+:favicon: ../favicon.png
 
 [.text-center]
 https://github.com/umarcor/hwstudio[image:https://img.shields.io/badge/umarcor-hwstudio-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='umarcor/hwstudio GitHub repository']]
