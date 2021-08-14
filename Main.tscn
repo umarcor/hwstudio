@@ -3,7 +3,7 @@
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://mode/graph/Graph.tscn" type="PackedScene" id=2]
 [ext_resource path="res://mode/spatial/Spatial.tscn" type="PackedScene" id=3]
-[ext_resource path="res://mode/tilemap/TileMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mode/tiles/Tiles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://doc/img/banner_blur.png" type="Texture" id=5]
 [ext_resource path="res://hud/HUD_Repositories.gd" type="Script" id=6]
 [ext_resource path="res://hud/HUD.gd" type="Script" id=7]
@@ -17,7 +17,7 @@ script = ExtResource( 1 )
 
 [node name="Graph" parent="." instance=ExtResource( 2 )]
 
-[node name="TileMap" parent="." instance=ExtResource( 4 )]
+[node name="Tiles" parent="." instance=ExtResource( 4 )]
 
 [node name="Spatial" parent="." instance=ExtResource( 3 )]
 

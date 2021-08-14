@@ -3,7 +3,7 @@ extends Node
 
 onready var modeGroups = {
 	'graph': [$Graph],
-	'tilemap': [$TileMap],
+	'tiles': [$Tiles],
 	'spatial': [$Spatial, $Spatial/Window]
 };
 var currentMode: int = -1
@@ -45,8 +45,8 @@ func _switch_mode(idx : int):
 	match currentMode:
 		mode.GRAPH:
 			group = 'graph';
-		mode.TILEMAP:
-			group = 'tilemap';
+		mode.TILES:
+			group = 'tiles';
 		mode.SPATIAL:
 			group = 'spatial';
 		_:

@@ -20,7 +20,7 @@ enum Context {
 
 enum Mode {
 	GRAPH,
-	TILEMAP,
+	TILES,
 	SPATIAL
 }
 
@@ -33,7 +33,7 @@ onready var aboutLinks : Node = $About/PanelContainer/CenterContainer/VBoxContai
 func _ready():
 	modeMenu.set_name('modeMenu');
 	modeMenu.add_item('Graph', Mode.GRAPH);
-	modeMenu.add_item('TileMap', Mode.TILEMAP);
+	modeMenu.add_item('Tiles', Mode.TILES);
 	modeMenu.add_item('Spatial', Mode.SPATIAL);
 	contextMenu.add_child(modeMenu);
 
