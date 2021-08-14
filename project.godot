@@ -9,16 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "Architecture",
-"language": "GDScript",
-"path": "res://data/Data_Architecture.gd"
-}, {
-"base": "Reference",
-"class": "Entity",
-"language": "GDScript",
-"path": "res://data/Data_Entity.gd"
-}, {
 "base": "GNode",
 "class": "GBlock",
 "language": "GDScript",
@@ -38,26 +28,12 @@ _global_script_classes=[ {
 "class": "GSlice",
 "language": "GDScript",
 "path": "res://mode/graph/GSlice.gd"
-}, {
-"base": "Object",
-"class": "Project",
-"language": "GDScript",
-"path": "res://data/Data_Project.gd"
-}, {
-"base": "Reference",
-"class": "Repository",
-"language": "GDScript",
-"path": "res://data/Data_Repository.gd"
 } ]
 _global_script_class_icons={
-"Architecture": "",
-"Entity": "",
 "GBlock": "",
 "GLabel": "",
 "GNode": "",
-"GSlice": "",
-"Project": "",
-"Repository": ""
+"GSlice": ""
 }
 
 [application]

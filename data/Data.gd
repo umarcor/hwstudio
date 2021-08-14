@@ -1,7 +1,9 @@
 extends Node
 
 
-const Project = preload('res://data/Data_Project.gd')
+const Types = preload('res://data/Types.gd')
+const Project = Types.Project
+const Source = Types.Source
 
 const icons = {
 	'check': preload('res://data/btn/check.svg'),
@@ -72,9 +74,9 @@ func _init():
 		'architectures': {}
 	}
 	projects.append(Project.new('Example project', [
-		Project.Source.new('/t/neorv32', Project.source_types.GLOB),
-		Project.Source.new('/t/vunit/vunit', Project.source_types.GLOB),
-		Project.Source.new('/t/vunit/osvb/AXI4Stream', Project.source_types.PYCAPI)
+		Source.new('/t/neorv32', Types.source_types.GLOB),
+		Source.new('/t/vunit/vunit', Types.source_types.GLOB),
+		Source.new('/t/vunit/osvb/AXI4Stream', Types.source_types.PYCAPI)
 	]));
 
 

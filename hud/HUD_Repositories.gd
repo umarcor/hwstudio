@@ -82,7 +82,7 @@ func _Projects_init_Project(
 	item = prj_tree.create_item(root);
 	item.set_text(0, 'New source location');
 	item.set_editable(0, true);
-	_add_Range_Cell(Data.Project.source_types_str, item, 1);
+	_add_Range_Cell(Data.Types.source_types_str, item, 1);
 	_add_Buttons([
 		{
 			'text': 'Check',
@@ -99,12 +99,12 @@ func _Projects_init_Project(
 
 func _Projects_init_Source(
 	root : TreeItem,
-	src : Data.Project.Source
+	src : Data.Source
 ) -> void:
 	root.set_metadata(0, {"Location": src});
 	root.set_text(0, src.Location);
 	root.add_button(0, Data.icons.pencil, project_buttons.EDIT, false, 'Edit');
-	_add_Range_Cell(Data.Project.source_types_str, root, 1, src.Type);
+	_add_Range_Cell(Data.Types.source_types_str, root, 1, src.Type);
 	_add_Buttons([
 		{
 			'text': 'Check',
@@ -285,7 +285,7 @@ func _get_last(item):
 
 
 func _Projects_set_Project(
-	prj : Project,
+	prj : Data.Types.Project,
 	item : TreeItem
 ) -> void:
 	var name = item.get_text(0);
@@ -294,7 +294,7 @@ func _Projects_set_Project(
 
 
 func _Projects_set_Source(
-	_prj : Project,
+	_prj : Data.Types.Project,
 	item : TreeItem
 ) -> void:
 	var path = item.get_text(0);
@@ -322,15 +322,15 @@ func _Projects_add_Project(
 
 
 func _Projects_add_Source(
-	prj : Project,
+	prj : Data.Types.Project,
 	item : TreeItem
 ) -> void:
 	var path = item.get_text(0);
 	var type = item.get_range(1);
 	item.set_text(0, 'New source location');
-	item.set_range(1, Data.Project.source_types.GLOB);
+	item.set_range(1, Data.Types.source_types.GLOB);
 	
-	var src = Data.Project.Source.new(path, type);
+	var src = Data.Source.new(path, type);
 	prj.Sources.append(src);
 	
 	var parent = item.get_parent();
@@ -340,7 +340,7 @@ func _Projects_add_Source(
 
 
 func _Projects_remove_Project(
-	prj : Project,
+	prj : Data.Types.Project,
 	item : TreeItem
 ) -> void:
 	prj.free();
@@ -348,7 +348,7 @@ func _Projects_remove_Project(
 
 
 func _Projects_remove_Source(
-	prj : Project,
+	prj : Data.Types.Project,
 	item : TreeItem
 ) -> void:
 	prj.Sources.erase(item.get_metadata(0)["Location"]);
