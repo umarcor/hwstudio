@@ -13,72 +13,135 @@ The workflow needs to be (V)HDL centric. That is, hardware designers working wit
 https://github.com/VUnit/vunit[VUnit] for managing regression tests should NOT need to modify their sources in order to use
 Hardware Studio.
 
-There is an abstract language model project written in Python: https://github.com/vhdl/pyVHDLModel[pyVHDLModel]. The motivation
-is abstracting parser engines and allowing building tools on top of a standardised API. Unfortunately, there is still no open
-source, complete and documented parser for VHDL 2008 which interacts with it. See detailed discussions
-in https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/312[jeremiah-c-leary/vhdl-style-guide#312] and
-https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328[jeremiah-c-leary/vhdl-style-guide#328]. As of January 2021,
-https://github.com/ghdl/ghdl/tree/master/pyGHDL[pyGHDL] is the best candidate, since a prototype exists and GHDL is the most
-used open source simulator and synthesiser for VHDL; however, the implementation of `pyGHDL.dom` is not complete.
+Parsing HDLs is a challenging task.
+Both VHDL and System Verilog are known to be difficult to parse because of the number of use cases they cover, as well
+as due to the notable differences compared to software languages.
+In fact, as far as we are aware, there is no tool (open source or not open) which can support either VHDL or System
+Verilog completely.
+All of them specify which versions and/or features are (un)supported.
+However, a robust and as-comple-as-possible parser is the foundation for any kind of tooling to be built around a
+language.
+As a result, hardware design environments have been severely lagging behind in comparison to the IDEs, GUIs and
+debuggers available for almost any software language.
+
+Dozens of developers tried implementing their own VHDL parsers.
+Some notable examples are
+http://vunit.github.io/[VUnit],
+https://kevinpt.github.io/symbolator/[Symbolator],
+https://terostech.com/[TerosHDL],
+https://vhdl-style-guide.readthedocs.io/[vhdl-style-guide]
+or https://github.com/VHDLTool[VHDLTool].
+All of those have complex parsers, based on regular expressions and ad-hoc tweaks, or on general purpose parser
+generators.
+They suffice for their use cases, but the implementation of new and more complex features is hindered by the maintenance
+burden of the parsers.
+
+There are two projects with a wider scope, which are expected to be used by any tool around the language, rather than by
+some specific tool.
+See detailed discussions in https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/312[jeremiah-c-leary/vhdl-style-guide#312]
+and https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328[jeremiah-c-leary/vhdl-style-guide#328].
+
+* https://github.com/VHDL-LS/rust_hdl[rust_hdl] was developed by Olof Kraigher (co-author of VUnit), starting in 2018.
+  It is written in Rust and it is meant to provide "a collection of HDL related tools".
+  Parsing of the VHDL language is almost complete, but semantic analysis stages were not implemented yet.
+  In fact, plugging rust_hdl as a frontend into GHDL (or using GHDL as a backend from rust_hdl) has been discussed.
+  However, rust_hdl is not actively developed at the moment, since the main author is currently not using HDL.
+
+* https://github.com/Paebbels/pyVHDLParser[pyVHDLParser] is a token-stream based parser developed by Patrick 'Paebbels'
+  Lehmann.
+  Patrick is the Vice-Chair of the IEEE P1076 Working Group, so the main focus of pyVHDLParser is correctness and fast
+  (real-time) processing without requiring a compiled tool.
+  Development started in 2017, however, due to the focus on covering and properly handling all the features in the
+  language, it is a long going project which is not complete yet.
+
+Overall, almost a dozen projects are known in the community, which are trying to reimplement features already available
+in GHDL, but not easy to reuse.
+Although GHDL's main purpose was never being a parser per se, advanced VHDL parsing was required in order to allow
+simulation and synthesis features.
+As a result, GHDL includes the most complete VHDL parser and semantic analysis capabilities available in open source
+tooling, and maybe compared to vendor tooling too.
+Throughout the last decade, there were numerous requests for having GHDL's parsing/analysis capabilities exposed through
+an API for developers to build tools on top of it.
+However, GHDL is written in Ada.
+That might be appealing to VHDL developers, due to the similarities; but it seems to be an stopper for developers with a
+background in C/C++, Rust, Python, etc.
+
+https://github.com/vhdl/pyVHDLModel[pyVHDLModel] is a Document Object Model (DOM) for the VHDL language written in Python.
+That is, a set of classes that represent the objects found in VHDL sources, and utils for manipulating and interacting
+with those classes.
+The generation of an specific tree for an specific codebase is done by a backend.
+Currently supported backends are `pyGHDL.dom`/`pyGHDL.libghdl` and pyVHDLParser.
+Therefore, `pyGHDL.dom` is used in the backend of Hardware Studio.
 
 Yet, there are two distinct required features with different complexity:
 
-* Parsing the entities to get the list and types of generics and ports. This might be possible with either
-https://github.com/ghdl/ghdl[GHDL] or https://github.com/kraigher/rust_hdl[rust_hdl] already. It would allow to identify
-entities as blocks to be instantiaded in diagrams.
+* Parsing the entities to get the list and types of generics and ports.
+  This is possible with `pyGHDL.dom` already, and it might be possible with
+  https://github.com/kraigher/rust_hdl[rust_hdl] too.
+  Hence, it's possible to identify entities as blocks to be instantiaded in diagrams.
 
-* Getting an schematic/RTL diagram from an architecture. This is more complex, as it requires not only parsing, but also
-semantic analysis and (at least partial) elaboration of the design. The output of `ghdl --synth` might work well (either
-before or after passing it to https://github.com/YosysHQ/yosys[yosys]). Nonetheless, *this is the main goal of this project*,
-as it would really provide insight into existing designs.
+* Getting an schematic/RTL diagram from an architecture.
+  This is more complex, as it requires not only parsing, but also semantic analysis and (at least partial) elaboration
+  of the design.
+  The output of `ghdl --synth` might work well (either before or after passing it to https://github.com/YosysHQ/yosys[yosys]).
+  Nonetheless, *this is the main goal of this project*, as it would really provide insight into existing designs.
 
 ===== (V)HDL generation/synchronization
 
 As a complement to generating diagrams by analysing (V)HDL sources, it should be possible to generate structural (V)HDL
-sources from diagrams in Hardware Studio. This is supported by many tools already, so it is not a novelty, but a need for
-usability.
+sources from diagrams in Hardware Studio.
+This is supported by many tools already, so it is not a novelty, but a need for usability.
 
 In this regard, it is unfortunate that neither a standard style guide nor open source automatic code formatter exists for
-VHDL. As a result, keeping style consistency between handwritten and generated sources is not possible yet. Nevertheless,
-see https://github.com/jeremiah-c-leary/vhdl-style-guide[VHDL Style Guide (VSG)].
+VHDL.
+As a result, keeping style consistency between handwritten and generated sources is not possible yet.
+Nevertheless, that is one of the expected use cases of pyVHDLModel.
+See also https://github.com/jeremiah-c-leary/vhdl-style-guide[VHDL Style Guide (VSG)].
 
 ==== 2.5D|3D visualization
 
-Regarding the interface and how users interact with the design, the purpose of this project is to explore visualizatons that
-go beyond collapsible/expandable 2D diagrams. Our belief is that the multiple abstraction layers in hardware designs can be
-better understood and debugged by using the third dimension.
+Regarding the interface and how users interact with the design, the purpose of this project is to explore visualizatons
+that go beyond collapsible/expandable 2D diagrams.
+Our belief is that the multiple abstraction layers in hardware designs can be better understood and debugged by using
+the third dimension.
 
-The main blocker to achieve a true 3D visualization allowing users to locate blocks at arbitrary locations is the routing.
-The complexity is increased if the layout needs to be automatic. That is, in fact, a very challenging task from an algorithmic
-point of view (https://github.com/SymbiFlow/ideas/issues/41[SymbiFlow/ideas#/issues/#41]). Nevertheless, so much freedom in
-the visualization might be counterproductive. Hence, a semi-constrained 2.5D approach might be preferred.
+The main blocker to achieve a true 3D visualization allowing users to locate blocks at arbitrary locations is the
+routing.
+The complexity is increased if the layout needs to be automatic.
+That is, in fact, a very challenging task from an algorithmic point of view (https://github.com/SymbiFlow/ideas/issues/41[SymbiFlow/ideas#/issues/#41]).
+Nevertheless, so much freedom in the visualization might be counterproductive.
+Hence, a semi-constrained 2.5D approach might be preferred.
 
-Depending on implementation details, off-the-shelf Godot classes might not work. That is, the connection and port type
-management logic that is provided in `GraphEdit` and `GraphNode` might need to be reimplemented. On the other hand,
-https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d[2.5D Demo Project with GDScript] exists.
+Depending on implementation details, off-the-shelf Godot classes might not work.
+That is, the connection and port type management logic that is provided in `GraphEdit` and `GraphNode` might need to be
+reimplemented.
+On the other hand, https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d[2.5D Demo Project with GDScript] exists.
 Nevertheless, this is far below other features in the priority list.
 
-Moreover, 2.5D or 3D visualizations are a good fit for virtual reality (VR) devices. The usability of VR for real-time
-navigation of (V)HDL designs is to be tested. We are not convinced about it, because text editing is expected to be an
-important task of the development process. Anyway, Godot supports VR and AR (see
-https://godotengine.org/article/godot-3-vr-and-ar-support[Godot 3's VR and AR support]), so it would be relatively
-straightforward to try it once other features are ready.
+Moreover, 2.5D or 3D visualizations are a good fit for virtual reality (VR) devices.
+The usability of VR for real-time navigation of (V)HDL designs is to be tested.
+We are not convinced about it, because text editing is expected to be an important task of the development process.
+Anyway, Godot supports VR and AR (see https://godotengine.org/article/godot-3-vr-and-ar-support[Godot 3's VR and AR support]),
+so it would be relatively straightforward to try it once other features are ready.
 
 ==== Gamification of hardware design and https://en.wikipedia.org/wiki/Fourth_Industrial_Revolution[Industry 4.0]
 
-Since most hardware designs are indeed logic puzzles, there are lots of synergies between describing systems in (V)HDL and
-several game types. This is specially so because VHDL is a parallel/concurrent language, co-execution of multiple cooperative
-modules/components is _natural_. The most obvious games are the ones where electrical circuits are used, or which are based
-on playing with logic gates and Boole's algebra:
+Since most hardware designs are indeed logic puzzles, there are lots of synergies between describing systems in (V)HDL
+and several game types.
+This is specially so because VHDL is a parallel/concurrent language; thus, co-execution of multiple cooperative
+modules/components is _natural_.
+The most obvious games are the ones where electrical circuits are used, or which are based on playing with logic gates
+and Boole's algebra:
 
 * https://store.steampowered.com/app/614890/Cuit/[CUIT]
 * https://store.steampowered.com/app/290020/LogicBots/[LogicBots]
 * https://store.steampowered.com/app/970800/Short_Circuit_VR/[Short Circuit VR]
 * https://store.steampowered.com/app/282760/Circuits/[Circuits]
 
-However, many strategy and survival games focused on building, automation and resource management can also be easily related.
-The following list is a very small subset of circuits designed in games with basic hardware logic features, albeit not being
-a relevant mechanic in the game.
+However, many strategy and survival games focused on building, automation and resource management can also be easily
+related.
+The following list is a very small subset of circuits designed in games with basic hardware logic features, albeit not
+being a relevant mechanic in the game.
 
 * https://www.youtube.com/watch?v=W856cOQ2ubk[How to make a clock/timer in RUST (and more) | Electricity tutorial]
 * https://www.youtube.com/watch?v=VEcmaXwjwuY[Computer Logic Gates in Minecraft (Only Redstone and Torches)]
@@ -87,9 +150,10 @@ a relevant mechanic in the game.
 * https://www.youtube.com/watch?v=raQguSGIVX8[OpenTTD Logic: 01 Introduction to Logic Circuits, AND Gate, NOT Gate]
 * https://www.youtube.com/watch?v=h-MOlgyx3Ps[Prison Architect - How To Use Logic Circuits]
 
-On a different category, (advanced) simulation environments mimicking real world industrial machinery/vehicles are gaining
-popularity. Those are sometimes developed together with custom input devices, frequently reusing the actual controls from the
-target plant.
+On a different category, (advanced) simulation environments mimicking real world industrial machinery/vehicles are
+gaining popularity.
+Those are sometimes developed together with custom input devices, frequently reusing the actual controls from the target
+plant.
 
 * https://www.youtube.com/channel/UClCCOBvRGK6jgL6n2yJIFow/videos[Science Virtual Labs] https://virtlabs.tech/[virtlabs.tech]
 * https://www.youtube.com/watch?v=0SETkk6lXRI[Mobile Crane Simulator (RTC Simulator) Training Module]
@@ -98,16 +162,18 @@ target plant.
 * https://www.youtube.com/watch?v=By1pGUWeKU0[Graphical Evolution of Construction Simulator (2011-2019)]
 * https://www.youtube.com/watch?v=nyEe3h7W5dg[Graphical Evolution of Farming Simulator (2008-2020)]
 
-Since FPGAs are a good fit for advanced industrial control applications, it is appealing to test control designs against the
-CAD models of the plant (if available). In this regard, several CAD and 3D modelling suites (such as https://www.freecadweb.org/[FreeCAD]
-or https://www.blender.org/[Blender]) are gaining scripting/animation support too, which allows simulation of mechanisms and
-collision detection:
+Since FPGAs are a good fit for advanced industrial control applications, it is appealing to test control designs against
+the CAD models of the plant (if available).
+In this regard, several CAD and 3D modelling suites (such as https://www.freecadweb.org/[FreeCAD] or
+https://www.blender.org/[Blender]) are gaining scripting/animation support too, which allows simulation of mechanisms
+and collision detection:
 
 * https://www.youtube.com/watch?v=veyaCkrAc68[How to Rig a Universal Joint with Blender]
 * https://www.youtube.com/watch?v=bU9KmkvSCdg[Robot Work Bench: FreeCAD Kuka Robot Simulation]
 
-Consequently, due to Godot providing easy to use engines for both 2D and 3D, adding HDL simulation features to Hardware Studio
-would allow building interactive learning environments. See https://github.com/dbhi/vboard[Virtual development board for HDL design]
+Consequently, due to Godot providing easy to use engines for both 2D and 3D, adding HDL simulation features to Hardware
+Studio would allow building interactive learning environments.
+See https://github.com/dbhi/vboard[Virtual development board for HDL design]
 and https://umarcor.github.io/ghdl-cosim/vhdl202x/[VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT].
 
 ////
@@ -120,12 +186,18 @@ and https://umarcor.github.io/ghdl-cosim/vhdl202x/[VHDL DPI/FFI based on GHDL’
 
 ==== Integration with other tools
 
-As explained, we aim to reuse existing tools when possible. For editing VHDL, projects such as VSCode, Emacs, Vim... all are
-good solutions. GHDL provides a https://github.com/ghdl/ghdl-language-server[language server] to be used with any of them.
-Moreover, https://github.com/TerosTechnology[TerosTechnology] provides a VSCode extension with multiple advanced features for
-working with VHDL and VUnit: https://github.com/TerosTechnology/vscode-terosHDL[vscode-terosHDL].
+As explained, we aim to reuse existing tools when possible.
+For editing VHDL, projects such as VSCode, Emacs, Vim... all are good solutions.
+GHDL provides a https://github.com/ghdl/ghdl-language-server[language server] to be used with any of them.
+Moreover, https://github.com/TerosTechnology[TerosTechnology] provides a VSCode extension with multiple advanced
+features for working with VHDL and VUnit: https://github.com/TerosTechnology/vscode-terosHDL[vscode-terosHDL].
 
 For waveform visualization, either http://gtkwave.sourceforge.net/[GtkWave] (https://github.com/gtkwave/gtkwave[github.com/gtkwave/gtkwave]),
-https://wavedrom.com/[Wavedrom] (https://github.com/wavedrom/wavedrom[github.com/wavedrom/wavedrom]) or https://github.com/Nic30/d3-wave[d3-wave] might be used. Nonetheless, *replaying* waveforms in Hardware Studio's frontend dataflow diagram (e.g., by colouring connections)
-would be interesting for allowing *animated simulations*. Related reference: https://github.com/umarcor/pulseview/tree/ghdl/ghdl[Reading waveforms from HDL simulators with PulseView].
-See also https://github.com/dbhi/fpconv[Data type exploration and visualization in arithmetic algorithms/circuits] and https://github.com/dbhi/vboard[Virtual development board for HDL design].
+https://wavedrom.com/[Wavedrom] (https://github.com/wavedrom/wavedrom[github.com/wavedrom/wavedrom]) or
+https://github.com/Nic30/d3-wave[d3-wave] might be used.
+Nonetheless, _replaying_ waveforms in Hardware Studio's frontend dataflow diagram (e.g., by colouring connections)
+would be interesting for allowing _animated simulations_.
+Related reference: https://umarcor.github.io/osvb/notebook/sigrok[Reading waveforms from HDL simulators with PulseView].
+See also
+https://umarcor.github.io/osvb/notebook/fpconv[Data type exploration and visualization in arithmetic algorithms/circuits]
+and https://github.com/dbhi/vboard[Virtual development board for HDL design].

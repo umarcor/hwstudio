@@ -1,20 +1,14 @@
 === Roadmap
 
-* [ ] Define the format/classes for, at least:
-** [ ] `Data`
-** [ ] `Repository`
-** [ ] `Project`
-** [ ] `Entity`
-** [ ] `Architecture`
+* [ ] Complete the definion of the Types classes.
 * · Extract entities and architectures by parsing HDL sources:
 ** [ ] VHDL
-*** Using GHDL's Python interface: https://github.com/ghdl/ghdl/pull/1449[ghdl/ghdl#1449]
+*** Define the OpenAPI between the frontend and the backend (container `swaggerapi/swagger-editor`).
 ** [ ] Verilog
 *** Verilator?
-* [ ] Define the content of the (internal) _utils_ repository: gates, combinatorial, sequential...
-* [ ] Show the tree structure of the current design in tab _Design_ from window _Repositories_.
-* [ ] Define/update the content of _Block details_ in windows _Repositories_, depending on the selected unit (in the tree or in the diagram).
-* [ ] Redefine the routing of the connections (currently, splines/bezier curves).
+* [ ] Implement the functionality of OSVDE in tab _Repositories_ of the main menu.
+* [ ] Define/update the content of _Block details_ in _Repositories_, depending on the selected unit (in the tree or in the diagram).
+* [ ] Redefine the routing of the connections in the Graph mode (currently, splines/bezier curves).
 ** https://github.com/godotengine/godot-proposals/issues/1401[godotengine/godot-proposals#1401]
 * · Generate HDL sources from _ArchGraph_:
 ** [ ] VHDL

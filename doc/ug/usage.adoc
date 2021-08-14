@@ -1,0 +1,108 @@
+=== Usage
+
+Hardware Studio's frontend has three main editing _modes_, each of them based on one _node_ type in Godot:
+Graph, Tiles and Spatial.
+Modes are just different approaches to drawing the designs and allowing the user to navigate and modify them.
+Having different modes is a result of exploring the capabilities and limitations of Godot as a hardware diagram editing
+tool.
+
+Apart from the editing modes, the _menu_ of Hardware Studio includes explorer features for gaining insight into the
+designs, boards, devices, etc.
+Currently, development is focused on those features rather than on the diagraming aspect.
+
+[NOTE]
+====
+Usage of Hardware Studio should be intuitive and self-learning should be easy.
+If you don't understand how some feature works, or if nothing happens when you do some action, chances are that it is
+not ready yet.
+Feel free to https://github.com/umarcor/hwstudio/issues/new[open an issue] for discussing it!
+====
+
+[TIP]
+====
+* Right-click anywhere on the Tiles or Spatial modes to open the context menu.
+* Use `Ctrl + Space` and `Ctrl + Shift + Space` to switch between editing modes.
+====
+
+==== Graph
+
+Apart from "traditional" text-based programming languages (such as
+https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/index.html[docs.godotengine.org: GDScript],
+C#,
+or any foreign language through https://docs.godotengine.org/en/stable/classes/class_gdnative.html[docs.godotengine.org: GDNative]),
+Godot has built-in support for https://en.wikipedia.org/wiki/Visual_programming_language[visual programming] through
+https://docs.godotengine.org/en/stable/getting_started/scripting/visual_script/index.html[docs.godotengine.org: VisualScript],
+similar to the https://docs.blender.org/manual/en/latest/editors/shader_editor.html[docs.blender.org: Shader Editor]
+in https://www.blender.org/[Blender].
+The class which VisualScript is built on is available as a https://docs.godotengine.org/en/stable/classes/class_control.html#class-control[Control]
+node named https://docs.godotengine.org/en/stable/classes/class_graphedit.html[docs.godotengine.org: GraphEdit], so that
+developers can build custom interfaces with them.
+
+The _Graph_ editing mode in Hardware Studio is based on GraphEdit.
+
+==== Tiles
+
+The main node type in Godot for managing 2D scenes is https://docs.godotengine.org/en/stable/classes/class_tilemap.html[TileMap].
+It provides a two-dimensional grid with optional snapping.
+Although mostly meant to be used when designing game levels (see https://docs.godotengine.org/en/stable/tutorials/2d/using_tilemaps.html[docs.godotengine.org: Using TileMaps]),
+the content of the tiles can be changed programmatically.
+
+The _Tiles_ editing mode in Hardware Studio is based on TileMap.
+
+==== Spatial
+
+The Godot 3D engine uses the https://docs.godotengine.org/en/stable/classes/class_spatial.html#class-spatial[Spatial]
+node for everything 3D.
+As explained in https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#d-in-3d[2D in 3D] (see also
+https://docs.godotengine.org/en/stable/tutorials/3d/index.html[3D]), using a 3D environment with a constrained camera is
+a common tradeoff for getting richer lighting/shadow effects.
+Moreover, it's a better fit than tilemaps for exploring editing designs through a <<2.5D|3D visualization>>.
+
+The _Spatial_ editing mode in Hardware Studio is based on Spatial.
+Currently, three ortogonal and fixed cameras are used.
+
+* Use WASD or arroy keys for moving the "player".
+* Use `+` to enable instantiation mode.
+** `Page Up` and `Page Down` iterate over the available "blocks".
+  Currently, there are 7 blocks only, representing `and`, `or`, `xor`, `not`, `nand`, `nor` and `xnor`.
+** `+` places an instance of the block.
+** `Esc` disables instantiation mode.
+
+==== Menu
+
+There are two main menus in Hardware Studio:
+
+* Context menu: a popup menu triggered with the right-click of the mouse.
+  It allows opening the _main menu_, changing the editing mode, opening the documentation, the About page and quitting.
+  It contains additional options specific to the active editing mode.
+* Main menu: a full size panel with tabs, opened from the _context menu_ and closed with `Esc`.
+  Tabs _Repositories_ and _Boards_ allow exploring the designs and data about the devices, while _Preferences_ contains
+  configuration options.
+
+===== Repositories
+
+_TBW_
+
+* https://umarcor.github.io/osvb/apis/project.html#open-source-vhdl-design-explorer-osvde[Open Source VHDL Design Explorer (OSVDE)]
+
+[IMPORTANT]
+====
+pyVHDLModel uses https://vhdl.github.io/pyVHDLModel/LanguageModel/Miscellaneous.html#design[Design] as the root of
+multiple documents and libraries.
+Therefore, it does not match the naming/classes in Hardware Studio.
+A _Model Design_ corresponds to a _Design_ in Hardware Studio, plus the tree of sources.
+In order to retrieve the tree of sources, the _Sources_ field of the corresponding _Project_ needs to be inquired.
+
+However, currently `libghdl` and therefore `pyGHDL.dom` don't allow handling multiple Designs in a single instance.
+Therefore, Hardware Studio analyses all the sources in a _Project_ as a single _Model Design_.
+====
+
+===== Boards
+
+_TBW_
+
+* https://github.com/hdl/constraints[hdl/constraints]
+
+===== Preferences
+
+_TBW_

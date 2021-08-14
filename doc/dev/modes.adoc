@@ -1,0 +1,26 @@
+=== Editing modes
+
+==== Graph
+
+_TBC_
+
+* Introduction videos to GraphEdit and GraphNode:
+** https://www.youtube.com/watch?v=ZD9X3uvyWmg[Using GraphEdit and GraphNode to create flow charts]
+** https://www.youtube.com/watch?v=AX5pN3mwfBc[Connecting GraphNodes to create powerful applications]
+** https://www.youtube.com/watch?v=klcB23Aw8Q4[Creating a mindmap app in Godot with GraphEdit and GraphNodes: a walkthrough]
+
+==== Tiles
+
+TileMaps in Godot can be square, isometric or custom shaped.
+The isometric view is used by many projects for faking 3D, while using 2D nodes.
+Actually, it's possible to render 3D assets as 2D sprites.
+However, the isometric view falls short when handling the depth and/or the height.
+Moreover in TileMaps assets are measured in pixels.
+That is desirable for games based on pixel-art, but cumbersome for a diagram editing tool.
+As a result, Tiles in Hardware Studio are square, while Spatial is used for isometric or other visualizations.
+
+_TBC_
+
+==== Spatial
+
+_TBC_

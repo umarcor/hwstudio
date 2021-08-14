@@ -1,20 +1,71 @@
 === Types
 
+IMPORTANT: These classes are to be (re)designed in terms of https://github.com/vhdl/pyVHDLModel[pyVHDLModel].
+
+The workflow and internal structure of Hardware Studio are based on _Entities_, _Architectures_ and _Blocks_:
+
+* _Entities_ are black boxes with name, ports, generics/constants and a context. It defines the external interface of a
+component.
+
+* _Architectures_ are the description of the logic/behaviour of a component. _Architectures_ have a name, an _Entity_ they
+belong to, and the content. That content can be defined using different languages, hence multiple types exist: _ArchScript_,
+_ArchGraph_, _ArchVHDL_, etc.
+
+* _Blocks_ are each of the components in a diagram/design; the instantiation of _Entities_. _Blocks_ have a name, the
+_Entity_/_Architecture_ that are to be used, and maps for generics/constants and ports.
+
+Hence, the main difference compared to other circuit/model diagraming tools is the ability to select the behaviour (thus
+implementation) of a block through a dropdown list.
+In traditional GUI tools, changing the behaviour requires the deletion of the previous block, and even redoing all the
+connections to/from it.
+Fast swapping of implementations in different languages allows for iterative comparison during development.
+That is, it allows switching between e.g. an in-development (V)HDL design and a reference software function.
+This concept is, naturally, borrowed from the VHDL language.footnote:[See the concept of _Configurations_ in the VHDL
+LRM.], but extended to other languages.
+
+For now, extracting diagrams from (V)HDL sources is not supported.
+Hence, only architectures of type _ArchGraph_ can be viewed and edited in the explorer.
+Therefore, the top-level instance is expected to be of type _ArchGraph_.
+Users can then instantiate any kind of _Block_ in there.
+
 ==== Data
 
-* repositories
-* devices
-
-==== Repository
-
-* library
-  * entities: []
-  * architectures: []
+_Data_ is a unique instance of a helper class, which is loaded automatically (see https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html[docs.godotengine.org: Singletons (AutoLoad)]).
+It contains the data and the interface for other components in the frontend to interact with design, components, etc.
 
 ==== Project
 
-* instance
-* implementations: []
+A _Project_ is a class that represents the content that users need when working on a hardware description project.
+
+* `Name : String`: name of the project. Does _not_ need to be unique.
+* `Sources : Array`: a list of objects of type `Source`.
+* `Designs : Array`: a list of objects of type `Design`.
+
+==== Source
+
+A _Source_ is a class that represents a repository or directory containing HDL sources.
+
+* `Location : String`: URL or path of the repository/directory.
+* `Type : int`: type of sources, where the integer is a constant from the enumeration `{glob, pyCAPI, FuseSoC}`.
+* `Library : Dictionary`: name of the logical libraries where sources are to be analysed, and the corresponding patterns
+  (applies to type `glob` only).
+
+==== Design
+
+A _Design_ is a class that represents the top-level of a hardware design, which might be targeting one or multiple boards.
+
+* `Name : String`: name of the design. Does _not_ need to match any entity name, and it does _not_ need to be unique.
+* `DesignTop : String`: the top-level unit of the logical design and (optionally) secondary unit, using the following
+  syntax `LibraryName.PrimaryName(SecondaryName)`.
+* `Targets : Array`: a list of objects of type `Target`.
+
+==== Target
+
+* `Board : String`: identifier of the target board.
+* `BoardTop : String`: the top-level unit of the implementation and (optionally) secondary unit, using the following
+  syntax: `LibraryName.PrimaryName(SecondaryName)`.
+* `IO : Array`: mapping of the top-level ports to the device pins.
+* `Constraints`: (optional) constraints to be passed to simulation, synthesis or implementation tools.
 
 ==== Entity
 

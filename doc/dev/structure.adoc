@@ -1,50 +1,50 @@
 === Structure
 
-IMPORTANT: This is work in progress and is to be designed in terms of https://github.com/vhdl/pyVHDLModel[pyVHDLModel].
+Hardware Studio is implemented in two main components (a frontend and a backend) which talk to each other through a web
+API (see https://en.wikipedia.org/wiki/OpenAPI_Specification[wikipedia.org: OpenAPI Specification]).
+As shown in xref:img-hwstudio[xrefstyle=short], the frontend is written in Godot's GDScript.
+On the other hand, the backend is written in Python and it handles most of the complexity.
+Since the goal of Hardware Studio is to wrap existing projects, rather than reimplementing them, the backend is based on
+bridging to and reusing over a dozen purpose specific open source tools.
 
-The workflow and internal structure of Hardware Studio are based on _Entities_, _Architectures_ and _Blocks_:
-
-* _Entities_ are black boxes with name, ports, generics/constants and a context. It defines the external interface of a
-component.
-
-* _Architectures_ are the description of the logic/behaviour of a component. _Architectures_ have a name, an _Entity_ they
-belong to, and the content. That content can be defined using different languages, hence multiple types exist: _ArchScript_,
-_ArchGraph_, _ArchVHDL_, etc.
-
-* _Blocks_ are each of the components in a diagram/design; the instantiation of _Entities_. _Blocks_ have a name, the
-_Entity_/_Architecture_ that are to be used, and maps for generics/constants and ports.
-
-Hence, the main difference compared to other circuit/model diagraming tools is the ability to select the behaviour (thus
-implementation) of a block through a dropdown list. In traditional GUI tools, changing the behaviour requires the deletion of
-the previous block, and even redoing all the connections to/from it. Fast swapping of implementations in different languages
-allows for iterative comparison during development. That is, it allows switching between e.g. an in-development (V)HDL design
-and a reference software function. This concept is, naturally, borrowed from the VHDL language.footnote:[See the concept of
-_Configurations_ in the VHDL LRM.], but extended to other languages.
-
-For now, extracting diagrams from (V)HDL sources is not supported. Hence, only architectures of type _ArchGraph_ can be
-viewed and edited in the explorer. Therefore, the top-level instance is expected to be of type _ArchGraph_. Users can then
-instantiate any kind of _Block_ in there.
+[#img-hwstudio]
+.Internal structure of Hardware Studio.
+[link=img/hwstudio.svg]
+image::hwstudio.svg['Internal structure of Hardware Studio', align="center"]
 
 ==== Projects and `*.hwf`
 
-A _Project_ in Hardware Studio is a top-level instance which has implementation details, such as external pin mapping and
-board constants. Hence, in order to save projects to disk, the text or binary format of entities and architectures needs to
-be defined. For (V)HDL architecture types, that is standardized already. However, _ArchGraph_, the description of architectures
-through the graphical editor, is per se a https://en.wikipedia.org/wiki/Visual_programming_language[visual programming language]
-(VPL). Hence, the definition of the format to be used for saving diagrams to disk is, implicitly, a textual or binary
-programming (description) language. That is, users can potentially choose to write the diagrams manually or programmatically,
-instead of using the visual editor. In fact, drawing structural circuits with https://en.wikipedia.org/wiki/PGF/TikZ[TikZ] is
-conceptually similar to describing them in VHDL, even though the syntax is very different.
+A _Project_ in Hardware Studio is a top-level instance which has implementation details, such as external pin mapping
+and board constants.
+Hence, in order to save projects to disk, the text or binary format of entities and architectures needs to be defined.
+For (V)HDL architecture types, that is standardized already.
+However, _ArchGraph_, the description of architectures through the graphical editor, is per se a
+https://en.wikipedia.org/wiki/Visual_programming_language[visual programming language] (VPL).
+Hence, the definition of the format to be used for saving diagrams to disk is, implicitly, a textual or binary
+programming (description) language.
+That is, users can potentially choose to write the diagrams manually or programmatically, instead of using the visual
+editor.
+In fact, drawing structural circuits with https://en.wikipedia.org/wiki/PGF/TikZ[TikZ] is conceptually similar to
+describing them in VHDL, even though the syntax is very different.
 
-IMPORTANT: The binary/text format for saving _ArchGraphs_ is undefined yet. That's why this tool is still barely usable.
+[IMPORTANT]
+====
+The binary/text format for saving _ArchGraphs_ is undefined yet.
+That's why this tool is still barely usable.
+====
 
-https://docs.godotengine.org/en/latest/classes/class_configfile.html[ConfigFile], while intended for configuration files, can
-be used for saving games, as it can serialize any Godot datatype (not custom objects). Unlike JSON, (de)serializing types such
-as `Vector2` or `Vector3` manually is not required. However, due to portability and potential compatibility with other tools,
-it might be desirable to use JSON or YAML, either as complements or replacements of _ConfigFile_. See
+https://docs.godotengine.org/en/latest/classes/class_configfile.html[docs.godotengine.org: ConfigFile], while intended
+for configuration files, can be used for saving games, as it can serialize any Godot datatype (not custom objects).
+Unlike JSON, (de)serializing types such as `Vector2` or `Vector3` manually is not required.
+However, due to portability and potential compatibility with other tools, it might be desirable to use JSON or YAML,
+either as complements or replacements of _ConfigFile_.
+See
 https://docs.godotengine.org/en/latest/tutorials/io/saving_games.html[docs.godotengine.org: I/O > Saving games] and
 https://docs.godotengine.org/en/latest/getting_started/step_by_step/resources.html#creating-your-own-resources[docs.godotengine.org: Step by step > Creating your own resources].
 
 ==== Signal/port types
 
-_How to handle compatible/incompatible types, TBW_
+_TBW_
+
+* _How to handle compatible/incompatible types_
+* _Getting resolved types needs elaboration, so we use string representations for now_

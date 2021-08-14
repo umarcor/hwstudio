@@ -1,42 +1,57 @@
 = Hardware Studio
-Unai Martinez-Corral <unai.martinezcorral[at]ehu[dot]eus>
+:author: Unai Martinez-Corral and contributors
+:email: https://github.com/umarcor[@GitHub] https://gitlab.com/umarcor[@GitLab] https://twitter.com/unaimarcor[@Twitter]
+:repotree: https://github.com/umarcor/hwstudio/tree/main/
+:notitle:
+:toc-title: Hardware Studio
 :toc: left
 :toclevels: 4
-:repotree: https://github.com/umarcor/hwstudio/tree/main/
-:toc-title: Hardware Studio
+:stem:
+:reproducible:
 :icons: font
 :favicon: ../favicon.png
+:imagesdir: img
+
+[#banner-hwstudio]
+[link=https://umarcor.github.io/hwstudio]
+image::https://umarcor.github.io/hwstudio/index.png['Hardware Studio', align="center", width=75%]
 
 [.text-center]
 https://github.com/umarcor/hwstudio[image:https://img.shields.io/badge/umarcor-hwstudio-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='umarcor/hwstudio GitHub repository']]
 https://github.com/umarcor/hwstudio/releases[image:https://img.shields.io/github/v/release/umarcor/hwstudio?include_prereleases&longCache=true&style=flat-square&label=Releases&logo=github&color=informational[title='GitHub releases (latest by date including pre-releases)']]
 
-[#banner-hwstudio]
-[link=https://umarcor.github.io/hwstudio]
-image::https://umarcor.github.io/hwstudio/index.png['Hardware Studio', align="center"]
+Hardware Studio (_hwstudio_) is a graphical design environment for hardware modelling, focused on (V)HDL.
+It allows describing systems by arranging and connecting blocks in a diagramming tool.
+Unlike other similar tools, the main target of hwstudio is not https://en.wikipedia.org/wiki/Hardware_description_language[HDL]
+generation.
+Instead, it is expected to be used by hardware designers for gaining insight into their models and for easing cumbersome
+tasks, such as connections in large structural architectures or co-simulation with non-trivial software models.
 
-== Installation
+[WARNING]
+====
+This is a work in progress proof of concept and not actively funded/developed.
+A diagraming tool which is kept in sync with HDL sources needs to integrate multiple complex features.
+It is challenging to bring together the expertise in hardware design with knowledge about software architecture, and
+spare time for devoting to open source tooling.
+Hence, this repository contains several iterations to try putting together existing pieces:
+https://godotengine.org/[Godot],
+https://github.com/umarcor/osvb/[OSVB]
+(https://github.com/ghdl/ghdl[GHDL],
+https://github.com/VUnit/vunit[VUnit],
+http://gtkwave.sourceforge.net/[GtkWave],
+https://github.com/OSVVM/OSVVM[OSVVM]...),
+https://github.com/vhdl/pyVHDLModel[pyVHDLModel],
+https://github.com/hdl/constraints[hdl/constraints],
+https://github.com/hdl/containers[hdl/containers],
+https://symbiflow.github.io/[SymbiFlow],
+etc..
+====
 
-This repository is early work in progress and no regular/tagged releases are available yet. However, after each commit is
-pushed, CI workflows produce artifacts. Latest artifacts are published as assets of pre-release _nightly_:
-https://github.com/umarcor/hwstudio/releases/tag/nightly[github.com/umarcor/hwstudio/releases/tag/nightly]. Just downloading
-the tarball/zipfile for your platform and extracting it should work. Otherwise, https://github.com/umarcor/hwstudio/issues/new[let us know]!
+== User Guide
 
-The HTML5 version of the app is available at https://umarcor.github.io/hwstudio/[umarcor.github.io/hwstudio]. Note that
-running the HTML5 version locally requires a web server. For testing purposes, a shell script is included in the tarball
-(link:{repotree}dist/html5/serve.sh[`serve.sh`]), which will start a Docker container.
+include::ug/setup.adoc[]
 
-== Usage
-
-Since *Hardware Studio* is mainly a diagraming tool, the usage should be intuitive and self-learning should be easy. If you
-don't understand how some feature works, or if nothing happens when you do some action, chances are that it is not ready yet.
-Feel free to https://github.com/umarcor/hwstudio/issues/new[open an issue] for discussing it!
-
-=== Boards
-
-* https://github.com/hdl/constraints[hdl/constraints]
-** http://www.latticesemi.com/icestick[iCEstick Evaluation Kit]
-** https://tomu.im/fomu.html[Fomu] (https://github.com/im-tomu/fomu-hardware[im-tomu/fomu-hardware])
+include::ug/usage.adoc[]
 
 == Development
 
@@ -45,6 +60,8 @@ include::dev/tools.adoc[]
 include::dev/goals.adoc[]
 
 include::dev/structure.adoc[]
+
+include::dev/modes.adoc[]
 
 include::dev/types.adoc[]
 

@@ -1,0 +1,79 @@
+=== Installation and setup
+
+[IMPORTANT]
+====
+Since this repository is early work in progress, no regular/tagged releases are available yet.
+Nevertheless, after each commit is pushed, CI workflows produce artifacts.
+Latest artifacts are published as assets of pre-release _nightly_:
+https://github.com/umarcor/hwstudio/releases/tag/nightly[github.com/umarcor/hwstudio/releases/tag/nightly].
+====
+
+Hardware Studio is composed of two main components: the frontend and the backend.
+Features that require interacting with files or tools on the host are not implemented in the frontend,
+but handled by a backend.
+Therefore, although the frontend can be used standalone, it is recommended to run both of them.
+
+==== Frontend
+
+The frontend is developed using https://godotengine.org/[Godot] and it is exported for GNU/Linux, Windows and Mac OS.
+The artifacts are standalone executables, so just downloading the https://github.com/umarcor/hwstudio/releases/tag/nightly[nightly]
+tarball/zipfile for your platform and extracting it should work.
+Otherwise, https://github.com/umarcor/hwstudio/issues/new[let us know]!
+
+[NOTE]
+====
+Native builds of Hardware Studio are available for x64 only.
+However, the backend can be executed on any platform, as long as EDA tools are available.
+====
+
+===== HTML5
+
+Godot has built-in support for https://docs.godotengine.org/en/stable/getting_started/workflow/export/exporting_for_web.html[docs.godotengine.org: Exporting for the Web].
+That generates an HTML5 build to be used on browsers with support for https://webassembly.org/[WebAssembly (WASM)] and
+https://www.khronos.org/webgl/[WebGL].
+The HTML5 build of Hardware Studio is available at https://umarcor.github.io/hwstudio/[umarcor.github.io/hwstudio].
+
+[IMPORTANT]
+====
+Since WASM is a very recent technology, there are still compatibility and performance issues on some
+platforms/browsers.
+For instance, fonts are not properly scaled on 4K monitors.
+It is therefore recommended to use the native artifacts.
+====
+
+[NOTE]
+====
+The HTML5 artifacts are available for download, so users can run the HTML5 build locally for experimentation.
+Note that a web server is required for serving the files.
+For testing purposes, a shell script is included in the tarball
+(link:{repotree}dist/html5/serve.sh[`serve.sh`]), which will start a Docker container and serve the content.
+====
+
+==== Backend
+
+The backend is mostly written in pure Python, so it can be used through https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH[PYTHONPATH], after getting a tarball or through
+`git clone`.
+
+Install the dependencies through `pip`:
+
+[source,shell]
+----
+# pip3 install -r py/requirements.txt
+----
+
+Then, execute the main script for starting the server:
+
+[source,shell]
+----
+# ./py/api/main.py
+Serving on port 8000...
+----
+
+In the frontend, go to _Menu_ / _Preferences_ and check that the _Backend_ address and port are correct.
+There is a button for testing that frontend and backend can talk to each other.
+
+[TIP]
+====
+When using the HTML5 frontend, open the _Console_ in the developer tools to see the output printed to the _terminal_
+by the frontend.
+====
