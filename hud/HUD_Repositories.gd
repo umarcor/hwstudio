@@ -35,7 +35,7 @@ func _Projects_init_tree()  -> void:
 	entry.set_text(0, 'New project');
 	entry.set_editable(0, true);
 	entry.set_expand_right(0, true);
-	entry.add_button(0, Utils.icons.plus, project_buttons.ADD, false, 'Add')
+	entry.add_button(0, Data.icons.plus, project_buttons.ADD, false, 'Add')
 
 	for sig in ['cell_selected', 'nothing_selected', 'item_activated', 'button_pressed', 'item_edited']:
 		Utils.checkError(
@@ -103,7 +103,7 @@ func _Projects_init_Source(
 ) -> void:
 	root.set_metadata(0, {"Location": src});
 	root.set_text(0, src.Location);
-	root.add_button(0, Utils.icons.pencil, project_buttons.EDIT, false, 'Edit');
+	root.add_button(0, Data.icons.pencil, project_buttons.EDIT, false, 'Edit');
 	_add_Range_Cell(Data.Project.source_types_str, root, 1, src.Type);
 	_add_Buttons([
 		{
@@ -141,7 +141,7 @@ func _add_Buttons(
 	column : int = 0
 ) -> void:
 	for btn in btns:
-		item.add_button(column, Utils.icons[btn.icon], btn.id, false, btn.text);
+		item.add_button(column, Data.icons[btn.icon], btn.id, false, btn.text);
 
 
 func _add_Range_Cell(

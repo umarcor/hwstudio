@@ -3,6 +3,17 @@ extends Node
 
 const Project = preload('res://data/Data_Project.gd')
 
+const icons = {
+	'check': preload('res://data/btn/check.svg'),
+	'check-all': preload('res://data/btn/check-all.svg'),
+	'copy': preload('res://data/btn/content-copy.svg'),
+	'delete': preload('res://data/btn/delete.svg'),
+	'eye': preload('res://data/btn/eye.svg'),
+	'pencil': preload('res://data/btn/pencil.svg'),
+	'plus': preload('res://data/btn/plus-thick.svg'),
+	'refresh': preload('res://data/btn/refresh.svg')
+};
+
 var devices = {}
 var libraries = {}
 var projects = []

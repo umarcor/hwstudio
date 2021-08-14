@@ -64,10 +64,10 @@ _global_script_class_icons={
 
 config/name="Hardware Studio"
 run/main_scene="res://Main.tscn"
-boot_splash/image="res://img/banner_blur.png"
+boot_splash/image="res://doc/img/banner_blur.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.298039, 0.298039, 0.298039, 1 )
-config/icon="res://img/icon.png"
+config/icon="res://doc/img/icon.png"
 
 [autoload]
 

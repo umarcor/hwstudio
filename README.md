@@ -1,5 +1,5 @@
 <p align="center">
-  <a title="HTML5 deployment" href="https://umarcor.github.io/hwstudio"><img width="550px" src="img/banner_blur.png"/></a>
+  <a title="HTML5 deployment" href="https://umarcor.github.io/hwstudio"><img width="550px" src="doc/img/banner_blur.png"/></a>
 </p>
 
 <p align="center">

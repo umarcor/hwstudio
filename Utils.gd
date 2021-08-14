@@ -3,17 +3,6 @@ extends Node
 
 var APIRequest : HTTPRequest = HTTPRequest.new()
 
-const icons = {
-	'check': preload('res://img/btn/check.svg'),
-	'check-all': preload('res://img/btn/check-all.svg'),
-	'copy': preload('res://img/btn/content-copy.svg'),
-	'delete': preload('res://img/btn/delete.svg'),
-	'eye': preload('res://img/btn/eye.svg'),
-	'pencil': preload('res://img/btn/pencil.svg'),
-	'plus': preload('res://img/btn/plus-thick.svg'),
-	'refresh': preload('res://img/btn/refresh.svg')
-};
-
 
 func checkError(
 	err : int,

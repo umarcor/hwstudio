@@ -42,10 +42,10 @@ func _ready():
 
 
 func _add_buttons_to_treeitem(item):
-	item.add_button(0, Utils.icons.plus, 0, false, 'Add instance')
-	item.add_button(0, Utils.icons.eye, 1, false, 'View in editor')
-	item.add_button(0, Utils.icons.pencil, 2, false, 'Edit')
-	item.add_button(0, Utils.icons.copy, 3, false, 'Create a copy')
+	item.add_button(0, Data.icons.plus, 0, false, 'Add instance')
+	item.add_button(0, Data.icons.eye, 1, false, 'View in editor')
+	item.add_button(0, Data.icons.pencil, 2, false, 'Edit')
+	item.add_button(0, Data.icons.copy, 3, false, 'Create a copy')
 	
 	
 func _add_children_recursively(tree, entry, children):
