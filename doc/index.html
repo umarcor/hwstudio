@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.16">
-<meta name="author" content="Unai Martinez-Corral">
+<meta name="author" content="Unai Martinez-Corral and contributors">
 <link rel="icon" type="image/png" href="../favicon.png">
 <title>Hardware Studio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -442,18 +442,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Hardware Studio</h1>
 <div class="details">
-<span id="author" class="author">Unai Martinez-Corral</span><br>
-<span id="email" class="email">unai.martinezcorral[at]ehu[dot]eus</span><br>
+<span id="author" class="author">Unai Martinez-Corral and contributors</span><br>
+<span id="email" class="email"><a href="https://github.com/umarcor">@GitHub</a> <a href="https://gitlab.com/umarcor">@GitLab</a> <a href="https://twitter.com/unaimarcor">@Twitter</a></span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Hardware Studio</div>
 <ul class="sectlevel1">
-<li><a href="#_installation">Installation</a></li>
-<li><a href="#_usage">Usage</a>
+<li><a href="#_user_guide">User Guide</a>
 <ul class="sectlevel2">
+<li><a href="#_installation_and_setup">Installation and setup</a>
+<ul class="sectlevel3">
+<li><a href="#_frontend">Frontend</a>
+<ul class="sectlevel4">
+<li><a href="#_html5">HTML5</a></li>
+</ul>
+</li>
+<li><a href="#_backend">Backend</a></li>
+</ul>
+</li>
+<li><a href="#_usage">Usage</a>
+<ul class="sectlevel3">
+<li><a href="#_graph">Graph</a></li>
+<li><a href="#_tiles">Tiles</a></li>
+<li><a href="#_spatial">Spatial</a></li>
+<li><a href="#_menu">Menu</a>
+<ul class="sectlevel4">
+<li><a href="#_repositories">Repositories</a></li>
 <li><a href="#_boards">Boards</a></li>
+<li><a href="#_preferences">Preferences</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_development">Development</a>
@@ -477,11 +498,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_signalport_types">Signal/port types</a></li>
 </ul>
 </li>
+<li><a href="#_editing_modes">Editing modes</a>
+<ul class="sectlevel3">
+<li><a href="#_graph_2">Graph</a></li>
+<li><a href="#_tiles_2">Tiles</a></li>
+<li><a href="#_spatial_2">Spatial</a></li>
+</ul>
+</li>
 <li><a href="#_types">Types</a>
 <ul class="sectlevel3">
 <li><a href="#_data">Data</a></li>
-<li><a href="#_repository">Repository</a></li>
 <li><a href="#_project">Project</a></li>
+<li><a href="#_source">Source</a></li>
+<li><a href="#_design">Design</a></li>
+<li><a href="#_target">Target</a></li>
 <li><a href="#_entity">Entity</a></li>
 <li><a href="#_generic">Generic</a></li>
 <li><a href="#_port">Port</a></li>
@@ -513,59 +543,388 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div id="banner-hwstudio" class="imageblock text-center">
+<div class="content">
+<a class="image" href="https://umarcor.github.io/hwstudio"><img src="https://umarcor.github.io/hwstudio/index.png" alt="Hardware Studio" width="75%"></a>
+</div>
+</div>
 <div class="paragraph text-center">
 <p><a href="https://github.com/umarcor/hwstudio"><span class="image"><img src="https://img.shields.io/badge/umarcor-hwstudio-f2f1ef.svg?longCache=true&amp;style=flat-square&amp;logo=GitHub&amp;logoColor=f2f1ef" alt="umarcor hwstudio f2f1ef" title="umarcor/hwstudio GitHub repository"></span></a>
 <a href="https://github.com/umarcor/hwstudio/releases"><span class="image"><img src="https://img.shields.io/github/v/release/umarcor/hwstudio?include_prereleases&amp;longCache=true&amp;style=flat-square&amp;label=Releases&amp;logo=github&amp;color=informational" alt="hwstudio?include prereleases&amp;longCache=true&amp;style=flat square&amp;label=Releases&amp;logo=github&amp;color=informational" title="GitHub releases (latest by date including pre-releases)"></span></a></p>
 </div>
-<div id="banner-hwstudio" class="imageblock text-center">
+<div class="paragraph">
+<p>Hardware Studio (<em>hwstudio</em>) is a graphical design environment for hardware modelling, focused on (V)HDL.
+It allows describing systems by arranging and connecting blocks in a diagramming tool.
+Unlike other similar tools, the main target of hwstudio is not <a href="https://en.wikipedia.org/wiki/Hardware_description_language">HDL</a>
+generation.
+Instead, it is expected to be used by hardware designers for gaining insight into their models and for easing cumbersome
+tasks, such as connections in large structural architectures or co-simulation with non-trivial software models.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This is a work in progress proof of concept and not actively funded/developed.
+A diagraming tool which is kept in sync with HDL sources needs to integrate multiple complex features.
+It is challenging to bring together the expertise in hardware design with knowledge about software architecture, and
+spare time for devoting to open source tooling.
+Hence, this repository contains several iterations to try putting together existing pieces:
+<a href="https://godotengine.org/">Godot</a>,
+<a href="https://github.com/umarcor/osvb/">OSVB</a>
+(<a href="https://github.com/ghdl/ghdl">GHDL</a>,
+<a href="https://github.com/VUnit/vunit">VUnit</a>,
+<a href="http://gtkwave.sourceforge.net/">GtkWave</a>,
+<a href="https://github.com/OSVVM/OSVVM">OSVVM</a>&#8230;&#8203;),
+<a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a>,
+<a href="https://github.com/hdl/constraints">hdl/constraints</a>,
+<a href="https://github.com/hdl/containers">hdl/containers</a>,
+<a href="https://symbiflow.github.io/">SymbiFlow</a>,
+etc..</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_guide">User Guide</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_installation_and_setup">Installation and setup</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since this repository is early work in progress, no regular/tagged releases are available yet.
+Nevertheless, after each commit is pushed, CI workflows produce artifacts.
+Latest artifacts are published as assets of pre-release <em>nightly</em>:
+<a href="https://github.com/umarcor/hwstudio/releases/tag/nightly">github.com/umarcor/hwstudio/releases/tag/nightly</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Hardware Studio is composed of two main components: the frontend and the backend.
+Features that require interacting with files or tools on the host are not implemented in the frontend,
+but handled by a backend.
+Therefore, although the frontend can be used standalone, it is recommended to run both of them.</p>
+</div>
+<div class="sect3">
+<h4 id="_frontend">Frontend</h4>
+<div class="paragraph">
+<p>The frontend is developed using <a href="https://godotengine.org/">Godot</a> and it is exported for GNU/Linux, Windows and Mac OS.
+The artifacts are standalone executables, so just downloading the <a href="https://github.com/umarcor/hwstudio/releases/tag/nightly">nightly</a>
+tarball/zipfile for your platform and extracting it should work.
+Otherwise, <a href="https://github.com/umarcor/hwstudio/issues/new">let us know</a>!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Native builds of Hardware Studio are available for x64 only.
+However, the backend can be executed on any platform, as long as EDA tools are available.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_html5">HTML5</h5>
+<div class="paragraph">
+<p>Godot has built-in support for <a href="https://docs.godotengine.org/en/stable/getting_started/workflow/export/exporting_for_web.html">docs.godotengine.org: Exporting for the Web</a>.
+That generates an HTML5 build to be used on browsers with support for <a href="https://webassembly.org/">WebAssembly (WASM)</a> and
+<a href="https://www.khronos.org/webgl/">WebGL</a>.
+The HTML5 build of Hardware Studio is available at <a href="https://umarcor.github.io/hwstudio/">umarcor.github.io/hwstudio</a>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since WASM is a very recent technology, there are still compatibility and performance issues on some
+platforms/browsers.
+For instance, fonts are not properly scaled on 4K monitors.
+It is therefore recommended to use the native artifacts.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The HTML5 artifacts are available for download, so users can run the HTML5 build locally for experimentation.
+Note that a web server is required for serving the files.
+For testing purposes, a shell script is included in the tarball
+(<a href="https://github.com/umarcor/hwstudio/tree/main/dist/html5/serve.sh"><code>serve.sh</code></a>), which will start a Docker container and serve the content.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_backend">Backend</h4>
+<div class="paragraph">
+<p>The backend is mostly written in pure Python, so it can be used through <a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">PYTHONPATH</a>, after getting a tarball or through
+<code>git clone</code>.</p>
+</div>
+<div class="paragraph">
+<p>Install the dependencies through <code>pip</code>:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<a class="image" href="https://umarcor.github.io/hwstudio"><img src="https://umarcor.github.io/hwstudio/index.png" alt="Hardware Studio"></a>
+<pre class="highlight"><code class="language-shell" data-lang="shell"># pip3 install -r py/requirements.txt</code></pre>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_installation">Installation</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This repository is early work in progress and no regular/tagged releases are available yet. However, after each commit is
-pushed, CI workflows produce artifacts. Latest artifacts are published as assets of pre-release <em>nightly</em>:
-<a href="https://github.com/umarcor/hwstudio/releases/tag/nightly">github.com/umarcor/hwstudio/releases/tag/nightly</a>. Just downloading
-the tarball/zipfile for your platform and extracting it should work. Otherwise, <a href="https://github.com/umarcor/hwstudio/issues/new">let us know</a>!</p>
 </div>
 <div class="paragraph">
-<p>The HTML5 version of the app is available at <a href="https://umarcor.github.io/hwstudio/">umarcor.github.io/hwstudio</a>. Note that
-running the HTML5 version locally requires a web server. For testing purposes, a shell script is included in the tarball
-(<a href="https://github.com/umarcor/hwstudio/tree/main/dist/html5/serve.sh"><code>serve.sh</code></a>), which will start a Docker container.</p>
+<p>Then, execute the main script for starting the server:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell"># ./py/api/main.py
+Serving on port 8000...</code></pre>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_usage">Usage</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Since <strong>Hardware Studio</strong> is mainly a diagraming tool, the usage should be intuitive and self-learning should be easy. If you
-don&#8217;t understand how some feature works, or if nothing happens when you do some action, chances are that it is not ready yet.
-Feel free to <a href="https://github.com/umarcor/hwstudio/issues/new">open an issue</a> for discussing it!</p>
+<p>In the frontend, go to <em>Menu</em> / <em>Preferences</em> and check that the <em>Backend</em> address and port are correct.
+There is a button for testing that frontend and backend can talk to each other.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When using the HTML5 frontend, open the <em>Console</em> in the developer tools to see the output printed to the <em>terminal</em>
+by the frontend.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_boards">Boards</h3>
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>Hardware Studio&#8217;s frontend has three main editing <em>modes</em>, each of them based on one <em>node</em> type in Godot:
+Graph, Tiles and Spatial.
+Modes are just different approaches to drawing the designs and allowing the user to navigate and modify them.
+Having different modes is a result of exploring the capabilities and limitations of Godot as a hardware diagram editing
+tool.</p>
+</div>
+<div class="paragraph">
+<p>Apart from the editing modes, the <em>menu</em> of Hardware Studio includes explorer features for gaining insight into the
+designs, boards, devices, etc.
+Currently, development is focused on those features rather than on the diagraming aspect.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Usage of Hardware Studio should be intuitive and self-learning should be easy.
+If you don&#8217;t understand how some feature works, or if nothing happens when you do some action, chances are that it is
+not ready yet.
+Feel free to <a href="https://github.com/umarcor/hwstudio/issues/new">open an issue</a> for discussing it!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Right-click anywhere on the Tiles or Spatial modes to open the context menu.</p>
+</li>
+<li>
+<p>Use <code>Ctrl + Space</code> and <code>Ctrl + Shift + Space</code> to switch between editing modes.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_graph">Graph</h4>
+<div class="paragraph">
+<p>Apart from "traditional" text-based programming languages (such as
+<a href="https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/index.html">docs.godotengine.org: GDScript</a>,
+C#,
+or any foreign language through <a href="https://docs.godotengine.org/en/stable/classes/class_gdnative.html">docs.godotengine.org: GDNative</a>),
+Godot has built-in support for <a href="https://en.wikipedia.org/wiki/Visual_programming_language">visual programming</a> through
+<a href="https://docs.godotengine.org/en/stable/getting_started/scripting/visual_script/index.html">docs.godotengine.org: VisualScript</a>,
+similar to the <a href="https://docs.blender.org/manual/en/latest/editors/shader_editor.html">docs.blender.org: Shader Editor</a>
+in <a href="https://www.blender.org/">Blender</a>.
+The class which VisualScript is built on is available as a <a href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</a>
+node named <a href="https://docs.godotengine.org/en/stable/classes/class_graphedit.html">docs.godotengine.org: GraphEdit</a>, so that
+developers can build custom interfaces with them.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Graph</em> editing mode in Hardware Studio is based on GraphEdit.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tiles">Tiles</h4>
+<div class="paragraph">
+<p>The main node type in Godot for managing 2D scenes is <a href="https://docs.godotengine.org/en/stable/classes/class_tilemap.html">TileMap</a>.
+It provides a two-dimensional grid with optional snapping.
+Although mostly meant to be used when designing game levels (see <a href="https://docs.godotengine.org/en/stable/tutorials/2d/using_tilemaps.html">docs.godotengine.org: Using TileMaps</a>),
+the content of the tiles can be changed programmatically.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Tiles</em> editing mode in Hardware Studio is based on TileMap.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spatial">Spatial</h4>
+<div class="paragraph">
+<p>The Godot 3D engine uses the <a href="https://docs.godotengine.org/en/stable/classes/class_spatial.html#class-spatial">Spatial</a>
+node for everything 3D.
+As explained in <a href="https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#d-in-3d">2D in 3D</a> (see also
+<a href="https://docs.godotengine.org/en/stable/tutorials/3d/index.html">3D</a>), using a 3D environment with a constrained camera is
+a common tradeoff for getting richer lighting/shadow effects.
+Moreover, it&#8217;s a better fit than tilemaps for exploring editing designs through a <a href="#_2_5d3d_visualization">2.5D|3D visualization</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <em>Spatial</em> editing mode in Hardware Studio is based on Spatial.
+Currently, three ortogonal and fixed cameras are used.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use WASD or arroy keys for moving the "player".</p>
+</li>
+<li>
+<p>Use <code>+</code> to enable instantiation mode.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Page Up</code> and <code>Page Down</code> iterate over the available "blocks".
+Currently, there are 7 blocks only, representing <code>and</code>, <code>or</code>, <code>xor</code>, <code>not</code>, <code>nand</code>, <code>nor</code> and <code>xnor</code>.</p>
+</li>
+<li>
+<p><code>+</code> places an instance of the block.</p>
+</li>
+<li>
+<p><code>Esc</code> disables instantiation mode.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_menu">Menu</h4>
+<div class="paragraph">
+<p>There are two main menus in Hardware Studio:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Context menu: a popup menu triggered with the right-click of the mouse.
+It allows opening the <em>main menu</em>, changing the editing mode, opening the documentation, the About page and quitting.
+It contains additional options specific to the active editing mode.</p>
+</li>
+<li>
+<p>Main menu: a full size panel with tabs, opened from the <em>context menu</em> and closed with <code>Esc</code>.
+Tabs <em>Repositories</em> and <em>Boards</em> allow exploring the designs and data about the devices, while <em>Preferences</em> contains
+configuration options.</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_repositories">Repositories</h5>
+<div class="paragraph">
+<p><em>TBW</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://umarcor.github.io/osvb/apis/project.html#open-source-vhdl-design-explorer-osvde">Open Source VHDL Design Explorer (OSVDE)</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>pyVHDLModel uses <a href="https://vhdl.github.io/pyVHDLModel/LanguageModel/Miscellaneous.html#design">Design</a> as the root of
+multiple documents and libraries.
+Therefore, it does not match the naming/classes in Hardware Studio.
+A <em>Model Design</em> corresponds to a <em>Design</em> in Hardware Studio, plus the tree of sources.
+In order to retrieve the tree of sources, the <em>Sources</em> field of the corresponding <em>Project</em> needs to be inquired.</p>
+</div>
+<div class="paragraph">
+<p>However, currently <code>libghdl</code> and therefore <code>pyGHDL.dom</code> don&#8217;t allow handling multiple Designs in a single instance.
+Therefore, Hardware Studio analyses all the sources in a <em>Project</em> as a single <em>Model Design</em>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_boards">Boards</h5>
+<div class="paragraph">
+<p><em>TBW</em></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p><a href="https://github.com/hdl/constraints">hdl/constraints</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://www.latticesemi.com/icestick">iCEstick Evaluation Kit</a></p>
-</li>
-<li>
-<p><a href="https://tomu.im/fomu.html">Fomu</a> (<a href="https://github.com/im-tomu/fomu-hardware">im-tomu/fomu-hardware</a>)</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
+</div>
+<div class="sect4">
+<h5 id="_preferences">Preferences</h5>
+<div class="paragraph">
+<p><em>TBW</em></p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -582,60 +941,84 @@ Feel free to <a href="https://github.com/umarcor/hwstudio/issues/new">open an is
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For previous iterations based on <a href="https://vuejs.org/">Vue.js</a>, <a href="https://vuetifyjs.com">Vuetify</a>, and
-<a href="https://www.jointjs.com/">JointJS</a> or <a href="https://threejs.org/">Three.js</a>, see other <a href="https://github.com/umarcor/hwstudio/branches">branches</a>.
+<div class="paragraph">
+<p>For previous iterations based on
+<a href="https://vuejs.org/">Vue.js</a>,
+<a href="https://vuetifyjs.com">Vuetify</a>, and
+<a href="https://www.jointjs.com/">JointJS</a> or <a href="https://threejs.org/">Three.js</a>,
+see other <a href="https://github.com/umarcor/hwstudio/branches">branches</a>.</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
 <p>The current iteration of this project is based on <a href="https://godotengine.org/">Godot</a> (<a href="https://github.com/godotengine/godot">github.com/godotengine/godot</a>),
-a "<em>multi-platform 2D and 3D game engine</em>" . Despite Godot being presented as a game engine, it is a powerful framework that
-provides common tools for writing fancy and interactive interfaces. It has built-in support for exporting to multiple platforms:
-Linux, Windows, Mac OS, Android, iOS, HTML5 and consoles. Moreover, it is free, open source, community driven and lightweight.</p>
+a "<em>multi-platform 2D and 3D game engine</em>" .
+Despite Godot being presented as a game engine, it is a powerful framework that provides common tools for writing fancy
+and interactive interfaces.
+It has built-in support for exporting to multiple platforms: Linux, Windows, Mac OS, Android, iOS, HTML5 and consoles.
+Moreover, it is free, open source, community driven and lightweight.</p>
 </div>
 <div class="paragraph">
-<p>A very interesting feature of Godot is that a very complete set of pre-built <em>control nodes</em> is provided. "Node" is the term
-used in Godot for reusable objects/items, and "control" is the category with nodes for User Interfaces (UI). The category
-includes not only labels, buttons, checkboxes, etc. but also container/layout components that set anchors, margins and sizes
-automatically. As a matter of fact, Godot Editor (the development environment/application) is written/designed using the engine
-itself; so are most of plugins/assets available in the (<a href="https://godotengine.org/asset-library/asset">Asset Library</a>). How cool
-is that!</p>
+<p>A very interesting feature of Godot is that a very complete set of pre-built <em>control nodes</em> is provided.
+"Node" is the term used in Godot for reusable objects/items, and "control" is the category with nodes for User
+Interfaces (UIs).
+The category includes not only labels, buttons, checkboxes, etc. but also container/layout components that set anchors,
+margins and sizes automatically.
+As a matter of fact, Godot Editor (the development environment/application) is written/designed using the engine
+itself; so are most of plugins/assets available in the (<a href="https://godotengine.org/asset-library/asset">Asset Library</a>).
+How cool is that!</p>
 </div>
 <div class="paragraph">
-<p>As a result, designing interfaces with Godot feels gratefully similar to using CSS frameworks such as Bootstrap, Bulma, Tachyons,
-etc. Yet, Godot provides two significant advantages. On the one hand, Godot exports to HTML5 by converting the game/tool to
-WebAssembly and exports to other platforms are native statically compiled executable binaries. Hence, desktop releases are
-significantly more lightweight than putting a website into Electron or NW.js. On the other hand, for providing so-called single
-page applications (SPA), CSS frameworks need to be complemented with a JavaScript/TypeScript framework, such as Vue.js, React
-or AngularJS. In the context of a diagraming tool, those general purpose JS frameworks fall short. There are more specialized
-libraries (JointJS, Three.js&#8230;&#8203;), but none of them provides powerful enough pre-built UI features. Coordinating a backend, a
-framework for UI and a different framework for diagramming is certainly a difficult task. The most complete JS framework in
-this regard is <a href="https://jgraph.github.io/mxgraph/">JGraph/mxgraph</a>, which is a self-contained solution including frontend libraries
-and backend. Unfortunately, mxgraph was a commercial project for a decade, before being open sourced a few years ago.
-Subsequently, there are some constraints that feel dated. For instance, backends (and documentation) are only available in .NET
-and Java. However, the main drawback is that lots of features are related to allowing users to customize the look and feel of
-their diagrams through graphical interfaces, and to allowing developers to build complex custom interactive diagrams. That&#8217;s
-a whole set of features that we don&#8217;t need, and thus add excessive complexity. In the context of this project, we need a tool
-good enough for drawing structural diagrams with square boxes and a single predefined style/theme. However, it needs to provide
-easy bindings to languages such as Python or C.</p>
+<p>Therefore, designing interfaces with Godot feels gratefully similar to using CSS frameworks such as Bootstrap, Bulma,
+Tachyons, etc.
+Yet, Godot provides two significant advantages.
+On the one hand, Godot exports to HTML5 by converting the game/tool to WebAssembly and exports to other platforms are
+native statically compiled executable binaries.
+Hence, desktop releases are significantly more lightweight than putting a website into Electron or NW.js.
+On the other hand, for providing so-called single page applications (SPA), CSS frameworks need to be complemented with
+a JavaScript/TypeScript framework, such as Vue.js, React or AngularJS.
+In the context of a diagraming tool, those general purpose JS frameworks fall short.
+There are more specialized libraries (JointJS, Three.js&#8230;&#8203;), but none of them provides powerful enough pre-built UI
+features.
+Coordinating a backend, a framework for UI and a different framework for diagramming is certainly a difficult task.
+The most complete JS framework in this regard is <a href="https://jgraph.github.io/mxgraph/">JGraph/mxgraph</a>, which is a
+self-contained solution including frontend libraries and backend.
+Unfortunately, mxgraph was a commercial project for a decade, before being open sourced a few years ago.
+Subsequently, there are some constraints that feel dated.
+For instance, backends (and documentation) are only available in .NET and Java.
+However, the main drawback is that lots of features are related to allowing users to customize the look and feel of
+their diagrams through graphical interfaces, and to allowing developers to build complex custom interactive diagrams.
+That&#8217;s a whole set of features that we don&#8217;t need, and thus add excessive complexity.
+In the context of this project, we need a tool good enough for drawing structural diagrams with square boxes and a
+single predefined style/theme.
+However, it needs to provide easy bindings to languages such as Python or C.</p>
 </div>
 <div class="paragraph">
 <p>If you are new to Godot, read the <a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html">docs.godotengine.org: Step by step</a>
-guide. There, you will learn that multiple languages can be used. Apart from C/C or C#, Godot offers its own programming
-languages: VisualScript and GDScript. Furthermore, with GDNative, high-performance code can be written using compiled languages
-like C, C, Rust, or Python (using the Cython compiler). In this project, <a href="https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/index.html">GDScript</a>
-is used only (for now), which is similar to Python with optional static typing. Nonetheless, VisualScript is very relevant
-too. It is a node-based (graphical) programming language. Users/designers/developers can drag and drop nodes and set
-connections to compose a dataflow diagram. Since Godot Editor is built with the engine, this means that there are built-in
-classes for handling those diagrams. Hence, it is possible to design custom tools by reusing those. For example,
-<a href="https://github.com/littleMouseGames/whiskers">littleMouseGames/whiskers</a>.</p>
+guide.
+There, you will learn that multiple languages can be used.
+Apart from C/C++ or C#, Godot offers its own programming languages:
+<a href="https://docs.godotengine.org/en/stable/getting_started/scripting/visual_script/index.html">docs.godotengine.org: VisualScript</a>
+and <a href="https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/index.html">docs.godotengine.org: GDScript</a>.
+Furthermore, with GDNative, high-performance code can be written using compiled languages like C, C++, Rust, or Python
+(using the Cython compiler).
+In the frontend of this project, <a href="https://docs.godotengine.org/en/latest/getting_started/scripting/gdscript/index.html">GDScript</a>
+is used only (for now), which is similar to Python with optional static typing.
+Nonetheless, VisualScript is very relevant too.
+It is a node-based (graphical/visual) programming language.
+Users/designers/developers can drag and drop nodes and set connections to compose a dataflow diagram.
+Since Godot Editor is built with the engine, this means that there are built-in classes for handling those diagrams.
+Hence, it is possible to design custom tools by reusing those.
+For example, <a href="https://github.com/littleMouseGames/whiskers">littleMouseGames/whiskers</a>.</p>
 </div>
 <div class="paragraph">
-<p>Overall, the only drawback of Godot is that windows and dialogs are fully managed by the engine. In consequence, when opening
-or saving some file, the explorer is not the native one from the host. Moreover, the tool and the modal windows are constrained
-in a single main window; i.e. floating dialogs cannot be moved to other monitors. Nonetheless, for this same reason, the
-experience is more consistent accross platforms, which might be desirable.</p>
+<p>Overall, the only drawback of Godot is that windows and dialogs are fully managed by the engine.
+In consequence, when opening or saving some file, the explorer is not the native one from the host.
+Moreover, the tool and the modal windows are constrained in a single main window (for now); i.e. floating dialogs cannot
+be moved to other monitors.
+Nonetheless, for this same reason, the experience is more consistent across platforms, which might be desirable.</p>
 </div>
 </div>
 <div class="sect2">
@@ -656,13 +1039,75 @@ undocumented) or "no public/open implementation available, although the feature 
 Hardware Studio.</p>
 </div>
 <div class="paragraph">
-<p>There is an abstract language model project written in Python: <a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a>. The motivation
-is abstracting parser engines and allowing building tools on top of a standardised API. Unfortunately, there is still no open
-source, complete and documented parser for VHDL 2008 which interacts with it. See detailed discussions
-in <a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/312">jeremiah-c-leary/vhdl-style-guide#312</a> and
-<a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328">jeremiah-c-leary/vhdl-style-guide#328</a>. As of January 2021,
-<a href="https://github.com/ghdl/ghdl/tree/master/pyGHDL">pyGHDL</a> is the best candidate, since a prototype exists and GHDL is the most
-used open source simulator and synthesiser for VHDL; however, the implementation of <code>pyGHDL.dom</code> is not complete.</p>
+<p>Parsing HDLs is a challenging task.
+Both VHDL and System Verilog are known to be difficult to parse because of the number of use cases they cover, as well
+as due to the notable differences compared to software languages.
+In fact, as far as we are aware, there is no tool (open source or not open) which can support either VHDL or System
+Verilog completely.
+All of them specify which versions and/or features are (un)supported.
+However, a robust and as-comple-as-possible parser is the foundation for any kind of tooling to be built around a
+language.
+As a result, hardware design environments have been severely lagging behind in comparison to the IDEs, GUIs and
+debuggers available for almost any software language.</p>
+</div>
+<div class="paragraph">
+<p>Dozens of developers tried implementing their own VHDL parsers.
+Some notable examples are
+<a href="http://vunit.github.io/">VUnit</a>,
+<a href="https://kevinpt.github.io/symbolator/">Symbolator</a>,
+<a href="https://terostech.com/">TerosHDL</a>,
+<a href="https://vhdl-style-guide.readthedocs.io/">vhdl-style-guide</a>
+or <a href="https://github.com/VHDLTool">VHDLTool</a>.
+All of those have complex parsers, based on regular expressions and ad-hoc tweaks, or on general purpose parser
+generators.
+They suffice for their use cases, but the implementation of new and more complex features is hindered by the maintenance
+burden of the parsers.</p>
+</div>
+<div class="paragraph">
+<p>There are two projects with a wider scope, which are expected to be used by any tool around the language, rather than by
+some specific tool.
+See detailed discussions in <a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/312">jeremiah-c-leary/vhdl-style-guide#312</a>
+and <a href="https://github.com/jeremiah-c-leary/vhdl-style-guide/issues/328">jeremiah-c-leary/vhdl-style-guide#328</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/VHDL-LS/rust_hdl">rust_hdl</a> was developed by Olof Kraigher (co-author of VUnit), starting in 2018.
+It is written in Rust and it is meant to provide "a collection of HDL related tools".
+Parsing of the VHDL language is almost complete, but semantic analysis stages were not implemented yet.
+In fact, plugging rust_hdl as a frontend into GHDL (or using GHDL as a backend from rust_hdl) has been discussed.
+However, rust_hdl is not actively developed at the moment, since the main author is currently not using HDL.</p>
+</li>
+<li>
+<p><a href="https://github.com/Paebbels/pyVHDLParser">pyVHDLParser</a> is a token-stream based parser developed by Patrick 'Paebbels'
+Lehmann.
+Patrick is the Vice-Chair of the IEEE P1076 Working Group, so the main focus of pyVHDLParser is correctness and fast
+(real-time) processing without requiring a compiled tool.
+Development started in 2017, however, due to the focus on covering and properly handling all the features in the
+language, it is a long going project which is not complete yet.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Overall, almost a dozen projects are known in the community, which are trying to reimplement features already available
+in GHDL, but not easy to reuse.
+Although GHDL&#8217;s main purpose was never being a parser per se, advanced VHDL parsing was required in order to allow
+simulation and synthesis features.
+As a result, GHDL includes the most complete VHDL parser and semantic analysis capabilities available in open source
+tooling, and maybe compared to vendor tooling too.
+Throughout the last decade, there were numerous requests for having GHDL&#8217;s parsing/analysis capabilities exposed through
+an API for developers to build tools on top of it.
+However, GHDL is written in Ada.
+That might be appealing to VHDL developers, due to the similarities; but it seems to be an stopper for developers with a
+background in C/C++, Rust, Python, etc.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a> is a Document Object Model (DOM) for the VHDL language written in Python.
+That is, a set of classes that represent the objects found in VHDL sources, and utils for manipulating and interacting
+with those classes.
+The generation of an specific tree for an specific codebase is done by a backend.
+Currently supported backends are <code>pyGHDL.dom</code>/<code>pyGHDL.libghdl</code> and pyVHDLParser.
+Therefore, <code>pyGHDL.dom</code> is used in the backend of Hardware Studio.</p>
 </div>
 <div class="paragraph">
 <p>Yet, there are two distinct required features with different complexity:</p>
@@ -670,15 +1115,17 @@ used open source simulator and synthesiser for VHDL; however, the implementation
 <div class="ulist">
 <ul>
 <li>
-<p>Parsing the entities to get the list and types of generics and ports. This might be possible with either
-<a href="https://github.com/ghdl/ghdl">GHDL</a> or <a href="https://github.com/kraigher/rust_hdl">rust_hdl</a> already. It would allow to identify
-entities as blocks to be instantiaded in diagrams.</p>
+<p>Parsing the entities to get the list and types of generics and ports.
+This is possible with <code>pyGHDL.dom</code> already, and it might be possible with
+<a href="https://github.com/kraigher/rust_hdl">rust_hdl</a> too.
+Hence, it&#8217;s possible to identify entities as blocks to be instantiaded in diagrams.</p>
 </li>
 <li>
-<p>Getting an schematic/RTL diagram from an architecture. This is more complex, as it requires not only parsing, but also
-semantic analysis and (at least partial) elaboration of the design. The output of <code>ghdl --synth</code> might work well (either
-before or after passing it to <a href="https://github.com/YosysHQ/yosys">yosys</a>). Nonetheless, <strong>this is the main goal of this project</strong>,
-as it would really provide insight into existing designs.</p>
+<p>Getting an schematic/RTL diagram from an architecture.
+This is more complex, as it requires not only parsing, but also semantic analysis and (at least partial) elaboration
+of the design.
+The output of <code>ghdl --synth</code> might work well (either before or after passing it to <a href="https://github.com/YosysHQ/yosys">yosys</a>).
+Nonetheless, <strong>this is the main goal of this project</strong>, as it would really provide insight into existing designs.</p>
 </li>
 </ul>
 </div>
@@ -686,50 +1133,58 @@ as it would really provide insight into existing designs.</p>
 <h5 id="_vhdl_generationsynchronization">(V)HDL generation/synchronization</h5>
 <div class="paragraph">
 <p>As a complement to generating diagrams by analysing (V)HDL sources, it should be possible to generate structural (V)HDL
-sources from diagrams in Hardware Studio. This is supported by many tools already, so it is not a novelty, but a need for
-usability.</p>
+sources from diagrams in Hardware Studio.
+This is supported by many tools already, so it is not a novelty, but a need for usability.</p>
 </div>
 <div class="paragraph">
 <p>In this regard, it is unfortunate that neither a standard style guide nor open source automatic code formatter exists for
-VHDL. As a result, keeping style consistency between handwritten and generated sources is not possible yet. Nevertheless,
-see <a href="https://github.com/jeremiah-c-leary/vhdl-style-guide">VHDL Style Guide (VSG)</a>.</p>
+VHDL.
+As a result, keeping style consistency between handwritten and generated sources is not possible yet.
+Nevertheless, that is one of the expected use cases of pyVHDLModel.
+See also <a href="https://github.com/jeremiah-c-leary/vhdl-style-guide">VHDL Style Guide (VSG)</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_2_5d3d_visualization">2.5D|3D visualization</h4>
 <div class="paragraph">
-<p>Regarding the interface and how users interact with the design, the purpose of this project is to explore visualizatons that
-go beyond collapsible/expandable 2D diagrams. Our belief is that the multiple abstraction layers in hardware designs can be
-better understood and debugged by using the third dimension.</p>
+<p>Regarding the interface and how users interact with the design, the purpose of this project is to explore visualizatons
+that go beyond collapsible/expandable 2D diagrams.
+Our belief is that the multiple abstraction layers in hardware designs can be better understood and debugged by using
+the third dimension.</p>
 </div>
 <div class="paragraph">
-<p>The main blocker to achieve a true 3D visualization allowing users to locate blocks at arbitrary locations is the routing.
-The complexity is increased if the layout needs to be automatic. That is, in fact, a very challenging task from an algorithmic
-point of view (<a href="https://github.com/SymbiFlow/ideas/issues/41">SymbiFlow/ideas#/issues/#41</a>). Nevertheless, so much freedom in
-the visualization might be counterproductive. Hence, a semi-constrained 2.5D approach might be preferred.</p>
+<p>The main blocker to achieve a true 3D visualization allowing users to locate blocks at arbitrary locations is the
+routing.
+The complexity is increased if the layout needs to be automatic.
+That is, in fact, a very challenging task from an algorithmic point of view (<a href="https://github.com/SymbiFlow/ideas/issues/41">SymbiFlow/ideas#/issues/#41</a>).
+Nevertheless, so much freedom in the visualization might be counterproductive.
+Hence, a semi-constrained 2.5D approach might be preferred.</p>
 </div>
 <div class="paragraph">
-<p>Depending on implementation details, off-the-shelf Godot classes might not work. That is, the connection and port type
-management logic that is provided in <code>GraphEdit</code> and <code>GraphNode</code> might need to be reimplemented. On the other hand,
-<a href="https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d">2.5D Demo Project with GDScript</a> exists.
+<p>Depending on implementation details, off-the-shelf Godot classes might not work.
+That is, the connection and port type management logic that is provided in <code>GraphEdit</code> and <code>GraphNode</code> might need to be
+reimplemented.
+On the other hand, <a href="https://github.com/godotengine/godot-demo-projects/tree/master/misc/2.5d">2.5D Demo Project with GDScript</a> exists.
 Nevertheless, this is far below other features in the priority list.</p>
 </div>
 <div class="paragraph">
-<p>Moreover, 2.5D or 3D visualizations are a good fit for virtual reality (VR) devices. The usability of VR for real-time
-navigation of (V)HDL designs is to be tested. We are not convinced about it, because text editing is expected to be an
-important task of the development process. Anyway, Godot supports VR and AR (see
-<a href="https://godotengine.org/article/godot-3-vr-and-ar-support">Godot 3&#8217;s VR and AR support</a>), so it would be relatively
-straightforward to try it once other features are ready.</p>
+<p>Moreover, 2.5D or 3D visualizations are a good fit for virtual reality (VR) devices.
+The usability of VR for real-time navigation of (V)HDL designs is to be tested.
+We are not convinced about it, because text editing is expected to be an important task of the development process.
+Anyway, Godot supports VR and AR (see <a href="https://godotengine.org/article/godot-3-vr-and-ar-support">Godot 3&#8217;s VR and AR support</a>),
+so it would be relatively straightforward to try it once other features are ready.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_gamification_of_hardware_design_and_industry_4_0">Gamification of hardware design and <a href="https://en.wikipedia.org/wiki/Fourth_Industrial_Revolution">Industry 4.0</a></h4>
 <div class="paragraph">
-<p>Since most hardware designs are indeed logic puzzles, there are lots of synergies between describing systems in (V)HDL and
-several game types. This is specially so because VHDL is a parallel/concurrent language, co-execution of multiple cooperative
-modules/components is <em>natural</em>. The most obvious games are the ones where electrical circuits are used, or which are based
-on playing with logic gates and Boole&#8217;s algebra:</p>
+<p>Since most hardware designs are indeed logic puzzles, there are lots of synergies between describing systems in (V)HDL
+and several game types.
+This is specially so because VHDL is a parallel/concurrent language; thus, co-execution of multiple cooperative
+modules/components is <em>natural</em>.
+The most obvious games are the ones where electrical circuits are used, or which are based on playing with logic gates
+and Boole&#8217;s algebra:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -748,9 +1203,10 @@ on playing with logic gates and Boole&#8217;s algebra:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>However, many strategy and survival games focused on building, automation and resource management can also be easily related.
-The following list is a very small subset of circuits designed in games with basic hardware logic features, albeit not being
-a relevant mechanic in the game.</p>
+<p>However, many strategy and survival games focused on building, automation and resource management can also be easily
+related.
+The following list is a very small subset of circuits designed in games with basic hardware logic features, albeit not
+being a relevant mechanic in the game.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -775,9 +1231,10 @@ a relevant mechanic in the game.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>On a different category, (advanced) simulation environments mimicking real world industrial machinery/vehicles are gaining
-popularity. Those are sometimes developed together with custom input devices, frequently reusing the actual controls from the
-target plant.</p>
+<p>On a different category, (advanced) simulation environments mimicking real world industrial machinery/vehicles are
+gaining popularity.
+Those are sometimes developed together with custom input devices, frequently reusing the actual controls from the target
+plant.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -802,10 +1259,11 @@ target plant.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Since FPGAs are a good fit for advanced industrial control applications, it is appealing to test control designs against the
-CAD models of the plant (if available). In this regard, several CAD and 3D modelling suites (such as <a href="https://www.freecadweb.org/">FreeCAD</a>
-or <a href="https://www.blender.org/">Blender</a>) are gaining scripting/animation support too, which allows simulation of mechanisms and
-collision detection:</p>
+<p>Since FPGAs are a good fit for advanced industrial control applications, it is appealing to test control designs against
+the CAD models of the plant (if available).
+In this regard, several CAD and 3D modelling suites (such as <a href="https://www.freecadweb.org/">FreeCAD</a> or
+<a href="https://www.blender.org/">Blender</a>) are gaining scripting/animation support too, which allows simulation of mechanisms
+and collision detection:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -818,29 +1276,66 @@ collision detection:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Consequently, due to Godot providing easy to use engines for both 2D and 3D, adding HDL simulation features to Hardware Studio
-would allow building interactive learning environments. See <a href="https://github.com/dbhi/vboard">Virtual development board for HDL design</a>
+<p>Consequently, due to Godot providing easy to use engines for both 2D and 3D, adding HDL simulation features to Hardware
+Studio would allow building interactive learning environments.
+See <a href="https://github.com/dbhi/vboard">Virtual development board for HDL design</a>
 and <a href="https://umarcor.github.io/ghdl-cosim/vhdl202x/">VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT</a>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_integration_with_other_tools">Integration with other tools</h4>
 <div class="paragraph">
-<p>As explained, we aim to reuse existing tools when possible. For editing VHDL, projects such as VSCode, Emacs, Vim&#8230;&#8203; all are
-good solutions. GHDL provides a <a href="https://github.com/ghdl/ghdl-language-server">language server</a> to be used with any of them.
-Moreover, <a href="https://github.com/TerosTechnology">TerosTechnology</a> provides a VSCode extension with multiple advanced features for
-working with VHDL and VUnit: <a href="https://github.com/TerosTechnology/vscode-terosHDL">vscode-terosHDL</a>.</p>
+<p>As explained, we aim to reuse existing tools when possible.
+For editing VHDL, projects such as VSCode, Emacs, Vim&#8230;&#8203; all are good solutions.
+GHDL provides a <a href="https://github.com/ghdl/ghdl-language-server">language server</a> to be used with any of them.
+Moreover, <a href="https://github.com/TerosTechnology">TerosTechnology</a> provides a VSCode extension with multiple advanced
+features for working with VHDL and VUnit: <a href="https://github.com/TerosTechnology/vscode-terosHDL">vscode-terosHDL</a>.</p>
 </div>
 <div class="paragraph">
 <p>For waveform visualization, either <a href="http://gtkwave.sourceforge.net/">GtkWave</a> (<a href="https://github.com/gtkwave/gtkwave">github.com/gtkwave/gtkwave</a>),
-<a href="https://wavedrom.com/">Wavedrom</a> (<a href="https://github.com/wavedrom/wavedrom">github.com/wavedrom/wavedrom</a>) or <a href="https://github.com/Nic30/d3-wave">d3-wave</a> might be used. Nonetheless, <strong>replaying</strong> waveforms in Hardware Studio&#8217;s frontend dataflow diagram (e.g., by colouring connections)
-would be interesting for allowing <strong>animated simulations</strong>. Related reference: <a href="https://github.com/umarcor/pulseview/tree/ghdl/ghdl">Reading waveforms from HDL simulators with PulseView</a>.
-See also <a href="https://github.com/dbhi/fpconv">Data type exploration and visualization in arithmetic algorithms/circuits</a> and <a href="https://github.com/dbhi/vboard">Virtual development board for HDL design</a>.</p>
+<a href="https://wavedrom.com/">Wavedrom</a> (<a href="https://github.com/wavedrom/wavedrom">github.com/wavedrom/wavedrom</a>) or
+<a href="https://github.com/Nic30/d3-wave">d3-wave</a> might be used.
+Nonetheless, <em>replaying</em> waveforms in Hardware Studio&#8217;s frontend dataflow diagram (e.g., by colouring connections)
+would be interesting for allowing <em>animated simulations</em>.
+Related reference: <a href="https://umarcor.github.io/osvb/notebook/sigrok">Reading waveforms from HDL simulators with PulseView</a>.
+See also
+<a href="https://umarcor.github.io/osvb/notebook/fpconv">Data type exploration and visualization in arithmetic algorithms/circuits</a>
+and <a href="https://github.com/dbhi/vboard">Virtual development board for HDL design</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_structure">Structure</h3>
+<div class="paragraph">
+<p>Hardware Studio is implemented in two main components (a frontend and a backend) which talk to each other through a web
+API (see <a href="https://en.wikipedia.org/wiki/OpenAPI_Specification">wikipedia.org: OpenAPI Specification</a>).
+As shown in <a href="#img-hwstudio">Figure 1</a>, the frontend is written in Godot&#8217;s GDScript.
+On the other hand, the backend is written in Python and it handles most of the complexity.
+Since the goal of Hardware Studio is to wrap existing projects, rather than reimplementing them, the backend is based on
+bridging to and reusing over a dozen purpose specific open source tools.</p>
+</div>
+<div id="img-hwstudio" class="imageblock text-center">
+<div class="content">
+<a class="image" href="img/hwstudio.svg"><img src="img/hwstudio.svg" alt="Internal structure of Hardware Studio"></a>
+</div>
+<div class="title">Figure 1. Internal structure of Hardware Studio.</div>
+</div>
+<div class="sect3">
+<h4 id="_projects_and_hwf">Projects and <code>*.hwf</code></h4>
+<div class="paragraph">
+<p>A <em>Project</em> in Hardware Studio is a top-level instance which has implementation details, such as external pin mapping
+and board constants.
+Hence, in order to save projects to disk, the text or binary format of entities and architectures needs to be defined.
+For (V)HDL architecture types, that is standardized already.
+However, <em>ArchGraph</em>, the description of architectures through the graphical editor, is per se a
+<a href="https://en.wikipedia.org/wiki/Visual_programming_language">visual programming language</a> (VPL).
+Hence, the definition of the format to be used for saving diagrams to disk is, implicitly, a textual or binary
+programming (description) language.
+That is, users can potentially choose to write the diagrams manually or programmatically, instead of using the visual
+editor.
+In fact, drawing structural circuits with <a href="https://en.wikipedia.org/wiki/PGF/TikZ">TikZ</a> is conceptually similar to
+describing them in VHDL, even though the syntax is very different.</p>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -848,7 +1343,102 @@ See also <a href="https://github.com/dbhi/fpconv">Data type exploration and visu
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-This is work in progress and is to be designed in terms of <a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a>.
+<div class="paragraph">
+<p>The binary/text format for saving <em>ArchGraphs</em> is undefined yet.
+That&#8217;s why this tool is still barely usable.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.godotengine.org/en/latest/classes/class_configfile.html">docs.godotengine.org: ConfigFile</a>, while intended
+for configuration files, can be used for saving games, as it can serialize any Godot datatype (not custom objects).
+Unlike JSON, (de)serializing types such as <code>Vector2</code> or <code>Vector3</code> manually is not required.
+However, due to portability and potential compatibility with other tools, it might be desirable to use JSON or YAML,
+either as complements or replacements of <em>ConfigFile</em>.
+See
+<a href="https://docs.godotengine.org/en/latest/tutorials/io/saving_games.html">docs.godotengine.org: I/O &gt; Saving games</a> and
+<a href="https://docs.godotengine.org/en/latest/getting_started/step_by_step/resources.html#creating-your-own-resources">docs.godotengine.org: Step by step &gt; Creating your own resources</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_signalport_types">Signal/port types</h4>
+<div class="paragraph">
+<p><em>TBW</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>How to handle compatible/incompatible types</em></p>
+</li>
+<li>
+<p><em>Getting resolved types needs elaboration, so we use string representations for now</em></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_editing_modes">Editing modes</h3>
+<div class="sect3">
+<h4 id="_graph_2">Graph</h4>
+<div class="paragraph">
+<p><em>TBC</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduction videos to GraphEdit and GraphNode:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=ZD9X3uvyWmg">Using GraphEdit and GraphNode to create flow charts</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=AX5pN3mwfBc">Connecting GraphNodes to create powerful applications</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=klcB23Aw8Q4">Creating a mindmap app in Godot with GraphEdit and GraphNodes: a walkthrough</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tiles_2">Tiles</h4>
+<div class="paragraph">
+<p>TileMaps in Godot can be square, isometric or custom shaped.
+The isometric view is used by many projects for faking 3D, while using 2D nodes.
+Actually, it&#8217;s possible to render 3D assets as 2D sprites.
+However, the isometric view falls short when handling the depth and/or the height.
+Moreover in TileMaps assets are measured in pixels.
+That is desirable for games based on pixel-art, but cumbersome for a diagram editing tool.
+As a result, Tiles in Hardware Studio are square, while Spatial is used for isometric or other visualizations.</p>
+</div>
+<div class="paragraph">
+<p><em>TBC</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spatial_2">Spatial</h4>
+<div class="paragraph">
+<p><em>TBC</em></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_types">Types</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These classes are to be (re)designed in terms of <a href="https://github.com/vhdl/pyVHDLModel">pyVHDLModel</a>.
 </td>
 </tr>
 </table>
@@ -875,96 +1465,101 @@ belong to, and the content. That content can be defined using different language
 </div>
 <div class="paragraph">
 <p>Hence, the main difference compared to other circuit/model diagraming tools is the ability to select the behaviour (thus
-implementation) of a block through a dropdown list. In traditional GUI tools, changing the behaviour requires the deletion of
-the previous block, and even redoing all the connections to/from it. Fast swapping of implementations in different languages
-allows for iterative comparison during development. That is, it allows switching between e.g. an in-development (V)HDL design
-and a reference software function. This concept is, naturally, borrowed from the VHDL language.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>, but extended to other languages.</p>
+implementation) of a block through a dropdown list.
+In traditional GUI tools, changing the behaviour requires the deletion of the previous block, and even redoing all the
+connections to/from it.
+Fast swapping of implementations in different languages allows for iterative comparison during development.
+That is, it allows switching between e.g. an in-development (V)HDL design and a reference software function.
+This concept is, naturally, borrowed from the VHDL language.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>, but extended to other languages.</p>
 </div>
 <div class="paragraph">
-<p>For now, extracting diagrams from (V)HDL sources is not supported. Hence, only architectures of type <em>ArchGraph</em> can be
-viewed and edited in the explorer. Therefore, the top-level instance is expected to be of type <em>ArchGraph</em>. Users can then
-instantiate any kind of <em>Block</em> in there.</p>
+<p>For now, extracting diagrams from (V)HDL sources is not supported.
+Hence, only architectures of type <em>ArchGraph</em> can be viewed and edited in the explorer.
+Therefore, the top-level instance is expected to be of type <em>ArchGraph</em>.
+Users can then instantiate any kind of <em>Block</em> in there.</p>
 </div>
-<div class="sect3">
-<h4 id="_projects_and_hwf">Projects and <code>*.hwf</code></h4>
-<div class="paragraph">
-<p>A <em>Project</em> in Hardware Studio is a top-level instance which has implementation details, such as external pin mapping and
-board constants. Hence, in order to save projects to disk, the text or binary format of entities and architectures needs to
-be defined. For (V)HDL architecture types, that is standardized already. However, <em>ArchGraph</em>, the description of architectures
-through the graphical editor, is per se a <a href="https://en.wikipedia.org/wiki/Visual_programming_language">visual programming language</a>
-(VPL). Hence, the definition of the format to be used for saving diagrams to disk is, implicitly, a textual or binary
-programming (description) language. That is, users can potentially choose to write the diagrams manually or programmatically,
-instead of using the visual editor. In fact, drawing structural circuits with <a href="https://en.wikipedia.org/wiki/PGF/TikZ">TikZ</a> is
-conceptually similar to describing them in VHDL, even though the syntax is very different.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-The binary/text format for saving <em>ArchGraphs</em> is undefined yet. That&#8217;s why this tool is still barely usable.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.godotengine.org/en/latest/classes/class_configfile.html">ConfigFile</a>, while intended for configuration files, can
-be used for saving games, as it can serialize any Godot datatype (not custom objects). Unlike JSON, (de)serializing types such
-as <code>Vector2</code> or <code>Vector3</code> manually is not required. However, due to portability and potential compatibility with other tools,
-it might be desirable to use JSON or YAML, either as complements or replacements of <em>ConfigFile</em>. See
-<a href="https://docs.godotengine.org/en/latest/tutorials/io/saving_games.html">docs.godotengine.org: I/O &gt; Saving games</a> and
-<a href="https://docs.godotengine.org/en/latest/getting_started/step_by_step/resources.html#creating-your-own-resources">docs.godotengine.org: Step by step &gt; Creating your own resources</a>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_signalport_types">Signal/port types</h4>
-<div class="paragraph">
-<p><em>How to handle compatible/incompatible types, TBW</em></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_types">Types</h3>
 <div class="sect3">
 <h4 id="_data">Data</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>repositories</p>
-</li>
-<li>
-<p>devices</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_repository">Repository</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>library</p>
-</li>
-<li>
-<p>entities: []</p>
-</li>
-<li>
-<p>architectures: []</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><em>Data</em> is a unique instance of a helper class, which is loaded automatically (see <a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html">docs.godotengine.org: Singletons (AutoLoad)</a>).
+It contains the data and the interface for other components in the frontend to interact with design, components, etc.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_project">Project</h4>
+<div class="paragraph">
+<p>A <em>Project</em> is a class that represents the content that users need when working on a hardware description project.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>instance</p>
+<p><code>Name : String</code>: name of the project. Does <em>not</em> need to be unique.</p>
 </li>
 <li>
-<p>implementations: []</p>
+<p><code>Sources : Array</code>: a list of objects of type <code>Source</code>.</p>
+</li>
+<li>
+<p><code>Designs : Array</code>: a list of objects of type <code>Design</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_source">Source</h4>
+<div class="paragraph">
+<p>A <em>Source</em> is a class that represents a repository or directory containing HDL sources.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Location : String</code>: URL or path of the repository/directory.</p>
+</li>
+<li>
+<p><code>Type : int</code>: type of sources, where the integer is a constant from the enumeration <code>{glob, pyCAPI, FuseSoC}</code>.</p>
+</li>
+<li>
+<p><code>Library : Dictionary</code>: name of the logical libraries where sources are to be analysed, and the corresponding patterns
+(applies to type <code>glob</code> only).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_design">Design</h4>
+<div class="paragraph">
+<p>A <em>Design</em> is a class that represents the top-level of a hardware design, which might be targeting one or multiple boards.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Name : String</code>: name of the design. Does <em>not</em> need to match any entity name, and it does <em>not</em> need to be unique.</p>
+</li>
+<li>
+<p><code>DesignTop : String</code>: the top-level unit of the logical design and (optionally) secondary unit, using the following
+syntax <code>LibraryName.PrimaryName(SecondaryName)</code>.</p>
+</li>
+<li>
+<p><code>Targets : Array</code>: a list of objects of type <code>Target</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_target">Target</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Board : String</code>: identifier of the target board.</p>
+</li>
+<li>
+<p><code>BoardTop : String</code>: the top-level unit of the implementation and (optionally) secondary unit, using the following
+syntax: <code>LibraryName.PrimaryName(SecondaryName)</code>.</p>
+</li>
+<li>
+<p><code>IO : Array</code>: mapping of the top-level ports to the device pins.</p>
+</li>
+<li>
+<p><code>Constraints</code>: (optional) constraints to be passed to simulation, synthesis or implementation tools.</p>
 </li>
 </ul>
 </div>
@@ -1252,26 +1847,7 @@ from <a href="https://github.com/umarcor/hwstudio/tree/main/.github/actions/godo
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Define the format/classes for, at least:</p>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-square-o"></i> <code>Data</code></p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> <code>Repository</code></p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> <code>Project</code></p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> <code>Entity</code></p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> <code>Architecture</code></p>
-</li>
-</ul>
-</div>
+<p><i class="fa fa-square-o"></i> Complete the definion of the Types classes.</p>
 </li>
 <li>
 <p>· Extract entities and architectures by parsing HDL sources:</p>
@@ -1282,7 +1858,7 @@ from <a href="https://github.com/umarcor/hwstudio/tree/main/.github/actions/godo
 <div class="ulist">
 <ul>
 <li>
-<p>Using GHDL&#8217;s Python interface: <a href="https://github.com/ghdl/ghdl/pull/1449">ghdl/ghdl#1449</a></p>
+<p>Define the OpenAPI between the frontend and the backend (container <code>swaggerapi/swagger-editor</code>).</p>
 </li>
 </ul>
 </div>
@@ -1301,16 +1877,13 @@ from <a href="https://github.com/umarcor/hwstudio/tree/main/.github/actions/godo
 </div>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Define the content of the (internal) <em>utils</em> repository: gates, combinatorial, sequential&#8230;&#8203;</p>
+<p><i class="fa fa-square-o"></i> Implement the functionality of OSVDE in tab <em>Repositories</em> of the main menu.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Show the tree structure of the current design in tab <em>Design</em> from window <em>Repositories</em>.</p>
+<p><i class="fa fa-square-o"></i> Define/update the content of <em>Block details</em> in <em>Repositories</em>, depending on the selected unit (in the tree or in the diagram).</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Define/update the content of <em>Block details</em> in windows <em>Repositories</em>, depending on the selected unit (in the tree or in the diagram).</p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> Redefine the routing of the connections (currently, splines/bezier curves).</p>
+<p><i class="fa fa-square-o"></i> Redefine the routing of the connections in the Graph mode (currently, splines/bezier curves).</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1447,8 +2020,31 @@ as the programming language.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-08-14 15:28:15 UTC
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
