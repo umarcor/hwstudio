@@ -7,6 +7,7 @@ on:
       - '.github/actions/godot/godot.dockerfile'
   schedule:
     - cron: '0 0 * * 4'
+  workflow_dispatch:
 
 env:
   CI: true
