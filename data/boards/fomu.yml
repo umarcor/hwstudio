@@ -1,0 +1,27 @@
+label: Fomu PVT
+device: ICE40-UP5K
+package: UWG30
+doc:
+  - https://github.com/im-tomu/fomu-hardware
+prog:
+  - dfu-util
+io: [
+    [in,    FomuPVT_CLK,       F4],
+    [inout, FomuPVT_USER_4,    F5],
+    [inout, FomuPVT_USER_3,    E5],
+    [inout, FomuPVT_USER_2,    D5],
+    [inout, FomuPVT_USER_1,    E4],
+    [out,   FomuPVT_USB_DP,    A1],
+    [out,   FomuPVT_USB_DN,    A2],
+    [out,   FomuPVT_USB_DP_PU, A4],
+    [inout, FomuPVT_SPI_MOSI,  F1],
+    [inout, FomuPVT_SPI_MISO,  E1],
+    [inout, FomuPVT_SPI_IO3,   B1],
+    [inout, FomuPVT_SPI_IO2,   F2],
+    [inout, FomuPVT_SPI_CS,    C1],
+    [inout, FomuPVT_SPI_CLK,   D1],
+    [out,   FomuPVT_RGB_2,     C5],
+    [out,   FomuPVT_RGB_1,     B5],
+    [out,   FomuPVT_RGB_0,     A5]
+  ]
+}
