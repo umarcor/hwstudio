@@ -1,0 +1,12 @@
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-citation-files
+
+cff-version: 1.2.0
+message: "Please cite this project as below."
+authors:
+  - family-names: Martinez-Corral
+    given-names: Unai
+    orcid: https://orcid.org/0000-0003-1752-9181
+title: "Hardware Studio (hwstudio): a graphical design environment for hardware description"
+version: 0.0.0-main
+url: "https://umarcor.github.io/hwstudio"
+repository-code: https://github.com/umarcor/hwstudio
