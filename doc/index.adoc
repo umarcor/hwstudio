@@ -99,6 +99,8 @@ GHDL and Icarus Verilog. There is an interesting discussion about the multiple e
 * http://flowgorithm.org/[Flowgorithm] allows automatic generation of code in different languages, using a flowchart diagram
 as the programming language.
 
+* https://sourceforge.net/projects/umhdl/[UMHDL]: educational IDE.
+
 * https://www.systemvision.com[SystemVision Cloud] by Siemens.
 
 * https://webfpga.io/[webfpga.io] (https://github.com/webfpga[github.com/webfpga])
