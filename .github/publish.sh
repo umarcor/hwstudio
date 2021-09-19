@@ -39,7 +39,7 @@ echo '::group::Add content'
 git add .
 echo '::endgroup::'
 
-git diff --exit-code && (
+git diff --cached --exit-code && (
   echo '::group::Nothing to commit'
   git status
   echo '::endgroup::'
