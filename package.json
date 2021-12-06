@@ -37,7 +37,7 @@
     "sass": "^1.43.5",
     "sass-loader": "^10.1.1",
     "vue-cli-plugin-electron-builder": "^2.1.1",
-    "vue-cli-plugin-vuetify": "^2.4.4",
+    "vue-cli-plugin-vuetify": "^2.4.5",
     "vue-template-compiler": "^2.6.13",
     "vuetify-loader": "^1.7.3"
   },
