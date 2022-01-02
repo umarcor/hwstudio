@@ -138,6 +138,10 @@ and Boole's algebra:
 * https://store.steampowered.com/app/970800/Short_Circuit_VR/[Short Circuit VR]
 * https://store.steampowered.com/app/282760/Circuits/[Circuits]
 
+Similarly, synthesizer rack simulators can be repurposed:
+
+* https://github.com/katef/eurorack-cpu[gh:katef/eurorack-cpu]
+
 However, many strategy and survival games focused on building, automation and resource management can also be easily
 related.
 The following list is a very small subset of circuits designed in games with basic hardware logic features, albeit not
