@@ -111,3 +111,5 @@ as the programming language.
 * https://webfpga.io/[webfpga.io] (https://github.com/webfpga[github.com/webfpga])
 
 * https://github.com/mbezjak/vhdllab[mbezjak/vhdllab]
+
+* https://github.com/Trilarion/opensourcegames[Trilarion/opensourcegames]
