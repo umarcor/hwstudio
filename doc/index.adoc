@@ -93,6 +93,8 @@ GHDL and Icarus Verilog. There is an interesting discussion about the multiple e
 
 * https://github.com/tilk/digitaljs[tilk/digitaljs] is a teaching-focused digital circuit simulator written in JavaScript with a companion https://github.com/tilk/yosys2digitaljs[tilk/yosys2digitaljs] tool for converting output from Yosys.
 
+* https://github.com/paceholder/nodeeditor[paceholder/nodeeditor] is a dataflow programming framework based on Qt.
+
 * https://www.bespokesynth.com[bespokesynth] (https://github.com/awwbees/BespokeSynth/[awwbees/BespokeSynth]): is a software modular synthesizer, with a GUI very similar to GNURadio or Godot's VisualScript.
 
 * https://github.com/Redcrafter/verilog2factorio[Redcrafter/verilog2factorio]: compile verilog into factorio blueprints.
