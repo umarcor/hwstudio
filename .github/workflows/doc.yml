@@ -23,5 +23,5 @@ jobs:
       run: make -C doc
 
     - name: Publish site to gh-pages (doc)
-      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      if: github.event_name != 'pull_request'
       run: GITHUB_SHA="${{ github.sha }}" ./.github/publish.sh doc
