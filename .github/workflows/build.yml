@@ -30,7 +30,7 @@ jobs:
         path: dist/html5/*
 
     - name: Publish site to gh-pages
-      if: github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
+      if: github.event_name != 'pull_request'
       run: GITHUB_SHA="${{ github.sha }}" ./.github/publish.sh
 
 

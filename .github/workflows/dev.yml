@@ -16,17 +16,26 @@ env:
 jobs:
 
   docker:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.repository == 'umarcor/hwstudio'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
 
-    - name: Build image
-      run: docker build -t hwstudio/godot:export - < .github/actions/godot/godot.dockerfile
+      - uses: actions/checkout@v2
 
-    - name: Publish image
-      run: |
-        echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
-        docker images
-        docker push hwstudio/godot:export
-        docker logout
+      - name: Generate image name
+        id: generate
+        run: |
+          REPO='${{ github.repository }}'
+          echo "::set-output name=image::ghcr.io/${REPO,,}/godot/export"
+
+      - name: Build image
+        run: docker build -t '${{ steps.generate.outputs.image }}' - < .github/actions/godot/godot.dockerfile
+
+      - name: Publish image
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: pyTooling/Actions/with-post-step@r0
+        with:
+          main: |
+            echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+            docker images
+            docker push '${{ steps.generate.outputs.image }}'
+          post: docker logout ghcr.io
