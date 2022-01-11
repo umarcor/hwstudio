@@ -1,6 +1,6 @@
 FROM ubuntu
 
-ARG GODOT_VERSION='3.4.2'
+ARG GODOT_VERSION='3.3.4'
 ARG GODOT_DIST_URL='https://downloads.tuxfamily.org/godotengine'
 
 ENV GODOT_VERSION=$GODOT_VERSION
