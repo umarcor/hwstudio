@@ -103,6 +103,8 @@ GHDL and Icarus Verilog. There is an interesting discussion about the multiple e
 
 * https://github.com/jamesbowman/cuflow[jamesbowman/cuflow]: experimental procedural PCB layout program.
 
+* https://github.com/lynnpepin/reso[lynnpepin/reso]: A visual circuits programming language using pixels.
+
 * http://flowgorithm.org/[Flowgorithm] allows automatic generation of code in different languages, using a flowchart diagram
 as the programming language.
 
