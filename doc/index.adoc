@@ -85,17 +85,27 @@ based on C++ and Qt; hence, the build process is more complex. However, examples
 models have been reported (see https://github.com/gnuradio/gr-verilog[gnuradio/gr-verilog]). Therefore, there are multiple
 opportunities for collaboration.
 
-* https://github.com/Nic30[@Nic30] has prototyped an interesting ecosystem on HDL tools based on ANTLR parsers. On of the tools is https://github.com/Nic30/d3-hwschematic[d3-hwschematic], a JavaScript based solution using https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html[ELK JSON] as the input format. There are references to other multiple projects in https://github.com/Nic30/d3-hwschematic#similar-opensource-projects[Nic30/d3-hwschematic: Similar opensource projects], such as https://github.com/davidthings/hdelk[hdelk].
+* https://github.com/Nic30[@Nic30] has prototyped an interesting ecosystem on HDL tools based on ANTLR parsers.
+  On of the tools is https://github.com/Nic30/d3-hwschematic[d3-hwschematic], a JavaScript based solution using
+  https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html[ELK JSON] as the input
+  format.
+  There are references to other multiple projects in
+  https://github.com/Nic30/d3-hwschematic#similar-opensource-projects[Nic30/d3-hwschematic: Similar opensource projects],
+  such as https://github.com/davidthings/hdelk[hdelk].
+
 ** https://github.com/dkilfoyle/logic2[dkilfoyle/logic2].
 
-* https://github.com/hneemann/Digital[hneemann/Digital] is a fork of http://www.cburch.com/logisim/[Logisim], which support
-GHDL and Icarus Verilog. There is an interesting discussion about the multiple existing forks of Logisim: https://github.com/hneemann/Digital#motivation[hneemann/Digital: Motivation].
+* https://github.com/hneemann/Digital[hneemann/Digital] is a fork of http://www.cburch.com/logisim/[Logisim], which
+  support GHDL and Icarus Verilog.
+  There is an interesting discussion about the multiple existing forks of Logisim: https://github.com/hneemann/Digital#motivation[hneemann/Digital: Motivation].
 
-* https://github.com/tilk/digitaljs[tilk/digitaljs] is a teaching-focused digital circuit simulator written in JavaScript with a companion https://github.com/tilk/yosys2digitaljs[tilk/yosys2digitaljs] tool for converting output from Yosys.
+* https://github.com/tilk/digitaljs[tilk/digitaljs] is a teaching-focused digital circuit simulator written in JavaScript
+  with a companion https://github.com/tilk/yosys2digitaljs[tilk/yosys2digitaljs] tool for converting output from Yosys.
 
 * https://github.com/paceholder/nodeeditor[paceholder/nodeeditor] is a dataflow programming framework based on Qt.
 
-* https://www.bespokesynth.com[bespokesynth] (https://github.com/awwbees/BespokeSynth/[awwbees/BespokeSynth]): is a software modular synthesizer, with a GUI very similar to GNURadio or Godot's VisualScript.
+* https://www.bespokesynth.com[bespokesynth] (https://github.com/awwbees/BespokeSynth/[awwbees/BespokeSynth]): is a
+  software modular synthesizer, with a GUI very similar to GNURadio or Godot's VisualScript.
 
 * https://github.com/Redcrafter/verilog2factorio[Redcrafter/verilog2factorio]: compile verilog into factorio blueprints.
 
@@ -103,10 +113,13 @@ GHDL and Icarus Verilog. There is an interesting discussion about the multiple e
 
 * https://github.com/jamesbowman/cuflow[jamesbowman/cuflow]: experimental procedural PCB layout program.
 
+* https://github.com/Bycelium/PyFlow[Bycelium/PyFlow]: An open-source tool for visual and modular block programing in
+  Python.
+
 * https://github.com/lynnpepin/reso[lynnpepin/reso]: A visual circuits programming language using pixels.
 
-* http://flowgorithm.org/[Flowgorithm] allows automatic generation of code in different languages, using a flowchart diagram
-as the programming language.
+* http://flowgorithm.org/[Flowgorithm] allows automatic generation of code in different languages, using a flowchart
+  diagram as the programming language.
 
 * https://sourceforge.net/projects/umhdl/[UMHDL]: educational IDE.
 
