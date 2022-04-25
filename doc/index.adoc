@@ -130,3 +130,5 @@ opportunities for collaboration.
 * https://github.com/mbezjak/vhdllab[mbezjak/vhdllab]
 
 * https://github.com/Trilarion/opensourcegames[Trilarion/opensourcegames]
+
+* https://github.com/JohnnyGOX17/HDL-IDE[JohnnyGOX17/HDL-IDE]
