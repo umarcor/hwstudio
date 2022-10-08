@@ -132,3 +132,5 @@ opportunities for collaboration.
 * https://github.com/Trilarion/opensourcegames[Trilarion/opensourcegames]
 
 * https://github.com/JohnnyGOX17/HDL-IDE[JohnnyGOX17/HDL-IDE]
+
+* https://www.virtualcircuitboard.com/[Virtual Circuit Board] by Reverie Foundry (https://store.steampowered.com/app/1885690/Virtual_Circuit_Board/[Steam])
