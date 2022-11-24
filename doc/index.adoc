@@ -134,3 +134,9 @@ opportunities for collaboration.
 * https://github.com/JohnnyGOX17/HDL-IDE[JohnnyGOX17/HDL-IDE]
 
 * https://www.virtualcircuitboard.com/[Virtual Circuit Board] by Reverie Foundry (https://store.steampowered.com/app/1885690/Virtual_Circuit_Board/[Steam])
+
+* https://www.crumbsim.com/[crumbsim.com]
+
+** https://store.steampowered.com/app/2198800/CRUMB_Circuit_Simulator/[store.steampowered.com/app/2198800/CRUMB_Circuit_Simulator]
+
+** https://twitter.com/arturo182/status/1594848081912254464[twitter.com/arturo182/status/1594848081912254464]
