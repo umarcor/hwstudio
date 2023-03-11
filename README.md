@@ -9,9 +9,9 @@
   -->
   <a title="Releases" href="https://github.com/umarcor/hwstudio/releases"><img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/umarcor/hwstudio?include_prereleases&longCache=true&style=flat-square&label=Releases&logo=github&color=informational"></a><!--
   -->
-  <a title="'build' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Abuild"><img alt="'build' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/build?longCache=true&style=flat-square&label=build&logo=Github%20Actions&logoColor=fff"></a><!--
+  <a title="'build' workflow status" href="https://github.com/umarcor/hwstudio/actions/workflows/build.yml"><img alt="'build' workflow status" src="https://img.shields.io/github/actions/workflow/status/umarcor/hwstudio/build.yml?branch=main&longCache=true&style=flat-square&label=build&logo=Github%20Actions&logoColor=fff"></a><!--
   -->
-  <a title="'doc' workflow status" href="https://github.com/umarcor/hwstudio/actions?query=workflow%3Adoc"><img alt="'doc' workflow status" src="https://img.shields.io/github/workflow/status/umarcor/hwstudio/doc?longCache=true&style=flat-square&label=doc&logo=Github%20Actions&logoColor=fff"></a><!--
+  <a title="'doc' workflow status" href="https://github.com/umarcor/hwstudio/actions/workflows/doc.yml"><img alt="'doc' workflow status" src="https://img.shields.io/github/actions/workflow/status/umarcor/hwstudio/doc.yml?branch=main&longCache=true&style=flat-square&label=doc&logo=Github%20Actions&logoColor=fff"></a><!--
   -->
 </p>
 
