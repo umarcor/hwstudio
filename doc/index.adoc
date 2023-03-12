@@ -144,3 +144,7 @@ opportunities for collaboration.
 * https://store.steampowered.com/app/1812820/Bitburner/[store.steampowered.com/app/1812820/Bitburner]
 
 * https://github.com/formatc1702/WireViz[formatc1702/WireViz]
+
+* https://store.steampowered.com/app/1444480/Turing_Complete/[store.steampowered.com/app/1444480/Turing_Complete]
+
+** https://twitter.com/AnnatarTheMaia/status/1622530429419937792[*"It's a circuit simulator and designer capable of generating VHDL, cleverly disguised as a game (...)"*]
