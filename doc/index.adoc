@@ -148,3 +148,7 @@ opportunities for collaboration.
 ** https://twitter.com/AnnatarTheMaia/status/1622530429419937792[_"It's a circuit simulator and designer capable of generating VHDL, cleverly disguised as a game (...)"_]
 
 * https://github.com/fogleman/sdf[fogleman/sdf]: simple SDF mesh generation in Python.
+
+* https://github.com/devanlai/webdfu[devanlai/webdfu]
+
+** https://devanlai.github.io/webdfu/[devanlai.github.io/webdfu]
