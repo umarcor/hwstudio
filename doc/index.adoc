@@ -107,8 +107,6 @@ opportunities for collaboration.
 * https://www.bespokesynth.com[bespokesynth] (https://github.com/awwbees/BespokeSynth/[awwbees/BespokeSynth]): is a
   software modular synthesizer, with a GUI very similar to GNURadio or Godot's VisualScript.
 
-* https://github.com/Redcrafter/verilog2factorio[Redcrafter/verilog2factorio]: compile verilog into factorio blueprints.
-
 * https://github.com/emsec/hal[emsec/hal]: The Hardware Analyzer.
 
 * https://github.com/jamesbowman/cuflow[jamesbowman/cuflow]: experimental procedural PCB layout program.
@@ -147,6 +145,6 @@ opportunities for collaboration.
 
 * https://store.steampowered.com/app/1444480/Turing_Complete/[store.steampowered.com/app/1444480/Turing_Complete]
 
-** https://twitter.com/AnnatarTheMaia/status/1622530429419937792[*"It's a circuit simulator and designer capable of generating VHDL, cleverly disguised as a game (...)"*]
+** https://twitter.com/AnnatarTheMaia/status/1622530429419937792[_"It's a circuit simulator and designer capable of generating VHDL, cleverly disguised as a game (...)"_]
 
 * https://github.com/fogleman/sdf[fogleman/sdf]: simple SDF mesh generation in Python.

@@ -144,12 +144,13 @@ Similarly, synthesizer rack simulators can be repurposed:
 
 However, many strategy and survival games focused on building, automation and resource management can also be easily
 related.
-The following list is a very small subset of circuits designed in games with basic hardware logic features, albeit not
-being a relevant mechanic in the game.
+The following list is a very small subset of circuits designed in games with basic hardware logic features.
 
 * https://www.youtube.com/watch?v=W856cOQ2ubk[How to make a clock/timer in RUST (and more) | Electricity tutorial]
 * https://www.youtube.com/watch?v=VEcmaXwjwuY[Computer Logic Gates in Minecraft (Only Redstone and Torches)]
 * https://www.youtube.com/watch?v=ts5EKp9w4TU[Quicksort on a Factorio computer] (https://github.com/Artorp/factorio-computer[github.com/Artorp/factorio-computer])
+** https://hackaday.com/2022/10/19/researching-factorio-for-science/[hackaday.com/2022/10/19/researching-factorio-for-science]
+** https://github.com/Redcrafter/verilog2factorio[Redcrafter/verilog2factorio]: compile verilog into factorio blueprints.s
 * https://www.youtube.com/watch?v=tTFbXs1LJI8[Scrap Mechanic CPU Vlog]
 * https://www.youtube.com/watch?v=raQguSGIVX8[OpenTTD Logic: 01 Introduction to Logic Circuits, AND Gate, NOT Gate]
 * https://www.youtube.com/watch?v=h-MOlgyx3Ps[Prison Architect - How To Use Logic Circuits]
