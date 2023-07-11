@@ -152,3 +152,7 @@ opportunities for collaboration.
 * https://github.com/devanlai/webdfu[devanlai/webdfu]
 
 ** https://devanlai.github.io/webdfu/[devanlai.github.io/webdfu]
+
+* https://makingartstudios.itch.io/dls[makingartstudios.itch.io/dls]: DLS, the digital logic simulator game
+
+** https://dls.makingartstudios.com/sandbox/[dls.makingartstudios.com/sandbox]
