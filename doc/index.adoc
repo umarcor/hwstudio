@@ -156,3 +156,10 @@ opportunities for collaboration.
 * https://makingartstudios.itch.io/dls[makingartstudios.itch.io/dls]: DLS, the digital logic simulator game
 
 ** https://dls.makingartstudios.com/sandbox/[dls.makingartstudios.com/sandbox]
+
+* https://github.com/hdl-tools/hdl-schemview[hdl-tools]
+
+** https://github.com/hdl-tools/hdl-kgraph[hdl-kgraph]
+
+** https://github.com/hdl-tools/hdl-schemview[hdl-schemview]
+
